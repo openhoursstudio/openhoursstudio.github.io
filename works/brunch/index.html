@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Maple &amp; Main · All-day brunch in Leslieville, Toronto (concept)</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1F3B2D">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Instrument+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-base="en" data-default-lang="en" data-tz="America/Toronto" data-open="08:00" data-close="15:00" data-closed-day="2" data-key="mm">
+
+<div class="concept" role="note">Concept project · Maple &amp; Main is a fictional restaurant</div>
+
+<header class="top">
+  <a class="brand" href="#">Maple <span>&amp;</span> Main</a>
+  <a class="pill" href="#waitlist">Join the waitlist</a>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="status" data-status></p>
+      <h1>Brunch is not a meal.<br><em>It's a plan.</em></h1>
+      <p class="lead">Eggs benedict, buttermilk pancakes and bottomless coffee on Queen Street East. No reservations on weekends, so join the waitlist from your sofa.</p>
+      <div class="cta"><a class="btn" href="#waitlist">Join the waitlist</a><a class="btn ghost" href="#menu">See the menu</a></div>
+    </div>
+    <div class="hero-plate"><img src="../../assets/photos/brunch-2.webp" alt="Eggs benedict with asparagus"><span class="sticker">Bottomless<br>coffee</span></div>
+  </section>
+
+  <section class="waitlist" id="waitlist">
+    <div class="wl-card">
+      <div>
+        <p class="eyebrow">Weekend waitlist</p>
+        <h2>About <b data-wait>25</b> minutes right now</h2>
+        <p>Add your name and we will text you when your table is ten minutes away. Go for a walk in Jimmie Simpson Park.</p>
+      </div>
+      <form class="wl-form" data-wl>
+        <label>Name<input id="wl-name" required autocomplete="given-name"></label>
+        <label>Party size
+          <select id="wl-size"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>
+        </label>
+        <button type="submit">Add me to the list</button>
+        <p class="wl-out" data-wl-out aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+
+  <section class="menu" id="menu">
+    <header class="head"><p class="eyebrow">The menu</p><h2>Served until 3pm, every day but Tuesday</h2></header>
+    <div class="dishes">
+      <article><img src="../../assets/photos/brunch-4.webp" loading="lazy" alt="Eggs benedict"><div><h3>Peameal benny</h3><p>Toronto's own cured back bacon, poached eggs, hollandaise.</p><span class="tags"><i>House favourite</i></span></div><b>$19</b></article>
+      <article><img src="../../assets/photos/brunch-1.webp" loading="lazy" alt="Avocado toast with egg"><div><h3>Green toast</h3><p>Avocado, soft eggs, chilli crisp, sourdough.</p><span class="tags"><i>V</i></span></div><b>$17</b></article>
+      <article><img src="../../assets/photos/brunch-3.webp" loading="lazy" alt="Fried egg on rye with salad"><div><h3>Farmer's plate</h3><p>Fried eggs, rye, market salad, pickled onions.</p><span class="tags"><i>V</i><i>GF option</i></span></div><b>$18</b></article>
+      <article><img src="../../assets/photos/brunch-6.webp" loading="lazy" alt="Avocado toast with lemon"><div><h3>Smashed avo</h3><p>Lemon, chives, flaky salt. Add bacon for $4.</p><span class="tags"><i>VG</i></span></div><b>$15</b></article>
+    </div>
+  </section>
+
+  <section class="visit">
+    <div class="v-grid">
+      <img src="../../assets/photos/brunch-5.webp" loading="lazy" alt="Hands holding a plate of toast">
+      <dl>
+        <div><dt>Wed – Mon</dt><dd>8:00 – 15:00</dd></div>
+        <div><dt>Tuesday</dt><dd>Closed</dd></div>
+        <div><dt>Address</dt><dd>Queen Street East, Toronto (fictional)</dd></div>
+        <div><dt>Transit</dt><dd>501 streetcar, Logan Avenue stop</dd></div>
+        <div><dt>Good to know</dt><dd>High chairs, step-free entrance, dogs on the patio</dd></div>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer class="foot">
+  <p class="foot-brand">Maple &amp; Main</p>
+  <p>This is a concept project. The restaurant, address and prices are fictional. Photos: CC0 (public domain).</p>
+  <details class="credits"><summary>Photo credits</summary><ul data-credits></ul></details>
+</footer>
+
+<a class="dock" href="#waitlist">Join the waitlist</a>
+<script src="../../assets/concept.js"></script>
+<script>
+  // فهرستِ انتظار: زمانِ انتظار از روی ساعتِ تورنتو (آخرِ هفته شلوغ‌تر)؛ ثبت فقط نمایشی است
+  (function () {
+    var now = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Toronto' }));
+    var weekend = now.getDay() === 0 || now.getDay() === 6, h = now.getHours();
+    var wait = h < 8 || h >= 15 ? 0 : weekend ? (h >= 10 && h < 13 ? 45 : 25) : 10;
+    var w = document.querySelector('[data-wait]');
+    w.textContent = wait;
+    if (!wait) w.parentNode.innerHTML = 'No wait right now. See you tomorrow from 8am.';
+    document.querySelector('[data-wl]').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name = document.getElementById('wl-name').value.trim();
+      if (!name) { document.getElementById('wl-name').focus(); return; }
+      document.querySelector('[data-wl-out]').textContent = 'You are on the list, ' + name + ', party of ' + document.getElementById('wl-size').value + '. This is a concept, so no text will arrive.';
+    });
+  })();
+</script>
+</body>
+</html>

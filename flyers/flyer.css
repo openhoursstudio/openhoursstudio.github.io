@@ -1,0 +1,60 @@
+/* برگه‌ی چاپیِ A5 نماینده‌ها؛ روی صفحه پیش‌نمایش، در چاپ دقیقاً یک برگ */
+@page { size: 148mm 210mm; margin: 0; }
+:root { --ink: #14213D; --ink-2: #44506A; --amber: #F2A93B; --amber-2: #C97F0E; --paper: #FBF7EF; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body { margin: 0; background: #DADFE8; font-family: "DM Sans", "Noto Sans JP", system-ui, sans-serif; color: var(--ink); }
+html[lang="ja"] body { font-family: "Noto Sans JP", "Hiragino Sans", system-ui, sans-serif; }
+
+.tools { display: flex; justify-content: space-between; align-items: center; gap: 12px; max-width: 148mm; margin: 0 auto; padding: 14px 4px; font: 500 14px "DM Sans", system-ui, sans-serif; }
+.tools a { color: var(--ink); min-height: 40px; display: inline-flex; align-items: center; }
+.tools span { display: flex; gap: 8px; }
+.tools button, .tools .pdf { font: inherit; font-weight: 700; border: 0; border-radius: 999px; padding: 0 16px; min-height: 40px; background: var(--ink); color: var(--paper); text-decoration: none; cursor: pointer; }
+.tools button { background: #fff; color: var(--ink); }
+
+.sheet { width: 148mm; height: 210mm; margin: 0 auto 40px; background: var(--paper); box-shadow: 0 30px 60px -30px rgba(20, 33, 61, .5); overflow: hidden; display: grid; grid-template-rows: auto 1fr auto auto; }
+
+.top { position: relative; overflow: hidden; background: var(--ink); color: var(--paper); padding: 9mm 9mm 0; }
+.top::before { content: ""; position: absolute; width: 150mm; height: 150mm; left: 50%; bottom: -75mm; margin-left: -75mm; border-radius: 50%; background: radial-gradient(circle, var(--amber) 0 36%, rgba(242, 169, 59, .42) 36.5% 50%, rgba(242, 169, 59, .14) 50.5% 64%, transparent 64.5%); }
+.brand { position: relative; margin: 0; display: flex; align-items: baseline; font: 700 17pt/1 "Fraunces", Georgia, serif; letter-spacing: -.02em; }
+.brand .o { width: .92em; height: .92em; margin: 0 -.04em 0 -.07em; transform: translateY(.1em); --ring: var(--paper); --hands: var(--amber); }
+.brand small { align-self: center; margin-left: 2.4mm; font: 500 6.5pt "DM Sans", sans-serif; letter-spacing: .16em; text-transform: uppercase; color: #AAB3CB; }
+h1 { position: relative; margin: 7mm 0 0; font: 700 28pt/1.03 "Fraunces", Georgia, serif; letter-spacing: -.025em; }
+h1 em { color: var(--amber); }
+html[lang="ja"] h1 { font: 700 21pt/1.4 "Noto Sans JP", sans-serif; letter-spacing: .01em; }
+html[lang="ja"] h1 em { font-style: normal; }
+.sub { position: relative; margin: 3.5mm 0 0; max-width: 112mm; font-size: 9.5pt; line-height: 1.45; color: #C9D0E2; }
+.phones { position: relative; display: flex; justify-content: center; align-items: flex-end; gap: 4mm; height: 60mm; margin-top: 7mm; }
+.ph { width: 30mm; border: 1.2mm solid #0B1222; border-bottom: 0; border-radius: 4.5mm 4.5mm 0 0; overflow: hidden; background: #0B1222; box-shadow: 0 6mm 10mm -4mm rgba(0, 0, 0, .55); }
+.ph:nth-child(2) { width: 34mm; }
+.ph img { display: block; width: 100%; aspect-ratio: 9 / 15; object-fit: cover; object-position: top; }
+
+.mid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 6mm; align-items: center; padding: 7mm 9mm 5mm; }
+.ben { list-style: none; margin: 0; padding: 0; display: grid; gap: 2.8mm; font-size: 10pt; font-weight: 500; line-height: 1.3; }
+.ben li { display: flex; gap: 2.4mm; align-items: flex-start; }
+.ben li::before { content: ""; flex: none; width: 4.4mm; height: 4.4mm; border-radius: 50%; background: var(--amber) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2314213D' stroke-width='3.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12.5 4 4 8-9'/%3E%3C/svg%3E") center / 3mm no-repeat; }
+.from { margin: 0; display: grid; gap: 1.2mm; justify-items: end; text-align: right; }
+.from span { font-size: 7.5pt; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--ink-2); }
+html[lang="ja"] .from span { letter-spacing: .04em; }
+.from b { font: 700 25pt/1 "Fraunces", Georgia, serif; letter-spacing: -.02em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.offer { margin: 0 9mm; padding: 2.6mm 4mm; border-radius: 3mm; background: var(--amber); text-align: center; font-size: 9.5pt; font-weight: 700; }
+.bot { display: grid; grid-template-columns: auto 1fr; gap: 6mm; align-items: center; padding: 6mm 9mm 8mm; }
+.qr { display: flex; gap: 3mm; align-items: center; }
+.qr-svg { display: block; width: 25mm; height: 25mm; padding: 2mm; border-radius: 2.5mm; background: #fff; box-shadow: inset 0 0 0 .3mm rgba(20, 33, 61, .18); }
+.qr-svg svg { display: block; width: 100%; height: 100%; }
+.qr-t { max-width: 36mm; font-size: 8pt; line-height: 1.4; color: var(--ink-2); }
+.qr-t b { display: inline-block; margin-top: .8mm; font-size: 7.5pt; color: var(--ink); }
+.who { display: grid; gap: 2.4mm; font-size: 8pt; color: var(--ink-2); }
+.role { font-size: 7pt; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--amber-2); }
+html[lang="ja"] .role { letter-spacing: .04em; }
+.line { display: flex; align-items: flex-end; min-height: 7.5mm; padding-bottom: 1mm; border-bottom: .3mm solid rgba(20, 33, 61, .35); }
+.mail { font-size: 7.5pt; font-weight: 500; color: var(--ink); }
+
+@media screen and (max-width: 600px) { .sheet { zoom: .62; } }
+@media screen and (max-width: 360px) { .sheet { zoom: .56; } }
+@media print {
+  body { background: none; }
+  .tools { display: none; }
+  .sheet { margin: 0; box-shadow: none; }
+}

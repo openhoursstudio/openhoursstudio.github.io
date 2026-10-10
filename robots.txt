@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /flyers/
+
+Sitemap: https://openhoursstudio.github.io/sitemap.xml

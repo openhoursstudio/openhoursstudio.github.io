@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kingsley's Barbers · Walk-ins and fades in Leeds (concept)</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#121417">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-base="en" data-default-lang="en" data-tz="Europe/London" data-open="09:00" data-close="18:30" data-closed-day="0" data-key="kb">
+
+<div class="concept" role="note">Concept project · Kingsley's Barbers is a fictional shop</div>
+<div class="pole" aria-hidden="true"></div>
+
+<header class="top">
+  <a class="brand" href="#">Kingsley's<small>Barbers · Leeds</small></a>
+  <a class="call" href="#book">Book a chair</a>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-copy">
+      <p class="status" data-status></p>
+      <h1>Proper haircuts.<br><span>No fuss.</span></h1>
+      <p class="lead">Three chairs on Call Lane. Walk in or book ahead, sit down, and leave looking like you meant it.</p>
+      <div class="cta"><a class="btn" href="#wait">See the wait</a><a class="btn alt" href="#book">Book a chair</a></div>
+    </div>
+    <figure class="hero-photo"><img src="../../assets/photos/kingsley-7.webp" alt="Barber pole and BARBER sign on a brick wall"></figure>
+  </section>
+
+  <section class="wait" id="wait">
+    <header class="head"><p class="eyebrow">Walk-ins</p><h2>The wait right now</h2><p>Updated from the chair. Walk in and give your name at the desk.</p></header>
+    <div class="board" data-board>
+      <article><span class="avatar">D</span><div><b>Dev</b><small>Fades, skin fades</small></div><em></em></article>
+      <article><span class="avatar">M</span><div><b>Marcus</b><small>Classic cuts, beards</small></div><em></em></article>
+      <article><span class="avatar">J</span><div><b>Joe</b><small>Longer hair, scissor cuts</small></div><em></em></article>
+    </div>
+  </section>
+
+  <section class="prices">
+    <header class="head"><p class="eyebrow">Price list</p><h2>Same price every day</h2></header>
+    <div class="sign">
+      <dl>
+        <div><dt>Haircut</dt><dd>£22</dd></div>
+        <div><dt>Skin fade</dt><dd>£25</dd></div>
+        <div><dt>Beard trim &amp; line-up</dt><dd>£12</dd></div>
+        <div><dt>Hot towel shave</dt><dd>£28</dd></div>
+        <div><dt>Cut &amp; beard</dt><dd>£32</dd></div>
+        <div><dt>Kids (under 12)</dt><dd>£15</dd></div>
+        <div><dt>Over 65s, weekdays</dt><dd>£16</dd></div>
+      </dl>
+      <p>Card or cash · Tips go straight to your barber</p>
+    </div>
+  </section>
+
+  <section class="tools">
+    <div class="tools-grid">
+      <img src="../../assets/photos/kingsley-2.webp" loading="lazy" alt="Barber tools laid out on a towel">
+      <img src="../../assets/photos/kingsley-5.webp" loading="lazy" alt="Straight razor, shaving brush and bowl">
+      <img src="../../assets/photos/kingsley-1.webp" loading="lazy" alt="A vintage barber chair">
+      <img src="../../assets/photos/kingsley-6.webp" loading="lazy" alt="A barber pole against blue sky">
+    </div>
+  </section>
+
+  <section class="book" id="book">
+    <div class="book-card">
+      <h2>Book a chair</h2>
+      <p>Pick a time today. We hold the chair for ten minutes, then the next walk-in sits down.</p>
+      <div class="slots" role="group" aria-label="Times today">
+        <button type="button" aria-pressed="false">10:30</button><button type="button" aria-pressed="false">11:15</button><button type="button" aria-pressed="false">13:00</button><button type="button" aria-pressed="false">14:45</button><button type="button" aria-pressed="false">16:30</button><button type="button" aria-pressed="false">17:15</button>
+      </div>
+      <p class="picked" data-picked aria-live="polite"></p>
+    </div>
+  </section>
+
+  <section class="visit">
+    <header class="head"><p class="eyebrow">Find us</p><h2>Call Lane, Leeds</h2></header>
+    <dl class="facts">
+      <div><dt>Mon – Fri</dt><dd>9:00 – 18:30</dd></div>
+      <div><dt>Saturday</dt><dd>8:30 – 17:00</dd></div>
+      <div><dt>Sunday</dt><dd>Closed</dd></div>
+      <div><dt>Address</dt><dd>Call Lane, Leeds LS1 (fictional)</dd></div>
+      <div><dt>Station</dt><dd>Leeds station, 6 minutes on foot</dd></div>
+    </dl>
+  </section>
+</main>
+
+<footer class="foot">
+  <p class="foot-brand">Kingsley's Barbers</p>
+  <p>This is a concept project. The shop, barbers and prices are fictional. Photos: CC0 (public domain).</p>
+  <details class="credits"><summary>Photo credits</summary><ul data-credits></ul></details>
+</footer>
+
+<a class="dock" href="#book">Book a chair</a>
+<script src="../../assets/concept.js"></script>
+<script>
+  // تابلوی انتظار (نمونه‌ای): با ساعتِ لندن کمی جابه‌جا می‌شود؛ و انتخابِ ساعتِ رزرو
+  (function () {
+    var now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/London' }));
+    var seed = now.getHours() * 7 + Math.floor(now.getMinutes() / 15);
+    document.querySelectorAll('[data-board] article').forEach(function (a, i) {
+      var w = [0, 10, 15, 25, 35][(seed + i * 3) % 5];
+      a.querySelector('em').textContent = w === 0 ? 'Free now' : '~' + w + ' min';
+      a.classList.toggle('free', w === 0);
+    });
+    var out = document.querySelector('[data-picked]');
+    document.querySelectorAll('.slots button').forEach(function (b) {
+      b.addEventListener('click', function () {
+        document.querySelectorAll('.slots button').forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
+        out.textContent = 'Held for you at ' + b.textContent + ' today. Give your name at the desk.';
+      });
+    });
+  })();
+</script>
+</body>
+</html>
