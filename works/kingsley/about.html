@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>About · Kingsley's Barbers, Leeds (concept)</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#121417">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../pages.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-base="en" data-default-lang="en" data-tz="Europe/London" data-open="09:00" data-close="18:30" data-closed-day="0" data-key="kb">
+
+<div class="concept" role="note">Concept project · Kingsley's Barbers is a fictional shop</div>
+<div class="pole" aria-hidden="true"></div>
+
+<header class="top">
+  <a class="brand" href="index.html">Kingsley's<small>Barbers · Leeds</small></a>
+  <nav class="knav"><a href="prices.html">Prices</a><a href="about.html">About</a></nav>
+  <a class="call" href="index.html#book">Book a chair</a>
+</header>
+<!-- pages --><nav class="pages" aria-label="Pages" style="--pg:#B3202A"><a href="index.html">The shop</a><a href="prices.html">Cuts &amp; prices</a><a href="about.html" aria-current="page">About</a></nav><!-- /pages -->
+
+<main>
+<section class="subhead">
+  <p class="eyebrow">About the shop</p>
+  <h1>Three chairs,<br><span>one rule.</span></h1>
+  <p class="lead">Nobody leaves until they are happy with it. That has been the rule on Call Lane since the shop opened, and it is the only one we never bend.</p>
+</section>
+
+<section class="story">
+  <div class="two-col">
+    <figure class="story-photo"><img src="../../assets/photos/kingsley-1.webp" loading="lazy" alt="A vintage barber chair"></figure>
+    <div>
+      <h2>A barber's, not a salon</h2>
+      <p>Kingsley's is a small, old-fashioned shop: a radio, a kettle, three red chairs that were already forty years old when we found them. You can walk in, or book a chair if you are short on time.</p>
+      <p>We do men's and boys' cuts, beards and shaves. Anyone who wants a short cut is welcome in the chair.</p>
+    </div>
+  </div>
+</section>
+
+<section class="rota">
+  <header class="head"><p class="eyebrow">Who is in</p><h2>This week's chairs</h2><p>Today is highlighted. Book the barber you like, or take whoever is free.</p></header>
+  <div class="rota-wrap">
+    <table class="rota-table" data-rota>
+      <thead><tr><th scope="col">Barber</th><th scope="col">Mon</th><th scope="col">Tue</th><th scope="col">Wed</th><th scope="col">Thu</th><th scope="col">Fri</th><th scope="col">Sat</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">Dev <small>fades</small></th><td>●</td><td>●</td><td></td><td>●</td><td>●</td><td>●</td></tr>
+        <tr><th scope="row">Marcus <small>beards, shaves</small></th><td>●</td><td></td><td>●</td><td>●</td><td>●</td><td>●</td></tr>
+        <tr><th scope="row">Joe <small>longer hair</small></th><td></td><td>●</td><td>●</td><td>●</td><td>●</td><td>●</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="promises-k">
+  <div class="promise-grid">
+    <article><h3>Clean, every time</h3><p>Combs and blades go in the steriliser after every cut. Fresh towel, fresh neck strip.</p></article>
+    <article><h3>Quiet Tuesday mornings</h3><p>9 to 11 on Tuesdays: radio off, lights low, no rush. Made for kids and adults who find barbers loud.</p></article>
+    <article><h3>Step-free</h3><p>Level entrance from Call Lane and a chair that lowers for wheelchair users.</p></article>
+    <article><h3>Gift cards</h3><p>£25 and £50 cards at the desk, in an envelope that looks like a ticket.</p></article>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <p class="foot-brand">Kingsley's Barbers</p>
+  <p>This is a concept project. The shop, barbers and prices are fictional. Photos: CC0 (public domain).</p>
+  <details class="credits"><summary>Photo credits</summary><ul data-credits></ul></details>
+</footer>
+
+<a class="dock" href="index.html#book">Book a chair</a>
+<script src="../../assets/concept.js"></script>
+<script>
+  // روزِ امروز در جدولِ آرایشگرها (ساعتِ لندن)
+  (function () {
+    var d = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/London' })).getDay();
+    if (d === 0) return;
+    document.querySelectorAll('[data-rota] tr').forEach(function (tr) { var c = tr.children[d]; if (c) c.classList.add('today'); });
+  })();
+</script>
+</body>
+</html>

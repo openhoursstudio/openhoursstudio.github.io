@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Private events · Maple & Main, Leslieville (concept)</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#1F3B2D">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Instrument+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../pages.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-base="en" data-default-lang="en" data-tz="America/Toronto" data-open="08:00" data-close="15:00" data-closed-day="2" data-key="mm">
+
+<div class="concept" role="note">Concept project · Maple &amp; Main is a fictional restaurant</div>
+
+<header class="top">
+  <a class="brand" href="index.html">Maple <span>&amp;</span> Main</a>
+  <nav class="bnav"><a href="menu.html">Menu</a><a href="events.html">Private events</a></nav>
+  <a class="pill" href="index.html#waitlist">Join the waitlist</a>
+</header>
+<!-- pages --><nav class="pages" aria-label="Pages" style="--pg:#1F3B2D"><a href="index.html">Home</a><a href="menu.html">Menu</a><a href="events.html" aria-current="page">Private events</a></nav><!-- /pages -->
+
+<main>
+<section class="subhead">
+  <p class="eyebrow">Private events</p>
+  <h1>Tuesdays are<br><em>yours.</em></h1>
+  <p class="lead">We are closed to the public on Tuesdays, so the whole room can be yours: birthdays, baby showers, team breakfasts. Forty seats, our kitchen, no waitlist.</p>
+</section>
+
+<section class="pk">
+  <div class="pk-grid">
+    <article><h2>Brunch table</h2><p class="pp">$38<small> per guest</small></p><ul><li>Family-style platters</li><li>Bottomless coffee and juice</li><li>Pancake station</li></ul></article>
+    <article class="hl"><h2>Brunch and bubbles</h2><p class="pp">$52<small> per guest</small></p><ul><li>Everything in Brunch table</li><li>Mimosas and Caesars for two hours</li><li>A cake from the bakery next door</li></ul></article>
+    <article><h2>Office trays</h2><p class="pp">$16<small> per person</small></p><ul><li>Delivered in the east end, any weekday</li><li>Breakfast sandwiches, fruit, pastries</li><li>Minimum 10 people</li></ul></article>
+  </div>
+</section>
+
+<section class="ev-b">
+  <div class="ev-b-grid">
+    <div>
+      <h2>Plan it in two minutes</h2>
+      <p>Pick a Tuesday and a package. We show an estimate with tax, then a real person replies within a day.</p>
+      <ul class="small-print"><li>Prices before 13% HST.</li><li>Gratuity is up to you, never added automatically.</li><li>Dietary needs are free to accommodate. Tell us early.</li></ul>
+    </div>
+    <form class="form-card ev-b-form" data-evb>
+      <label>Date (Tuesdays)<input type="date" name="date"></label>
+      <label>Guests<input type="number" name="guests" min="10" max="40" value="20"></label>
+      <label>Package<select name="pack"><option value="38">Brunch table · $38</option><option value="52" selected>Brunch and bubbles · $52</option></select></label>
+      <p class="out" data-evb-out aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <p class="foot-brand">Maple &amp; Main</p>
+  <p>This is a concept project. The restaurant, address and prices are fictional. Photos: CC0 (public domain).</p>
+  <details class="credits"><summary>Photo credits</summary><ul data-credits></ul></details>
+</footer>
+
+<a class="dock" href="index.html#waitlist">Join the waitlist</a>
+<script src="../../assets/concept.js"></script>
+<script>
+  // برآوردِ مهمانیِ سه‌شنبه با مالیاتِ ۱۳٪ انتاریو
+  (function () {
+    var f = document.querySelector('[data-evb]'), out = document.querySelector('[data-evb-out]');
+    var now = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Toronto' }));
+    var d = new Date(now); d.setDate(now.getDate() + ((9 - now.getDay()) % 7 || 7) + 7);
+    f.date.value = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    function render() {
+      var g = Math.min(40, Math.max(0, Number(f.guests.value) || 0)), p = Number(f.pack.value);
+      var day = f.date.value ? new Date(f.date.value + 'T12:00:00') : null;
+      if (day && day.getDay() !== 2) { out.textContent = 'Private events are on Tuesdays. Pick a Tuesday, or ask us about office trays.'; return; }
+      if (g < 10) { out.textContent = 'Private events start at 10 guests.'; return; }
+      var sub = g * p, tax = Math.round(sub * 0.13);
+      out.textContent = g + ' guests × $' + p + ' = $' + sub.toLocaleString('en-CA') + ' + $' + tax.toLocaleString('en-CA') + ' HST = $' + (sub + tax).toLocaleString('en-CA') + (day ? ' · ' + day.toLocaleDateString('en-CA', { weekday: 'long', month: 'long', day: 'numeric' }) : '');
+    }
+    f.addEventListener('input', render); f.addEventListener('submit', function (e) { e.preventDefault(); });
+    render();
+  })();
+</script>
+</body>
+</html>

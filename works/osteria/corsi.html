@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Corsi di sfoglia · Osteria del Portico, Bologna (concept)</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F6EEDF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,800;1,600&family=Nunito+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../pages.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-base="it" data-default-lang="auto" data-tz="Europe/Rome" data-open="12:00" data-close="23:00" data-closed-day="1" data-key="op" data-title-en="Pasta classes · Osteria del Portico, Bologna (concept)">
+
+<div class="concept" role="note"><span data-en="Concept project · Osteria del Portico is a fictional restaurant">Progetto concept · L'Osteria del Portico è un locale immaginario</span></div>
+
+<header class="top">
+  <a class="brand" href="index.html">Osteria <i>del</i> Portico</a>
+  <nav class="nav"><a href="menu.html" data-en="Menu">Menù</a><a href="corsi.html" data-en="Pasta classes">Corsi</a><a href="index.html#prenota" data-en="Book">Prenota</a></nav>
+  <button class="lang" type="button" aria-label="Switch language" data-lang-toggle><span class="lang-base">IT</span><span class="lang-en">EN</span></button>
+</header>
+<!-- pages --><nav class="pages" aria-label="Pages" style="--pg:#B5452B"><a href="index.html">Home</a><a href="menu.html" data-en="Menu">Menù</a><a href="corsi.html" aria-current="page" data-en="Pasta classes">Corsi di sfoglia</a></nav><!-- /pages -->
+
+<main>
+<section class="subhead">
+  <p class="eyebrow" data-en="Pasta classes">Corsi di sfoglia</p>
+  <h1 data-en="Roll your own tagliatelle, then eat them">Tirate la vostra sfoglia, poi mangiatela</h1>
+  <p class="lead" data-en="Three hours at our pasta table with Rosa. You make tagliatelle and tortellini from eggs and flour, then sit down for lunch with a glass of Sangiovese.">Tre ore al tavolo della sfoglia con Rosa. Impastate uova e farina, fate tagliatelle e tortellini, poi vi sedete a pranzo con un calice di Sangiovese.</p>
+</section>
+
+<section class="corso">
+  <div class="two-col">
+    <figure class="corso-photo"><img src="../../assets/photos/osteria-3.webp" loading="lazy" alt="Pasta fresca sul tavolo" data-en-alt="Fresh pasta on the table"></figure>
+    <div>
+      <ul class="facts-c">
+        <li><b data-en="3 hours">3 ore</b><span data-en="10:00 – 13:00, lunch included">10:00 – 13:00, pranzo incluso</span></li>
+        <li><b data-en="6 people">6 persone</b><span data-en="at most, so everyone gets a rolling pin">al massimo, un mattarello a testa</span></li>
+        <li><b>€ 75</b><span data-en="per person, wine and apron included">a persona, vino e grembiule inclusi</span></li>
+        <li><b data-en="IT · EN">IT · EN</b><span data-en="Taught in Italian and English">In italiano e in inglese</span></li>
+      </ul>
+      <ol class="steps-list">
+        <li><b data-en="The well">La fontana</b><span data-en="Flour, eggs, a fork, and patience.">Farina, uova, una forchetta e pazienza.</span></li>
+        <li><b data-en="The sfoglia">La sfoglia</b><span data-en="Rolled until you can read the newspaper through it.">Tirata finché ci si legge il giornale attraverso.</span></li>
+        <li><b data-en="Cut and fold">Taglio e chiusura</b><span data-en="Tagliatelle by knife, tortellini by hand, one at a time.">Tagliatelle al coltello, tortellini a mano, uno per uno.</span></li>
+        <li><b data-en="Lunch">Pranzo</b><span data-en="We cook what you made. You take the rest home.">Cuciniamo quello che avete fatto. Il resto lo portate a casa.</span></li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="corso-book">
+  <header class="head"><h2 data-en="Choose a morning">Scegliete una mattina</h2><p data-en="Classes run on Tuesday, Thursday and Saturday.">I corsi sono il martedì, il giovedì e il sabato.</p></header>
+  <div class="dates" role="group" aria-label="Dates" data-dates></div>
+  <div class="form-card corso-form">
+    <label><span data-en="People">Persone</span><select data-people><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select></label>
+    <label class="gift"><input type="checkbox" data-gift> <span data-en="It is a gift (we send a printable voucher)">È un regalo (vi mandiamo un buono da stampare)</span></label>
+    <p class="out" data-corso-out aria-live="polite"></p>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <p class="foot-brand">Osteria <i>del</i> Portico</p>
+  <p data-en="This is a concept project. The restaurant, address and prices are fictional. Photos: CC0 (public domain).">Questo è un progetto concept. Locale, indirizzo e prezzi sono immaginari. Foto: CC0 (pubblico dominio).</p>
+  <details class="credits"><summary data-en="Photo credits">Crediti fotografici</summary><ul data-credits></ul></details>
+</footer>
+
+<a class="dock" href="index.html#prenota" data-en="Book a table">Prenota un tavolo</a>
+<script src="../../assets/concept.js"></script>
+<script>
+  // تقویمِ کلاس: سه‌شنبه، پنجشنبه، شنبه‌های آینده (ساعتِ رم)، جای خالیِ نمونه، و جمع
+  (function () {
+    var box = document.querySelector('[data-dates]'), out = document.querySelector('[data-corso-out]');
+    var people = document.querySelector('[data-people]'), gift = document.querySelector('[data-gift]');
+    var now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Rome' })), days = [], sel = 0;
+    for (var i = 1; days.length < 6 && i < 30; i++) { var d = new Date(now); d.setDate(now.getDate() + i); if ([2, 4, 6].indexOf(d.getDay()) > -1) days.push(d); }
+    function en() { return document.documentElement.lang === 'en'; }
+    function left(d) { return (d.getDate() * 7 + d.getMonth()) % 6; }
+    function render() {
+      var loc = en() ? 'en-GB' : 'it-IT';
+      box.innerHTML = days.map(function (d, k) {
+        var l = left(d);
+        return '<button type="button" aria-pressed="' + (k === sel) + '"' + (l ? '' : ' disabled') + ' data-k="' + k + '"><b>' + d.toLocaleDateString(loc, { weekday: 'short', day: 'numeric', month: 'short' }) + '</b><span>' + (l ? (en() ? l + ' places left' : l + ' posti liberi') : (en() ? 'Full' : 'Completo')) + '</span></button>';
+      }).join('');
+      var d = days[sel], n = Number(people.value), l = left(d);
+      if (n > l) { out.textContent = en() ? 'Only ' + l + ' places left on this day.' : 'Solo ' + l + ' posti liberi in questa data.'; return; }
+      out.textContent = d.toLocaleDateString(loc, { weekday: 'long', day: 'numeric', month: 'long' }) + ' · 10:00 · ' + n + (en() ? (n > 1 ? ' people' : ' person') : (n > 1 ? ' persone' : ' persona')) + ' · € ' + (75 * n) + (gift.checked ? (en() ? ' · voucher by email' : ' · buono via email') : '');
+    }
+    while (!left(days[sel]) && sel < days.length - 1) sel++;
+    box.addEventListener('click', function (e) { var b = e.target.closest('[data-k]'); if (b && !b.disabled) { sel = Number(b.dataset.k); render(); } });
+    people.addEventListener('change', render); gift.addEventListener('change', render);
+    document.addEventListener('langchange', render);
+    render();
+  })();
+</script>
+</body>
+</html>

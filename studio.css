@@ -641,3 +641,10 @@ html[lang="ja"] .frow button { font-family: var(--jp); }
 }
 .done-actions { display: flex; flex-wrap: wrap; gap: 10px; }
 .contact-copy .mail a, .contact-facts .sel a { color: inherit; text-decoration-color: var(--amber); text-underline-offset: 4px; word-break: break-all; }
+/* فهرستِ صفحه‌های نمونه در مطالعه‌ی موردی */
+.site-pages { margin-top: 28px; }
+.site-pages ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.site-pages a { display: flex; align-items: center; gap: 14px; min-height: 52px; padding: 10px 2px; border-bottom: 1px solid var(--line); text-decoration: none; font-weight: 700; transition: padding .25s var(--ease), color .2s; }
+.site-pages a:hover { padding-inline-start: 10px; color: var(--amber-2); }
+.site-pages small { font: 500 12px var(--body); color: var(--amber-2); }
+.site-pages i { margin-inline-start: auto; font-style: normal; color: var(--muted); }

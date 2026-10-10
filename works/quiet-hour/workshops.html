@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Workshops · Quiet Hour Yoga, Leslieville (concept)</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2B2340">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../pages.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-base="en" data-default-lang="en" data-tz="America/Toronto" data-open="06:30" data-close="21:00" data-key="qh">
+
+<div class="concept" role="note">Concept project · Quiet Hour Yoga is a fictional studio</div>
+
+<header class="top">
+  <a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13"/><path d="M21 7.5a10 10 0 1 0 3.5 13.6A8.5 8.5 0 0 1 21 7.5z"/></svg><span>Quiet Hour</span></a>
+  <nav class="nav" aria-label="Menu"><a href="index.html#classes">Timetable</a><a href="workshops.html">Workshops</a><a href="index.html#prices">Prices</a><a href="studio.html">The studio</a></nav>
+  <a class="btn btn-sm" href="index.html#classes">Book a class</a>
+</header>
+<!-- pages --><nav class="pages" aria-label="Pages" style="--pg:#2B2340"><a href="index.html">Classes</a><a href="workshops.html" aria-current="page">Workshops</a><a href="studio.html">The studio</a></nav><!-- /pages -->
+
+<main>
+<section class="subhead">
+  <p class="eyebrow">Workshops</p>
+  <h1>Go a little deeper,<br><em>one weekend at a time.</em></h1>
+  <p class="lead">Two-hour workshops on Saturday and Sunday afternoons, and short courses for people starting out. Small groups, so there is room to ask questions.</p>
+</section>
+
+<section class="ws">
+  <div class="ws-list" data-ws></div>
+</section>
+
+<section class="courses">
+  <header class="head"><p class="eyebrow">Courses</p><h2>Start properly</h2></header>
+  <div class="cards">
+    <article><h3>Beginners, four weeks</h3><p class="p">$99</p><p>Every Monday at 19:00. Breathing, the basic poses and how to use props. Then any class feels possible.</p></article>
+    <article class="hl"><h3>Prenatal, six weeks</h3><p class="p">$150</p><p>Wednesdays at 17:30, from the second trimester. Gentle, practical, and a group of people going through the same thing.</p></article>
+    <article><h3>Desk reset for teams</h3><p class="p">$240<small>/session</small></p><p>Forty-five minutes at your office for up to 15 people. Chairs welcome, no mats needed.</p></article>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <p class="foot-brand">Quiet Hour Yoga</p>
+  <p>This is a concept project. The studio, timetable, address and prices are fictional. Photos: CC0 (public domain).</p>
+  <details class="credits"><summary>Photo credits</summary><ul data-credits></ul></details>
+</footer>
+
+<script src="../../assets/concept.js"></script>
+<script>
+  // کارگاه‌های آخرِ هفته: تاریخ‌ها از امروز (ساعتِ تورنتو) ساخته می‌شوند
+  (function () {
+    var W = [
+      ['Inversions without fear', 'Headstand and forearm balance, step by step, against the wall.', 45, '14:00'],
+      ['Yin and sound bath', 'Long, quiet holds, then twenty minutes lying down with singing bowls.', 40, '16:30'],
+      ['Hips and lower back', 'For runners, cyclists and everyone who sits all day.', 40, '14:00'],
+      ['Breath for sleep', 'Three breathing practices you can do in bed tonight.', 35, '17:00'],
+    ];
+    var now = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Toronto' })), out = [], k = 0;
+    for (var i = 1; out.length < 4 && i < 40; i++) { var d = new Date(now); d.setDate(now.getDate() + i); if (d.getDay() === 6 || d.getDay() === 0) { out.push([d, W[k % W.length]]); k++; } }
+    var box = document.querySelector('[data-ws]');
+    box.innerHTML = out.map(function (o, n) {
+      var d = o[0], w = o[1], left = (d.getDate() * 3 + n) % 9;
+      return '<article class="ws-card"><div class="ws-date"><b>' + d.toLocaleDateString('en-CA', { day: 'numeric' }) + '</b><span>' + d.toLocaleDateString('en-CA', { month: 'short' }) + '</span></div><div class="ws-body"><h2>' + w[0] + '</h2><p>' + w[1] + '</p><span class="ws-meta">' + d.toLocaleDateString('en-CA', { weekday: 'long' }) + ' · ' + w[3] + ' · 2 hours · $' + w[2] + ' · ' + (left ? left + ' of 14 mats left' : 'waitlist only') + '</span></div><button type="button" class="book" data-ws-book>' + (left ? 'Book' : 'Join waitlist') + '</button></article>';
+    }).join('');
+    box.addEventListener('click', function (e) { var b = e.target.closest('[data-ws-book]'); if (!b) return; var on = b.classList.toggle('on'); b.textContent = on ? (b.textContent.indexOf('wait') > -1 ? 'On the waitlist ✓' : 'Booked ✓') : (b.textContent.indexOf('wait') > -1 ? 'Join waitlist' : 'Book'); });
+  })();
+</script>
+</body>
+</html>

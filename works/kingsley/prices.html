@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cuts and prices · Kingsley's Barbers, Leeds (concept)</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#121417">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../pages.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-base="en" data-default-lang="en" data-tz="Europe/London" data-open="09:00" data-close="18:30" data-closed-day="0" data-key="kb">
+
+<div class="concept" role="note">Concept project · Kingsley's Barbers is a fictional shop</div>
+<div class="pole" aria-hidden="true"></div>
+
+<header class="top">
+  <a class="brand" href="index.html">Kingsley's<small>Barbers · Leeds</small></a>
+  <nav class="knav"><a href="prices.html">Prices</a><a href="about.html">About</a></nav>
+  <a class="call" href="index.html#book">Book a chair</a>
+</header>
+<!-- pages --><nav class="pages" aria-label="Pages" style="--pg:#B3202A"><a href="index.html">The shop</a><a href="prices.html" aria-current="page">Cuts &amp; prices</a><a href="about.html">About</a></nav><!-- /pages -->
+
+<main>
+<section class="subhead">
+  <p class="eyebrow">Cuts &amp; prices</p>
+  <h1>Know what to ask for.</h1>
+  <p class="lead">Every cut, how long it takes and who does it best. Same price every day, no surprises at the till.</p>
+</section>
+
+<section class="cuts">
+  <div class="cut-grid">
+    <article><header><h2>Haircut</h2><b>£22</b></header><p>Clippers and scissors, washed, styled. The one most people come in for.</p><ul><li>30 minutes</li><li>Any barber</li></ul></article>
+    <article><header><h2>Skin fade</h2><b>£25</b></header><p>Down to the skin at the sides, blended by hand. Ask Dev if you want it sharp.</p><ul><li>40 minutes</li><li>Best with Dev</li></ul></article>
+    <article><header><h2>Scissor cut</h2><b>£26</b></header><p>For longer hair that needs shape, not clippers. Joe will talk you through it first.</p><ul><li>45 minutes</li><li>Best with Joe</li></ul></article>
+    <article><header><h2>Beard trim &amp; line-up</h2><b>£12</b></header><p>Shaped, lined with a razor, finished with oil.</p><ul><li>15 minutes</li><li>Best with Marcus</li></ul></article>
+    <article><header><h2>Hot towel shave</h2><b>£28</b></header><p>Two hot towels, a straight razor, a cold towel to finish. Slow, on purpose.</p><ul><li>40 minutes</li><li>Best with Marcus</li></ul></article>
+    <article><header><h2>Kids (under 12)</h2><b>£15</b></header><p>Patient barbers and a booster seat. Quiet mornings on Tuesdays, see below.</p><ul><li>20 minutes</li><li>Any barber</li></ul></article>
+  </div>
+</section>
+
+<section class="guards">
+  <header class="head"><p class="eyebrow">Clipper guide</p><h2>What does a number two look like?</h2><p>Tap a number. The bar shows how much hair is left.</p></header>
+  <div class="guard-tool">
+    <div class="guard-btns" role="group" aria-label="Clipper guard">
+      <button type="button" aria-pressed="false" data-mm="1.5">½</button><button type="button" aria-pressed="false" data-mm="3">1</button><button type="button" aria-pressed="true" data-mm="6">2</button><button type="button" aria-pressed="false" data-mm="9">3</button><button type="button" aria-pressed="false" data-mm="12">4</button><button type="button" aria-pressed="false" data-mm="19">6</button>
+    </div>
+    <div class="guard-show" aria-live="polite"><div class="guard-bar"><i data-bar></i></div><p data-guard-text></p></div>
+  </div>
+</section>
+
+<section class="card-stamp">
+  <div class="stamp-card">
+    <div><p class="eyebrow">Loyalty card</p><h2>Every sixth cut is on us</h2><p>Ask for a card at the desk. We stamp it, you keep it in your wallet. No app, no email.</p></div>
+    <ol class="stamps" aria-label="Five stamps, then a free cut"><li>✂</li><li>✂</li><li>✂</li><li></li><li></li><li class="free">Free</li></ol>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <p class="foot-brand">Kingsley's Barbers</p>
+  <p>This is a concept project. The shop, barbers and prices are fictional. Photos: CC0 (public domain).</p>
+  <details class="credits"><summary>Photo credits</summary><ul data-credits></ul></details>
+</footer>
+
+<a class="dock" href="index.html#book">Book a chair</a>
+<script src="../../assets/concept.js"></script>
+<script>
+  // راهنمای شانه‌ی ماشین: طولِ مو با هر شماره
+  (function () {
+    var bar = document.querySelector('[data-bar]'), text = document.querySelector('[data-guard-text]');
+    var NOTE = { '1.5': 'Very short. Scalp shows through.', '3': 'Short and neat. The classic grade one.', '6': 'Short back and sides for most people.', '9': 'Soft and even. Hides the scalp.', '12': 'Long enough to look like a haircut, not a buzz.', '19': 'Longest guard. Usually blended into scissors.' };
+    function pick(b) {
+      document.querySelectorAll('[data-mm]').forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
+      bar.style.width = (Number(b.dataset.mm) / 19 * 100) + '%';
+      text.textContent = 'Number ' + b.textContent + ' leaves about ' + b.dataset.mm + ' mm. ' + NOTE[b.dataset.mm];
+    }
+    document.querySelectorAll('[data-mm]').forEach(function (b) { b.addEventListener('click', function () { pick(b); }); });
+    pick(document.querySelector('[data-mm][aria-pressed="true"]'));
+  })();
+</script>
+</body>
+</html>

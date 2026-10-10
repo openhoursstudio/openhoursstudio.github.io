@@ -109,3 +109,34 @@ h2 { font-size: 34px; line-height: 1.05; color: var(--crust); }
   .foot { padding: 48px 32px; } .foot > * { max-width: 1180px; margin-inline: auto; }
   .dock { display: none; }
 }
+
+/* صفحه‌های داخلی: منو و کیکِ جشن */
+.pages { background: var(--butter); border-bottom: 2px solid var(--ink); }
+.pages a[aria-current="page"] { background: var(--ink); color: var(--butter); }
+.hero-lite { background: var(--butter); padding-bottom: 40px; border-bottom: 2px solid var(--ink); }
+.hero-lite .lead { max-width: 34em; }
+.menu-count { margin: -6px 0 8px; font-size: 14px; color: #6B5A4C; }
+.menu-groups { display: grid; gap: 30px; }
+.menu-group { background: #fff; border: 2px solid var(--ink); border-radius: 22px; padding: 6px 18px 10px; }
+.menu-group h2 { font-size: 26px; padding: 14px 0 4px; }
+.menu-group .price-list li:last-child { border-bottom: 0; }
+.menu-group .pr { color: var(--cherry); font-family: var(--display); font-size: 18px; }
+.menu-empty { padding: 18px; border: 2px dashed var(--crust); border-radius: 16px; }
+.menu-full .note-box { margin-top: 24px; background: #fff; border: 2px solid var(--ink); box-shadow: none; }
+.filter-chips button { border: 2px solid var(--ink); box-shadow: none; background: #fff; }
+.filter-chips button[aria-pressed="true"] { background: var(--ink); color: var(--butter); }
+.size-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.size-cards article { display: grid; justify-items: center; gap: 2px; padding: 18px 8px; background: #fff; border: 2px solid var(--ink); border-radius: 20px; text-align: center; }
+.size-cards article.pick { background: var(--butter); box-shadow: 6px 6px 0 var(--ink); }
+.size-cards h3 { font-size: 20px; }
+.size-cards p { margin: 0; font-size: 13px; color: #6B5A4C; }
+.size-cards b { font: 800 24px var(--display); color: var(--cherry); }
+.ring { display: block; border-radius: 50%; background: radial-gradient(circle, var(--cream) 0 46%, #F4C9B4 47% 60%, var(--crust) 61% 64%, transparent 65%); margin-bottom: 8px; }
+.ring.s6 { width: 54px; height: 54px; } .ring.s8 { width: 70px; height: 70px; } .ring.s10 { width: 86px; height: 86px; }
+.cake-photo { margin: 0; border: 2px solid var(--ink); border-radius: 22px; overflow: hidden; box-shadow: 8px 8px 0 var(--ink); }
+.cake-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.cake-form { background: #fff; border: 2px solid var(--ink); box-shadow: 8px 8px 0 var(--ink); max-width: 640px; }
+.cake-form .check-row { display: flex; align-items: center; gap: 10px; min-height: 44px; }
+.cake-form .check-row input { min-height: 0; width: 20px; height: 20px; accent-color: var(--cherry); }
+.cake-form .out { padding: 12px 14px; border-radius: 12px; background: var(--butter); }
+@media (min-width: 900px) { .menu-groups { grid-template-columns: 1fr 1fr; } .size-cards { gap: 18px; max-width: 760px; } }

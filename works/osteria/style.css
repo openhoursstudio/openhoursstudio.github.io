@@ -81,3 +81,39 @@ h2 { font-size: 32px; line-height: 1.1; font-weight: 800; }
   .foot { padding: 44px 32px; } .foot > * { max-width: 1120px; margin-inline: auto; }
   .dock { display: none; }
 }
+
+/* صفحه‌های داخلی: منوی کامل و کلاسِ پاستا */
+.pages { background: var(--paper); border-bottom: 1px solid var(--line); }
+.subhead h1 { font-size: 36px; line-height: 1.1; color: var(--brick); }
+.subhead .lead { color: var(--muted); max-width: 40em; }
+.lunch { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 16px; padding: 22px; border-radius: 4px; background: var(--green); color: var(--cream); }
+.lunch .eyebrow { color: var(--ochre); }
+.lunch p { margin: 6px 0 0; color: #D8E0D6; }
+.lunch-price { margin: 0 !important; font: 800 44px var(--serif); color: var(--ochre) !important; white-space: nowrap; }
+.carta-grid { display: grid; gap: 14px; }
+.course-c { padding: 6px 20px 10px; border-radius: 4px; background: var(--paper); box-shadow: 0 1px 0 var(--line); }
+.course-c h2 { font-size: 24px; padding: 14px 0 2px; color: var(--brick); }
+.course-c .pr { font: 700 18px var(--serif); color: var(--brick); }
+.course-c .price-list li:last-child { border-bottom: 0; }
+.course-c.wine { background: #F1E2C6; }
+.allergens-it { margin-top: 20px; background: var(--paper); }
+.allergens-it p { margin: 6px 0 0; color: var(--muted); }
+.corso-photo { margin: 0; border-radius: 4px; overflow: hidden; }
+.corso-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.facts-c { list-style: none; margin: 0 0 22px; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.facts-c li { display: grid; padding: 12px 14px; border-radius: 4px; background: var(--paper); }
+.facts-c b { font: 800 22px var(--serif); color: var(--brick); }
+.facts-c span { font-size: 13px; color: var(--muted); }
+.corso .steps-list li::before { background: var(--brick); }
+.dates { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
+.dates button { display: grid; gap: 2px; min-height: 64px; padding: 8px; border: 0; border-radius: 4px; background: var(--paper); color: var(--ink); font: inherit; cursor: pointer; box-shadow: inset 0 0 0 1px var(--line); }
+.dates b { font-family: var(--serif); text-transform: capitalize; }
+.dates span { font-size: 12px; color: var(--muted); }
+.dates [aria-pressed="true"] { background: var(--brick); color: #fff; box-shadow: none; }
+.dates [aria-pressed="true"] span { color: #F6D9CF; }
+.dates button:disabled { opacity: .45; cursor: not-allowed; }
+.corso-form { background: var(--paper); max-width: 560px; }
+.corso-form .gift { display: flex; align-items: center; gap: 10px; min-height: 44px; font-weight: 500; }
+.corso-form .gift input { min-height: 0; width: 20px; height: 20px; accent-color: var(--brick); }
+.corso-form .out { padding: 12px 14px; border-radius: 4px; background: #F1E2C6; }
+@media (min-width: 820px) { .subhead h1 { font-size: 56px; } .carta-grid { grid-template-columns: 1fr 1fr; } .lunch { padding: 32px 40px; } .dates { grid-template-columns: repeat(6, 1fr); } }

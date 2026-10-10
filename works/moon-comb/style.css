@@ -183,3 +183,32 @@ html[lang="en"] h2 { font-size: 34px; }
   .foot > * { max-width: 1180px; margin-inline: auto; }
   .dock { display: none; }
 }
+
+/* صفحه‌های داخلی: فهرستِ قیمت و اولین مراجعه */
+.pages { background: var(--bg-2); border-bottom: 1px solid var(--line); }
+.pages a[aria-current="page"] { background: var(--sage); }
+.subhead h1 { font-size: 30px; }
+.subhead .lead { color: var(--ink-2); }
+.ptabs { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 14px; scrollbar-width: none; }
+.ptabs button { flex: none; min-height: 44px; padding: 0 16px; border: 0; border-radius: 999px; background: var(--card); box-shadow: inset 0 0 0 1px var(--line); font: 500 14px var(--sans); color: var(--ink); cursor: pointer; }
+.ptabs [aria-selected="true"] { background: var(--sage); color: #fff; box-shadow: none; }
+.ppanel { padding: 4px 20px 8px; border-radius: 22px; background: var(--card); box-shadow: inset 0 0 0 1px var(--line); }
+.ppanel .price-list li:last-child { border-bottom: 0; }
+.ppanel .pr { font: 600 19px var(--latin); color: var(--sage); }
+.estimate { display: grid; gap: 16px; justify-items: start; }
+.est { background: var(--card); }
+.est p { margin: 6px 0 0; color: var(--ink-2); }
+.welcome-card { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 20px; padding: 24px; border-radius: 26px; background: var(--sage); color: #fff; }
+.welcome-card .big { margin: 0; font: 600 76px/1 var(--latin); color: var(--blush); }
+.welcome-card .big small { font-size: .45em; }
+.welcome-card h2 { font-size: 22px; }
+.welcome-card p { margin: 6px 0 0; color: #DCE6E0; font-size: 14px; }
+.visit-flow .steps-list li::before { background: var(--sage); }
+.visit-flow .steps-list span { color: var(--ink-2); }
+.fv-photo { margin: 0; border-radius: 160px 160px 22px 22px; overflow: hidden; }
+.fv-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.fv-facts { margin: 12px 0 0; }
+.fv-facts div { display: grid; grid-template-columns: 7.5em 1fr; gap: 10px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.fv-facts dt { color: var(--sage); font-weight: 700; }
+.fv-facts dd { margin: 0; color: var(--ink-2); }
+@media (min-width: 760px) { .subhead h1 { font-size: 40px; } .welcome-card { padding: 36px 44px; } .welcome-card .big { font-size: 110px; } }

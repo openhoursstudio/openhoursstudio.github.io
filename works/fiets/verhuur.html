@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fietsverhuur · Spaak & Bonen, De Pijp (concept)</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#F26B1D">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../pages.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-base="nl" data-default-lang="auto" data-tz="Europe/Amsterdam" data-open="08:00" data-close="18:00" data-closed-day="0" data-key="sb" data-title-en="Bike hire · Spaak & Bonen, De Pijp (concept)">
+
+<div class="concept" role="note"><span data-en="Concept project · Spaak &amp; Bonen is a fictional shop">Conceptproject · Spaak &amp; Bonen is een fictieve zaak</span></div>
+
+<header class="top">
+  <a class="brand" href="index.html"><svg viewBox="0 0 40 24" aria-hidden="true"><circle cx="9" cy="15" r="7"/><circle cx="31" cy="15" r="7"/><path d="M9 15 16 5h9l6 10M16 5l-3-3h-3M20 15l5-10"/></svg>Spaak <em>&amp;</em> Bonen</a>
+  <button class="lang" type="button" aria-label="Switch language" data-lang-toggle><span class="lang-base">NL</span><span class="lang-en">EN</span></button>
+</header>
+<!-- pages --><nav class="pages" aria-label="Pages" style="--pg:#F26B1D"><a href="index.html" data-en="Workshop">Werkplaats</a><a href="verhuur.html" aria-current="page" data-en="Bike hire">Fietsverhuur</a><a href="abonnement.html" data-en="Service plan">Onderhoudsplan</a></nav><!-- /pages -->
+
+<main>
+<section class="subhead">
+  <p class="eyebrow" data-en="Bike hire">Fietsverhuur</p>
+  <h1 data-en="Ride Amsterdam&lt;br&gt;like a local." data-html>Fiets door Amsterdam<br>als een local.</h1>
+  <p class="lead" data-en="Plain Dutch bikes we service ourselves, not shiny tourist bikes. Lock, lights and a coffee on pick-up included.">Gewone Hollandse fietsen die we zelf onderhouden, geen glimmende toeristenfietsen. Slot, licht en een koffie bij het ophalen inbegrepen.</p>
+</section>
+
+<section class="hire">
+  <div class="bike-types" role="group" aria-label="Bikes" data-bikes>
+    <button type="button" aria-pressed="true" data-p="14" data-n="Stadsfiets" data-n-en="City bike"><b data-en="City bike">Stadsfiets</b><span data-en="Three gears, back-pedal brake">3 versnellingen, terugtraprem</span><i>€ 14</i></button>
+    <button type="button" aria-pressed="false" data-p="32" data-n="E-bike" data-n-en="E-bike"><b>E-bike</b><span data-en="60 km battery, for the long way round">Accu voor 60 km, voor de lange route</span><i>€ 32</i></button>
+    <button type="button" aria-pressed="false" data-p="39" data-n="Bakfiets" data-n-en="Cargo bike"><b data-en="Cargo bike">Bakfiets</b><span data-en="Two kids or a week of shopping">Twee kinderen of een week boodschappen</span><i>€ 39</i></button>
+  </div>
+  <div class="hire-calc">
+    <label><span data-en="Days">Dagen</span><input type="range" min="1" max="7" value="2" data-days-in><b data-days-out>2</b></label>
+    <label class="opt-c"><input type="checkbox" data-seat> <span data-en="Child seat (+ € 3 a day)">Kinderzitje (+ € 3 per dag)</span></label>
+    <div class="hire-total"><span data-en="Total">Totaal</span><b data-hire-total>€ 28</b><p data-hire-note></p></div>
+  </div>
+</section>
+
+<section class="hire-rules">
+  <div class="rules-grid">
+    <article><h2 data-en="Pick up">Ophalen</h2><p data-en="From 8:00 at the workshop. Bring ID. Deposit € 50, back when you return the bike.">Vanaf 8:00 in de werkplaats. Neem een ID mee. Borg € 50, terug bij het inleveren.</p></article>
+    <article><h2 data-en="Flat tyre?">Lekke band?</h2><p data-en="Call us. Within the ring we bring a new bike in thirty minutes, free.">Bel ons. Binnen de ring brengen we binnen een half uur gratis een andere fiets.</p></article>
+    <article><h2 data-en="Three local rules">Drie lokale regels</h2><p data-en="Ride on the right, lights on after dark, and never stop on the bike lane to take a photo.">Rechts houden, licht aan in het donker, en nooit stilstaan op het fietspad voor een foto.</p></article>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <p class="foot-brand">Spaak &amp; Bonen</p>
+  <p data-en="This is a concept project. The shop, address and prices are fictional. Photos: CC0 (public domain).">Dit is een conceptproject. De zaak, het adres en de prijzen zijn fictief. Foto's: CC0 (publiek domein).</p>
+  <details class="credits"><summary data-en="Photo credits">Fotocredits</summary><ul data-credits></ul></details>
+</footer>
+
+<script src="../../assets/concept.js"></script>
+<script>
+  // ماشین‌حسابِ کرایه: هفت روز به قیمتِ پنج روز، صندلیِ کودک روزی ۳ یورو
+  (function () {
+    var bikes = document.querySelectorAll('[data-bikes] button'), days = document.querySelector('[data-days-in]');
+    var dOut = document.querySelector('[data-days-out]'), seat = document.querySelector('[data-seat]');
+    var total = document.querySelector('[data-hire-total]'), note = document.querySelector('[data-hire-note]'), cur = bikes[0];
+    function render() {
+      var en = document.documentElement.lang === 'en', d = Number(days.value), paid = d === 7 ? 5 : d;
+      var sum = Number(cur.dataset.p) * paid + (seat.checked ? 3 * d : 0);
+      dOut.textContent = d; total.textContent = '€ ' + sum;
+      note.textContent = (en ? cur.dataset.nEn : cur.dataset.n) + ' · ' + d + (en ? (d > 1 ? ' days' : ' day') : (d > 1 ? ' dagen' : ' dag')) + (d === 7 ? (en ? ' · a week costs five days' : ' · een week kost vijf dagen') : '');
+    }
+    bikes.forEach(function (b) { b.addEventListener('click', function () { bikes.forEach(function (x) { x.setAttribute('aria-pressed', x === b); }); cur = b; render(); }); });
+    days.addEventListener('input', render); seat.addEventListener('change', render);
+    document.addEventListener('langchange', render);
+    render();
+  })();
+</script>
+</body>
+</html>

@@ -68,3 +68,49 @@ h2 { font-size: 34px; line-height: 1; }
   .visit { max-width: 760px; }
   .foot { padding: 44px 32px; } .foot > * { max-width: 1120px; margin-inline: auto; }
 }
+
+/* صفحه‌های داخلی: کرایه‌ی دوچرخه و طرحِ نگهداری */
+.pages { background: var(--white); border-bottom: 2px solid var(--ink); }
+.pages a[aria-current="page"] { background: var(--orange); }
+.subhead h1 { font-size: 40px; line-height: 1; text-transform: uppercase; }
+.subhead .lead { color: var(--muted); }
+.bike-types { display: grid; gap: 10px; }
+.bike-types button { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; text-align: left; padding: 18px; border: 2px solid var(--ink); border-radius: 0; background: var(--white); color: var(--ink); font: inherit; cursor: pointer; }
+.bike-types b { font: 400 20px var(--display); text-transform: uppercase; }
+.bike-types span { grid-column: 1; font-size: 14px; color: var(--muted); }
+.bike-types i { grid-column: 2; grid-row: 1 / span 2; align-self: center; font: 400 24px var(--display); font-style: normal; color: var(--orange); }
+.bike-types [aria-pressed="true"] { background: var(--orange); color: #fff; }
+.bike-types [aria-pressed="true"] span, .bike-types [aria-pressed="true"] i { color: #fff; }
+.hire-calc { display: grid; gap: 14px; margin-top: 16px; padding: 20px; background: var(--blue); color: #fff; }
+.hire-calc label { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 12px; font-weight: 700; }
+.hire-calc input[type="range"] { width: 100%; accent-color: var(--orange); min-height: 44px; }
+.hire-calc label b { font: 400 26px var(--display); }
+.hire-calc .opt-c { grid-template-columns: auto 1fr; font-weight: 500; min-height: 44px; }
+.hire-calc .opt-c input { width: 20px; height: 20px; accent-color: var(--orange); }
+.hire-total { display: grid; gap: 2px; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, .25); }
+.hire-total b { font: 400 44px var(--display); color: var(--orange); }
+.hire-total p { margin: 0; color: #C9D6E6; font-size: 14px; }
+.rules-grid { display: grid; gap: 10px; }
+.rules-grid article { padding: 18px; border: 2px solid var(--ink); background: var(--white); }
+.rules-grid h2 { font-size: 20px; text-transform: uppercase; }
+.rules-grid p { margin: 6px 0 0; color: var(--muted); }
+.plan-cols { display: grid; gap: 12px; }
+.plan-cols article { padding: 24px; border: 2px solid var(--ink); background: var(--white); }
+.plan-cols h2 { font-size: 28px; text-transform: uppercase; }
+.pf { margin: 4px 0 12px; font: 400 40px var(--display); color: var(--orange); }
+.pf small { font: 700 15px var(--body); color: var(--muted); }
+.plan-cols ul { margin: 0; padding-inline-start: 18px; }
+.plan-cols li { padding: 4px 0; }
+.plan-cols .hl { background: var(--ink); color: #fff; }
+.plan-cols .hl .pf small { color: #B9BEC4; }
+.quiz { padding: 20px; background: var(--orange); color: #fff; }
+.quiz .q { margin: 0 0 10px; font: 400 20px var(--display); text-transform: uppercase; }
+.q-btns { display: grid; gap: 8px; }
+.q-btns button { min-height: 48px; border: 2px solid #fff; background: transparent; color: #fff; font: 700 15px var(--body); cursor: pointer; }
+.q-btns [aria-pressed="true"] { background: #fff; color: var(--orange); }
+.answer { margin: 12px 0 0; font-weight: 700; min-height: 1.6em; }
+.faq-f h2 { margin-bottom: 8px; }
+.faq-f details { border-bottom: 2px solid var(--ink); }
+.faq-f summary { cursor: pointer; min-height: 52px; display: flex; align-items: center; font-weight: 700; }
+.faq-f details p { margin: 0 0 14px; color: var(--muted); }
+@media (min-width: 820px) { .subhead h1 { font-size: 64px; } .bike-types, .rules-grid { grid-template-columns: repeat(3, 1fr); } .plan-cols { grid-template-columns: 1fr 1fr; } .q-btns { grid-template-columns: repeat(3, 1fr); } }

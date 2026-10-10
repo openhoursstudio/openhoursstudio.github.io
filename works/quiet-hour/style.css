@@ -156,3 +156,32 @@ h1 em { font-style: normal; color: var(--teal); }
   .foot { padding: 48px 40px 56px; }
   .foot > * { max-width: 1180px; margin-inline: auto; }
 }
+
+/* صفحه‌های داخلی: کارگاه‌ها و استودیو */
+.pages { background: var(--card); border-bottom: 1px solid var(--line); }
+.pages a[aria-current="page"] { background: var(--ink); }
+.subhead h1 { font-size: 40px; line-height: 1.08; }
+.subhead h1 em { font-style: normal; color: var(--teal); }
+.subhead .lead { color: var(--ink-2); }
+.ws-list { display: grid; gap: 10px; }
+.ws-card { display: grid; grid-template-columns: 64px 1fr; gap: 6px 14px; padding: 16px; border-radius: 22px; background: var(--card); box-shadow: inset 0 0 0 1px var(--line); }
+.ws-date { display: grid; place-items: center; align-content: center; width: 64px; height: 70px; border-radius: 16px; background: var(--lav-2); }
+.ws-date b { font: 400 26px/1 var(--serif); }
+.ws-date span { font-size: 12px; font-weight: 700; text-transform: uppercase; color: var(--ink-2); }
+.ws-body h2 { font-size: 21px; }
+.ws-body p { margin: 4px 0 6px; font-size: 15px; color: var(--ink-2); }
+.ws-meta { font-size: 13px; font-weight: 600; color: var(--teal); }
+.ws-card .book { grid-column: 1 / -1; justify-self: start; }
+.courses .cards p small { font: 500 15px var(--sans); color: var(--ink-2); }
+.room-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.room-grid img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 24px; }
+.room-grid img:first-child { grid-column: 1 / -1; aspect-ratio: 16 / 9; }
+.v-grid-q { display: grid; gap: 10px; }
+.v-grid-q article { padding: 20px; border-radius: 22px; background: var(--lav-2); }
+.v-grid-q h3 { font-size: 21px; }
+.v-grid-q p { margin: 6px 0 0; color: var(--ink-2); font-size: 15px; }
+.fq { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 24px 20px; border-radius: 28px; background: var(--ink); color: #fff; }
+.fq div { display: grid; }
+.fq b { font: 400 44px/1 var(--serif); color: var(--teal-2); }
+.fq span { font-size: 14px; color: #CFC9E0; margin-top: 4px; }
+@media (min-width: 900px) { .subhead h1 { font-size: 60px; } .ws-card { grid-template-columns: 84px 1fr auto; align-items: center; padding: 20px 24px; } .ws-date { width: 84px; height: 84px; } .ws-card .book { grid-column: auto; } .room-grid { grid-template-columns: 2fr 1fr 1fr; } .room-grid img:first-child { grid-column: auto; aspect-ratio: auto; height: 100%; } .v-grid-q { grid-template-columns: 1fr 1fr; } .fq { grid-template-columns: repeat(4, 1fr); padding: 40px; } }
