@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>アクセス｜麺屋ほたる（コンセプト作品）</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#141110">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../pages.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-open="18:00" data-close="02:00" data-closed-day="1" data-key="mh" data-title-en="Getting here · Menya Hotaru, Osaka (concept)">
+
+<div class="concept" role="note"><span data-en="Concept project · Menya Hotaru is a fictional ramen shop">コンセプト作品 · 「麺屋ほたる」は架空の店舗です</span></div>
+
+<header class="top">
+  <a class="brand" href="index.html" aria-label="麺屋ほたる"><span class="dot" aria-hidden="true"></span>麺屋ほたる</a>
+  <button class="lang" type="button" aria-label="JA EN, switch language" data-lang-toggle><span class="lang-ja">JA</span><span class="lang-en">EN</span></button>
+</header>
+<!-- pages --><nav class="pages" aria-label="Pages" style="--pg:#C8281E"><a href="index.html" data-en="Home">ホーム</a><a href="menu.html" data-en="Menu">お品書き</a><a href="guide.html" data-en="First time?">はじめての方へ</a><a href="access.html" aria-current="page" data-en="Getting here">アクセス</a></nav><!-- /pages -->
+
+<main>
+<section class="subhead">
+  <p class="eyebrow">Access</p>
+  <h1 data-en="Follow the red lantern">赤い提灯をめざして</h1>
+  <p class="lead" data-en="Three minutes on foot from JR Tenma Station, in an alley just off the Tenjinbashi-suji arcade. Directions from each station, where to queue and how to get home late at night, all on one page.">JR天満駅から歩いて3分。天神橋筋商店街から一本入った路地にあります。駅ごとの道順、並ぶ場所、深夜の帰り道まで、このページにまとめました。</p>
+</section>
+
+<section class="lantern-now">
+  <div class="lantern-card">
+    <div class="chochin" data-lantern aria-hidden="true"><span class="ch-cap"></span><span class="ch-body"><b>ほたる</b></span><span class="ch-cap"></span></div>
+    <div class="lantern-copy">
+      <h2 data-en="Lantern lit means we are open">提灯が灯っていれば、営業中</h2>
+      <p data-en="We light it at 18:00 and take it in at 2:00. The noren curtain comes down at last order, 1:30. The lantern on this page follows the shop's hours too.">18時に灯して、2時にしまいます。のれんはラストオーダーの1:30に下げます。このページの提灯も、お店の営業時間に合わせて灯ります。</p>
+      <p class="status" data-status aria-live="polite"></p>
+    </div>
+  </div>
+</section>
+
+<section class="route">
+  <header class="head">
+    <p class="eyebrow">Directions</p>
+    <h2 data-en="From the station">駅からの道順</h2>
+    <p data-en="Choose the station you are coming from. The map shows the way.">お使いの駅を選んでください。地図に道順が出ます。</p>
+  </header>
+  <div class="route-tabs" role="tablist" aria-label="Station" data-route-tabs>
+    <button type="button" role="tab" id="r-jr" aria-controls="p-jr" aria-selected="true" data-r="jr"><b data-en="JR Tenma">JR天満駅</b><span data-en="3 min walk">徒歩3分</span></button>
+    <button type="button" role="tab" id="r-ogi" aria-controls="p-ogi" aria-selected="false" tabindex="-1" data-r="ogi"><b data-en="Ogimachi">扇町駅</b><span data-en="5 min walk">徒歩5分</span></button>
+    <button type="button" role="tab" id="r-ten" aria-controls="p-ten" aria-selected="false" tabindex="-1" data-r="ten"><b data-en="Tenroku">天神橋筋六丁目駅</b><span data-en="8 min walk">徒歩8分</span></button>
+  </div>
+  <div class="route-body">
+    <div class="route-map" data-route="jr" aria-hidden="true">
+      <svg viewBox="0 0 360 300">
+        <rect width="360" height="300" class="mp-bg"/>
+        <rect x="16" y="24" width="120" height="124" rx="8" class="mp-block"/>
+        <rect x="16" y="194" width="120" height="82" rx="8" class="mp-block"/>
+        <rect x="204" y="24" width="140" height="70" rx="8" class="mp-block"/>
+        <rect x="204" y="126" width="140" height="28" rx="6" class="mp-block"/>
+        <rect x="204" y="194" width="140" height="82" rx="8" class="mp-block"/>
+        <rect x="150" y="0" width="40" height="300" class="mp-arcade"/>
+        <path d="M150 0 V300 M190 0 V300" class="mp-arcade-edge"/>
+        <path d="M190 110 H344" class="mp-alley"/>
+        <path d="M0 172 H360" class="mp-rail"/>
+        <path d="M0 172 H360" class="mp-tie"/>
+        <path d="M232 172 H170 V110 H286" class="mp-route" data-r="jr"/>
+        <path d="M170 282 V110 H286" class="mp-route" data-r="ogi"/>
+        <path d="M170 18 V110 H286" class="mp-route" data-r="ten"/>
+        <rect x="232" y="160" width="84" height="24" rx="6" class="mp-station"/>
+        <text x="274" y="176" text-anchor="middle" class="mp-st" data-en="JR Tenma">JR天満駅</text>
+        <circle cx="170" cy="282" r="8" class="mp-metro"/>
+        <text x="184" y="286" class="mp-label" data-en="Ogimachi Stn">扇町駅</text>
+        <circle cx="170" cy="18" r="8" class="mp-metro"/>
+        <text x="184" y="22" class="mp-label" data-en="Tenroku Stn">天神橋筋六丁目駅</text>
+        <text x="144" y="64" text-anchor="end" class="mp-small" data-en="Tenjinbashi-suji">天神橋筋商店街</text>
+        <text x="144" y="78" text-anchor="end" class="mp-small" data-en="arcade">（アーケード）</text>
+        <text x="8" y="164" class="mp-small" data-en="JR Loop Line">JR大阪環状線</text>
+        <circle cx="198" cy="100" r="5" class="mp-tako"/>
+        <text x="207" y="97" class="mp-small" data-en="Takoyaki">たこ焼き屋</text>
+        <circle cx="286" cy="110" r="14" class="mp-glow"/>
+        <circle cx="286" cy="110" r="8" class="mp-shop"/>
+        <text x="286" y="138" text-anchor="middle" class="mp-label mp-here" data-en="Hotaru">ほたる</text>
+      </svg>
+    </div>
+    <div class="route-panels">
+      <div class="route-panel" role="tabpanel" id="p-jr" aria-labelledby="r-jr">
+        <ol class="route-steps">
+          <li data-en="Leave the ticket gate and turn left. Walk about 30 m along the tracks and you will reach the arcade.">改札を出て左へ。高架沿いに30mほど歩くと、商店街のアーケードに出ます。</li>
+          <li data-en="Turn right inside the arcade and walk north for about a minute.">アーケードに入ったら右（北）へ。1分ほど歩きます。</li>
+          <li data-en="Turn right at the takoyaki stand on the corner. You will see the steam before the sign.">たこ焼き屋の角を右へ。看板より先に湯気が見えます。</li>
+          <li data-en="Third door down the alley, under a red lantern and a navy noren. That is us.">路地の三軒目、赤い提灯と紺ののれん。そこがほたるです。</li>
+        </ol>
+      </div>
+      <div class="route-panel" role="tabpanel" id="p-ogi" aria-labelledby="r-ogi" hidden>
+        <ol class="route-steps">
+          <li data-en="On the Osaka Metro Sakaisuji Line. Take the exit on the Tenjinbashi-suji arcade side.">大阪メトロ堺筋線。天神橋筋商店街側の出口から地上へ。</li>
+          <li data-en="Walk north through the arcade and pass under the JR railway bridge.">アーケードを北へ。JRの高架をくぐります。</li>
+          <li data-en="About a minute after the bridge, turn right at the takoyaki stand.">高架を過ぎて1分ほど、たこ焼き屋の角を右へ。</li>
+          <li data-en="Third door down the alley, under a red lantern and a navy noren. That is us.">路地の三軒目、赤い提灯と紺ののれん。そこがほたるです。</li>
+        </ol>
+      </div>
+      <div class="route-panel" role="tabpanel" id="p-ten" aria-labelledby="r-ten" hidden>
+        <ol class="route-steps">
+          <li data-en="Come up to street level and head south into Japan's longest shopping arcade.">地上に出たら、日本一長い商店街を南へ。</li>
+          <li data-en="Keep going straight for about six minutes, past the second-hand bookshop.">古本屋の前を過ぎて、まっすぐ6分ほど。</li>
+          <li data-en="Turn left at the takoyaki stand. If you reach the railway bridge, you have gone too far.">たこ焼き屋の角を左へ。JRの高架が見えたら行き過ぎです。</li>
+          <li data-en="Third door down the alley, under a red lantern and a navy noren. That is us.">路地の三軒目、赤い提灯と紺ののれん。そこがほたるです。</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="queue">
+  <header class="head">
+    <p class="eyebrow">Queue</p>
+    <h2 data-en="Where to wait">並ぶ場所</h2>
+    <p data-en="The alley is narrow and people live across from us. Thank you for helping us keep it calm.">路地はせまく、向かいは住宅です。静かな夜を守るために、ご協力をお願いします。</p>
+  </header>
+  <div class="queue-grid">
+    <div class="queue-map" aria-hidden="true">
+      <svg viewBox="0 0 360 170">
+        <rect width="360" height="170" class="mp-bg"/>
+        <rect x="0" y="0" width="360" height="42" class="q-house"/>
+        <text x="16" y="27" class="mp-small" data-en="Homes across the alley">向かいは住宅</text>
+        <rect x="0" y="42" width="360" height="82" class="q-alley"/>
+        <path d="M14 70 H250" class="q-pass"/>
+        <path d="M244 64 L254 70 L244 76" class="q-pass-head"/>
+        <text x="16" y="62" class="mp-small q-pass-label" data-en="Keep this side clear">通り道は空けて</text>
+        <rect x="0" y="124" width="282" height="46" class="q-wall"/>
+        <rect x="282" y="124" width="78" height="46" class="q-shop"/>
+        <rect x="300" y="124" width="42" height="10" class="q-noren"/>
+        <circle cx="292" cy="114" r="7" class="mp-shop"/>
+        <text x="321" y="156" text-anchor="middle" class="mp-small q-shop-label" data-en="Hotaru">ほたる</text>
+        <text x="16" y="152" class="mp-small q-wall-label" data-en="Black wooden fence">黒い板塀</text>
+        <circle cx="266" cy="110" r="7" class="q-p"/>
+        <circle cx="244" cy="110" r="7" class="q-p"/>
+        <circle cx="222" cy="110" r="7" class="q-p"/>
+        <circle cx="200" cy="110" r="7" class="q-p"/>
+        <circle cx="178" cy="110" r="7" class="q-p"/>
+        <circle cx="156" cy="110" r="7" class="q-p"/>
+        <text x="140" y="96" text-anchor="end" class="mp-label" data-en="Queue here, single file">ここに一列で</text>
+      </svg>
+    </div>
+    <ul class="queue-rules">
+      <li><b data-en="Single file, along the fence">板塀に沿って、一列に</b><span data-en="Start beside the door and line up along the black wooden fence. Please do not stand across the alley.">入口の横から、黒い板塀に沿ってお並びください。路地をふさがないようにお願いします。</span></li>
+      <li><b data-en="Keep your voice down">話し声は小さめに</b><span data-en="It is late and our neighbours are asleep. Phone calls are best made back on the arcade.">深夜はご近所が眠っています。お電話は商店街に出てからどうぞ。</span></li>
+      <li><b data-en="A long queue gets numbered tickets">長い列には番号札</b><span data-en="When the line reaches the arcade, staff hand out numbered tickets. Look around the arcade and come back in about 30 minutes.">列が商店街まで届いたら、スタッフが番号札をお渡しします。30分ほど商店街で過ごして、お戻りください。</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="access night">
+  <header class="head"><p class="eyebrow">Late night</p><h2 data-en="Getting home, and other details">帰り道と、そのほか</h2></header>
+  <dl>
+    <div><dt data-en="Last trains">終電</dt><dd data-en="The last JR and Metro trains leave around midnight. If you come after 0:00, plan on a taxi or a walk home. Please check the station for exact times.">JR・地下鉄とも、最終は0時台です。0時以降にいらっしゃる方は、タクシーか歩いて帰れる方向けです。正確な時刻は駅でご確認ください。</dd></div>
+    <div><dt data-en="Taxi">タクシー</dt><dd data-en="Step out of the arcade to the main road and you can flag one down even late at night.">商店街から大通りに出れば、深夜でもすぐにつかまります。</dd></div>
+    <div><dt data-en="Bicycles">自転車</dt><dd data-en="Room for three in front of the shop. Please walk your bike inside the arcade.">店の前に3台まで。商店街の中は押して歩いてください。</dd></div>
+    <div><dt data-en="Car">お車</dt><dd data-en="We have no parking. Use one of the coin car parks nearby.">駐車場はありません。近くのコインパーキングをご利用ください。</dd></div>
+    <div><dt data-en="Step">段差</dt><dd data-en="One step of about 10 cm at the door. With a pushchair or wheelchair, just call out and we will help.">入口に10cmほどの段差がひとつ。ベビーカーや車いすの方は、声をかけてください。お手伝いします。</dd></div>
+  </dl>
+  <div class="taxi">
+    <button type="button" class="taxi-btn" aria-expanded="false" aria-controls="taxi-card" data-taxi-btn><span data-en="Coming by taxi? Show this to the driver">タクシーで来る方へ · 行き先を見せる</span></button>
+    <div class="taxi-card" id="taxi-card" hidden>
+      <p class="taxi-ja" lang="ja"><span>大阪市北区天満</span><span>天神橋筋商店街の路地</span><span>JR天満駅の北側</span><span><b>麺屋ほたる</b> まで</span></p>
+      <p class="taxi-note" data-en="The address in large Japanese type, for the driver. Ask to be dropped at the arcade; the last minute is on foot.">運転手さんに、この画面をそのまま見せてください。商店街の入口で降りて、最後の1分は歩きです。</p>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <p class="foot-brand">麺屋ほたる</p>
+  <p data-en="This is a concept project. The shop, address and prices are fictional. Photos: CC0 (public domain).">このサイトはコンセプト作品です。店舗・住所・価格は架空のものです。写真：CC0（パブリックドメイン）。</p>
+  <details class="credits"><summary data-en="Photo credits">写真クレジット</summary><ul data-credits></ul></details>
+</footer>
+
+<script src="../../assets/concept.js"></script>
+<script>
+  // فانوس: وقتی مغازه باز است روشن می‌شود (از همان نشانِ «営業中» که concept.js می‌سازد)
+  (function () {
+    var status = document.querySelector('[data-status]'), lantern = document.querySelector('[data-lantern]');
+    function sync() { lantern.classList.toggle('lit', status.classList.contains('open')); }
+    sync();
+    document.addEventListener('langchange', sync);
+  })();
+  // مسیر: زبانه‌ی ایستگاه که عوض شود، نقشه هم همان مسیر را نشان می‌دهد
+  (function () {
+    var tabs = document.querySelector('[data-route-tabs]'), map = document.querySelector('.route-map');
+    function sync() { var on = tabs.querySelector('[aria-selected="true"]'); if (on) map.dataset.route = on.dataset.r; }
+    tabs.addEventListener('click', sync);
+    tabs.addEventListener('keydown', sync);
+  })();
+  // کارتِ تاکسی: نشانی را درشت نشان بده
+  (function () {
+    var b = document.querySelector('[data-taxi-btn]'), card = document.getElementById('taxi-card');
+    b.addEventListener('click', function () {
+      var open = b.getAttribute('aria-expanded') !== 'true';
+      b.setAttribute('aria-expanded', open);
+      card.hidden = !open;
+    });
+  })();
+</script>
+</body>
+</html>

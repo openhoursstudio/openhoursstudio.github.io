@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Teachers · Quiet Hour Yoga, Leslieville (concept)</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#2B2340">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../pages.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-base="en" data-default-lang="en" data-tz="America/Toronto" data-open="06:30" data-close="21:00" data-key="qh">
+
+<div class="concept" role="note">Concept project · Quiet Hour Yoga is a fictional studio</div>
+
+<header class="top">
+  <a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13"/><path d="M21 7.5a10 10 0 1 0 3.5 13.6A8.5 8.5 0 0 1 21 7.5z"/></svg><span>Quiet Hour</span></a>
+  <nav class="nav" aria-label="Menu"><a href="index.html#classes">Timetable</a><a href="teachers.html">Teachers</a><a href="workshops.html">Workshops</a><a href="index.html#prices">Prices</a><a href="studio.html">The studio</a></nav>
+  <a class="btn btn-sm" href="index.html#classes">Book a class</a>
+</header>
+<!-- pages --><nav class="pages" aria-label="Pages" style="--pg:#2B2340"><a href="index.html">Classes</a><a href="workshops.html">Workshops</a><a href="studio.html">The studio</a><a href="teachers.html" aria-current="page">Teachers</a></nav><!-- /pages -->
+
+<main>
+<section class="subhead">
+  <p class="eyebrow">Teachers</p>
+  <h1>Five teachers,<br><em>who learn your name.</em></h1>
+  <p class="lead">Small classes mean the teacher actually sees you. Find who teaches the level you are at, then book them on the timetable.</p>
+</section>
+
+<section class="today-t">
+  <header class="head"><p class="eyebrow">In the room today</p><h2 data-today-title>Who is teaching today</h2><p class="sub">Toronto time. Finished classes fade out as the day goes on.</p></header>
+  <ol class="list today-list" data-today aria-live="polite"></ol>
+  <p class="today-note" data-today-note hidden></p>
+</section>
+
+<section class="teachers">
+  <header class="head"><p class="eyebrow">Who teaches what</p><h2>Find your teacher</h2></header>
+  <div class="filter-chips lv-chips" role="group" aria-label="Show teachers by level">
+    <button type="button" aria-pressed="true" data-lv="any">Everyone</button><button type="button" aria-pressed="false" data-lv="beg"><i class="lv beg"></i>Beginners</button><button type="button" aria-pressed="false" data-lv="all"><i class="lv all"></i>All levels</button><button type="button" aria-pressed="false" data-lv="str"><i class="lv str"></i>Stronger</button>
+  </div>
+  <p class="t-count" data-t-count aria-live="polite"></p>
+
+  <div class="t-grid">
+    <article class="t-card" id="hannah" data-lv="beg">
+      <div class="t-head"><span class="t-face" style="--f:var(--sun)" aria-hidden="true">HO</span><div><h3>Hannah Okafor</h3><p class="t-role">Beginners · she/her</p></div></div>
+      <p class="t-bio">A primary school teacher for ten years before yoga. She explains every pose twice and never lets anyone feel behind. If it is your first class here, it will probably be hers.</p>
+      <p class="t-next" data-next></p>
+      <ul class="t-classes">
+        <li data-day="1 3" data-t="17:30" data-len="60"><i class="lv beg"></i><b>Slow Flow</b><span>Mon, Wed · 17:30</span></li>
+        <li data-day="2 4" data-t="17:30" data-len="60"><i class="lv beg"></i><b>Basics</b><span>Tue, Thu · 17:30</span></li>
+        <li data-day="6" data-t="11:00" data-len="60"><i class="lv beg"></i><b>Basics</b><span>Sat · 11:00</span></li>
+      </ul>
+      <p class="t-extra">Also runs the <a href="workshops.html">four-week Beginners course</a>.</p>
+    </article>
+
+    <article class="t-card" id="priya" data-lv="all str">
+      <div class="t-head"><span class="t-face" style="--f:#8A63D2;--fc:#fff" aria-hidden="true">PR</span><div><h3>Priya Raman</h3><p class="t-role">Founder · she/her</p></div></div>
+      <p class="t-bio">Opened Quiet Hour in what used to be the bakery's storeroom. Fifteen years of vinyasa, and still the first one in at a quarter past six to warm the floor.</p>
+      <p class="t-next" data-next></p>
+      <ul class="t-classes">
+        <li data-day="1 3 5" data-t="06:30" data-len="60"><i class="lv all"></i><b>Sunrise Flow</b><span>Mon, Wed, Fri · 06:30</span></li>
+        <li data-day="1 3" data-t="19:00" data-len="75"><i class="lv str"></i><b>Strong Vinyasa</b><span>Mon, Wed · 19:00</span></li>
+      </ul>
+      <p class="t-extra">Teaches the <a href="workshops.html">Inversions without fear</a> workshop.</p>
+    </article>
+
+    <article class="t-card" id="tomas" data-lv="all">
+      <div class="t-head"><span class="t-face" style="--f:var(--lav)" aria-hidden="true">TR</span><div><h3>Tomás Reyes</h3><p class="t-role">Yin and rest · he/him</p></div></div>
+      <p class="t-bio">Came to yoga for a bad back after years of restaurant shifts. Teaches long, quiet holds, and the pay-what-you-can Restore on Sunday mornings.</p>
+      <p class="t-next" data-next></p>
+      <ul class="t-classes">
+        <li data-day="2 4" data-t="19:00" data-len="75"><i class="lv all"></i><b>Yin and Breath</b><span>Tue, Thu · 19:00</span></li>
+        <li data-day="5" data-t="18:00" data-len="75"><i class="lv all"></i><b>Candlelight Yin</b><span>Fri · 18:00</span></li>
+        <li data-day="0" data-t="11:30" data-len="60"><i class="lv all"></i><b>Restore</b><span>Sun · 11:30 · pay what you can</span></li>
+      </ul>
+      <p class="t-extra">Leads <a href="workshops.html">Yin and sound bath</a> and <a href="workshops.html">Breath for sleep</a>.</p>
+    </article>
+
+    <article class="t-card" id="mei" data-lv="all">
+      <div class="t-head"><span class="t-face" style="--f:var(--teal);--fc:#fff" aria-hidden="true">MC</span><div><h3>Mei Lin Chu</h3><p class="t-role">Lunchtime · she/her</p></div></div>
+      <p class="t-bio">A physiotherapist in the mornings. At lunchtime she undoes what desks do to necks, shoulders and hips. Tell her about old injuries: she will have a version for you.</p>
+      <p class="t-next" data-next></p>
+      <ul class="t-classes">
+        <li data-day="1 2 4 5" data-t="12:15" data-len="45"><i class="lv all"></i><b>Lunch Stretch</b><span>Mon, Tue, Thu, Fri · 12:15</span></li>
+        <li data-day="3" data-t="12:15" data-len="45"><i class="lv all"></i><b>Desk Reset</b><span>Wed · 12:15</span></li>
+      </ul>
+      <p class="t-extra">Teaches <a href="workshops.html">Hips and lower back</a> and the desk reset for teams.</p>
+    </article>
+
+    <article class="t-card" id="claire" data-lv="all">
+      <div class="t-head"><span class="t-face" style="--f:var(--ink);--fc:var(--lav)" aria-hidden="true">CD</span><div><h3>Claire Dubois</h3><p class="t-role">Mornings and weekends · she/her</p></div></div>
+      <p class="t-bio">Trained in Montréal and teaches in English or French, whichever you answer in. A mother of two, and the reason our prenatal course exists.</p>
+      <p class="t-next" data-next></p>
+      <ul class="t-classes">
+        <li data-day="2 4" data-t="06:30" data-len="60"><i class="lv all"></i><b>Sunrise Flow</b><span>Tue, Thu · 06:30</span></li>
+        <li data-day="6" data-t="09:00" data-len="75"><i class="lv all"></i><b>Weekend Flow</b><span>Sat · 09:00</span></li>
+        <li data-day="0" data-t="09:30" data-len="75"><i class="lv all"></i><b>Slow Sunday</b><span>Sun · 09:30</span></li>
+      </ul>
+      <p class="t-extra">Runs the <a href="workshops.html">six-week Prenatal course</a>.</p>
+    </article>
+  </div>
+  <p class="t-empty" data-t-empty hidden>Nobody matches that level. Try Everyone.</p>
+</section>
+
+<section class="start">
+  <div class="new-in start-in">
+    <div>
+      <p class="eyebrow">Not sure where to start?</p>
+      <h2>Three good first classes</h2>
+      <p class="sub">All three are covered by the <a href="index.html#new">two-week intro pass</a>, $39 for as many classes as you like.</p>
+    </div>
+    <ul class="picks">
+      <li><a href="#hannah"><span>Never done yoga</span><b>Basics with Hannah</b></a></li>
+      <li><a href="#mei"><span>Stiff back or an old injury</span><b>Lunch Stretch with Mei</b></a></li>
+      <li><a href="#tomas"><span>Want to sleep better</span><b>Candlelight Yin with Tomás</b></a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="faq">
+  <h2>About the teachers</h2>
+  <details><summary>Can I book a private class?</summary><p>Yes, with any teacher: $95 for an hour in the studio, for one or two people. Ask at the desk or reply to any booking email.</p></details>
+  <details><summary>What if my teacher is away?</summary><p>Cover teachers are on the timetable by the evening before. If you only come for one person, cancel for free up to two hours before class.</p></details>
+  <details><summary>How are teachers trained?</summary><p>Everyone has at least 500 hours of teacher training and a current first aid certificate, and the five of them practise together every Monday afternoon.</p></details>
+</section>
+</main>
+
+<footer class="foot">
+  <p class="foot-brand">Quiet Hour Yoga</p>
+  <p>This is a concept project. The studio, timetable, address and prices are fictional. Photos: CC0 (public domain).</p>
+  <details class="credits"><summary>Photo credits</summary><ul data-credits></ul></details>
+</footer>
+
+<script src="../../assets/concept.js"></script>
+<script>
+  // معلم‌ها: «امروز چه کسی درس می‌دهد» و «کلاسِ بعدیِ هر معلم» به وقتِ تورنتو، از روی همان فهرستِ کلاس‌ها در کارت‌ها؛ و فیلترِ سطح
+  (function () {
+    var LONG = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    var LV = { all: 'All levels', beg: 'Beginners', str: 'Stronger' };
+    function now() { return new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Toronto' })); }
+    function mins(t) { var p = t.split(':'); return +p[0] * 60 + +p[1]; }
+    function hm(m) { return String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'); }
+    var cards = [].slice.call(document.querySelectorAll('.t-card'));
+    // همه‌ی کلاس‌ها: روز، ساعت، مدت، سطح، معلم
+    var all = [];
+    cards.forEach(function (c) {
+      var who = c.querySelector('h3').textContent;
+      c.querySelectorAll('[data-day]').forEach(function (li) {
+        li.dataset.day.split(' ').forEach(function (d) {
+          all.push({ d: +d, t: li.dataset.t, len: +li.dataset.len, name: li.querySelector('b').textContent, lv: li.querySelector('.lv').classList[1], who: who, id: c.id, card: c });
+        });
+      });
+    });
+    var todayEl = document.querySelector('[data-today]'), todayTitle = document.querySelector('[data-today-title]');
+    function render() {
+      var n = now(), d = n.getDay(), m = n.getHours() * 60 + n.getMinutes();
+      // ۱) برنامه‌ی امروز
+      var list = all.filter(function (x) { return x.d === d; }).sort(function (a, b) { return mins(a.t) - mins(b.t); });
+      var nextShown = false;
+      todayTitle.textContent = 'Who is teaching this ' + LONG[d];
+      todayEl.innerHTML = list.map(function (x) {
+        var s = mins(x.t), e = s + x.len, state;
+        if (m >= e) state = '<span class="done">Finished</span>';
+        else if (m >= s) state = '<span class="tag on">On now · until ' + hm(e) + '</span>';
+        else { state = '<span class="tag' + (nextShown ? '' : ' nx') + '">' + (nextShown ? 'Later' : (s - m < 60 ? 'In ' + (s - m) + ' min' : 'Up next')) + '</span>'; nextShown = true; }
+        return '<li class="' + (m >= e ? 'past' : '') + '"><span class="time">' + x.t + '</span><span class="what"><b>' + x.name + '</b><span><i class="lv ' + x.lv + '"></i>' + LV[x.lv] + ' · ' + x.len + ' min</span></span><span class="spots who">with <a href="#' + x.id + '">' + x.who + '</a></span>' + state + '</li>';
+      }).join('');
+      // وقتی کلاس‌های امروز تمام شد، اولین کلاسِ فردا را نشان بده
+      var note = document.querySelector('[data-today-note]'), rest = list.filter(function (x) { return m < mins(x.t) + x.len; });
+      note.hidden = rest.length > 0;
+      if (!rest.length) {
+        var tm = all.filter(function (x) { return x.d === (d + 1) % 7; }).sort(function (a, b) { return mins(a.t) - mins(b.t); })[0];
+        note.innerHTML = 'That is all for today. First class tomorrow: <b>' + tm.name + '</b> at ' + tm.t + ' with <a href="#' + tm.id + '">' + tm.who + '</a>.';
+      }
+      // ۲) کلاسِ بعدیِ هر معلم در هفت روزِ آینده
+      cards.forEach(function (c) {
+        var mine = all.filter(function (x) { return x.card === c; }), out = c.querySelector('[data-next]'), best = null;
+        mine.forEach(function (x) {
+          var k = (x.d - d + 7) % 7, s = mins(x.t);
+          if (k === 0 && m >= s + x.len) k = 7;
+          var at = k * 1440 + s;
+          if (!best || at < best.at) best = { at: at, k: k, x: x };
+        });
+        var x = best.x, s = mins(x.t);
+        c.classList.toggle('in-today', mine.some(function (y) { return y.d === d && m < mins(y.t) + y.len; }));
+        if (best.k === 0 && m >= s) out.innerHTML = '<b>Teaching now</b> ' + x.name + ', until ' + hm(s + x.len);
+        else out.innerHTML = '<b>Next class</b> ' + x.name + ', ' + (best.k === 0 ? 'today at ' : best.k === 1 ? 'tomorrow at ' : LONG[x.d] + ' at ') + x.t;
+      });
+    }
+    render();
+    setInterval(render, 60000);
+
+    // ۳) فیلترِ سطح
+    var chips = document.querySelectorAll('[data-lv]:not(.t-card)'), count = document.querySelector('[data-t-count]'), empty = document.querySelector('[data-t-empty]');
+    function filter(lv) {
+      var k = 0;
+      chips.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.lv === lv); });
+      cards.forEach(function (c) { var ok = lv === 'any' || c.dataset.lv.split(' ').indexOf(lv) > -1; c.hidden = !ok; if (ok) k++; });
+      count.textContent = lv === 'any' ? 'All five teachers' : k + (k === 1 ? ' teacher teaches ' : ' teachers teach ') + LV[lv] + ' classes';
+      empty.hidden = k > 0;
+    }
+    chips.forEach(function (b) { b.addEventListener('click', function () { filter(b.dataset.lv); }); });
+    filter('any');
+  })();
+</script>
+</body>
+</html>

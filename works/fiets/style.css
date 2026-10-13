@@ -114,3 +114,83 @@ h2 { font-size: 34px; line-height: 1; }
 .faq-f summary { cursor: pointer; min-height: 52px; display: flex; align-items: center; font-weight: 700; }
 .faq-f details p { margin: 0 0 14px; color: var(--muted); }
 @media (min-width: 820px) { .subhead h1 { font-size: 64px; } .bike-types, .rules-grid { grid-template-columns: repeat(3, 1fr); } .plan-cols { grid-template-columns: 1fr 1fr; } .q-btns { grid-template-columns: repeat(3, 1fr); } }
+
+/* صفحه‌ی «درباره‌ی ما»: دو نفرِ مغازه، نقشه‌ی مسیر، پرداخت و پرسش‌ها */
+.ov-head .eyebrow { color: #B84A0C; }
+.ov-head .lead { color: #4F545A; }
+.team-grid { display: grid; gap: 12px; }
+.person { display: grid; grid-template-columns: 64px 1fr; gap: 16px; padding: 20px; border: 2px solid var(--ink); background: var(--white); }
+.mono { display: grid; place-items: center; width: 64px; height: 64px; border: 2px solid var(--ink); background: var(--orange); }
+.mono svg { width: 40px; height: 40px; fill: none; stroke: var(--ink); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; }
+.mono.cup { background: var(--blue); }
+.mono.cup svg { stroke: #fff; }
+.person h3 { margin: 0; font: 400 28px/1 var(--display); text-transform: uppercase; }
+.person .role { margin: 4px 0 10px; font-weight: 700; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: #4F545A; }
+.person p { margin: 0; }
+.person .fav { margin-top: 12px; padding-top: 10px; border-top: 2px solid var(--ink); font-size: 15px; }
+.person .fav b { display: block; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; }
+.facts-f { list-style: none; margin: 12px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); background: var(--ink); color: #fff; }
+.facts-f li { display: grid; align-content: start; gap: 4px; padding: 16px 12px; border-inline-start: 1px solid rgba(255, 255, 255, .2); }
+.facts-f li:first-child { border-inline-start: 0; }
+.facts-f b { font: 400 26px/1 var(--display); color: var(--orange); }
+.facts-f span { font-size: 13px; line-height: 1.35; color: #D7DADD; }
+.route-f .head { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; }
+.route-f .status { margin: 0; }
+.route-grid { display: grid; gap: 14px; }
+.map-f { margin: 0; border: 2px solid var(--ink); background: var(--white); }
+.map-f svg { display: block; width: 100%; height: auto; }
+.map-f figcaption { padding: 8px 12px; border-top: 2px solid var(--ink); font-size: 12px; font-weight: 500; color: #4F545A; }
+.map-f .water { fill: var(--blue); }
+.map-f .w-label { font: 700 10px var(--body); letter-spacing: .08em; text-transform: uppercase; fill: #fff; }
+.map-f .park { fill: #D6E6CB; }
+.map-f .p-label { font: 700 10px var(--body); fill: #2F5122; }
+.map-f .streets { fill: none; stroke: #E4DFD6; stroke-width: 16; }
+.map-f .stalls rect { fill: var(--orange); stroke: var(--ink); stroke-width: 1; }
+.map-f .s-label { font: 700 9.5px var(--body); fill: var(--ink); }
+.map-f .rt { fill: none; stroke: var(--ink); stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 2 8; opacity: 0; transition: opacity .3s; }
+.map-f [data-r="tram"] .rt-tram, .map-f [data-r="metro"] .rt-metro, .map-f [data-r="fiets"] .rt-fiets { opacity: 1; animation: walk 1.2s linear infinite; }
+@keyframes walk { to { stroke-dashoffset: -20; } }
+@media (prefers-reduced-motion: reduce) { .map-f .rt { animation: none !important; } }
+.map-f .stop rect, .map-f .stop circle { fill: var(--white); stroke: var(--ink); stroke-width: 2.5; transition: fill .3s; }
+.map-f .stop text { font: 400 11px var(--display); fill: var(--ink); }
+.map-f [data-r="tram"] .st-tram rect, .map-f [data-r="metro"] .st-metro circle { fill: var(--ink); }
+.map-f [data-r="tram"] .st-tram text, .map-f [data-r="metro"] .st-metro text { fill: #fff; }
+.map-f .pin circle { fill: var(--orange); stroke: var(--ink); stroke-width: 3; }
+.map-f .pin rect { fill: var(--ink); }
+.map-f .pin text { font: 700 10.5px var(--body); fill: #fff; }
+.route-panel { display: grid; gap: 14px; align-content: start; }
+.route-btns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.route-btns button { min-height: 48px; padding: 0 6px; border: 2px solid var(--ink); background: var(--white); color: var(--ink); font: 400 13px var(--display); text-transform: uppercase; cursor: pointer; }
+.route-btns [aria-pressed="true"] { background: var(--ink); color: #fff; }
+.route-btns button:focus-visible, .ov-band .btn:focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; }
+.route-out { padding: 18px 20px; background: var(--blue); color: #fff; }
+.route-time { margin: 0 0 10px; font-weight: 700; color: #FFD3B8; }
+.route-steps { margin: 0; padding-inline-start: 20px; display: grid; gap: 6px; }
+.hours-f { margin: 0; }
+.hours-f div { display: grid; grid-template-columns: 7em 1fr; padding: 10px 0; border-bottom: 2px solid var(--ink); }
+.hours-f dt { font-weight: 700; }
+.hours-f dd { margin: 0; }
+.route-panel .btn { justify-self: start; }
+.pay-grid { display: grid; gap: 10px; }
+.pay-grid article { padding: 18px; border: 2px solid var(--ink); background: var(--white); }
+.pay-grid h3 { margin: 0; font: 400 22px var(--display); text-transform: uppercase; }
+.pay-grid h3.nc { text-transform: none; }
+.pay-grid p { margin: 6px 0 0; color: #4F545A; }
+.ov-band { display: grid; gap: 10px; padding: 26px 22px; background: var(--orange); border: 2px solid var(--ink); }
+.ov-band h2 { font-size: 30px; }
+.ov-band p { margin: 0; font-weight: 500; font-size: 17px; }
+.ov-band .cta { margin-top: 8px; }
+@media (min-width: 820px) {
+  .team-grid, .pay-grid { grid-template-columns: repeat(2, 1fr); }
+  .pay-grid { grid-template-columns: repeat(3, 1fr); }
+  .person { grid-template-columns: 80px 1fr; padding: 26px; }
+  .mono { width: 80px; height: 80px; }
+  .facts-f li { padding: 22px 24px; }
+  .facts-f b { font-size: 40px; }
+  .facts-f span { font-size: 15px; }
+  .route-grid { grid-template-columns: 1.15fr .85fr; gap: 24px; align-items: start; }
+  .ov-band { padding: 44px 48px; }
+  .ov-band h2 { font-size: 48px; }
+}
+/* سرتیترِ «درباره‌ی ما» روی گوشی‌های باریک جا شود */
+@media (max-width: 819px) { .ov-head h1 { font-size: clamp(32px, 10vw, 40px); } }

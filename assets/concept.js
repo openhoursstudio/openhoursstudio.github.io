@@ -82,6 +82,13 @@
     });
   });
 
+  // ── ردیفِ زبانه‌ی صفحه‌ها روی گوشی: زبانه‌ی صفحه‌ی فعلی وسطِ دید بیاید ──
+  var cur = document.querySelector('.pages [aria-current="page"]');
+  if (cur) {
+    var row = cur.parentNode, r = row.getBoundingClientRect(), c = cur.getBoundingClientRect();
+    if (c.left < r.left || c.right > r.right) row.scrollLeft += c.left - r.left - (r.width - c.width) / 2;
+  }
+
   // ── 表示アニメーション ──
   var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
     es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });

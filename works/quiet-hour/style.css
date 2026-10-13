@@ -185,3 +185,49 @@ h1 em { font-style: normal; color: var(--teal); }
 .fq b { font: 400 44px/1 var(--serif); color: var(--teal-2); }
 .fq span { font-size: 14px; color: #CFC9E0; margin-top: 4px; }
 @media (min-width: 900px) { .subhead h1 { font-size: 60px; } .ws-card { grid-template-columns: 84px 1fr auto; align-items: center; padding: 20px 24px; } .ws-date { width: 84px; height: 84px; } .ws-card .book { grid-column: auto; } .room-grid { grid-template-columns: 2fr 1fr 1fr; } .room-grid img:first-child { grid-column: auto; aspect-ratio: auto; height: 100%; } .v-grid-q { grid-template-columns: 1fr 1fr; } .fq { grid-template-columns: repeat(4, 1fr); padding: 40px; } }
+
+/* صفحه‌ی معلم‌ها: برنامه‌ی امروز، کارتِ هر معلم با کلاسِ بعدی، فیلترِ سطح و سه پیشنهاد برای شروع */
+.today-list .tag { grid-area: btn; justify-self: end; padding: 6px 12px; border-radius: 999px; background: var(--lav-2); font-size: 13px; font-weight: 700; white-space: nowrap; }
+.today-list .tag.nx { background: var(--ink); color: #fff; }
+.today-list .tag.on { background: #137A75; color: #fff; }
+.today-list .done { justify-self: end; }
+.today-list li.past { opacity: 1; background: transparent; }
+.today-list li.past .time, .today-list li.past b { color: var(--ink-2); }
+.today-note { margin: 14px 0 0; padding: 14px 18px; border-radius: 18px; background: var(--lav-2); }
+.today-note a { color: var(--ink); font-weight: 700; }
+.today-list .who { gap: 4px; }
+.today-list .who a { color: var(--ink); font-weight: 700; text-underline-offset: 3px; }
+.lv-chips button { display: inline-flex; align-items: center; gap: 7px; background: var(--card); box-shadow: inset 0 0 0 1px var(--line); }
+.lv-chips button[aria-pressed="true"] { background: var(--ink); color: #fff; }
+.t-count { margin: -6px 0 14px; font-size: 14px; color: var(--ink-2); }
+.t-grid { display: grid; gap: 12px; }
+.t-card { display: grid; align-content: start; gap: 14px; padding: 22px 20px; border-radius: 26px; background: var(--card); box-shadow: inset 0 0 0 1px var(--line); scroll-margin-top: 90px; }
+.t-card:target { box-shadow: inset 0 0 0 2px var(--teal); }
+.t-head { display: flex; align-items: center; gap: 14px; }
+.t-face { flex: none; display: grid; place-items: center; width: 64px; height: 76px; border-radius: 999px 999px 18px 18px; background: var(--f, var(--lav)); color: var(--fc, var(--ink)); font: 400 24px var(--serif); letter-spacing: .02em; }
+.t-head h3 { font-size: 24px; line-height: 1.15; }
+.t-role { margin: 2px 0 0; font-size: 14px; font-weight: 700; color: #137A75; }
+.t-bio { margin: 0; font-size: 15px; color: var(--ink-2); }
+.t-next { margin: 0; padding: 10px 14px; border-radius: 14px; background: var(--lav-2); font-size: 15px; }
+.t-next:empty { display: none; }
+.t-next b { display: block; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: #0F6B66; }
+.in-today .t-next { background: #E3F6F4; }
+.t-classes { list-style: none; margin: 0; padding: 0; }
+.t-classes li { display: grid; grid-template-columns: 14px 1fr; column-gap: 8px; align-items: center; padding: 9px 0; border-top: 1px solid var(--line); }
+.t-classes .lv { grid-row: span 2; }
+.t-classes b { font-size: 16px; }
+.t-classes span { grid-column: 2; font-size: 14px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.t-extra { margin: 0; font-size: 14px; color: var(--ink-2); }
+.t-extra a, .start-in .sub a { color: var(--ink); font-weight: 700; text-underline-offset: 3px; }
+.t-empty { padding: 18px; border-radius: 18px; background: var(--lav-2); }
+.picks { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.picks a { display: grid; gap: 2px; padding: 16px 18px; border-radius: 20px; background: var(--card); text-decoration: none; box-shadow: 0 14px 30px -24px rgba(43, 35, 64, .5); transition: transform .2s var(--ease); }
+.picks a:hover { transform: translateY(-2px); }
+.picks span { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #0F6B66; }
+.picks b { font: 400 21px var(--serif); }
+.picks b::after { content: " →"; color: var(--teal); }
+@media (min-width: 900px) {
+  .t-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .t-card { padding: 28px; }
+}
+@media (min-width: 1100px) { .t-grid { grid-template-columns: repeat(3, 1fr); } }

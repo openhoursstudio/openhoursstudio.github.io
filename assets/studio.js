@@ -64,6 +64,28 @@
   }
   addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
 
+  // ── دکمه‌ی شناورِ «شروع پروژه»: وقتی دکمه‌ی بالای صفحه، فرم یا پانویس در دید است، تکراری است و کنار می‌رود ──
+  var dock = document.querySelector('.dock');
+  if (dock && 'IntersectionObserver' in window) {
+    var seen = new Set();
+    var dockIO = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) seen.add(e.target); else seen.delete(e.target); });
+      dock.classList.toggle('off', seen.size > 0);
+    });
+    document.querySelectorAll('main .cta, main .btn[href*="contact"], [data-enquiry], .foot').forEach(function (el) { dockIO.observe(el); });
+  }
+
+  // ── جدولِ قیمتِ پهن روی گوشی اسکرول می‌خورد؛ با کیبورد هم قابلِ اسکرول باشد ──
+  document.querySelectorAll('.ptable').forEach(function (t) {
+    if (t.scrollWidth <= t.clientWidth + 1) return;
+    var h = t.closest('section') && t.closest('section').querySelector('h2');
+    t.tabIndex = 0;
+    t.setAttribute('role', 'region');
+    // با aria-labelledby برچسب همراهِ تغییرِ زبان عوض می‌شود
+    if (h) { h.id = h.id || 'ptable-h-' + Math.random().toString(36).slice(2, 7); t.setAttribute('aria-labelledby', h.id); }
+    else t.setAttribute('aria-label', 'Prices');
+  });
+
   // ── ورودِ آرامِ بخش‌ها هنگامِ اسکرول ──
   // آنچه از اول در دید است پنهان نمی‌شود (هم چشمک نمی‌زند، هم گذارِ بین صفحه‌ها تصویرِ درست می‌گیرد)
   var REVEAL = '.head, .wcard, .city-card, .svc-card, .sec-card, .benefits li, .steps li, .promises article, .plan, .checks li, .ptable, .faq details, .contact-card, .about-grid article, .fly-card, .band-in, .partner-card, .block, .live-phone, .svc-row a';

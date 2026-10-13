@@ -121,3 +121,71 @@ h2 { font-size: 32px; line-height: 1.1; }
 .knav { display: none; gap: 20px; margin-inline-start: auto; font-weight: 700; }
 .knav a { text-decoration: none; }
 @media (min-width: 820px) { .knav { display: flex; } }
+
+/* صفحه‌ی کارتِ هدیه: بلیتِ سینمایی با ته‌بلیت، انتخابِ مبلغ، و پرسش‌های پیشخوان */
+.gift-grid { display: grid; gap: 28px; }
+.ticket-side { display: grid; gap: 24px; align-content: start; }
+.ticket { position: relative; display: grid; grid-template-columns: 1fr 74px; margin: 0; color: var(--ink); background: var(--cream); border-radius: 6px; box-shadow: 0 24px 50px -24px #000; transform: rotate(-1.5deg); }
+.ticket::before, .ticket::after { content: ""; position: absolute; right: 63px; width: 22px; height: 22px; border-radius: 50%; background: var(--ink); }
+.ticket::before { top: -11px; }
+.ticket::after { bottom: -11px; }
+.t-main { min-width: 0; padding: 22px 18px 20px; border-radius: 6px 0 0 6px; box-shadow: inset 0 0 0 6px var(--cream), inset 0 0 0 8px var(--red); }
+.t-top { margin: 0; font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--blue); }
+.t-admit { margin: 10px 0 0; font: 400 22px/1.05 var(--slab); text-transform: uppercase; color: var(--red); }
+.t-val { margin: 6px 0 8px; font: 400 64px/1 var(--slab); }
+.t-names { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 0; padding-top: 10px; border-top: 1px dashed rgba(18, 20, 23, .35); }
+.t-names dt { font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: #5B564D; }
+.t-names dd { margin: 0; font-size: 18px; font-weight: 700; overflow-wrap: anywhere; }
+.t-msg { margin: 12px 0 0; font-size: 15px; font-style: italic; overflow-wrap: anywhere; }
+.t-stub { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 14px 4px; border-left: 2px dashed rgba(18, 20, 23, .4); background: repeating-linear-gradient(180deg, var(--red) 0 10px, var(--cream) 10px 20px, var(--blue) 20px 30px, var(--cream) 30px 40px) left top / 8px 100% no-repeat, var(--cream); border-radius: 0 6px 6px 0; }
+.t-stub span, .t-stub small { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #5B564D; }
+.t-stub b { font: 400 22px var(--slab); writing-mode: vertical-rl; transform: rotate(180deg); color: var(--red); }
+.t-stub small { writing-mode: vertical-rl; transform: rotate(180deg); letter-spacing: .06em; text-transform: none; }
+.covers { padding: 20px; border-radius: 6px; background: var(--ink-2); box-shadow: inset 0 0 0 1px var(--line); }
+.covers h3 { margin: 0 0 6px; font: 400 21px var(--slab); color: var(--brass); }
+.covers ul { list-style: none; margin: 0; padding: 0; }
+.covers li { display: grid; gap: 2px; padding: 10px 0; border-bottom: 1px solid var(--line); }
+.covers li:last-child { border-bottom: 0; }
+.covers span { font-size: 14px; color: #D7CFBF; }
+.gift-form { align-self: start; background: var(--ink-2); }
+.gift-form label { color: var(--cream); }
+.gift-form input:not([type="radio"]), .gift-form select { background: var(--cream); color: var(--ink); border: 0; border-radius: 4px; }
+.gift-form [aria-invalid="true"] { box-shadow: 0 0 0 3px var(--red); }
+.gift-form .hint { margin: -8px 0 0; font-size: 13px; color: var(--muted); }
+.gift-form .amount { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 0; padding: 0; border: 0; min-width: 0; }
+.gift-form .amount legend { padding: 0; margin-bottom: 6px; font-size: 14px; font-weight: 700; }
+.gift-form .amount label { position: relative; display: block; }
+.gift-form .amount input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.gift-form .amount span { display: grid; gap: 2px; min-height: 92px; padding: 14px; border-radius: 4px; background: rgba(241, 233, 218, .08); box-shadow: inset 0 0 0 1px var(--line); }
+.gift-form .amount b { font: 400 32px/1 var(--slab); color: var(--cream); }
+.gift-form .amount small { font-size: 13px; font-weight: 500; color: #D7CFBF; }
+.gift-form .amount input:checked + span { background: var(--red); box-shadow: none; }
+.gift-form .amount input:checked + span small { color: #fff; }
+.gift-form .amount input:focus-visible + span, .gift-form .btn:focus-visible { outline: 3px solid var(--brass); outline-offset: 2px; }
+.gift-form .btn { justify-content: center; border: 0; background: var(--red); color: #fff; font: inherit; font-weight: 700; cursor: pointer; }
+.gift-out { color: var(--cream); }
+.gift-out:empty { display: none; }
+.gift-out:not(:empty) { padding: 12px 14px; border-radius: 4px; background: rgba(241, 233, 218, .1); }
+.desk .steps-list { --pg: var(--red); max-width: 720px; }
+.desk .steps-list li::before { font: 400 17px var(--slab); }
+.desk .steps-list span { color: #D7CFBF; opacity: 1; }
+.using .facts a { color: var(--brass); }
+.faq-k h2 { margin-bottom: 12px; font-size: 28px; }
+.faq-k details { border-bottom: 1px solid var(--line); }
+.faq-k summary { cursor: pointer; list-style: none; min-height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 0; font-weight: 700; }
+.faq-k summary::-webkit-details-marker { display: none; }
+.faq-k summary::after { content: "+"; font: 400 24px var(--slab); color: var(--brass); }
+.faq-k details[open] summary::after { content: "–"; }
+.faq-k details p { margin: 0 0 16px; color: #D7CFBF; }
+.faq-k summary:focus-visible { outline: 3px solid var(--brass); outline-offset: 2px; }
+@media (min-width: 820px) {
+  .gift-grid { grid-template-columns: 1.05fr .95fr; gap: 48px; align-items: start; }
+  .ticket { grid-template-columns: 1fr 96px; }
+  .ticket::before, .ticket::after { right: 85px; }
+  .t-main { padding: 30px 30px 28px; }
+  .t-admit { font-size: 26px; }
+  .t-val { font-size: 88px; }
+  .gift-form { padding: 28px; }
+  .faq-k { padding-top: 27px; }
+  .faq-k h2 { font-size: 34px; }
+}
