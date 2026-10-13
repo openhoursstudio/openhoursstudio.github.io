@@ -5,7 +5,7 @@
   --card: #FFFDF8;
   --ink: #14213D;
   --ink-2: #44506A;
-  --muted: #7C8396;
+  --muted: #5F677B;
   --amber: #F2A93B;
   --amber-2: #C97F0E;
   --sky: #E8EDF6;
@@ -228,6 +228,7 @@ html:not([lang="ja"]) .about-grid h2 { font-size: 28px; }
 .contact-facts dt { color: var(--muted); }
 .contact-facts dd { margin: 0; }
 .sel { user-select: all; }
+.nw { white-space: nowrap; }
 .legal { max-width: 760px; }
 .legal h2 { font-size: 21px; margin: 26px 0 8px; }
 html:not([lang="ja"]) .legal h2 { font-size: 26px; }
@@ -259,7 +260,7 @@ html:not([lang="ja"]) .legal h2 { font-size: 26px; }
 /* پانویس */
 .foot { margin-top: 80px; background: var(--ink); color: #B9C2D6; padding: 40px 16px 120px; }
 .foot-top { display: grid; gap: 12px; }
-.avail-foot { display: flex; align-items: center; gap: 8px; margin: 0; font-size: 14px; }
+.avail-foot { display: flex; align-items: center; gap: 8px; margin: 28px 0 0; font-size: 14px; }
 .foot-cols { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 30px; font-size: 14px; }
 .foot-cols div { display: grid; gap: 6px; align-content: start; }
 .foot-cols b { color: var(--paper); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; }
@@ -267,6 +268,10 @@ html:not([lang="ja"]) .legal h2 { font-size: 26px; }
 .foot-cols a:hover { color: var(--paper); }
 .fine { margin: 30px 0 0; font-size: 12px; color: #8590A8; }
 .dock { position: fixed; right: 16px; bottom: calc(16px + env(safe-area-inset-bottom, 0px)); z-index: 40; text-decoration: none; background: var(--ink); color: var(--paper); border-radius: 999px; padding: 14px 22px; font-weight: 700; white-space: nowrap; box-shadow: 0 14px 30px -12px rgba(20, 33, 61, .7); }
+/* دکمه‌ی شناور وقتی خودِ فرم، دکمه‌ی اصلیِ بالا یا پانویس در دید است کنار می‌رود */
+.dock { transition: opacity .25s var(--ease), translate .25s var(--ease), visibility 0s; }
+.dock.off { opacity: 0; translate: 0 16px; visibility: hidden; pointer-events: none; transition: opacity .25s var(--ease), translate .25s var(--ease), visibility 0s .25s; }
+@media (prefers-reduced-motion: reduce) { .dock, .dock.off { transition: none; } }
 
 @media (min-width: 900px) {
   .top { padding: 14px 32px; gap: 22px; }
@@ -416,6 +421,8 @@ html:not([lang="ja"]) .svc-card b { font: 700 24px/1.15 var(--display); letter-s
 .checks li::before { content: ""; flex: none; width: 22px; height: 22px; margin-top: 1px; border-radius: 50%; background: var(--amber) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2314213D' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12.5 4 4 8-9'/%3E%3C/svg%3E") center / 14px no-repeat; }
 
 .ptable { overflow-x: auto; border-radius: 22px; background: var(--card); box-shadow: inset 0 0 0 1px var(--line); -webkit-overflow-scrolling: touch; }
+/* سایه‌ی لبه‌ی راست نشان می‌دهد جدول روی گوشی ادامه دارد؛ با رسیدن به انتها محو می‌شود */
+.ptable.wide { background: linear-gradient(to left, var(--card) 40%, rgba(255, 253, 248, 0)) right / 48px 100% no-repeat local, radial-gradient(farthest-side at 100% 50%, rgba(20, 33, 61, .14), rgba(20, 33, 61, 0)) right / 14px 100% no-repeat scroll, var(--card); }
 .ptable table { width: 100%; border-collapse: collapse; font-size: 15px; }
 .ptable.wide table { min-width: 760px; }
 .ptable th, .ptable td { padding: 14px 16px; text-align: start; border-bottom: 1px solid var(--line); white-space: nowrap; }
@@ -566,7 +573,7 @@ html[lang="ja"] .menu-links a { font: 700 28px/1.5 var(--jp); letter-spacing: 0;
 .hours-card .hc-time { color: var(--amber-2) !important; font-variant-numeric: tabular-nums; }
 .hours-card .hc-state { display: block; font-size: 12.5px; color: var(--ink-2); }
 .hours-card .hc-state span { display: inline; font-size: inherit; }
-.hc-state .s-open { display: none !important; color: var(--ok) !important; font-weight: 700; }
+.hc-state .s-open { display: none !important; color: #25804F !important; font-weight: 700; }
 .hc-item.open .hc-state .s-open { display: inline !important; }
 .hc-item.open .hc-state .s-closed { display: none !important; }
 
