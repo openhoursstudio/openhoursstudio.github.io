@@ -716,6 +716,8 @@ html:not([lang="ja"]) .prose h2 { font-size: 30px; line-height: 1.12; }
 .prose p, .prose ul:not([class]) > li, .prose ol:not([class]) > li { font-size: 17px; color: var(--ink-2); }
 html[lang="ja"] .prose p, html[lang="ja"] .prose ul:not([class]) > li, html[lang="ja"] .prose ol:not([class]) > li { line-height: 2; letter-spacing: .02em; }
 .prose p { margin: 0 0 18px; }
+/* متنِ بلندِ مقاله با شکستِ عادیِ خط؛ auto-phrase برای تیترها خوب است ولی پاراگرافِ بلند را دندانه‌دندانه می‌کند */
+.prose p, .prose li, .faq details p { word-break: normal; line-break: strict; }
 .prose ul:not([class]), .prose ol:not([class]) { margin: 0 0 22px; padding-inline-start: 1.4em; }
 .prose ul:not([class]) > li, .prose ol:not([class]) > li { padding: 3px 0 3px 4px; }
 .prose li::marker { color: var(--amber-ink); font-weight: 700; }
