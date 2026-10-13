@@ -202,3 +202,61 @@ legend { padding: 0; margin-bottom: 10px; font: 500 22px var(--serif); }
 .days-n b { font-size: 52px; color: var(--blue); }
 .life-out p:last-child { margin: 6px 0 0; color: var(--ink-2); }
 @media (min-width: 900px) { .subhead h1 { font-size: 72px; } .pack-grid { grid-template-columns: repeat(3, 1fr); } .care-list { grid-template-columns: 1fr 1fr; } .life-tool { padding: 40px; } }
+
+/* صفحه‌ی اشتراک: سه طرح، سازنده‌ی اشتراک با تقویمِ هشت هفته، روندِ کار و پرسش‌ها */
+.pp small { font: 500 15px var(--sans); color: var(--ink-2); }
+.pack-grid .hl .pp small { color: #DCE2FA; }
+.sub-in .btn { position: relative; z-index: 1; margin-top: 18px; background: #fff; color: var(--blue); }
+.sub-in .btn:hover { background: var(--blush); }
+#componi { scroll-margin-top: 72px; }
+.ab-grid { display: grid; gap: 22px; grid-template-areas: "opts" "out" "form"; }
+.ab-opts { grid-area: opts; display: grid; gap: 22px; }
+.ab-out { grid-area: out; }
+.ab-form { grid-area: form; }
+.opts.freq { grid-template-columns: 1fr 1fr; }
+.opts.days { grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.opts.days label > span { min-height: 52px; justify-items: center; padding: 8px 4px; }
+.ab-hint { margin: 10px 0 0; font-size: 14px; color: var(--ink-2); }
+.ab-out { display: grid; gap: 10px; align-content: start; padding: 22px; border-radius: 22px; background: var(--ink); color: var(--paper); }
+.ab-price { display: flex; justify-content: space-between; align-items: baseline; }
+.ab-price span { font-size: 14px; letter-spacing: .1em; text-transform: uppercase; color: #B9BDD0; }
+.ab-price b { font: 700 38px var(--serif); }
+.ab-out p { margin: 0; }
+.ab-first { font-size: 15px; color: #D8DBE8; }
+.ab-cal-h { margin-top: 8px !important; font: 500 20px var(--serif); color: #fff; }
+.ab-cal-h small { display: block; font: 400 13px var(--sans); color: #B9BDD0; }
+.ab-cal { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.ab-cal button, .ab-cal .off { display: grid; gap: 2px; justify-items: center; align-content: center; min-height: 60px; padding: 8px 4px; border-radius: 14px; font: inherit; text-align: center; }
+.ab-cal button { border: 0; background: rgba(255, 255, 255, .08); color: #D8DBE8; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .2); cursor: pointer; transition: background .2s, transform .2s var(--ease); }
+.ab-cal button:active { transform: scale(.96); }
+.ab-cal button[aria-pressed="true"] { background: var(--blue-2); color: #fff; box-shadow: none; }
+.ab-cal button[aria-pressed="false"] b { text-decoration: line-through; }
+.ab-cal button:focus-visible { outline: 3px solid var(--blush); outline-offset: 2px; }
+.ab-cal .off { color: #9A9FB5; }
+.ab-cal b { font-weight: 600; font-size: 15px; }
+.ab-cal i { font-style: normal; font-size: 12px; }
+.ab-sum { padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, .15); font-size: 15px; color: #D8DBE8; }
+.ab-form { background: var(--card); }
+.ab-form h3 { margin: 0; font: 500 24px var(--serif); }
+.ab-form .btn { margin-top: 4px; }
+.ab-err { margin: 0; font-weight: 500; color: #B3261E; }
+.ab-err:empty { display: none; }
+.ab-done { padding: 14px 16px; border-radius: 14px; background: var(--blush); }
+.ab-done:focus { outline: 3px solid var(--blue-2); outline-offset: 2px; }
+.ab-done b { font: 500 21px var(--serif); }
+.ab-done p { margin: 6px 0 0; }
+.ab-done .ab-demo { font-size: 13px; color: var(--ink-2); }
+.ab-how h2 { font-size: 30px; margin-bottom: 14px; }
+.ab-how .steps-list li::before { background: var(--blue); }
+.ab-care { margin-top: 22px; }
+.ab-photo { margin: 0; }
+.ab-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 200px 200px 18px 18px; }
+.ab-faq h2 { margin-bottom: 10px; }
+.ab-faq details { border-bottom: 1px solid var(--line); }
+.ab-faq summary { display: flex; align-items: center; min-height: 54px; font: 500 20px var(--serif); cursor: pointer; }
+.ab-faq details p { margin: 0 0 16px; color: var(--ink-2); }
+@media (min-width: 900px) {
+  .ab-grid { grid-template-columns: 1.05fr .95fr; grid-template-areas: "opts out" "form out"; gap: 28px 40px; align-items: start; }
+  .ab-out { position: sticky; top: 90px; padding: 32px; }
+  .ab-photo img { max-height: 620px; }
+}

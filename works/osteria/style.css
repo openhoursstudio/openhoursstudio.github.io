@@ -117,3 +117,73 @@ h2 { font-size: 32px; line-height: 1.1; font-weight: 800; }
 .corso-form .gift input { min-height: 0; width: 20px; height: 20px; accent-color: var(--brick); }
 .corso-form .out { padding: 12px 14px; border-radius: 4px; background: #F1E2C6; }
 @media (min-width: 820px) { .subhead h1 { font-size: 56px; } .carta-grid { grid-template-columns: 1fr 1fr; } .lunch { padding: 32px 40px; } .dates { grid-template-columns: repeat(6, 1fr); } }
+
+/* صفحه‌ی پاستای تازه برای بیرون‌بر: پیشخوانِ پُرس‌ها، خلاصه‌ی سفارش، طرزِ پخت */
+.sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+#ordina { scroll-margin-top: 64px; }
+.asp-head .lead { color: #6E6052; }
+.asp-cutoff { display: inline-flex; align-items: center; gap: 10px; margin: 18px 0 0; padding: 10px 16px; border-radius: 2px; background: var(--paper); box-shadow: inset 4px 0 0 var(--brick); font-weight: 700; font-size: 15px; }
+.asp-cutoff:empty { display: none; }
+.asp-cutoff i { flex: none; width: 9px; height: 9px; border-radius: 50%; background: var(--brick); animation: asp-pulse 2s infinite; }
+@keyframes asp-pulse { 50% { box-shadow: 0 0 0 6px rgba(181, 69, 43, .18); } }
+@media (prefers-reduced-motion: reduce) { .asp-cutoff i { animation: none; } }
+.asp-grid { display: grid; gap: 28px; }
+.asp-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.asp-list li { display: grid; grid-template-columns: 1fr auto; gap: 6px 14px; align-items: center; padding: 16px; border-radius: 4px; background: var(--paper); box-shadow: 0 1px 0 var(--line); transition: box-shadow .2s; }
+.asp-list li.on { box-shadow: inset 4px 0 0 var(--brick), 0 1px 0 var(--line); }
+.asp-info b { display: block; font: 800 20px/1.2 var(--serif); }
+.asp-info span { display: block; margin-top: 2px; font-size: 14px; color: #6E6052; }
+.qty { display: flex; align-items: center; gap: 4px; }
+.qty button { width: 44px; height: 44px; border: 0; border-radius: 2px; background: var(--brick); color: #fff; font: 800 20px var(--body); cursor: pointer; }
+.qty button:disabled { background: #E9DFCC; color: #8C7C6C; cursor: default; }
+.qty b { min-width: 2ch; text-align: center; font: 800 22px var(--body); font-variant-numeric: tabular-nums; }
+.asp-line { grid-column: 1 / -1; margin: 0; font-size: 14px; font-weight: 600; color: var(--brick); }
+.qty button:focus-visible { outline: 3px solid var(--green); outline-offset: 2px; }
+.asp-sum { display: grid; gap: 12px; align-content: start; padding: 24px 20px; border-radius: 4px; background: var(--green); color: var(--cream); }
+.asp-sum h2 { font-size: 28px; color: #fff; }
+.asp-picked { list-style: none; margin: 0; padding: 0; }
+.asp-picked li { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px dashed rgba(246, 238, 223, .25); }
+.asp-picked b { font-family: var(--serif); font-variant-numeric: lining-nums; color: #fff; white-space: nowrap; }
+.asp-empty { margin: 0; font-style: italic; color: #D8E0D6; }
+.asp-hint { display: grid; gap: 8px; padding: 12px 14px; border-radius: 4px; background: rgba(227, 167, 47, .16); box-shadow: inset 3px 0 0 var(--ochre); }
+.asp-hint p { margin: 0; font-size: 15px; }
+.asp-hint button { justify-self: start; min-height: 40px; padding: 0 14px; border: 0; border-radius: 2px; background: var(--ochre); color: var(--ink); font: 800 14px var(--body); cursor: pointer; }
+.asp-total { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin: 0; padding-top: 10px; border-top: 1px solid rgba(246, 238, 223, .3); }
+.asp-total span { font-size: 13px; color: #D8E0D6; }
+.asp-total b { font: 800 36px var(--serif); font-variant-numeric: lining-nums; color: var(--ochre); white-space: nowrap; }
+.asp-when { min-width: 0; margin: 0; padding: 0; border: 0; }
+.asp-when legend { margin-bottom: 10px; padding: 0; font: 600 italic 19px var(--serif); color: var(--ochre); }
+.asp-sum .asp-days { grid-template-columns: repeat(3, 1fr); margin-bottom: 8px; }
+.asp-sum .asp-days button { box-shadow: none; }
+.asp-sum .asp-days [aria-pressed="true"] span { color: #fff; }
+.asp-times { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.asp-times button { min-height: 44px; border: 0; border-radius: 2px; background: rgba(255, 255, 255, .12); color: #fff; font: 800 15px var(--body); cursor: pointer; }
+.asp-times [aria-pressed="true"] { background: var(--cream); color: var(--brick); }
+.asp-who { display: grid; gap: 10px; }
+.asp-who label { display: grid; gap: 4px; font-size: 14px; font-weight: 600; }
+.asp-who input { width: 100%; min-width: 0; min-height: 48px; padding: 8px 12px; border: 0; border-radius: 2px; background: var(--paper); color: var(--ink); font: inherit; font-size: 16px; }
+.asp-sum .btn { justify-content: center; border: 0; font: 800 16px var(--body); letter-spacing: .03em; cursor: pointer; }
+.asp-sum button:focus-visible, .asp-sum input:focus-visible, .asp-done:focus { outline: 3px solid var(--ochre); outline-offset: 2px; }
+.asp-err { margin: 0; font-weight: 700; color: #FFD9A0; }
+.asp-err:empty { display: none; }
+.asp-done { padding: 14px 16px; border-radius: 4px; background: var(--cream); color: var(--ink); }
+.asp-done b { font: 800 20px var(--serif); color: var(--brick); }
+.asp-done p { margin: 6px 0 0; }
+.asp-done .asp-demo { font-size: 13px; color: #6E6052; }
+.asp-cook h2 { margin-bottom: 4px; }
+.cook-list { list-style: none; margin: 16px 0; padding: 0; display: grid; gap: 10px; }
+.cook-list li { display: grid; grid-template-columns: 64px 1fr; gap: 14px; align-items: center; padding: 14px 16px; border-radius: 4px; background: var(--paper); }
+.cook-list li > b { font: 800 36px var(--serif); font-variant-numeric: lining-nums; color: var(--brick); text-align: center; }
+.dock { transition: transform .3s; }
+.dock.away { transform: translateY(160%); visibility: hidden; transition: transform .3s, visibility 0s .3s; }
+.sf-copy .btn { margin-top: 22px; }
+@media (prefers-reduced-motion: reduce) { .dock { transition: none; } }
+.cook-list h3 { font-size: 20px; }
+.cook-list p { margin: 2px 0 0; font-size: 15px; color: #5A4C40; }
+.asp-note { background: #F1E2C6; box-shadow: none; }
+@media (min-width: 820px) {
+  .asp-grid { grid-template-columns: 1.15fr .85fr; gap: 40px; align-items: start; }
+  .asp-sum { position: sticky; top: 84px; padding: 32px; }
+  .asp-who { grid-template-columns: 1fr 1fr; }
+  .asp-cook .two-col { align-items: center; }
+}

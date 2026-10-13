@@ -90,3 +90,82 @@ h2 { font-size: 32px; line-height: 1.12; color: var(--brown); }
 .dsgvo li { display: grid; padding: 10px 0; border-bottom: 1px solid var(--line); }
 .dsgvo span { color: var(--muted); font-size: 15px; }
 @media (min-width: 820px) { .subhead h1 { font-size: 58px; } .karte-grid, .legal-grid { grid-template-columns: 1fr 1fr; } }
+
+/* صفحه‌ی سفارشِ کیکِ کامل: فهرستِ کیک‌ها، فرمِ پنج‌مرحله‌ای با نقاشیِ برش‌ها، خلاصه‌ی سفارش و پرسش‌ها */
+.tt-head .lead { color: #6E5E52; }
+.tt-cakes-grid { display: grid; gap: 22px; }
+.tt-list .pr { font-family: var(--serif); font-weight: 400; color: var(--red); }
+.tt-list li > span:last-child { opacity: 1; color: #6E5E52; }
+.tt-photo { margin: 0; position: relative; border-radius: 28px; overflow: hidden; }
+.tt-photo img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.tt-photo figcaption { position: absolute; left: 14px; bottom: 14px; background: var(--paper); padding: 6px 12px; border-radius: 999px; font-size: 13px; font-weight: 500; }
+.t-card .btn { margin-top: 18px; }
+#bestellen, #datenschutz { scroll-margin-top: 72px; }
+.tt-form { display: grid; gap: 16px; }
+.tt-steps { display: grid; gap: 12px; min-width: 0; }
+.tt-step { margin: 0; padding: 18px; border: 0; border-radius: 22px; background: var(--paper); box-shadow: inset 0 0 0 1px var(--line); min-width: 0; }
+.tt-step > legend { float: left; width: 100%; display: flex; align-items: center; gap: 10px; margin: 0 0 14px; padding: 0; font: 400 22px var(--serif); color: var(--brown); }
+.tt-step > legend + * { clear: both; }
+.tt-step > legend i { display: grid; place-items: center; flex: none; width: 32px; height: 32px; border-radius: 50%; background: var(--red); color: #fff; font: 700 15px var(--body); font-style: normal; }
+.tt-opts { display: grid; gap: 8px; }
+.tt-kinds { grid-template-columns: 1fr 1fr; }
+.tt-opts label { position: relative; cursor: pointer; }
+.tt-opts input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.tt-opts label > span { display: grid; gap: 2px; min-height: 64px; height: 100%; align-content: center; padding: 10px 14px; border-radius: 16px; background: var(--cream); box-shadow: inset 0 0 0 1px var(--line); transition: box-shadow .2s, background .2s; }
+.tt-opts b { font: 400 17px/1.25 var(--serif); color: var(--brown); }
+.tt-opts i { font-style: normal; font-size: 13px; color: #6E5E52; }
+.tt-opts em { font: 400 20px var(--serif); font-style: normal; color: #A8301F; }
+.tt-opts input:checked + span { background: #FBE9E4; box-shadow: inset 0 0 0 2px var(--red); }
+.tt-opts input:focus-visible + span { outline: 3px solid var(--brown); outline-offset: 2px; }
+.tt-size { display: grid; grid-template-columns: 116px 1fr; gap: 16px; align-items: center; }
+.tt-cake { width: 100%; height: auto; }
+.tt-cake .plate { fill: #fff; stroke: var(--line); stroke-width: 2; }
+.tt-cake .base { fill: #E3B25E; stroke: rgba(90, 58, 39, .25); stroke-width: 2; transition: fill .3s; }
+.tt-cake .cuts { stroke: rgba(90, 58, 39, .35); stroke-width: 1.6; }
+.tt-cake .tops circle { stroke: rgba(43, 33, 28, .2); stroke-width: 1; transition: fill .3s; }
+.tt-when { display: grid; grid-template-columns: 1.4fr 1fr; gap: 10px; }
+.tt-when label, .tt-who label, .tt-plate label { display: grid; gap: 4px; font-size: 14px; font-weight: 700; color: var(--brown); }
+.tt-form input:not([type="radio"]):not([type="checkbox"]), .tt-form select { width: 100%; min-width: 0; min-height: 48px; padding: 8px 12px; border-radius: 12px; border: 1px solid rgba(43, 33, 28, .3); background: #fff; color: var(--ink); font: inherit; font-size: 16px; }
+.tt-form input:focus-visible, .tt-form select:focus-visible { outline: 3px solid var(--red); outline-offset: 1px; }
+.tt-msg { margin: 0; font-size: 14px; }
+.tt-msg.warn { margin-top: 10px; padding: 8px 12px; border-radius: 12px; background: #FBE7D9; color: #8A3A14; font-weight: 500; }
+.tt-check { display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; cursor: pointer; }
+.tt-check input { flex: none; width: 20px; height: 20px; margin: 0; accent-color: var(--red); }
+.tt-plate { margin: 2px 0 8px 30px; }
+.tt-count { margin: 4px 0 0; font-size: 12px; color: #6E5E52; text-align: right; }
+.tt-who { display: grid; gap: 10px; }
+.tt-sum { display: grid; gap: 8px; align-content: start; padding: 22px; border-radius: 26px; background: var(--brown); color: var(--cream); }
+.tt-sum p { margin: 0; }
+.tt-sum .eyebrow { color: #F2B6A8; }
+.tt-sum-cake { font: 400 24px/1.2 var(--serif); color: #fff; }
+.tt-sum-when, .tt-sum-extras { color: #EAD9C6; }
+.tt-sum-extras { margin: 0; padding-inline-start: 18px; font-size: 15px; }
+.tt-sum-extras:empty { display: none; }
+.tt-total { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; margin-top: 4px !important; padding-top: 12px; border-top: 1px solid rgba(250, 244, 234, .2); }
+.tt-total span { font-size: 13px; color: #EAD9C6; }
+.tt-total b { font: 400 34px var(--serif); color: #fff; white-space: nowrap; }
+.tt-sum .btn { justify-content: center; margin-top: 6px; border: 0; font: 700 16px var(--body); cursor: pointer; }
+.tt-sum .btn:focus-visible { outline: 3px solid var(--cream); outline-offset: 3px; }
+.tt-err { font-size: 14px; font-weight: 500; color: #FFD0C4; }
+.tt-err:empty { display: none; }
+.tt-done { padding: 14px 16px; border-radius: 16px; background: var(--cream); color: var(--ink); }
+.tt-done:focus { outline: 3px solid #F2B6A8; outline-offset: 2px; }
+.tt-done b { font: 400 20px var(--serif); color: var(--brown); }
+.tt-done p { margin: 6px 0 0 !important; }
+.tt-done .tt-demo { font-size: 13px; color: #6E5E52; }
+.tt-how h2 { font-size: 30px; margin-bottom: 16px; }
+.tt-how .steps-list li::before { background: var(--red); }
+.tt-how .steps-list span { opacity: 1; color: #6E5E52; }
+.faq-k details { border-bottom: 1px solid var(--line); }
+.faq-k summary { display: flex; align-items: center; min-height: 52px; font-weight: 700; color: var(--brown); cursor: pointer; }
+.faq-k details p { margin: 0 0 14px; color: #6E5E52; }
+@media (min-width: 820px) {
+  .tt-cakes-grid { grid-template-columns: 1.15fr .85fr; gap: 48px; align-items: center; }
+  .tt-form { grid-template-columns: 1.4fr .9fr; gap: 24px; align-items: start; }
+  .tt-step { padding: 24px 26px; }
+  .tt-kinds { grid-template-columns: repeat(3, 1fr); }
+  .tt-size { grid-template-columns: 160px 1fr; gap: 24px; }
+  .tt-sizes { grid-template-columns: 1fr 1fr; }
+  .tt-who { grid-template-columns: 1fr 1fr; }
+  .tt-sum { position: sticky; top: 80px; padding: 30px; }
+}
