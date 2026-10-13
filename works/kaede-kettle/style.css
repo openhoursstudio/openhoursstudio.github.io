@@ -262,3 +262,64 @@ h2 { font-size: 24px; }
 .checkout { width: 100%; justify-content: center; }
 .checkout:disabled { opacity: .45; cursor: not-allowed; }
 @media (min-width: 760px) { .subhead h1 { font-size: 40px; } .season-grid-k { grid-template-columns: repeat(4, 1fr); } .shop-layout { grid-template-columns: 1fr 320px; } .products { grid-template-columns: repeat(3, 1fr); } .cart { position: sticky; top: 90px; } }
+
+/* صفحه‌ی کلاسِ قهوه: دوره‌ها، جدولِ روزها با صندلی‌های خالی، فرمِ نمونه */
+/* منوی بالا با شش پیوند: در عرضِ تبلت فشرده‌تر، بی‌شکستنِ خط */
+.nav a { white-space: nowrap; }
+@media (min-width: 760px) and (max-width: 959px) { .nav { gap: 14px; font-size: 13px; } .brand-en { display: none; } }
+.class-fig { margin: 0; border-radius: var(--r); overflow: hidden; box-shadow: 0 24px 50px -30px rgba(42, 36, 32, .5); }
+.class-fig img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.intro-k h2 { font-size: 22px; margin-bottom: 6px; }
+.intro-k .facts dt, .sched-k .note { color: var(--ink-2); }
+.course-grid { display: grid; gap: 14px; }
+.course { position: relative; display: grid; align-content: start; gap: 6px; padding: 22px 20px 20px; border-radius: var(--r); background: var(--card); border: 1px solid var(--line); }
+.c-mark { position: absolute; top: 16px; right: 18px; font: 700 28px/1 var(--mincho); color: var(--maple); opacity: .22; }
+.course h3 { font-size: 20px; padding-right: 36px; }
+.c-meta { display: flex; align-items: baseline; gap: 12px; margin: 0; font-size: 13px; color: var(--ink-2); }
+.c-meta b { font: 700 20px var(--mincho); color: var(--ink); font-variant-numeric: tabular-nums; }
+.course p:not(.c-meta) { margin: 0; color: var(--ink-2); font-size: 14px; }
+.course .c-take { margin-top: 8px; padding-top: 10px; border-top: 1px dashed var(--line); color: var(--moss); font-weight: 700; font-size: 13px; }
+
+.sched-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
+.sched { list-style: none; margin: 0; padding: 0; }
+.sched li { display: grid; grid-template-columns: 3.6em 1fr auto; grid-template-areas: "d i b" "d s b"; column-gap: 12px; row-gap: 2px; align-items: center; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.sched li[hidden] { display: none; }
+.sched time { grid-area: d; display: grid; justify-items: center; align-self: start; padding: 6px 0; border-radius: 12px; background: var(--paper-2); line-height: 1.3; }
+.sched time b { font: 700 16px var(--mincho); font-variant-numeric: tabular-nums; }
+.sched time span { font-size: 12px; color: var(--ink-2); }
+.s-info { grid-area: i; display: grid; line-height: 1.5; }
+.s-info b { font-weight: 700; font-size: 15px; }
+.s-info span { font-size: 13px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.seats { grid-area: s; display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: var(--moss); font-weight: 700; }
+.dots-k { display: inline-flex; gap: 4px; }
+.dots-k i { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid rgba(42, 36, 32, .3); }
+.dots-k i.free { background: var(--moss); border-color: var(--moss); }
+.sched li.full .seats { color: var(--ink-2); font-weight: 500; }
+.sched li.full .s-info b { color: var(--ink-2); }
+.pick { grid-area: b; white-space: nowrap; min-height: 44px; padding: 0 14px; border: 0; border-radius: 999px; background: var(--ink); color: #fff; font: 700 13px var(--gothic); cursor: pointer; transition: background .2s, transform .15s; }
+.pick:hover { background: var(--maple); }
+.pick:active { transform: scale(.95); }
+.pick:disabled { background: transparent; color: var(--muted); box-shadow: inset 0 0 0 1px var(--line); cursor: not-allowed; }
+.pick:focus-visible, .filter-chips button:focus-visible, .book-k :focus-visible { outline: 3px solid var(--maple); outline-offset: 2px; }
+.sched-count { margin: 10px 0 0; font-size: 12px; color: var(--ink-2); }
+.book-k { background: var(--card); align-self: start; }
+.book-k h2 { font-size: 22px; }
+.book-k label { min-width: 0; }
+.book-k input, .book-k select, .book-k textarea { width: 100%; min-width: 0; background: #fff; font-family: var(--gothic); }
+.hint-k { font-weight: 400; font-size: 12px; color: var(--ink-2); }
+.sum-k { margin: 0; font: 700 16px var(--mincho); }
+.sum-k:empty { display: none; }
+.book-k .btn { width: 100%; border: 0; cursor: pointer; font-family: var(--gothic); }
+.book-k .out { font-size: 14px; color: var(--maple-2); }
+.book-k .out.ok { padding: 12px 14px; border-radius: 14px; background: #E7EBDF; color: #3F4A33; }
+.book-k .out:empty { display: none; }
+.notes-k .note-box { background: var(--card); }
+.notes-k ul { margin: 8px 0 0; padding-inline-start: 18px; color: var(--ink-2); font-size: 14px; }
+.notes-k li + li { margin-top: 6px; }
+@media (min-width: 760px) {
+  .intro-k .two-col { align-items: center; }
+  .course-grid { grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .sched-layout { grid-template-columns: minmax(0, 1.25fr) minmax(0, .9fr); gap: 40px; align-items: start; }
+  .book-k { position: sticky; top: 90px; }
+  .notes-k .note-box { max-width: 760px; }
+}
