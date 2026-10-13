@@ -1,6 +1,6 @@
 /* برگه‌ی چاپیِ A5 نماینده‌ها؛ روی صفحه پیش‌نمایش، در چاپ دقیقاً یک برگ */
 @page { size: 148mm 210mm; margin: 0; }
-:root { --ink: #14213D; --ink-2: #44506A; --amber: #F2A93B; --amber-2: #C97F0E; --paper: #FBF7EF; }
+:root { --ink: #14213D; --ink-2: #44506A; --amber: #F2A93B; --amber-2: #9E6309; --paper: #FBF7EF; }
 * { box-sizing: border-box; }
 html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 body { margin: 0; background: #DADFE8; font-family: "DM Sans", "Noto Sans JP", system-ui, sans-serif; color: var(--ink); }

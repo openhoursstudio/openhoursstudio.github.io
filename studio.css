@@ -7,7 +7,7 @@
   --ink-2: #44506A;
   --muted: #5F677B;
   --amber: #F2A93B;
-  --amber-2: #C97F0E;
+  --amber-2: #9E6309;
   --sky: #E8EDF6;
   --ok: #2E9E63;
   --line: rgba(20, 33, 61, .12);
@@ -657,9 +657,6 @@ html[lang="ja"] .frow button { font-family: var(--jp); }
 .site-pages i { margin-inline-start: auto; font-style: normal; color: var(--muted); }
 
 /* ───── پرسش‌های پرتکرار و «خواندنی‌ها» (فهرستِ نوشته‌ها و صفحه‌ی مقاله) ───── */
-/* کهرباییِ تیره‌تر برای متنِ ریز روی زمینه‌ی روشن (کنتراستِ AA) */
-:root { --amber-ink: #9A5F08; }
-.faq-side .num, .article-head .label { color: var(--amber-ink); }
 html[lang="ja"] .article-head .label, html[lang="ja"] .end-cta .num { text-transform: none; letter-spacing: .04em; }
 /* پرسش‌ها در چهار گروه؛ روی دسکتاپ عنوانِ گروه کنارِ پرسش‌ها می‌چسبد */
 .faq.grouped { padding-top: 48px; }
@@ -673,7 +670,7 @@ html[lang="ja"] .article-head .label, html[lang="ja"] .end-cta .num { text-trans
 .faq details .ptable th, .faq details .ptable td { padding: 11px 14px; }
 .faq details .ptable td { font-size: 16px; }
 .faq details a, .prose a { color: var(--ink); text-decoration-color: var(--amber); text-decoration-thickness: 2px; text-underline-offset: 4px; }
-.faq details a:hover, .prose a:hover { color: var(--amber-ink); }
+.faq details a:hover, .prose a:hover { color: var(--amber-2); }
 .faq details .ptable a { text-decoration: none; }
 
 /* کارتِ تیره‌ی پایانی با دعوت به تماس */
@@ -700,7 +697,7 @@ html:not([lang="ja"]) .jcard h2, html:not([lang="ja"]) .jcard h3 { font: 700 25p
   .jcard:has(a:focus-visible) { outline: 3px solid var(--amber); outline-offset: 3px; }
 }
 .jcard .arrow { justify-self: start; margin-top: 4px; }
-.jcard:hover .arrow { color: var(--amber-ink); }
+.jcard:hover .arrow { color: var(--amber-2); }
 .journal { padding-top: 40px; }
 
 /* مقاله: ستونِ باریکِ خواندن، خطِ تاریخ و زمانِ خواندن، نقلِ برجسته */
@@ -720,7 +717,7 @@ html[lang="ja"] .prose p, html[lang="ja"] .prose ul:not([class]) > li, html[lang
 .prose p, .prose li, .faq details p { word-break: normal; line-break: strict; }
 .prose ul:not([class]), .prose ol:not([class]) { margin: 0 0 22px; padding-inline-start: 1.4em; }
 .prose ul:not([class]) > li, .prose ol:not([class]) > li { padding: 3px 0 3px 4px; }
-.prose li::marker { color: var(--amber-ink); font-weight: 700; }
+.prose li::marker { color: var(--amber-2); font-weight: 700; }
 .prose .checks, .prose .decisions { margin: 6px 0 26px; }
 .prose .checks { grid-template-columns: 1fr; }
 .prose .checks li { font-size: 15px; line-height: 1.7; }
