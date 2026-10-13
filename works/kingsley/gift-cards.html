@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Gift cards · Kingsley's Barbers, Leeds (concept)</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#121417">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Karla:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../pages.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body data-base="en" data-default-lang="en" data-tz="Europe/London" data-open="09:00" data-close="18:30" data-closed-day="0" data-key="kb">
+
+<div class="concept" role="note">Concept project · Kingsley's Barbers is a fictional shop</div>
+<div class="pole" aria-hidden="true"></div>
+
+<header class="top">
+  <a class="brand" href="index.html">Kingsley's<small>Barbers · Leeds</small></a>
+  <nav class="knav"><a href="prices.html">Prices</a><a href="about.html">About</a><a href="gift-cards.html">Gift cards</a></nav>
+  <a class="call" href="index.html#book">Book a chair</a>
+</header>
+<!-- pages --><nav class="pages" aria-label="Pages" style="--pg:#B3202A"><a href="index.html">The shop</a><a href="prices.html">Cuts &amp; prices</a><a href="about.html">About</a><a href="gift-cards.html" aria-current="page">Gift cards</a></nav><!-- /pages -->
+
+<main>
+<section class="subhead">
+  <p class="eyebrow">Gift cards</p>
+  <h1>A proper haircut,<br><span>in an envelope.</span></h1>
+  <p class="lead">£25 and £50 cards, sold at the desk and sealed in an envelope that looks like an old cinema ticket. Good for any cut, beard or shave, with any barber, for twelve months.</p>
+</section>
+
+<section class="gift" id="card">
+  <header class="head"><p class="eyebrow">Make one up</p><h2>See it before you buy it</h2><p>Pick an amount and the names. We will have it sealed and waiting at the desk, and you pay when you collect.</p></header>
+  <div class="gift-grid">
+    <div class="ticket-side">
+      <figure class="ticket" aria-label="Preview of the gift card">
+        <div class="t-main">
+          <p class="t-top">Kingsley's Barbers · Call Lane, Leeds</p>
+          <p class="t-admit">Admit one<br>to the chair</p>
+          <p class="t-val" data-t-val>£25</p>
+          <dl class="t-names"><div><dt>For</dt><dd data-t-to>Someone lucky</dd></div><div><dt>From</dt><dd data-t-from>You</dd></div></dl>
+          <p class="t-msg" data-t-msg hidden></p>
+        </div>
+        <div class="t-stub"><span>No.</span><b data-t-no>0400</b><small data-t-valid>Valid 12 months</small></div>
+      </figure>
+      <div class="covers">
+        <h3 data-covers-title>What £25 covers</h3>
+        <ul data-covers aria-live="polite"></ul>
+      </div>
+    </div>
+
+    <form class="form-card gift-form" data-gift novalidate>
+      <fieldset class="amount"><legend>Amount</legend>
+        <label><input type="radio" name="amt" value="25" checked><span><b>£25</b><small>A cut or a skin fade</small></span></label>
+        <label><input type="radio" name="amt" value="50"><span><b>£50</b><small>Cut and a hot towel shave</small></span></label>
+      </fieldset>
+      <label>For<input name="to" maxlength="22" autocomplete="off" placeholder="Sam"></label>
+      <label>From (the name we ask for at the desk)<input name="from" maxlength="22" required autocomplete="given-name" placeholder="Ellie"></label>
+      <label>A line on the ticket, if you like<input name="msg" maxlength="60" autocomplete="off" placeholder="Happy birthday. Sort the beard out." aria-describedby="msg-left"></label>
+      <p class="hint" id="msg-left" data-msg-left>60 letters left</p>
+      <label>Collect from the desk<select name="day" data-days></select></label>
+      <button type="submit" class="btn">Put it aside for me</button>
+      <p class="out gift-out" data-gift-out aria-live="polite"></p>
+    </form>
+  </div>
+</section>
+
+<section class="desk">
+  <header class="head"><p class="eyebrow">At the desk</p><h2>Two minutes, start to finish</h2></header>
+  <ol class="steps-list">
+    <li><b>Call in, Monday to Saturday</b><span>Whoever is not mid-cut will sort it. No need to wait in the queue for a chair.</span></li>
+    <li><b>Pay by card or cash</b><span>We write the name and number on the stub, and the same number in the book behind the till.</span></li>
+    <li><b>Hand it over</b><span>Sealed in a red envelope with a ticket window. They bring it in, or just give their name.</span></li>
+  </ol>
+</section>
+
+<section class="using">
+  <div class="two-col">
+    <div>
+      <header class="head"><p class="eyebrow">Using it</p><h2>The small print, in big letters</h2></header>
+      <dl class="facts">
+        <div><dt>Valid for</dt><dd>Twelve months from the date on the stub.</dd></div>
+        <div><dt>Barbers</dt><dd>Dev, Marcus or Joe, walk-in or booked.</dd></div>
+        <div><dt>Covers</dt><dd>Anything on the <a href="prices.html">price list</a>, kids' cuts included.</dd></div>
+        <div><dt>Change</dt><dd>If the cut costs less, we write what is left on the back.</dd></div>
+        <div><dt>Lost it?</dt><dd>Tell us the name. The number is in the book.</dd></div>
+      </dl>
+    </div>
+    <div class="faq-k">
+      <h2>Questions at the desk</h2>
+      <details><summary>Can I buy one online?</summary><p>No, only at the desk. Fill in the form above and we have it sealed and waiting, so it takes a minute when you come in.</p></details>
+      <details><summary>Can I put more than £50 on one card?</summary><p>Buy two. Two envelopes look better than one anyway.</p></details>
+      <details><summary>Can the leftover go on a tip?</summary><p>Yes. Tell your barber to keep the change and we note it in the book. Tips go straight to them, as always.</p></details>
+      <details><summary>Does it work on quiet Tuesday mornings?</summary><p>Yes. From 9 to 11 on Tuesdays the radio is off and the lights are low. A good first visit for someone who finds barbers loud.</p></details>
+      <details><summary>Can I swap it for cash?</summary><p>No, sorry. But it never stops being a haircut while it is valid.</p></details>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <p class="foot-brand">Kingsley's Barbers</p>
+  <p>This is a concept project. The shop, barbers and prices are fictional. Photos: CC0 (public domain).</p>
+  <details class="credits"><summary>Photo credits</summary><ul data-credits></ul></details>
+</footer>
+
+<a class="dock" href="#card">Put a card aside</a>
+<script src="../../assets/concept.js"></script>
+<script>
+  // کارت هدیه: پیش‌نمایشِ زنده‌ی بلیت، «با این مبلغ چه می‌شود گرفت»، و روزهای تحویل از پیشخوان به وقتِ لندن؛ فرم فقط نمایشی است
+  (function () {
+    var DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    // ساعتِ کارِ مغازه: دوشنبه تا جمعه ۹ تا ۱۸:۳۰، شنبه ۸:۳۰ تا ۱۷، یکشنبه بسته
+    var CLOSE = [null, '18:30', '18:30', '18:30', '18:30', '18:30', '17:00'];
+    var COVERS = {
+      25: [['Haircut', '£22, with £3 left for a tip'], ['Skin fade', '£25, spot on'], ['Kids cut, under 12', '£15, with £10 left for next time'], ['Two beard trims', '£24 across two visits']],
+      50: [['Haircut and hot towel shave', '£50, spot on'], ['Two haircuts', '£44, one now and one in a month'], ['Scissor cut and a beard trim', '£38, with £12 left'], ['Cut and beard, then a kids cut', '£47, a dad-and-son Saturday']]
+    };
+    var f = document.querySelector('[data-gift]'), out = document.querySelector('[data-gift-out]');
+    var el = function (s) { return document.querySelector(s); };
+    var now = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/London' }));
+    function mins(t) { var p = t.split(':'); return +p[0] * 60 + +p[1]; }
+
+    // شماره و تاریخِ اعتبارِ بلیت از روی امروز
+    var start = new Date(now.getFullYear(), 0, 1), doy = Math.floor((now - start) / 864e5) + 1;
+    el('[data-t-no]').textContent = String(400 + doy).padStart(4, '0');
+    var until = new Date(now); until.setFullYear(now.getFullYear() + 1);
+    el('[data-t-valid]').textContent = 'Valid to ' + until.getDate() + ' ' + MONTHS[until.getMonth()].slice(0, 3) + ' ' + until.getFullYear();
+
+    // شش روزِ کاریِ بعدی؛ امروز فقط اگر تا بسته‌شدن دست‌کم نیم ساعت مانده باشد
+    var opts = [], d = new Date(now), m = now.getHours() * 60 + now.getMinutes();
+    for (var k = 0; opts.length < 6 && k < 10; k++) {
+      d = new Date(now); d.setDate(now.getDate() + k);
+      var c = CLOSE[d.getDay()];
+      if (!c || (k === 0 && m > mins(c) - 30)) continue;
+      var name = DAYS[d.getDay()] + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()];
+      opts.push('<option value="' + name + '">' + (k === 0 ? 'Today, until ' + c : k === 1 ? 'Tomorrow, ' + name : name + ', until ' + c) + '</option>');
+    }
+    el('[data-days]').innerHTML = opts.join('');
+
+    function render() {
+      var amt = f.querySelector('[name="amt"]:checked').value;
+      el('[data-t-val]').textContent = '£' + amt;
+      el('[data-t-to]').textContent = f.to.value.trim() || 'Someone lucky';
+      el('[data-t-from]').textContent = f.from.value.trim() || 'You';
+      var msg = f.msg.value.trim(), tm = el('[data-t-msg]');
+      tm.hidden = !msg; tm.textContent = msg ? '“' + msg + '”' : '';
+      var left = 60 - f.msg.value.length;
+      el('[data-msg-left]').textContent = left + (left === 1 ? ' letter left' : ' letters left');
+      el('[data-covers-title]').textContent = 'What £' + amt + ' covers';
+      el('[data-covers]').innerHTML = COVERS[amt].map(function (r) { return '<li><b>' + r[0] + '</b><span>' + r[1] + '</span></li>'; }).join('');
+    }
+    f.addEventListener('input', render);
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      f.from.setAttribute('aria-invalid', !f.from.value.trim());
+      if (!f.from.value.trim()) { out.textContent = 'Add your name under From, so we know who is collecting it.'; f.from.focus(); return; }
+      var amt = f.querySelector('[name="amt"]:checked').value, to = f.to.value.trim();
+      var day = f.day.value, today = f.day.selectedIndex === 0 && /^Today/.test(f.day.options[0].textContent);
+      out.textContent = 'Done. A £' + amt + ' card' + (to ? ' for ' + to : '') + ', sealed and waiting at the desk ' + (today ? 'later today' : 'from ' + day) + '. Ask for the one under “' + f.from.value.trim() + '” and pay by card or cash. This is a concept site, so nothing was sent.';
+    });
+    render();
+  })();
+</script>
+</body>
+</html>
