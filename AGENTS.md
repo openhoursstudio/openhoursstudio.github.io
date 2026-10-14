@@ -52,7 +52,8 @@ Each page has a **base language** in the HTML text and **English in `data-en="â€
 - The businesses are fictional and must always be labelled "concept".
 - `<body>` sets opening hours for the live "open now" badge: `data-tz`, `data-open`, `data-close`, `data-closed-day` (0 = Sunday), `data-key`.
 - A **new concept site** must be added to: `work/index.html`, a `work/<slug>/index.html` case study, its sector page, its city page, the home page strip if featured, `sitemap.xml`, and get desk and phone screenshots in `assets/shots/`.
-- The cloud environment usually cannot download new photos. New designs should be photo-free or reuse `assets/photos/`.
+- The cloud environment usually cannot download new photos, and Unsplash/Pexels are blocked from the owner's network too. What worked (2026-10-14): search Wikimedia Commons (CC0, CC BY, CC BY-SA only) and download on the owner's laptop through the connected device tools, then copy the files in. Every photo gets a `CREDITS.json` entry with creator, licence and source page; the concept footer lists them.
+- Photo-led concept sites with scroll animation use the shared `works/scroll.js` (see the comment at its top for the `data-*` hooks). Keep motion to transform/opacity and make sure the page reads fine with reduced motion.
 
 ## How to work
 
