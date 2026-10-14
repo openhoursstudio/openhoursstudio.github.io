@@ -1,0 +1,294 @@
+/* «鳥と炭 Tori to Sumi»، یاکیتوری‌فروشیِ کوچک در شیموکیتازاوا: شبِ تیره‌ی زغالی، نارنجیِ اخگر، کاغذِ کرم؛
+   تیترِ مینچوی درشت (گاهی عمودی) + گوتیکِ ساده؛ پر از عکس و انیمیشنِ اسکرول (works/scroll.js) */
+:root {
+  --night: #121010;
+  --night-2: #1C1816;
+  --night-3: #2A2421;
+  --paper: #F3EADB;
+  --paper-2: #CDBFA9;
+  --muted: #A99C8A;
+  --ember: #FF6A2B;
+  --ember-2: #FF8F4D;
+  --red: #D7262B;
+  --line: rgba(243, 234, 219, .14);
+  --mincho: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --sans: "Zen Kaku Gothic New", "Hiragino Sans", system-ui, sans-serif;
+  --ease: cubic-bezier(.22, 1, .36, 1);
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; scroll-padding-top: 70px; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { margin: 0; background: var(--night); color: var(--paper); font: 400 16px/1.75 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: clip; }
+a { color: inherit; }
+img { display: block; max-width: 100%; height: auto; }
+h1, h2, h3 { margin: 0; font-family: var(--mincho); font-weight: 800; letter-spacing: .02em; line-height: 1.25; text-wrap: balance; }
+html[lang="en"] h1, html[lang="en"] h2 { letter-spacing: -.01em; }
+p { margin: 0; }
+:focus-visible { outline: 3px solid var(--ember-2); outline-offset: 3px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+
+.concept { position: relative; z-index: 31; background: var(--ember); color: #1A0D06; font-size: 12px; font-weight: 700; text-align: center; padding: 6px 16px; }
+.scrollbar { position: fixed; inset: 0 0 auto; height: 3px; z-index: 40; background: var(--ember); transform: scaleX(0); transform-origin: 0 50%; pointer-events: none; }
+
+/* سربرگ */
+.top { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; gap: 12px; padding: 10px 16px; background: rgba(18, 16, 16, .82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid var(--line); }
+.brand { display: inline-flex; align-items: center; gap: 10px; margin-inline-end: auto; text-decoration: none; white-space: nowrap; }
+.brand svg { width: 30px; height: 30px; flex: none; }
+.brand b { font: 800 20px/1 var(--mincho); letter-spacing: .08em; }
+.brand small { font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: var(--muted); }
+.nav { display: none; gap: 22px; font-size: 14px; }
+.nav a { text-decoration: none; color: var(--paper-2); }
+.nav a:hover { color: var(--paper); }
+.lang { display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--paper); padding: 3px; font: 700 12px/1 var(--sans); cursor: pointer; min-height: 36px; }
+.lang span { padding: 7px 10px; border-radius: 999px; color: var(--muted); transition: background .2s, color .2s; }
+html[lang="ja"] .lang-ja, html[lang="en"] .lang-en { background: var(--paper); color: var(--night); }
+.book-top { display: none; }
+@media (min-width: 900px) {
+  .top { padding: 12px 40px; gap: 28px; }
+  .nav { display: flex; }
+  .book-top { display: inline-flex; align-items: center; min-height: 40px; padding: 0 18px; border-radius: 999px; background: var(--ember); color: #1A0D06; font-weight: 700; font-size: 14px; text-decoration: none; }
+}
+.pages { background: var(--night); border-bottom: 1px solid var(--line); }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; padding: 0 24px; border-radius: 999px; background: var(--ember); color: #1A0D06; font: 700 15px/1 var(--sans); text-decoration: none; border: 0; cursor: pointer; transition: transform .25s var(--ease), background .2s; }
+.btn:hover { background: var(--ember-2); transform: translateY(-2px); }
+.btn.ghost { background: transparent; color: var(--paper); box-shadow: inset 0 0 0 1.5px rgba(243, 234, 219, .5); }
+.btn.ghost:hover { box-shadow: inset 0 0 0 1.5px var(--paper); }
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: .24em; text-transform: uppercase; color: var(--ember-2); margin-bottom: 14px; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
+@media (min-width: 900px) { .wrap { padding: 0 40px; } }
+.head { max-width: 40em; margin-bottom: 36px; }
+.head h2 { font-size: clamp(30px, 6vw, 56px); }
+.head p { margin-top: 14px; color: var(--paper-2); }
+
+/* ── عکسِ بالای صفحه ── */
+.hero { position: relative; min-height: calc(100svh - 96px); display: grid; align-items: end; overflow: hidden; isolation: isolate; }
+.hero-media { position: absolute; inset: 0; z-index: -2; overflow: hidden; }
+.hero-media img { width: 100%; height: 100%; object-fit: cover; transform: scale(1.04); will-change: transform; }
+.hero::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(18, 16, 16, .35) 0%, rgba(18, 16, 16, .1) 35%, rgba(18, 16, 16, .92) 100%), radial-gradient(ellipse at 30% 100%, rgba(255, 106, 43, .25), transparent 60%); opacity: calc(.85 + var(--p, 0) * .5); }
+.hero-copy { padding: 40px 16px 96px; max-width: 760px; }
+.hero h1 { font-size: clamp(44px, 12vw, 120px); line-height: 1.05; letter-spacing: .04em; text-shadow: 0 4px 40px rgba(0, 0, 0, .5); }
+html[lang="en"] .hero h1 { font-size: clamp(40px, 9vw, 96px); letter-spacing: -.01em; }
+.hero h1 em { font-style: normal; color: var(--ember); }
+.hero .lead { margin-top: 18px; font-size: 17px; max-width: 32em; color: var(--paper); }
+.hero .cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+.status { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 18px; padding: 7px 14px; border-radius: 999px; background: rgba(18, 16, 16, .6); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); font-size: 13px; font-weight: 700; }
+.status i { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+.status.open i { background: #7BE07B; box-shadow: 0 0 0 4px rgba(123, 224, 123, .2); }
+.vert { display: none; }
+@media (min-width: 900px) {
+  .hero-copy { padding: 0 40px 72px; }
+  .vert { display: block; position: absolute; top: 48px; right: 48px; writing-mode: vertical-rl; font: 800 22px/1.6 var(--mincho); letter-spacing: .5em; color: var(--paper); opacity: .85; }
+  html[lang="en"] .vert { display: none; }
+}
+/* اخگرهای کوچکی که بالا می‌روند؛ فقط CSS */
+.embers { position: absolute; inset: auto 0 0; height: 70%; z-index: -1; pointer-events: none; }
+.embers i { position: absolute; bottom: -10px; width: 4px; height: 4px; border-radius: 50%; background: var(--ember-2); box-shadow: 0 0 8px 2px rgba(255, 120, 50, .7); opacity: 0; animation: rise 7s linear infinite; }
+.embers i:nth-child(1) { left: 12%; animation-delay: 0s; }
+.embers i:nth-child(2) { left: 28%; animation-delay: 2.2s; animation-duration: 8s; }
+.embers i:nth-child(3) { left: 46%; animation-delay: 4.1s; }
+.embers i:nth-child(4) { left: 63%; animation-delay: 1.3s; animation-duration: 9s; }
+.embers i:nth-child(5) { left: 78%; animation-delay: 3.4s; }
+.embers i:nth-child(6) { left: 90%; animation-delay: 5.6s; animation-duration: 6s; }
+@keyframes rise { 0% { transform: translate(0, 0); opacity: 0; } 10% { opacity: .9; } 100% { transform: translate(-30px, -60vh); opacity: 0; } }
+.still .embers { display: none; }
+
+/* ── نوارِ متنیِ متحرک ── */
+.marquee { overflow: hidden; border-block: 1px solid var(--line); background: var(--night-2); }
+.marquee div { display: flex; width: max-content; animation: slide 36s linear infinite; }
+.marquee span { padding: 16px 28px; font: 800 22px/1 var(--mincho); letter-spacing: .14em; white-space: nowrap; color: var(--paper-2); }
+.marquee span::after { content: "✦"; margin-inline-start: 56px; color: var(--ember); font-size: 14px; vertical-align: 4px; }
+@keyframes slide { to { transform: translateX(-50%); } }
+.still .marquee div { animation: none; }
+
+/* ── معرفی ── */
+.intro { padding: 88px 0 72px; }
+.intro .wrap { display: grid; gap: 32px; }
+.intro h2 { font-size: clamp(30px, 6.4vw, 64px); }
+.intro p { color: var(--paper-2); font-size: 17px; max-width: 34em; }
+.facts { list-style: none; margin: 8px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
+.facts li { background: var(--night); padding: 18px 14px; }
+.facts b { display: block; font: 800 clamp(30px, 7vw, 48px)/1 var(--mincho); color: var(--ember); font-variant-numeric: tabular-nums; }
+.facts span { display: block; margin-top: 6px; font-size: 13px; color: var(--paper-2); line-height: 1.5; }
+@media (min-width: 900px) { .intro { padding: 140px 0 110px; } .intro .wrap { grid-template-columns: 1.1fr 1fr; align-items: end; gap: 64px; } }
+
+/* ── داستانِ اسکرولی: زغال → آتش → سیخ → بشقاب ── */
+.story { position: relative; padding-bottom: 40px; }
+.story-media { position: sticky; top: 64px; height: 62svh; overflow: hidden; border-radius: 0 0 28px 28px; z-index: 0; }
+.story-media figure { position: absolute; inset: 0; margin: 0; opacity: 0; transform: scale(1.08); transition: opacity .9s var(--ease), transform 1.6s var(--ease); }
+.story-media figure.on { opacity: 1; transform: scale(1); }
+.story-media img { width: 100%; height: 100%; object-fit: cover; }
+.story-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(18, 16, 16, .7)); pointer-events: none; }
+.story-dots { position: absolute; left: 16px; bottom: 16px; z-index: 2; display: flex; gap: 6px; }
+.story-dots i { width: 26px; height: 3px; border-radius: 3px; background: rgba(243, 234, 219, .35); }
+.story-dots i:nth-child(1) { background: var(--ember); }
+.story-dots[data-i="1"] i:nth-child(-n+2), .story-dots[data-i="2"] i { background: var(--ember); }
+.story-steps { position: relative; z-index: 1; padding: 0 16px; margin-top: -10svh; }
+.story-steps article { min-height: 80svh; display: flex; align-items: flex-end; padding-bottom: 12svh; }
+.story-steps .card { max-width: 30em; padding: 22px 22px 24px; border-radius: 22px; background: rgba(28, 24, 22, .88); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid var(--line); opacity: .35; transform: translateY(16px); transition: opacity .6s var(--ease), transform .6s var(--ease); }
+.story-steps article.on .card { opacity: 1; transform: none; }
+.story-steps small { display: block; font: 800 13px/1 var(--sans); letter-spacing: .2em; color: var(--ember-2); margin-bottom: 10px; }
+.story-steps h3 { font-size: clamp(24px, 5vw, 34px); margin-bottom: 10px; }
+.story-steps p { color: var(--paper-2); }
+@media (min-width: 900px) {
+  .story { display: grid; grid-template-columns: 1.25fr 1fr; gap: 0; }
+  .story-media { top: 76px; height: calc(100svh - 96px); margin-left: 40px; border-radius: 28px; }
+  .story-steps { margin-top: 0; padding: 0 40px 0 56px; }
+  .story-steps article { min-height: 100svh; align-items: center; padding: 0; }
+  .story-steps .card { background: transparent; border: 0; padding: 0; backdrop-filter: none; -webkit-backdrop-filter: none; }
+  .story-dots { left: 24px; bottom: 24px; }
+}
+.still .story-media figure { transition: opacity .2s; transform: none; }
+.still .story-steps .card { opacity: 1; transform: none; }
+
+/* ── ردیفِ افقیِ سیخ‌ها ── */
+.skewers { padding: 96px 0 24px; }
+.skewers .wrap { margin-bottom: 8px; }
+.h-view { overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+.h-view::-webkit-scrollbar { display: none; }
+.h-track { display: flex; gap: 14px; padding: 8px 16px 32px; width: max-content; will-change: transform; }
+.sk { position: relative; flex: none; width: 74vw; max-width: 340px; scroll-snap-align: center; border-radius: 22px; overflow: hidden; background: var(--night-2); border: 1px solid var(--line); }
+.sk figure { margin: 0; aspect-ratio: 4 / 5; overflow: hidden; }
+.sk img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.sk:hover img { transform: scale(1.06); }
+.sk-body { padding: 16px 18px 20px; }
+.sk-body h3 { font-size: 22px; }
+.sk-body h3 small { display: block; font: 500 12px/1.4 var(--sans); letter-spacing: .1em; color: var(--muted); margin-top: 4px; }
+.sk-body p { margin-top: 8px; font-size: 14px; color: var(--paper-2); }
+.sk-body b { display: inline-block; margin-top: 12px; font-size: 15px; color: var(--ember-2); font-variant-numeric: tabular-nums; }
+.sk-num { position: absolute; top: 12px; left: 12px; padding: 4px 10px; border-radius: 999px; background: rgba(18, 16, 16, .7); font: 700 12px/1.4 var(--sans); }
+.sk.end { display: grid; place-content: center; padding: 28px; text-align: center; background: var(--ember); color: #1A0D06; }
+.sk.end h3 { font-size: 30px; }
+.sk.end p { margin: 10px 0 18px; }
+.sk.end .btn { background: var(--night); color: var(--paper); }
+.h-hint { display: flex; align-items: center; gap: 10px; padding: 0 16px; font-size: 13px; color: var(--muted); }
+.h-hint i { flex: 1; max-width: 160px; height: 2px; background: var(--line); position: relative; overflow: hidden; }
+.h-hint i::after { content: ""; position: absolute; inset: 0; background: var(--ember); transform: scaleX(var(--hp, .15)); transform-origin: 0 50%; }
+@media (min-width: 900px) {
+  .skewers.pinned .h-pin { position: sticky; top: 64px; height: calc(100vh - 64px); display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
+  .skewers.pinned .h-view { overflow: visible; }
+  .h-track { padding: 8px 40px 32px; gap: 22px; }
+  .sk { width: 320px; }
+  .skewers.pinned .sk figure { aspect-ratio: 1; }
+  .skewers.pinned .head { margin-bottom: 20px; }
+  .h-hint { padding: 0 40px; }
+}
+
+/* ── گالریِ پارالاکس ── */
+.night { padding: 96px 0; }
+.mosaic { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 0 16px; max-width: 1320px; margin: 0 auto; }
+.mosaic figure { position: relative; margin: 0; overflow: hidden; border-radius: 18px; background: var(--night-2); }
+.mosaic img { width: 100%; height: 100%; object-fit: cover; will-change: transform; }
+.mosaic .tall { grid-row: span 2; }
+.mosaic .wide { grid-column: span 2; aspect-ratio: 16 / 9; }
+.mosaic figcaption { position: absolute; left: 12px; bottom: 10px; font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 999px; background: rgba(18, 16, 16, .72); }
+@media (min-width: 900px) {
+  .mosaic { grid-template-columns: repeat(4, 1fr); grid-auto-rows: 260px; gap: 16px; padding: 0 40px; }
+  .mosaic .wide { aspect-ratio: auto; }
+  .mosaic .big { grid-column: span 2; grid-row: span 2; }
+}
+
+/* ── تصویرِ بزرگِ تمام‌عرض با جمله ── */
+.quote { position: relative; min-height: 88svh; display: grid; place-items: center; overflow: hidden; isolation: isolate; text-align: center; padding: 80px 16px; }
+.quote .bg { position: absolute; inset: -12% 0; z-index: -2; }
+.quote .bg img { width: 100%; height: 100%; object-fit: cover; }
+.quote::before { content: ""; position: absolute; inset: 0; z-index: -1; background: rgba(18, 16, 16, .62); }
+.quote blockquote { margin: 0; max-width: 18em; font: 800 clamp(30px, 6.5vw, 68px)/1.3 var(--mincho); }
+.quote blockquote span { color: var(--ember); }
+.quote p { margin-top: 18px; color: var(--paper-2); }
+
+/* ── نوشیدنی ── */
+.drinks { padding: 96px 0; }
+.drinks .wrap { display: grid; gap: 28px; }
+.drink-photos { display: grid; grid-template-columns: 1.2fr 1fr; gap: 10px; }
+.drink-photos figure { margin: 0; border-radius: 20px; overflow: hidden; }
+.drink-photos figure:first-child { grid-row: span 2; }
+.drink-photos img { width: 100%; height: 100%; object-fit: cover; }
+.pairs { list-style: none; margin: 18px 0 24px; padding: 0; }
+.pairs li { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; padding: 14px 0; border-bottom: 1px dashed var(--line); }
+.pairs span { grid-column: 1 / -1; font-size: 14px; color: var(--muted); }
+.pairs b { font-variant-numeric: tabular-nums; color: var(--ember-2); }
+@media (min-width: 900px) { .drinks .wrap { grid-template-columns: 1fr 1fr; align-items: center; gap: 64px; } .drink-photos { height: 560px; } }
+
+/* ── رزرو و دسترسی ── */
+.visit { padding: 96px 0 120px; background: var(--paper); color: var(--night); }
+.visit .eyebrow { color: #B4410F; }
+.visit .head p { color: #4A3F35; }
+.visit-grid { display: grid; gap: 28px; }
+.seats { padding: 22px; border-radius: 22px; background: #fff; box-shadow: 0 1px 0 rgba(0, 0, 0, .06), 0 20px 50px -30px rgba(0, 0, 0, .4); }
+.seats h3 { font-size: 22px; }
+.seats p { margin-top: 6px; font-size: 14px; color: #4A3F35; }
+.counter { display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px; margin: 18px 0 10px; }
+.counter i { aspect-ratio: 1; border-radius: 50%; background: #E9DFCF; }
+.counter i.taken { background: var(--night); }
+.counter-bar { height: 10px; border-radius: 6px; background: linear-gradient(90deg, #6B4B33, #8A6447); margin-bottom: 14px; }
+.legend { display: flex; gap: 16px; font-size: 13px; color: #4A3F35; }
+.legend span::before { content: ""; display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-inline-end: 6px; background: #E9DFCF; vertical-align: -1px; }
+.legend span.t::before { background: var(--night); }
+.seats .btn { width: 100%; margin-top: 18px; }
+.info { margin: 0; display: grid; gap: 0; }
+.info div { display: grid; grid-template-columns: 7.5em 1fr; gap: 12px; padding: 14px 0; border-bottom: 1px solid rgba(18, 16, 16, .12); }
+.info dt { font-weight: 700; }
+.info dd { margin: 0; color: #3A3029; }
+.map { border-radius: 22px; overflow: hidden; background: #E9DFCF; }
+.map svg { display: block; width: 100%; height: auto; }
+.m-road { stroke: #fff; stroke-width: 10; fill: none; stroke-linecap: round; }
+.m-rail { stroke: #6B5B4D; stroke-width: 4; stroke-dasharray: 10 8; fill: none; }
+.m-pin { fill: var(--ember); stroke: #fff; stroke-width: 4; }
+.m-label { font: 800 15px var(--mincho); fill: var(--night); }
+.m-small { font: 500 12px var(--sans); fill: #6B5B4D; }
+@media (min-width: 900px) { .visit-grid { grid-template-columns: 1fr 1fr 1fr; align-items: start; gap: 40px; } }
+
+/* ── پانویس ── */
+.foot { padding: 48px 16px 120px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+.foot-brand { font: 800 26px/1 var(--mincho); color: var(--paper); margin-bottom: 12px; letter-spacing: .1em; }
+.credits { margin-top: 14px; }
+.credits summary { cursor: pointer; color: var(--paper-2); }
+.credits ul { margin: 10px 0 0; padding-left: 18px; font-size: 12px; line-height: 1.7; }
+.credits a { color: var(--paper-2); }
+@media (min-width: 900px) { .foot { padding: 64px 40px 72px; } }
+.dock { position: fixed; left: 16px; right: 16px; bottom: max(14px, env(safe-area-inset-bottom)); z-index: 25; display: flex; align-items: center; justify-content: center; min-height: 54px; border-radius: 999px; background: var(--ember); color: #1A0D06; font-weight: 700; text-decoration: none; box-shadow: 0 14px 30px -10px rgba(0, 0, 0, .6); }
+@media (min-width: 900px) { .dock { display: none; } }
+
+/* ── آشکار شدن هنگامِ اسکرول (کلاسِ in از concept.js) ── */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+.reveal.in { opacity: 1; transform: none; }
+.clip { clip-path: inset(12% 6% 12% 6% round 22px); transition: clip-path 1.2s var(--ease); }
+.clip.in { clip-path: inset(0 0 0 0 round 18px); }
+.still .reveal, .still .clip { opacity: 1; transform: none; clip-path: none; transition: none; }
+
+/* ── صفحه‌های داخلی ── */
+.page-hero { position: relative; min-height: 56svh; display: grid; align-items: end; overflow: hidden; isolation: isolate; }
+.page-hero .hero-media::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(18, 16, 16, .2), rgba(18, 16, 16, .9)); }
+.page-hero h1 { font-size: clamp(38px, 9vw, 84px); }
+.page-hero .lead { margin-top: 12px; max-width: 34em; color: var(--paper-2); }
+.section { padding: 72px 0; }
+.menu-cols { display: grid; gap: 40px; }
+.menu-cols h2 { font-size: 28px; margin-bottom: 4px; }
+.menu-cols .note { font-size: 14px; color: var(--muted); margin-bottom: 8px; }
+.price-list li { border-bottom-color: var(--line); }
+.price-list .pr { color: var(--ember-2); }
+.price-list li > span:last-child { color: var(--muted); opacity: 1; }
+.menu-cols figure { margin: 0 0 18px; border-radius: 18px; overflow: hidden; aspect-ratio: 16 / 10; }
+.menu-cols figure img { width: 100%; height: 100%; object-fit: cover; }
+@media (min-width: 900px) { .menu-cols { grid-template-columns: 1fr 1fr; gap: 64px; } }
+.note-box { margin-top: 28px; color: var(--paper-2); }
+.filter-chips button[aria-pressed="true"] { background: var(--ember); color: #1A0D06; }
+.sake-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+.sake-grid li { padding: 18px 20px; border-radius: 20px; background: var(--night-2); border: 1px solid var(--line); }
+.sake-grid h3 { font-size: 22px; }
+.sake-grid h3 small { font: 500 12px var(--sans); color: var(--muted); letter-spacing: .08em; margin-inline-start: 8px; }
+.sake-grid p { margin-top: 6px; font-size: 14px; color: var(--paper-2); }
+.taste { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; align-items: center; margin-top: 12px; font-size: 12px; color: var(--muted); }
+.taste i { height: 6px; border-radius: 3px; background: var(--night-3); position: relative; overflow: hidden; }
+.taste i::after { content: ""; position: absolute; inset: 0; width: calc(var(--v) * 20%); background: var(--ember); border-radius: 3px; }
+.sake-grid .meta { display: flex; justify-content: space-between; margin-top: 12px; font-weight: 700; color: var(--ember-2); font-variant-numeric: tabular-nums; }
+@media (min-width: 700px) { .sake-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1100px) { .sake-grid { grid-template-columns: repeat(3, 1fr); } }
+.form-card { background: var(--night-2); }
+.form-card input, .form-card select, .form-card textarea { background: var(--paper); }
+.out { color: var(--ember-2); }
+.wide-photo { margin: 0; border-radius: 22px; overflow: hidden; aspect-ratio: 16 / 9; }
+.wide-photo img { width: 100%; height: 100%; object-fit: cover; }
+.steps-list li::before { background: var(--ember); color: #1A0D06; }
