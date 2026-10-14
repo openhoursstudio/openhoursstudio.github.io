@@ -100,10 +100,10 @@
   if (list) fetch(new URL('photos/CREDITS.json', self.src).href).then(function (r) { return r.json(); }).then(function (rows) {
     var used = {};
     document.querySelectorAll('img[src*="assets/photos/"]').forEach(function (img) { used[img.getAttribute('src').split('/').pop()] = 1; });
-    rows.filter(function (r) { return used[r.file]; }).forEach(function (r) {
+    rows.filter(function (r) { return used[r.file] && !/-m\.webp$/.test(r.file); }).forEach(function (r) {
       var li = document.createElement('li'), a = document.createElement('a');
       a.href = r.landing; a.rel = 'noopener'; a.target = '_blank';
-      a.textContent = (r.title || r.file) + (r.creator ? ' · ' + r.creator : '') + ' · ' + r.source + ' (CC0)';
+      a.textContent = (r.title || r.file) + (r.creator ? ' · ' + r.creator : '') + ' · ' + r.source + ' (' + (r.license && r.license !== 'cc0' ? r.license : 'CC0') + ')';
       li.appendChild(a); list.appendChild(li);
     });
   }).catch(function () { /* クレジットが読めなくてもページは動く */ });
