@@ -162,6 +162,15 @@
     document.addEventListener('langchange', apply);
     apply();
   }
+  // ── صفحه‌ی خدمات: انتخابِ شهر برای قیمتِ کارت‌ها ──
+  document.querySelectorAll('[data-prices]').forEach(function (box) {
+    var btns = box.querySelectorAll('[data-city]'), vals = box.querySelectorAll('[data-c]');
+    box.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-city]'); if (!b) return;
+      btns.forEach(function (x) { var on = x === b; x.classList.toggle('on', on); x.setAttribute('aria-pressed', on); });
+      vals.forEach(function (v) { v.hidden = v.dataset.c !== b.dataset.city; });
+    });
+  });
   // ── فرم ──
   document.querySelectorAll('[data-enquiry]').forEach(function (form) {
     var steps = form.querySelectorAll('fieldset[data-step]');
