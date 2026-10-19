@@ -223,10 +223,6 @@ html:not([lang="ja"]) .case-hero h1 { font-size: 44px; }
 .about-grid h2 { font-size: 22px; margin-bottom: 10px; }
 html:not([lang="ja"]) .about-grid h2 { font-size: 28px; }
 .about-grid p, .about-grid ul { margin: 0; color: var(--ink-2); }
-.contact-facts dl { margin: 0; max-width: 760px; }
-.contact-facts div { display: grid; grid-template-columns: 8em 1fr; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); }
-.contact-facts dt { color: var(--muted); }
-.contact-facts dd { margin: 0; }
 .sel { user-select: all; }
 .nw { white-space: nowrap; }
 .legal { max-width: 760px; }
@@ -663,7 +659,8 @@ html[lang="ja"] .frow button { font-family: var(--jp); }
   .steps:has(li.in)::before, .steps.drawn::before { transform: none; }
 }
 .done-actions { display: flex; flex-wrap: wrap; gap: 10px; }
-.contact-copy .mail a, .contact-facts .sel a { color: inherit; text-decoration-color: var(--amber); text-underline-offset: 4px; word-break: break-all; }
+.contact-copy .mail-ico { width: 1.15em; height: 1.15em; margin-right: 10px; vertical-align: -0.2em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.contact-copy .mail a { color: inherit; text-decoration-color: var(--amber); text-underline-offset: 4px; word-break: break-all; }
 /* فهرستِ صفحه‌های نمونه در مطالعه‌ی موردی */
 .site-pages { margin-top: 28px; }
 .site-pages ol { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
