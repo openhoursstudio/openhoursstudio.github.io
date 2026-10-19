@@ -402,10 +402,14 @@ html[lang="ja"] .foot-line { font: 700 17px var(--jp); }
 /* ───── خدمات، صنف‌ها، جدولِ قیمت، برگه‌ها، ۴۰۴ ───── */
 .svc-row a { font-size: 14px; padding: 8px 14px; border-radius: 999px; background: var(--sky); color: var(--ink); text-decoration: none; min-height: 36px; display: inline-flex; align-items: center; transition: background .2s; }
 .svc-row a:hover { background: #DCE3F0; }
+.svc-skip { margin: 0 0 20px; text-align: center; }
+.svc-skip .btn { max-width: 100%; flex-wrap: wrap; column-gap: .3em; row-gap: 0; padding: 10px 24px; white-space: normal; text-align: center; }
 .svc-grid { display: grid; gap: 12px; }
 .svc-card { position: relative; display: grid; gap: 6px; align-content: start; padding: 22px; border-radius: 24px; background: var(--card); box-shadow: inset 0 0 0 1px var(--line); text-decoration: none; color: var(--ink); transition: transform .25s var(--ease), box-shadow .25s; }
+.svc-card[aria-current] { box-shadow: inset 0 0 0 2px var(--ink); }
 .svc-card:hover { transform: translateY(-3px); box-shadow: inset 0 0 0 1px var(--line), 0 18px 36px -24px rgba(20, 33, 61, .45); }
-.svc-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.svc-top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 10px; }
+.svc-top b { flex: 1; min-width: 0; }
 .svc-ic { width: 46px; height: 46px; padding: 10px; border-radius: 14px; background: var(--ink); stroke: var(--amber); fill: none; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .svc-n { font: 600 14px var(--display); color: var(--muted); }
 .svc-card b { font-size: 20px; }
@@ -420,9 +424,16 @@ html:not([lang="ja"]) .svc-card b { font: 700 24px/1.15 var(--display); letter-s
 .svc-head .svc-ic { width: 64px; height: 64px; padding: 14px; border-radius: 20px; }
 .svc-sec { margin: 28px 16px 0; padding: 24px 18px; border: 1px solid var(--line); border-radius: 28px; background: var(--card); }
 .svc-sec > :is(.svc-inc, .svc-steps, .faq) { margin-top: 24px; }
+.svc-steps > summary { position: relative; display: flex; align-items: center; min-height: 44px; padding-right: 36px; cursor: pointer; list-style: none; }
+.svc-steps > summary::-webkit-details-marker { display: none; }
+.svc-steps > summary::after { content: "+"; position: absolute; right: 4px; top: 50%; translate: 0 -50%; font: 400 26px/1 var(--display); color: var(--amber-2); transition: transform .25s var(--ease); }
+.svc-steps[open] > summary::after { transform: translateY(0) rotate(45deg); }
+.svc-steps > summary h3 { margin: 0; }
+.svc-steps[open] > summary { margin-bottom: 12px; }
 .svc-sec > .faq { margin-top: 4px; }
 .svc-sec .head { margin-bottom: 12px; }
 .svc-sec .lead { margin-top: 12px; }
+.more-sec .lead { max-width: none; }
 .svc-sec .steps li { padding: 8px 0; }
 .svc-sec h3 { font-size: 20px; }
 .checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
@@ -491,6 +502,9 @@ html:not([lang="ja"]) .sec-body b { font: 700 26px/1.1 var(--display); letter-sp
   .svc-grid { grid-template-columns: repeat(4, 1fr); gap: 16px; }
   .svc-grid.small { grid-template-columns: repeat(3, 1fr); }
   .svc-card { padding: 26px; min-height: 270px; }
+  .svc-list .svc-card { min-height: 0; }
+  .svc-steps > summary { cursor: default; padding-right: 0; }
+  .svc-steps > summary::after { display: none; }
   .svc-sec { margin: 32px auto 0; padding: 32px 36px; width: min(1176px, calc(100% - 64px)); }
   .svc-sec > .faq { max-width: 50%; }
   .checks { grid-template-columns: repeat(3, 1fr); }
@@ -659,7 +673,7 @@ html[lang="ja"] .frow button { font-family: var(--jp); }
   .steps:has(li.in)::before, .steps.drawn::before { transform: none; }
 }
 .done-actions { display: flex; flex-wrap: wrap; gap: 10px; }
-.contact-copy .mail-ico { width: 1.15em; height: 1.15em; margin-right: 10px; vertical-align: -0.2em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.contact-copy .mail-ico, .more-sec .mail-ico { width: 1.15em; height: 1.15em; margin-right: 10px; vertical-align: -0.2em; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 .contact-copy .mail a { color: inherit; text-decoration-color: var(--amber); text-underline-offset: 4px; word-break: break-all; }
 /* فهرستِ صفحه‌های نمونه در مطالعه‌ی موردی */
 .site-pages { margin-top: 28px; }
@@ -770,3 +784,22 @@ html[lang="ja"] .prose .pull p { font: 700 19px/1.8 var(--jp); letter-spacing: .
   .top .nav a { white-space: nowrap; }
   .top .avail-mini { display: none; }
 }
+
+/* services, phone: each service section opens as a full-screen modal from its top card */
+.svc-x { display: none; }
+html.svc-lock { overflow: hidden; }
+@media (max-width: 899.98px) {
+  .svc-sec.svc-modal { position: fixed; inset: 0; z-index: 60; margin: 0; border: 0; border-radius: 0; overflow-y: auto; overscroll-behavior: contain; padding-top: 12px; }
+  .svc-modal .svc-x { display: flex; align-items: center; gap: 8px; position: sticky; top: 0; z-index: 2; margin: 0 0 12px auto; min-height: 44px; padding: 0 16px; border: 0; border-radius: 999px; background: var(--ink); color: var(--paper); font: 700 14px var(--body); cursor: pointer; }
+  html[lang="ja"] .svc-modal .svc-x { font-family: var(--jp); }
+}
+
+/* services, phone: the feature list of each price card folds; always open on desktop */
+.plan-more > summary { position: relative; display: flex; align-items: center; min-height: 44px; padding-right: 36px; border-top: 1px solid var(--line); font-size: 14px; font-weight: 700; cursor: pointer; list-style: none; }
+.plan.star .plan-more > summary { border-color: rgba(255, 255, 255, .12); }
+.plan-more > summary::-webkit-details-marker { display: none; }
+.plan-more > summary::after { content: "+"; position: absolute; right: 4px; top: 50%; translate: 0 -50%; font: 400 26px/1 var(--display); color: var(--amber-2); transition: transform .25s var(--ease); }
+.plan.star .plan-more > summary::after { color: var(--amber); }
+.plan-more[open] > summary { border-top: 0; }
+.plan-more[open] > summary::after { transform: rotate(45deg); }
+@media (min-width: 900px) { .plan-more > summary { display: none; } }
