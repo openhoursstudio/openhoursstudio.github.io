@@ -276,7 +276,8 @@ html:not([lang="ja"]) .legal h2 { font-size: 26px; }
 
 @media (min-width: 900px) {
   .top { padding: 14px 32px; gap: 22px; }
-  .nav { display: flex; }
+  .top .logo { margin-inline-end: 0; }
+  .nav { display: flex; margin-inline-start: auto; }
   .avail-mini { display: inline-flex; }
   .btn-sm { display: inline-flex; }
   .hero { grid-template-columns: 1.05fr .95fr; align-items: center; padding: 64px 32px 32px; max-width: 1240px; margin: 0 auto; gap: 48px; }
@@ -335,7 +336,6 @@ html[lang="ja"] .band-line { font: 700 19px/1.5 var(--jp); }
 .band.slim { padding-top: 24px; }
 .clocks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; position: relative; }
 .clock { display: grid; justify-items: center; gap: 2px; padding: 14px 6px 12px; border-radius: 18px; text-decoration: none; color: inherit; background: rgba(255, 255, 255, .05); box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08); transition: background .2s, transform .2s var(--ease); }
-.clock:hover { background: rgba(255, 255, 255, .1); transform: translateY(-2px); }
 .face { width: 46px; height: 46px; color: #6E7BA0; margin-bottom: 4px; }
 .face line { stroke: var(--paper); stroke-width: 3.2; stroke-linecap: round; transition: transform .6s var(--ease); }
 .face line.m { stroke: var(--amber); stroke-width: 2.4; }
@@ -347,18 +347,16 @@ html[lang="ja"] .band-line { font: 700 19px/1.5 var(--jp); }
 .c-state .s-open { display: none; color: #7FD3A6; }
 .clock.open .c-state .s-open { display: inline; }
 .clock.open .c-state .s-closed { display: none; }
-.clocks.dark { margin-top: 26px; }
-
 .city-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .city-card { display: grid; gap: 2px; padding: 16px; border-radius: 22px; background: var(--card); box-shadow: inset 0 0 0 1px var(--line); text-decoration: none; color: var(--ink); transition: transform .25s var(--ease), box-shadow .25s; }
-.city-card:hover { transform: translateY(-3px); box-shadow: inset 0 0 0 1px var(--line), 0 18px 36px -24px rgba(20, 33, 61, .45); }
 .cc-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-.flag { font: 700 11px var(--body); letter-spacing: .1em; padding: 3px 8px; border-radius: 999px; background: var(--ink); color: var(--paper); }
 .cc-time { font: 600 15px var(--display); font-variant-numeric: tabular-nums; color: var(--ink-2); }
 .city-card b { font: 700 24px/1.1 var(--display); letter-spacing: -.02em; }
 .cc-country { font-size: 13px; color: var(--muted); }
 .cc-meta { font-size: 12px; color: var(--ink-2); margin-top: 8px; }
-.cc-go { font-size: 13px; font-weight: 700; margin-top: 10px; color: var(--amber-2); }
+.clocks.dark { margin-top: 26px; }
+
+.flag { font: 700 11px var(--body); letter-spacing: .1em; padding: 3px 8px; border-radius: 999px; background: var(--ink); color: var(--paper); }
 .svc-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
 .svc-row span { font-size: 14px; padding: 8px 14px; border-radius: 999px; background: var(--sky); color: var(--ink); }
 
@@ -440,20 +438,6 @@ html:not([lang="ja"]) .svc-card b { font: 700 24px/1.15 var(--display); letter-s
 .checks li { display: flex; gap: 12px; align-items: flex-start; padding: 16px 18px; border-radius: 18px; background: var(--card); box-shadow: inset 0 0 0 1px var(--line); font-weight: 500; }
 .checks li::before { content: ""; flex: none; width: 22px; height: 22px; margin-top: 1px; border-radius: 50%; background: var(--amber) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2314213D' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 12.5 4 4 8-9'/%3E%3C/svg%3E") center / 14px no-repeat; }
 
-.ptable { overflow-x: auto; border-radius: 22px; background: var(--card); box-shadow: inset 0 0 0 1px var(--line); -webkit-overflow-scrolling: touch; }
-/* سایه‌ی لبه‌ی راست نشان می‌دهد جدول روی گوشی ادامه دارد؛ با رسیدن به انتها محو می‌شود */
-.ptable.wide { background: linear-gradient(to left, var(--card) 40%, rgba(255, 253, 248, 0)) right / 48px 100% no-repeat local, radial-gradient(farthest-side at 100% 50%, rgba(20, 33, 61, .14), rgba(20, 33, 61, 0)) right / 14px 100% no-repeat scroll, var(--card); }
-.ptable table { width: 100%; border-collapse: collapse; font-size: 15px; }
-.ptable.wide table { min-width: 760px; }
-.ptable th, .ptable td { padding: 14px 16px; text-align: start; border-bottom: 1px solid var(--line); white-space: nowrap; }
-.ptable tbody tr:last-child > * { border-bottom: 0; }
-.ptable thead th { font-size: 12px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: var(--paper-2); }
-html[lang="ja"] .ptable thead th { letter-spacing: .02em; }
-.ptable tbody th { font-weight: 700; }
-.ptable tbody th a { text-decoration: none; margin-inline-end: 8px; }
-.ptable tbody th a:hover { text-decoration: underline; text-decoration-color: var(--amber); }
-.ptable td { font: 600 17px var(--display); font-variant-numeric: tabular-nums; }
-.ptable .flag { font-size: 10px; padding: 2px 6px; vertical-align: 2px; }
 .price-sec .frow { margin-bottom: 24px; }
 .ptable-note { margin: 12px 0 0; font-size: 13px; color: var(--muted); }
 
@@ -510,8 +494,6 @@ html:not([lang="ja"]) .sec-body b { font: 700 26px/1.1 var(--display); letter-sp
   .checks { grid-template-columns: repeat(3, 1fr); }
   .steps.three { grid-template-columns: repeat(3, 1fr); }
   .sec-art { height: 280px; }
-  .ptable th, .ptable td { padding: 16px 22px; }
-  .foot-cols { grid-template-columns: repeat(5, 1fr); }
   .benefits li:last-child:nth-child(3n + 2) { grid-column: span 2; }
   .benefits li:last-child:nth-child(3n + 1) { grid-column: span 3; }
   .nf { padding-top: 110px; }
@@ -521,10 +503,10 @@ html:not([lang="ja"]) .sec-body b { font: 700 26px/1.1 var(--display); letter-sp
   .avail-mini { display: none; }
   .nav { gap: 18px; }
 }
-.ptable thead th:first-child, .ptable tbody th { position: sticky; left: 0; z-index: 1; }
-.ptable tbody th { background: var(--card); box-shadow: 1px 0 0 var(--line); }
-.ptable thead th:first-child { box-shadow: 1px 0 0 var(--line); }
-@media (min-width: 900px) { .ptable tbody th, .ptable thead th:first-child { box-shadow: none; } }
+/* only where the Available badge shows: put the logo's text baseline on the badge's */
+@media (min-width: 1181px) {
+  .top .logo { translate: 0 -.1em; }
+}
 
 /* ───── پله‌ی ۱: حرکت و تعامل ───── */
 /* گذارِ نرم بین صفحه‌ها؛ سربرگ سرِ جایش می‌ماند و کارتِ نمونه به تصویرِ بالای مطالعه‌ی موردی تبدیل می‌شود */
@@ -563,9 +545,9 @@ html[lang="ja"] .menu-links a { font: 700 28px/1.5 var(--jp); letter-spacing: 0;
 .menu-links small { font: 500 13px var(--body); color: var(--amber); }
 .menu-cities { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; opacity: 0; transition: opacity .5s .35s; }
 .menu.on .menu-cities { opacity: 1; }
-.menu-cities a { display: grid; padding: 10px 12px; border-radius: 14px; background: rgba(255, 255, 255, .06); text-decoration: none; font-size: 13px; font-weight: 500; }
+.menu-cities > * { display: grid; padding: 10px 12px; border-radius: 14px; background: rgba(255, 255, 255, .06); text-decoration: none; font-size: 13px; font-weight: 500; }
 .menu-cities .c-time { font: 600 17px var(--display); color: #8D99B8; font-variant-numeric: tabular-nums; }
-.menu-cities a.open .c-time { color: var(--amber); }
+.menu-cities > .open .c-time { color: var(--amber); }
 .menu-cta { background: var(--amber); color: var(--ink); }
 .menu-cta:hover { background: #F6B957; }
 @media (min-width: 900px) { .menu-btn, .menu { display: none !important; } }
@@ -693,12 +675,8 @@ html[lang="ja"] .article-head .label, html[lang="ja"] .end-cta .num { text-trans
 .faq details ul { margin: 0 0 16px; padding-inline-start: 1.3em; color: var(--ink-2); font-size: 15px; }
 .faq details li { padding: 2px 0; }
 .faq details li::marker { color: var(--amber-2); }
-.faq details .ptable { margin: 0 0 14px; }
-.faq details .ptable th, .faq details .ptable td { padding: 11px 14px; }
-.faq details .ptable td { font-size: 16px; }
 .faq details a, .prose a { color: var(--ink); text-decoration-color: var(--amber); text-decoration-thickness: 2px; text-underline-offset: 4px; }
 .faq details a:hover, .prose a:hover { color: var(--amber-2); }
-.faq details .ptable a { text-decoration: none; }
 
 /* کارتِ تیره‌ی پایانی با دعوت به تماس */
 .end-cta .contact-card { align-items: center; }
