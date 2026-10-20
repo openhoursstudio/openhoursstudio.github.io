@@ -29,7 +29,6 @@ Open Hours Studio is a small web studio that builds websites for small local bus
 | `about/`, `contact/`, `privacy/`, `terms/`, `404.html` | Studio pages |
 | `services/` (+ `websites/`, `google-maps/`, `photos/`, `care/`) | Services and prices |
 | `sectors/` (+ `cafes/`, `restaurants/`, `beauty/`, `shops/`) | Pages per type of business |
-| `london/`, `tokyo/`, `milan/`, `amsterdam/`, `berlin/`, `toronto/` | City landing pages |
 | `work/` and `work/<slug>/` | Work index and one case study per concept site |
 | `works/<slug>/` | The concept demo sites themselves (fictional businesses), each with its own `style.css` plus shared `works/pages.css` |
 | `assets/shots/<slug>-desk.webp` (1200×750), `<slug>-phone.webp` (520×1125) | Screenshots of each concept site |
@@ -44,7 +43,7 @@ Each page has a **base language** in the HTML text and **English in `data-en="�
 
 - `<body data-base="ja|en|it|nl|de">` sets the base language; `data-title-en` gives the English `<title>`.
 - Studio pages (home, services, about, etc.) are Japanese-base with English alternates.
-- City pages use the local language: London and Toronto English, Tokyo Japanese, Milan Italian, Amsterdam Dutch, Berlin German.
+- The city landing pages were removed on 2026-10-20. `it`/`nl`/`de` base languages now only occur on concept sites.
 - Every new visible string needs both the base text and a `data-en` translation.
 
 ## Concept sites (`works/`)

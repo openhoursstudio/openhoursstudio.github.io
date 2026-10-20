@@ -162,6 +162,15 @@
     document.addEventListener('langchange', apply);
     apply();
   }
+  // ── صفحه‌ی خدمات: انتخابِ شهر برای قیمتِ کارت‌ها ──
+  document.querySelectorAll('[data-prices]').forEach(function (box) {
+    var btns = box.querySelectorAll('[data-city]'), vals = box.querySelectorAll('[data-c]');
+    box.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-city]'); if (!b) return;
+      btns.forEach(function (x) { var on = x === b; x.classList.toggle('on', on); x.setAttribute('aria-pressed', on); });
+      vals.forEach(function (v) { v.hidden = v.dataset.c !== b.dataset.city; });
+    });
+  });
   // ── فرم ──
   document.querySelectorAll('[data-enquiry]').forEach(function (form) {
     var steps = form.querySelectorAll('fieldset[data-step]');
@@ -208,4 +217,64 @@
     document.addEventListener('langchange', function () { if (done.hidden) show(at); });
     show(0);
   });
+})();
+
+// صفحه‌ی خدمات: دسکتاپ = هر بار یک بخش (پیش‌فرض: اولی)؛ موبایل = هر بخش در یک مودال با دکمه‌ی بستن؛ بدون جاوااسکریپت همه دیده می‌شوند.
+(function () {
+  var cards = document.querySelectorAll('.svc-list .svc-card'), secs = document.querySelectorAll('.svc-head.svc-sec[id]');
+  if (!cards.length || !secs.length) return;
+  var wide = window.matchMedia('(min-width: 900px)'), root = document.documentElement, tab, lastCard;
+  function reset() {
+    root.classList.remove('svc-lock');
+    cards.forEach(function (c) { c.removeAttribute('aria-current'); });
+    secs.forEach(function (s) { s.classList.remove('svc-modal'); s.removeAttribute('role'); s.removeAttribute('aria-modal'); });
+  }
+  function show(id, scroll) {
+    var hit = null;
+    secs.forEach(function (s) { s.hidden = s.id !== id; if (!s.hidden) hit = s; });
+    cards.forEach(function (c) { c.toggleAttribute('aria-current', c.hash === '#' + id); });
+    if (hit && scroll) hit.scrollIntoView();
+  }
+  function openModal(id) {
+    reset();
+    secs.forEach(function (s) { s.hidden = s.id !== id; });
+    var s = document.getElementById(id);
+    s.classList.add('svc-modal'); s.setAttribute('role', 'dialog'); s.setAttribute('aria-modal', 'true');
+    s.scrollTop = 0; root.classList.add('svc-lock');
+    s.querySelector('.svc-x').focus();
+  }
+  function closeModal() { reset(); secs.forEach(function (s) { s.hidden = true; }); }
+  function dismiss() {
+    closeModal();
+    history.replaceState(null, '', location.pathname + location.search);
+    if (lastCard) lastCard.focus();
+  }
+  function fromHash() {
+    var id = location.hash.slice(1), known = Array.prototype.some.call(secs, function (s) { return s.id === id; });
+    if (wide.matches) { reset(); if (known) show(tab = id, true); else show(tab = tab || secs[0].id, false); }
+    else if (known) openModal(id); else closeModal();
+  }
+  cards.forEach(function (c) {
+    c.addEventListener('click', function (e) {
+      if (wide.matches) return;
+      e.preventDefault(); lastCard = c; openModal(c.hash.slice(1)); history.pushState(null, '', c.hash);
+    });
+  });
+  secs.forEach(function (s) { s.querySelector('.svc-x').addEventListener('click', dismiss); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && root.classList.contains('svc-lock')) dismiss(); });
+  fromHash();
+  window.addEventListener('hashchange', fromHash);
+  wide.addEventListener('change', fromHash);
+})();
+
+// «روش کار» و فهرست هر پلن در موبایل جمع‌شونده‌اند (پیش‌فرض بسته)؛ در دسکتاپ همیشه باز.
+(function () {
+  var boxes = document.querySelectorAll('.svc-steps, .plan-more'), wide = window.matchMedia('(min-width: 900px)');
+  if (!boxes.length) return;
+  function sync() { boxes.forEach(function (d) { d.open = wide.matches; }); }
+  boxes.forEach(function (d) {
+    d.querySelector('summary').addEventListener('click', function (e) { if (wide.matches) e.preventDefault(); });
+  });
+  sync();
+  wide.addEventListener('change', sync);
 })();
