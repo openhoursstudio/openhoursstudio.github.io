@@ -12,11 +12,11 @@
 <link rel="stylesheet" href="../pages.css">
 <link rel="stylesheet" href="style.css">
 </head>
-<body data-default-lang="en" data-tz="Europe/London" data-open="07:00" data-close="16:00" data-closed-day="1" data-key="lb">
+<body data-base="en" data-default-lang="en" data-tz="Europe/London" data-open="07:00" data-close="16:00" data-closed-day="1" data-key="lb" data-title-ja="メニュー · Larkspur Bakery ロンドン・ハックニー（コンセプト作品）">
 
-<div class="concept" role="note">Concept project · Larkspur Bakery is a fictional bakery
+<div class="concept" role="note"><span data-ja="コンセプト作品 · Larkspur Bakery は架空のベーカリーです">Concept project · Larkspur Bakery is a fictional bakery</span>
    · 
-  <a href="../../work/larkspur/index.html">Return</a>
+  <a href="../../work/larkspur/index.html" data-ja="戻る">Return</a>
 </div>
 
 <header class="top">
@@ -24,92 +24,93 @@
     <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3c3 4 3 8 0 11-3-3-3-7 0-11zM16 14c4-1 7 1 9 4-4 1-7 0-9-4zM16 14c-4-1-7 1-9 4 4 1 7 0 9-4zM16 14v15"/></svg>
     Larkspur
   </a>
-  <nav class="nav"><a href="index.html#oven">Today</a><a href="menu.html">Menu</a><a href="cakes.html">Cakes</a><a href="wholesale.html">Wholesale</a><a href="index.html#visit">Visit</a></nav>
-  <a class="pill" href="index.html#order">Order for collection</a>
+  <nav class="nav"><a href="index.html#oven" data-ja="今日の焼き上がり">Today</a><a href="menu.html" data-ja="メニュー">Menu</a><a href="cakes.html" data-ja="ケーキ">Cakes</a><a href="wholesale.html" data-ja="卸売り">Wholesale</a><a href="index.html#visit" data-ja="店舗案内">Visit</a></nav>
+  <div class="lang" role="group" aria-label="Language · 言語" data-lang-toggle><button type="button" data-set-lang="en" aria-label="English"><span class="lang-base">EN</span></button><button type="button" data-set-lang="ja" aria-label="日本語"><span class="lang-ja">JA</span></button></div>
+  <a class="pill" href="index.html#order" data-ja="取り置きを予約">Order for collection</a>
 </header>
-<!-- pages --><nav class="pages" aria-label="Pages" style="--pg:#D7263D"><a href="index.html">Today</a><a href="menu.html" aria-current="page">Menu</a><a href="cakes.html">Celebration cakes</a><a href="wholesale.html">Wholesale</a></nav><!-- /pages -->
+<!-- pages --><nav class="pages" aria-label="Pages" style="--pg:#D7263D"><a href="index.html" data-ja="今日の焼き上がり">Today</a><a href="menu.html" aria-current="page" data-ja="メニュー">Menu</a><a href="cakes.html" data-ja="お祝いケーキ">Celebration cakes</a><a href="wholesale.html" data-ja="卸売り">Wholesale</a></nav><!-- /pages -->
 
 <main>
 <section class="subhead hero-lite">
-  <p class="eyebrow">The full menu</p>
-  <h1>Everything we bake,<br>every day.</h1>
-  <p class="lead">Prices include VAT. Tap a filter to see what suits you. If you have an allergy, ask at the counter: we bake everything in one small kitchen.</p>
+  <p class="eyebrow" data-ja="全メニュー">The full menu</p>
+  <h1 data-ja="毎日焼いている、&lt;br&gt;すべてのパン。" data-html>Everything we bake,<br>every day.</h1>
+  <p class="lead" data-ja="価格は税込です。フィルターをタップすると、合うものだけを表示できます。小さなキッチンひとつですべて焼いているので、アレルギーのある方はカウンターでお尋ねください。">Prices include VAT. Tap a filter to see what suits you. If you have an allergy, ask at the counter: we bake everything in one small kitchen.</p>
 </section>
 
 <section class="menu-full">
   <div class="filter-chips" role="group" aria-label="Filter the menu">
-    <button type="button" aria-pressed="true" data-diet="all">Everything</button>
-    <button type="button" aria-pressed="false" data-diet="vg">Vegan</button>
-    <button type="button" aria-pressed="false" data-diet="nf">No nuts</button>
-    <button type="button" aria-pressed="false" data-diet="gf">Gluten-free</button>
+    <button type="button" aria-pressed="true" data-diet="all" data-ja="すべて">Everything</button>
+    <button type="button" aria-pressed="false" data-diet="vg" data-ja="ヴィーガン">Vegan</button>
+    <button type="button" aria-pressed="false" data-diet="nf" data-ja="ナッツなし">No nuts</button>
+    <button type="button" aria-pressed="false" data-diet="gf" data-ja="グルテンフリー">Gluten-free</button>
   </div>
   <p class="menu-count" aria-live="polite" data-menu-count></p>
 
   <div class="menu-groups">
     <div class="menu-group">
-      <h2>Bread</h2>
+      <h2 data-ja="パン">Bread</h2>
       <ul class="price-list">
-        <li data-d="vg nf"><b>Country sourdough<span class="tags-inline"><i>VG</i></span></b><span class="pr">£5.50</span><span>White and a little wholemeal, 48-hour ferment. Out at 7:00.</span></li>
-        <li data-d="vg nf"><b>Seeded rye<span class="tags-inline"><i>VG</i></span></b><span class="pr">£6.00</span><span>Sunflower, pumpkin and linseed. Keeps for a week.</span></li>
-        <li data-d="vg nf"><b>Rosemary focaccia<span class="tags-inline"><i>VG</i></span></b><span class="pr">£4.00</span><span>Olive oil, sea salt, rosemary from the yard. Out at 13:00.</span></li>
-        <li data-d="nf"><b>Milk loaf</b><span class="pr">£4.50</span><span>Soft, for toast and for children who refuse crusts.</span></li>
-        <li data-d="vg nf gf"><b>Buckwheat and teff loaf<span class="tags-inline"><i>VG</i><i>GF</i></span></b><span class="pr">£6.50</span><span>Saturdays only. Baked first, before any wheat flour is out.</span></li>
+        <li data-d="vg nf"><b data-ja="カントリーサワードウ&lt;span class=&quot;tags-inline&quot;&gt;&lt;i&gt;VG&lt;/i&gt;&lt;/span&gt;" data-html>Country sourdough<span class="tags-inline"><i>VG</i></span></b><span class="pr">£5.50</span><span data-ja="白い粉に全粒粉を少し、48時間発酵。7:00焼き上がり。">White and a little wholemeal, 48-hour ferment. Out at 7:00.</span></li>
+        <li data-d="vg nf"><b data-ja="雑穀ライ麦パン&lt;span class=&quot;tags-inline&quot;&gt;&lt;i&gt;VG&lt;/i&gt;&lt;/span&gt;" data-html>Seeded rye<span class="tags-inline"><i>VG</i></span></b><span class="pr">£6.00</span><span data-ja="ひまわりの種、かぼちゃの種、亜麻仁入り。1週間もちます。">Sunflower, pumpkin and linseed. Keeps for a week.</span></li>
+        <li data-d="vg nf"><b data-ja="ローズマリーのフォカッチャ&lt;span class=&quot;tags-inline&quot;&gt;&lt;i&gt;VG&lt;/i&gt;&lt;/span&gt;" data-html>Rosemary focaccia<span class="tags-inline"><i>VG</i></span></b><span class="pr">£4.00</span><span data-ja="オリーブオイル、海塩、裏庭のローズマリー。13:00焼き上がり。">Olive oil, sea salt, rosemary from the yard. Out at 13:00.</span></li>
+        <li data-d="nf"><b data-ja="ミルク食パン">Milk loaf</b><span class="pr">£4.50</span><span data-ja="ふんわり食パン。トーストにも、耳が苦手なお子さんにも。">Soft, for toast and for children who refuse crusts.</span></li>
+        <li data-d="vg nf gf"><b data-ja="そば粉とテフのパン&lt;span class=&quot;tags-inline&quot;&gt;&lt;i&gt;VG&lt;/i&gt;&lt;i&gt;GF&lt;/i&gt;&lt;/span&gt;" data-html>Buckwheat and teff loaf<span class="tags-inline"><i>VG</i><i>GF</i></span></b><span class="pr">£6.50</span><span data-ja="土曜日限定。小麦粉を出す前に、いちばん最初に焼いています。">Saturdays only. Baked first, before any wheat flour is out.</span></li>
       </ul>
     </div>
     <div class="menu-group">
-      <h2>Pastry</h2>
+      <h2 data-ja="ペストリー">Pastry</h2>
       <ul class="price-list">
-        <li data-d="nf"><b>Butter croissant</b><span class="pr">£2.90</span><span>French butter, three days of folding.</span></li>
-        <li data-d="nf"><b>Pain au chocolat</b><span class="pr">£3.20</span><span>Two bars of dark chocolate, not one.</span></li>
-        <li data-d=""><b>Almond croissant<span class="tags-inline"><i>N</i></span></b><span class="pr">£3.60</span><span>Yesterday's croissant, today's frangipane.</span></li>
-        <li data-d="nf"><b>Cardamom bun</b><span class="pr">£3.40</span><span>Swedish style, knotted by hand. Out at 10:00.</span></li>
-        <li data-d="nf"><b>Cinnamon bun</b><span class="pr">£3.20</span><span>Brown sugar, cinnamon, a little salt. Out at 11:30.</span></li>
-        <li data-d="vg nf"><b>Vegan apple turnover<span class="tags-inline"><i>VG</i></span></b><span class="pr">£3.40</span><span>Plant butter pastry, Bramley apples.</span></li>
+        <li data-d="nf"><b data-ja="バタークロワッサン">Butter croissant</b><span class="pr">£2.90</span><span data-ja="フランス産バターを、3日かけて折り込み。">French butter, three days of folding.</span></li>
+        <li data-d="nf"><b data-ja="パン・オ・ショコラ">Pain au chocolat</b><span class="pr">£3.20</span><span data-ja="ビターチョコは1本ではなく2本。">Two bars of dark chocolate, not one.</span></li>
+        <li data-d=""><b data-ja="アーモンドクロワッサン&lt;span class=&quot;tags-inline&quot;&gt;&lt;i&gt;N&lt;/i&gt;&lt;/span&gt;" data-html>Almond croissant<span class="tags-inline"><i>N</i></span></b><span class="pr">£3.60</span><span data-ja="昨日のクロワッサンに、今日つくったフランジパーヌ。">Yesterday's croissant, today's frangipane.</span></li>
+        <li data-d="nf"><b data-ja="カルダモンロール">Cardamom bun</b><span class="pr">£3.40</span><span data-ja="スウェーデン風に、ひとつずつ手で結んでいます。10:00焼き上がり。">Swedish style, knotted by hand. Out at 10:00.</span></li>
+        <li data-d="nf"><b data-ja="シナモンロール">Cinnamon bun</b><span class="pr">£3.20</span><span data-ja="ブラウンシュガー、シナモン、ひとつまみの塩。11:30焼き上がり。">Brown sugar, cinnamon, a little salt. Out at 11:30.</span></li>
+        <li data-d="vg nf"><b data-ja="ヴィーガンのアップルターンオーバー&lt;span class=&quot;tags-inline&quot;&gt;&lt;i&gt;VG&lt;/i&gt;&lt;/span&gt;" data-html>Vegan apple turnover<span class="tags-inline"><i>VG</i></span></b><span class="pr">£3.40</span><span data-ja="植物性バターの生地に、ブラムリー種のりんご。">Plant butter pastry, Bramley apples.</span></li>
       </ul>
     </div>
     <div class="menu-group">
-      <h2>Cakes and slices</h2>
+      <h2 data-ja="ケーキ">Cakes and slices</h2>
       <ul class="price-list">
-        <li data-d=""><b>Seasonal fruit tart<span class="tags-inline"><i>N</i></span></b><span class="pr">£4.20</span><span>Almond crust, whatever the market had on Friday.</span></li>
-        <li data-d="nf gf"><b>Flourless chocolate cake<span class="tags-inline"><i>GF</i></span></b><span class="pr">£4.00</span><span>Dense and very dark. Made with eggs and butter.</span></li>
-        <li data-d="nf"><b>Lemon drizzle</b><span class="pr">£3.50</span><span>The one your nan would approve of.</span></li>
-        <li data-d="vg"><b>Banana and walnut loaf<span class="tags-inline"><i>VG</i><i>N</i></span></b><span class="pr">£3.40</span><span>Made with oat milk and very ripe bananas.</span></li>
+        <li data-d=""><b data-ja="季節のフルーツタルト&lt;span class=&quot;tags-inline&quot;&gt;&lt;i&gt;N&lt;/i&gt;&lt;/span&gt;" data-html>Seasonal fruit tart<span class="tags-inline"><i>N</i></span></b><span class="pr">£4.20</span><span data-ja="アーモンド生地に、金曜の市場で見つけた果物を。">Almond crust, whatever the market had on Friday.</span></li>
+        <li data-d="nf gf"><b data-ja="粉を使わないチョコレートケーキ&lt;span class=&quot;tags-inline&quot;&gt;&lt;i&gt;GF&lt;/i&gt;&lt;/span&gt;" data-html>Flourless chocolate cake<span class="tags-inline"><i>GF</i></span></b><span class="pr">£4.00</span><span data-ja="濃厚でとてもビター。卵とバターを使っています。">Dense and very dark. Made with eggs and butter.</span></li>
+        <li data-d="nf"><b data-ja="レモンドリズルケーキ">Lemon drizzle</b><span class="pr">£3.50</span><span data-ja="おばあちゃんも太鼓判を押す、昔ながらの味。">The one your nan would approve of.</span></li>
+        <li data-d="vg"><b data-ja="バナナとくるみのパウンドケーキ&lt;span class=&quot;tags-inline&quot;&gt;&lt;i&gt;VG&lt;/i&gt;&lt;i&gt;N&lt;/i&gt;&lt;/span&gt;" data-html>Banana and walnut loaf<span class="tags-inline"><i>VG</i><i>N</i></span></b><span class="pr">£3.40</span><span data-ja="オーツミルクと完熟バナナでつくっています。">Made with oat milk and very ripe bananas.</span></li>
       </ul>
     </div>
     <div class="menu-group">
-      <h2>Coffee and drinks</h2>
+      <h2 data-ja="コーヒーとドリンク">Coffee and drinks</h2>
       <ul class="price-list">
-        <li data-d="vg nf gf"><b>Filter coffee<span class="tags-inline"><i>VG</i></span></b><span class="pr">£2.80</span><span>From a roaster two streets away. Refills are free.</span></li>
-        <li data-d="nf gf"><b>Flat white</b><span class="pr">£3.40</span><span>Oat milk at no extra cost.</span></li>
-        <li data-d="nf gf"><b>Hot chocolate</b><span class="pr">£3.60</span><span>Melted from the same chocolate as the pain au chocolat.</span></li>
-        <li data-d="vg nf gf"><b>Loose-leaf tea<span class="tags-inline"><i>VG</i></span></b><span class="pr">£2.60</span><span>Breakfast, Earl Grey or fresh mint.</span></li>
+        <li data-d="vg nf gf"><b data-ja="ドリップコーヒー&lt;span class=&quot;tags-inline&quot;&gt;&lt;i&gt;VG&lt;/i&gt;&lt;/span&gt;" data-html>Filter coffee<span class="tags-inline"><i>VG</i></span></b><span class="pr">£2.80</span><span data-ja="2本先の通りの焙煎所の豆を使っています。おかわり無料。">From a roaster two streets away. Refills are free.</span></li>
+        <li data-d="nf gf"><b data-ja="フラットホワイト">Flat white</b><span class="pr">£3.40</span><span data-ja="オーツミルクへの変更は無料です。">Oat milk at no extra cost.</span></li>
+        <li data-d="nf gf"><b data-ja="ホットチョコレート">Hot chocolate</b><span class="pr">£3.60</span><span data-ja="パン・オ・ショコラと同じチョコレートを溶かしています。">Melted from the same chocolate as the pain au chocolat.</span></li>
+        <li data-d="vg nf gf"><b data-ja="リーフティー&lt;span class=&quot;tags-inline&quot;&gt;&lt;i&gt;VG&lt;/i&gt;&lt;/span&gt;" data-html>Loose-leaf tea<span class="tags-inline"><i>VG</i></span></b><span class="pr">£2.60</span><span data-ja="イングリッシュブレックファスト、アールグレイ、フレッシュミントから。">Breakfast, Earl Grey or fresh mint.</span></li>
       </ul>
     </div>
   </div>
-  <p class="menu-empty" data-menu-empty hidden>Nothing matches every filter today. Ask us: we can often set something aside.</p>
-  <p class="note-box"><b>Allergens.</b> VG vegan · GF made without gluten · N contains nuts. Everything is made in a kitchen that handles wheat, nuts, sesame, eggs and milk, so we cannot promise a trace-free bake.</p>
+  <p class="menu-empty" data-menu-empty hidden data-ja="今日は条件に合うものがありません。お声がけいただければ、取り置きできることも多いです。">Nothing matches every filter today. Ask us: we can often set something aside.</p>
+  <p class="note-box" data-ja="&lt;b&gt;アレルゲン表示&lt;/b&gt; VG ヴィーガン · GF グルテン不使用 · N ナッツ入り。小麦、ナッツ、ごま、卵、乳を扱うキッチンでつくっているため、微量の混入がないとはお約束できません。" data-html><b>Allergens.</b> VG vegan · GF made without gluten · N contains nuts. Everything is made in a kitchen that handles wheat, nuts, sesame, eggs and milk, so we cannot promise a trace-free bake.</p>
 </section>
 
 <section class="order">
   <div class="order-card">
     <div>
-      <p class="eyebrow">Running out?</p>
-      <h2>Pre-order anything on this page</h2>
-      <p>Order by 6pm and we keep it on the shelf with your name on it from 8am.</p>
-      <a class="btn" href="cakes.html">Or order a celebration cake</a>
+      <p class="eyebrow" data-ja="売り切れが心配なら">Running out?</p>
+      <h2 data-ja="このページの商品は、すべて予約できます">Pre-order anything on this page</h2>
+      <p data-ja="夕方6時までにご予約いただければ、翌朝8時からお名前をつけて棚に取り置きしておきます。">Order by 6pm and we keep it on the shelf with your name on it from 8am.</p>
+      <a class="btn" href="cakes.html" data-ja="お祝いケーキを予約する">Or order a celebration cake</a>
     </div>
-    <img src="../../assets/photos/larkspur-4.webp" loading="lazy" alt="Pastry display case">
+    <img src="../../assets/photos/larkspur-4.webp" loading="lazy" alt="Pastry display case" data-ja-alt="焼き菓子のショーケース">
   </div>
 </section>
 </main>
 
 <footer class="foot">
   <p class="foot-brand">Larkspur Bakery</p>
-  <p>This is a concept project. The bakery, address and prices are fictional. Photos: CC0 (public domain).</p>
-  <details class="credits"><summary>Photo credits</summary><ul data-credits></ul></details>
+  <p data-ja="これはコンセプト作品です。お店・住所・価格はすべて架空のものです。写真：CC0（パブリックドメイン）。">This is a concept project. The bakery, address and prices are fictional. Photos: CC0 (public domain).</p>
+  <details class="credits"><summary data-ja="写真クレジット">Photo credits</summary><ul data-credits></ul></details>
 </footer>
 
-<a class="dock" href="index.html#order">Pre-order</a>
+<a class="dock" href="index.html#order" data-ja="取り置き予約">Pre-order</a>
 <script src="../../assets/concept.js"></script>
 <script>
   // فیلترِ منو: گیاهی، بی‌مغزدانه، بی‌گلوتن
@@ -120,10 +121,11 @@
       var n = 0;
       items.forEach(function (li) { var ok = d === 'all' || li.dataset.d.split(' ').indexOf(d) > -1; li.hidden = !ok; if (ok) n++; });
       document.querySelectorAll('.menu-group').forEach(function (g) { g.hidden = !g.querySelector('li:not([hidden])'); });
-      count.textContent = n + (n === 1 ? ' item' : ' items');
+      count.textContent = tx({ ja: n + '品', en: n + (n === 1 ? ' item' : ' items') });
       empty.hidden = n > 0;
     }
     btns.forEach(function (b) { b.addEventListener('click', function () { btns.forEach(function (x) { x.setAttribute('aria-pressed', x === b); }); apply(b.dataset.diet); }); });
+    document.addEventListener('langchange', function () { apply(document.querySelector('[data-diet][aria-pressed="true"]').dataset.diet); });
     apply('all');
   })();
 </script>

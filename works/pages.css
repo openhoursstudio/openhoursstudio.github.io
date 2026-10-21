@@ -41,3 +41,6 @@ html[data-l="ja"] :is(h1, h2, h3) { word-break: auto-phrase; line-height: 1.25; 
 .two-col > * { min-width: 0; }
 .form-card select { max-width: 100%; }
 @media (max-width: 420px) { .lang button span { padding-inline: 7px; } }
+/* دکمه‌ی زبان برای نمونه‌هایی که خودشان استایلش را ندارند (Larkspur، Kingsley، Maple & Main، Quiet Hour)؛ رنگِ بخشِ فعال در style.css هر نمونه */
+:where(.lang) { display: inline-flex; align-items: center; flex: none; min-height: 36px; padding: 3px; border-radius: 999px; box-shadow: inset 0 0 0 1px color-mix(in srgb, currentColor 25%, transparent); font-size: 12px; font-weight: 700; line-height: 1; }
+:where(.lang) span { display: block; padding: 7px 10px; border-radius: 999px; }

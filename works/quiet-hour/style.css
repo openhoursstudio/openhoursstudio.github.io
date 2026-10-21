@@ -231,3 +231,8 @@ h1 em { font-style: normal; color: var(--teal); }
   .t-card { padding: 28px; }
 }
 @media (min-width: 1100px) { .t-grid { grid-template-columns: repeat(3, 1fr); } }
+
+/* دکمه‌ی زبان (EN · JA) */
+html[data-l="base"] .lang-base, html[data-l="ja"] .lang-ja { background: #2B2340; color: #fff; }
+/* با دکمه‌ی زبان، سربرگ روی گوشی فشرده‌تر می‌شود */
+@media (max-width: 479px) { .top { gap: 10px; } .brand span { white-space: nowrap; } .top .btn-sm { padding: 0 12px; white-space: nowrap; } }

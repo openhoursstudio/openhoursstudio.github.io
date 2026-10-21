@@ -167,3 +167,9 @@ h2 { font-size: 34px; line-height: 1.08; }
   .need-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
 }
 @media (min-width: 1100px) { .need-grid { grid-template-columns: repeat(3, 1fr); } }
+
+/* دکمه‌ی زبان (EN · JA) */
+html[data-l="base"] .lang-base, html[data-l="ja"] .lang-ja { background: var(--yolk); color: var(--ink); }
+.top .lang { color: var(--cream); }
+/* با دکمه‌ی زبان، دکمه‌ی بالای سربرگ روی گوشی جا نمی‌شود؛ همان دکمه پایینِ صفحه (.dock) هست */
+@media (max-width: 479px) { .top .pill { display: none; } }

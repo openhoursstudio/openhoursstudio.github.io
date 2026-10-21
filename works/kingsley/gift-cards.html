@@ -14,7 +14,7 @@
 </head>
 <body data-base="en" data-default-lang="en" data-tz="Europe/London" data-open="09:00" data-close="18:30" data-closed-day="0" data-key="kb">
 
-<div class="concept" role="note">Concept project · Kingsley's Barbers is a fictional shop
+<div class="concept" role="note"><span>Concept project · Kingsley's Barbers is a fictional shop</span>
    · 
   <a href="../../work/kingsley/index.html">Return</a>
 </div>
@@ -23,6 +23,7 @@
 <header class="top">
   <a class="brand" href="index.html">Kingsley's<small>Barbers · Leeds</small></a>
   <nav class="knav"><a href="prices.html">Prices</a><a href="about.html">About</a><a href="gift-cards.html">Gift cards</a></nav>
+  <div class="lang" role="group" aria-label="Language · 言語" data-lang-toggle><button type="button" data-set-lang="en" aria-label="English"><span class="lang-base">EN</span></button><button type="button" data-set-lang="ja" aria-label="日本語"><span class="lang-ja">JA</span></button></div>
   <a class="call" href="index.html#book">Book a chair</a>
 </header>
 <!-- pages --><nav class="pages" aria-label="Pages" style="--pg:#B3202A"><a href="index.html">The shop</a><a href="prices.html">Cuts &amp; prices</a><a href="about.html">About</a><a href="gift-cards.html" aria-current="page">Gift cards</a></nav><!-- /pages -->
@@ -59,11 +60,11 @@
         <label><input type="radio" name="amt" value="25" checked><span><b>£25</b><small>A cut or a skin fade</small></span></label>
         <label><input type="radio" name="amt" value="50"><span><b>£50</b><small>Cut and a hot towel shave</small></span></label>
       </fieldset>
-      <label>For<input name="to" maxlength="22" autocomplete="off" placeholder="Sam"></label>
-      <label>From (the name we ask for at the desk)<input name="from" maxlength="22" required autocomplete="given-name" placeholder="Ellie"></label>
-      <label>A line on the ticket, if you like<input name="msg" maxlength="60" autocomplete="off" placeholder="Happy birthday. Sort the beard out." aria-describedby="msg-left"></label>
+      <label><span>For</span><input name="to" maxlength="22" autocomplete="off" placeholder="Sam"></label>
+      <label><span>From (the name we ask for at the desk)</span><input name="from" maxlength="22" required autocomplete="given-name" placeholder="Ellie"></label>
+      <label><span>A line on the ticket, if you like</span><input name="msg" maxlength="60" autocomplete="off" placeholder="Happy birthday. Sort the beard out." aria-describedby="msg-left"></label>
       <p class="hint" id="msg-left" data-msg-left>60 letters left</p>
-      <label>Collect from the desk<select name="day" data-days></select></label>
+      <label><span>Collect from the desk</span><select name="day" data-days></select></label>
       <button type="submit" class="btn">Put it aside for me</button>
       <p class="out gift-out" data-gift-out aria-live="polite"></p>
     </form>
