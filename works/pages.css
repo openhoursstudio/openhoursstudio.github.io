@@ -40,3 +40,4 @@ html[data-l="ja"] body { line-break: strict; }
 html[data-l="ja"] :is(h1, h2, h3) { word-break: auto-phrase; line-height: 1.25; letter-spacing: .02em; }
 .two-col > * { min-width: 0; }
 .form-card select { max-width: 100%; }
+@media (max-width: 420px) { .lang button span { padding-inline: 7px; } }

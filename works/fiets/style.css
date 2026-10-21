@@ -194,3 +194,8 @@ h2 { font-size: 34px; line-height: 1; }
 }
 /* سرتیترِ «درباره‌ی ما» روی گوشی‌های باریک جا شود */
 @media (max-width: 819px) { .ov-head h1 { font-size: clamp(32px, 10vw, 40px); } }
+
+/* ژاپنی: حروفِ ژاپنی در همان اندازه درشت‌تر دیده می‌شوند */
+html[data-l="ja"] h1 { font-size: 34px; }
+html[data-l="ja"] .subhead h1 { font-size: 32px; }
+@media (min-width: 820px) { html[data-l="ja"] h1 { font-size: 60px; } html[data-l="ja"] .subhead h1 { font-size: 50px; } }
