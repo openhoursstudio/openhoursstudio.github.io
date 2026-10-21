@@ -194,3 +194,9 @@ h2 { font-size: 32px; line-height: 1.1; }
 html[data-l="base"] .lang-base, html[data-l="ja"] .lang-ja { background: #B3202A; color: #fff; }
 /* با دکمه‌ی زبان، دکمه‌ی بالای سربرگ روی گوشی جا نمی‌شود؛ همان دکمه پایینِ صفحه (.dock) هست */
 @media (max-width: 479px) { .top .call { display: none; } }
+/* ژاپنی: حروف درشت‌تر دیده می‌شوند، تیترها کمی کوچک‌تر */
+html[data-l="ja"] h1 { font-size: 36px; }
+html[data-l="ja"] h2 { font-size: 26px; }
+@media (min-width: 900px) { html[data-l="ja"] h1 { font-size: 60px; } html[data-l="ja"] h2 { font-size: 36px; } }
+html[data-l="ja"] .cut-grid h2 { font-size: 21px; }
+html[data-l="ja"] .cut-grid > * { min-width: 0; }
