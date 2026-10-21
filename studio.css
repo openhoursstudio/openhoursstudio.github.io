@@ -784,3 +784,80 @@ html.svc-lock { overflow: hidden; }
 .plan-more[open] > summary { border-top: 0; }
 .plan-more[open] > summary::after { transform: rotate(45deg); }
 @media (min-width: 900px) { .plan-more > summary { display: none; } }
+
+/* ───── مینی‌اپ‌های LINE: صفحه‌ی بخش و صفحه‌ی معرفیِ هر اپ ─────
+   هر اپ دو رنگ دارد: --a رنگِ تأکید و --bg زمینه‌ی تیره‌ی صحنه. گوشی‌ها iframe ِ زنده‌اند (?embed&auto) و خودشان جلو می‌روند. */
+.lx-hero { display: grid; gap: 32px; padding-top: 28px; }
+.lx-hero .lead { max-width: 34em; }
+.lx-btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.lx-stage { position: relative; display: grid; place-items: center; padding: 56px 16px 40px; border-radius: 32px; overflow: hidden; background: radial-gradient(80% 55% at 50% 105%, color-mix(in srgb, var(--a) 55%, transparent), transparent 70%), var(--bg); }
+.lx-stage::before { content: attr(data-mark); position: absolute; inset: 18px auto auto 50%; translate: -50% 0; writing-mode: vertical-rl; font: 400 clamp(120px, 22vw, 220px)/1 var(--jp-display); letter-spacing: .08em; color: #fff; opacity: .05; white-space: nowrap; pointer-events: none; }
+.lx-pill { position: absolute; top: 16px; left: 16px; display: inline-flex; align-items: center; gap: 8px; padding: 5px 12px; border-radius: 999px; background: rgba(255, 255, 255, .12); color: #fff; font-size: 12px; font-weight: 500; backdrop-filter: blur(6px); }
+.lx-pill i { width: 8px; height: 8px; border-radius: 50%; background: #FF4D4D; box-shadow: 0 0 0 0 rgba(255, 77, 77, .6); }
+@media (prefers-reduced-motion: no-preference) { .lx-pill i { animation: lx-rec 1.6s infinite; } }
+@keyframes lx-rec { 70% { box-shadow: 0 0 0 8px rgba(255, 77, 77, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 77, 77, 0); } }
+.lx-phone { --k: .7; position: relative; width: calc(390px * var(--k) + 20px); height: calc(800px * var(--k) + 20px); padding: 10px; border-radius: calc(46px * var(--k) + 10px); background: #0B0A09; box-shadow: 0 50px 80px -36px rgba(0, 0, 0, .8), inset 0 0 0 1.5px rgba(255, 255, 255, .16); overflow: hidden; }
+.lx-phone iframe { display: block; width: 390px; height: 800px; border: 0; border-radius: 46px; background: #FBF6EE; transform: scale(var(--k)); transform-origin: 0 0; }
+.lx-hint { position: relative; margin: 18px 0 0; font-size: 13px; color: rgba(255, 255, 255, .72); text-align: center; }
+
+.lx-flow ol { list-style: none; display: grid; grid-auto-flow: column; grid-auto-columns: min(62%, 240px); gap: 18px; margin: 0 -16px; padding: 4px 16px 18px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 16px; counter-reset: lx; scrollbar-width: thin; }
+.lx-flow li { scroll-snap-align: start; display: grid; gap: 14px; align-content: start; counter-increment: lx; }
+.lx-flow img { width: 100%; height: auto; border-radius: 24px; border: 6px solid #0E1526; background: #0E1526; box-shadow: 0 26px 40px -24px rgba(20, 33, 61, .55); }
+.lx-flow b { display: flex; align-items: baseline; gap: 10px; font-size: 16px; line-height: 1.4; }
+.lx-flow b::before { content: counter(lx, decimal-leading-zero); font: 600 14px var(--display); color: var(--amber-2); }
+.lx-flow span { display: block; margin-top: -8px; font-size: 14px; color: var(--ink-2); }
+
+.lx-kitchen { display: grid; gap: 28px; align-items: center; }
+.lx-kitchen .sub { max-width: 30em; }
+.lx-kitchen ul { margin: 18px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; }
+.lx-kitchen li { display: flex; gap: 10px; color: var(--ink-2); }
+.lx-kitchen li::before { content: ""; flex: none; width: 8px; height: 8px; margin-top: .75em; border-radius: 50%; background: var(--a, var(--amber)); }
+.lx-k-art { display: grid; place-items: center; padding: 28px 20px; border-radius: 28px; background: var(--bg); }
+.lx-k-art img { width: 100%; max-width: 420px; border-radius: 18px; box-shadow: 0 40px 60px -30px rgba(0, 0, 0, .8); }
+
+.lx-apps { display: grid; gap: 18px; }
+.lx-card { display: grid; grid-template-rows: auto 1fr; border-radius: 28px; overflow: hidden; background: var(--card); box-shadow: inset 0 0 0 1px var(--line); color: var(--ink); text-decoration: none; transition: transform .25s var(--ease), box-shadow .25s; }
+.lx-card:hover { transform: translateY(-3px); box-shadow: inset 0 0 0 1px var(--line), 0 22px 40px -26px rgba(20, 33, 61, .5); }
+.lx-card-art { display: flex; justify-content: center; height: 260px; padding-top: 30px; overflow: hidden; background: radial-gradient(80% 60% at 50% 110%, color-mix(in srgb, var(--a) 55%, transparent), transparent 70%), var(--bg); }
+.lx-card-art img { width: 52%; max-width: 200px; height: auto; align-self: start; border-radius: 22px 22px 0 0; border: 5px solid #0B0A09; border-bottom: 0; box-shadow: 0 30px 50px -20px rgba(0, 0, 0, .7); transition: transform .6s var(--ease); }
+.lx-card:hover .lx-card-art img { transform: translateY(-8px); }
+.lx-card-body { display: grid; gap: 6px; align-content: start; padding: 20px 22px 24px; }
+.lx-card-body b { font: 700 20px/1.4 var(--jp-display); }
+html:not([lang="ja"]) .lx-card-body b { font: 700 22px/1.2 var(--display); letter-spacing: -.01em; }
+.lx-card-body p { margin: 0; font-size: 14px; color: var(--ink-2); }
+.lx-chip { justify-self: start; padding: 2px 10px; border-radius: 999px; background: color-mix(in srgb, var(--a) 16%, #fff); color: color-mix(in srgb, var(--a) 70%, #000); font-size: 12px; font-weight: 700; }
+.lx-card .arrow { justify-self: start; margin-top: 6px; }
+
+/* صفحه‌ی بخش: چهار گوشیِ زنده کنارِ هم */
+.lx-live { display: grid; grid-auto-flow: column; grid-auto-columns: min(84%, 320px); gap: 18px; margin: 0 -16px; padding: 4px 16px 18px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-inline: 16px; list-style: none; }
+.lx-live > li { scroll-snap-align: start; display: grid; grid-template-rows: auto 1fr; border-radius: 30px; overflow: hidden; background: var(--card); box-shadow: inset 0 0 0 1px var(--line); }
+.lx-live .lx-stage { border-radius: 0; padding: 50px 12px 26px; }
+.lx-live .lx-stage::before { font-size: 150px; }
+.lx-live .lx-phone { --k: .66; }
+.lx-live .lx-card-body { padding: 18px 20px 22px; }
+.lx-links { display: flex; flex-wrap: wrap; gap: 6px 18px; margin-top: 8px; }
+.lx-links a { font-size: 14px; }
+
+@media (min-width: 900px) {
+  .lx-hero { grid-template-columns: 1fr 1fr; align-items: center; gap: 56px; }
+  .lx-hero h1 { font-size: 40px; }
+  html:not([lang="ja"]) .lx-hero h1 { font-size: 56px; }
+  .lx-phone { --k: .82; }
+  .lx-flow ol { grid-auto-flow: row; grid-template-columns: repeat(5, 1fr); margin: 0; padding: 4px 0 0; overflow: visible; }
+  .lx-flow li:nth-child(even) { margin-top: 36px; }
+  .lx-kitchen { grid-template-columns: .9fr 1.1fr; gap: 56px; }
+  .lx-apps { grid-template-columns: repeat(3, 1fr); }
+  .lx-live { grid-auto-flow: row; grid-template-columns: repeat(2, 1fr); margin: 0; padding: 4px 0 0; overflow: visible; }
+  .lx-live .lx-phone { --k: .8; }
+}
+@media (min-width: 1181px) {
+  .lx-live { grid-template-columns: repeat(4, 1fr); }
+  .lx-live .lx-phone { --k: .6; }
+  .lx-live .lx-stage::before { font-size: 130px; }
+}
+.lx-others .note { margin-top: 26px; }
+@media (min-width: 900px) { .lx-apps.four { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1181px) { .lx-apps.four { grid-template-columns: repeat(4, 1fr); } }
+.lx-home { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 20px; margin: 48px 0 18px; padding-top: 28px; border-top: 1px solid var(--line); }
+.lx-home h3 { margin: 0; font: 700 21px/1.5 var(--jp-display); }
+html:not([lang="ja"]) .lx-home h3 { font: 700 26px/1.2 var(--display); letter-spacing: -.01em; }

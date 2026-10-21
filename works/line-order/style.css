@@ -415,3 +415,14 @@ html[lang="en"] .intro h1 { letter-spacing: -.01em; }
   .cats { scroll-behavior: auto; }
 }
 .cr-link { display: block; margin-top: 14px; font-weight: 500; }
+
+/* ── داخلِ صفحه‌های معرفی (iframe): فقط خودِ اپ، با «انگشتِ» نمایشی که خودش جلو می‌رود ── */
+.embed .concept, .embed .scen, .embed .see-k { display: none !important; }
+body.embed { display: flex; height: 100vh; height: 100dvh; overflow: hidden; }
+.embed .stage { display: block; height: auto; padding: 0; flex: 1; min-height: 0; }
+.embed .intro, .embed .kitchen, .embed .foot { display: none; }
+.embed .device { height: 100%; min-height: 0; padding: 0; border-radius: 0; background: none; box-shadow: none; position: static; }
+.embed .app { border-radius: 0; }
+.tap { position: absolute; z-index: 60; width: 46px; height: 46px; margin: -23px 0 0 -23px; border-radius: 50%; background: rgba(28, 24, 22, .22); box-shadow: 0 0 0 2px rgba(255, 255, 255, .9), 0 6px 18px rgba(0, 0, 0, .25); pointer-events: none; opacity: 0; }
+.tap.go { animation: tap .9s var(--ease); }
+@keyframes tap { 0% { opacity: 0; transform: scale(1.5); } 35% { opacity: 1; transform: scale(.85); } 60% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(1.1); } }
