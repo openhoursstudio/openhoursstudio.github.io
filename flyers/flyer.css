@@ -3,8 +3,8 @@
 :root { --ink: #14213D; --ink-2: #44506A; --amber: #F2A93B; --amber-2: #9E6309; --paper: #FBF7EF; }
 * { box-sizing: border-box; }
 html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-body { margin: 0; background: #DADFE8; font-family: "DM Sans", "Noto Sans JP", system-ui, sans-serif; color: var(--ink); }
-html[lang="ja"] body { font-family: "Noto Sans JP", "Hiragino Sans", system-ui, sans-serif; }
+body { margin: 0; background: #DADFE8; font-family: "DM Sans", "Zen Kaku Gothic New", system-ui, sans-serif; color: var(--ink); }
+html[lang="ja"] body { font-family: "Zen Kaku Gothic New", "Hiragino Sans", system-ui, sans-serif; }
 
 .tools { display: flex; justify-content: space-between; align-items: center; gap: 12px; max-width: 148mm; margin: 0 auto; padding: 14px 4px; font: 500 14px "DM Sans", system-ui, sans-serif; }
 .tools a { color: var(--ink); min-height: 40px; display: inline-flex; align-items: center; }
@@ -21,7 +21,7 @@ html[lang="ja"] body { font-family: "Noto Sans JP", "Hiragino Sans", system-ui, 
 .brand small { align-self: center; margin-left: 2.4mm; font: 500 6.5pt "DM Sans", sans-serif; letter-spacing: .16em; text-transform: uppercase; color: #AAB3CB; }
 h1 { position: relative; margin: 7mm 0 0; font: 700 28pt/1.03 "Fraunces", Georgia, serif; letter-spacing: -.025em; }
 h1 em { color: var(--amber); }
-html[lang="ja"] h1 { font: 700 21pt/1.4 "Noto Sans JP", sans-serif; letter-spacing: .01em; }
+html[lang="ja"] h1 { font: 700 21pt/1.4 "Zen Old Mincho", serif; letter-spacing: .01em; }
 html[lang="ja"] h1 em { font-style: normal; }
 .sub { position: relative; margin: 3.5mm 0 0; max-width: 112mm; font-size: 9.5pt; line-height: 1.45; color: #C9D0E2; }
 .phones { position: relative; display: flex; justify-content: center; align-items: flex-end; gap: 4mm; height: 60mm; margin-top: 7mm; }

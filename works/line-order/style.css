@@ -41,6 +41,14 @@ button { font: inherit; color: inherit; }
 html:not([lang="en"]) .lang-ja, html[lang="en"] .lang-en { background: var(--night); color: var(--paper); }
 
 /* رنگِ هر سناریو: فقط رنگِ تأکید عوض می‌شود، بقیه‌ی صحنه یکی است */
+/* هر مغازه فونتِ خودش را دارد: یاکیتوری خوشنویسیِ قلم‌مو، رامن پوسترِ ضخیم، کافه دست‌خطِ آرام، ایزاکایا حروفِ قدیمیِ شووا */
+.th-tori { --mincho: "Yuji Syuku", "Hiragino Mincho ProN", serif; --sans: "Zen Kaku Gothic New", "Hiragino Sans", system-ui, sans-serif; }
+.th-hotaru { --mincho: "Dela Gothic One", "Hiragino Sans", sans-serif; --sans: "M PLUS 1p", "Hiragino Sans", system-ui, sans-serif; }
+.th-kaede { --mincho: "Klee One", "Hiragino Maru Gothic ProN", serif; --sans: "Zen Maru Gothic", "Hiragino Maru Gothic ProN", system-ui, sans-serif; }
+.th-tomoshibi { --mincho: "Zen Antique", "Hiragino Mincho ProN", serif; --sans: "Zen Kaku Gothic Antique", "Hiragino Sans", system-ui, sans-serif; }
+/* این فونت‌ها فقط یک وزن دارند؛ بُلدِ ساختگیِ مرورگر زشت می‌شود */
+:is(.th-tori, .th-hotaru, .th-tomoshibi) :is(.scr h2, .w-shop b, .w-h, .pk-img.ph, .wc-top b, .cat h3, .thumb.ph, .coupon b, .kitchen h2, .intro h1, .tent-shop, .pick-no b) { font-weight: 400; }
+.th-kaede :is(.scr h2, .w-shop b, .w-h, .pk-img.ph, .wc-top b, .cat h3, .thumb.ph, .coupon b, .kitchen h2, .intro h1, .tent-shop, .pick-no b) { font-weight: 600; }
 .th-hotaru { --ember: #C8281E; --ember-2: #F0614F; --ember-ink: #A01E16; --on-accent: #fff; }
 .th-kaede { --ember: #B04A2A; --ember-2: #E0835F; --ember-ink: #8E3519; --on-accent: #fff; }
 .th-tomoshibi { --ember: #F2B705; --ember-2: #FFD54A; --ember-ink: #8A6400; --on-accent: #1C1816; }
