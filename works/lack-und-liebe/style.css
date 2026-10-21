@@ -44,7 +44,7 @@ h1 em, h2 em { font: italic 400 1.2em/.9 var(--serif); letter-spacing: 0; color:
 .nav a:hover { color: var(--berry); }
 .lang { display: inline-flex; align-items: center; min-height: 36px; border: 1px solid var(--line); border-radius: 999px; padding: 3px; background: var(--card); cursor: pointer; font: 700 12px var(--body); color: var(--ink-2); }
 .lang span { padding: 6px 10px; border-radius: 999px; }
-html[data-l="base"] .lang-base, html[data-l="en"] .lang-en { background: var(--plum); color: #fff; }
+html[data-l="base"] .lang-base, html[data-l="ja"] .lang-ja, html[data-l="en"] .lang-en { background: var(--plum); color: #fff; }
 .pages { background: var(--card); border-bottom: 1px solid var(--line); }
 
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 52px; padding: 0 24px; border: 0; border-radius: 999px; background: var(--berry); color: #fff; font: 700 16px var(--body); text-decoration: none; cursor: pointer; box-shadow: 0 12px 24px -14px rgba(179, 18, 78, .9); transition: background .2s, transform .2s var(--ease); }

@@ -36,7 +36,7 @@ h1, h2 { font-family: var(--serif); font-weight: 500; letter-spacing: -.01em; ma
 .nav a:hover { color: var(--blue); }
 .lang { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; padding: 3px; background: var(--card); cursor: pointer; font: 600 12px var(--sans); }
 .lang span { padding: 6px 10px; border-radius: 999px; color: var(--ink-2); }
-html[data-l="base"] .lang-base, html[data-l="en"] .lang-en { background: var(--ink); color: var(--paper); }
+html[data-l="base"] .lang-base, html[data-l="ja"] .lang-ja, html[data-l="en"] .lang-en { background: var(--ink); color: var(--paper); }
 
 .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 0 24px; border-radius: 999px; background: var(--blue); color: #fff; text-decoration: none; font-weight: 600; font-size: 16px; border: 0; cursor: pointer; transition: transform .2s var(--ease), background .2s; }
 .btn:hover { background: var(--blue-2); }
