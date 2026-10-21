@@ -45,6 +45,7 @@ Each page has a **base language** in the HTML text and **English in `data-en="�
 - Studio pages (home, services, about, etc.) are Japanese-base with English alternates.
 - The city landing pages were removed on 2026-10-20. `it`/`nl`/`de` base languages now only occur on concept sites.
 - Every new visible string needs both the base text and a `data-en` translation.
+- **Concept sites also have Japanese** (since 2026-10-21). Japanese lives in `data-ja` (plus `data-ja-alt`, `data-ja-ph`, `data-title-ja` on `<body>`); add `data-html` when the value has markup. A concept opens in the language the visitor chose on the studio site (`localStorage` key `ohs-ja-lang`), unless `?lang=` or their own choice on that concept says otherwise. Script-made text uses `tx({ ja: '…', en: '…', it: '…' })` and re-renders on the `langchange` event. Write Japanese as a Japanese shop would, not as a literal translation; brand names stay as they are.
 
 ## Concept sites (`works/`)
 
