@@ -173,3 +173,8 @@ html[data-l="base"] .lang-base, html[data-l="ja"] .lang-ja { background: var(--y
 .top .lang { color: var(--cream); }
 /* با دکمه‌ی زبان، دکمه‌ی بالای سربرگ روی گوشی جا نمی‌شود؛ همان دکمه پایینِ صفحه (.dock) هست */
 @media (max-width: 479px) { .top .pill { display: none; } }
+/* ژاپنی: تیترها کمی کوچک‌تر */
+html[data-l="ja"] :is(h1, .subhead h1) { font-size: 34px; }
+html[data-l="ja"] h2 { font-size: 26px; }
+html[data-l="ja"] :is(.mb h2, .pk-grid h2) { font-size: 22px; }
+@media (min-width: 820px) { html[data-l="ja"] :is(h1, .subhead h1) { font-size: 50px; } html[data-l="ja"] h2 { font-size: 36px; } html[data-l="ja"] :is(.mb h2, .pk-grid h2) { font-size: 24px; } }

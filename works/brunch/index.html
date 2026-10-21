@@ -12,69 +12,69 @@
 <link rel="stylesheet" href="../pages.css">
 <link rel="stylesheet" href="style.css">
 </head>
-<body data-base="en" data-default-lang="en" data-tz="America/Toronto" data-open="08:00" data-close="15:00" data-closed-day="2" data-key="mm">
+<body data-base="en" data-default-lang="en" data-tz="America/Toronto" data-open="08:00" data-close="15:00" data-closed-day="2" data-key="mm" data-title-ja="Maple &amp; Main · トロント・レスリービルのオールデイ・ブランチの店（コンセプト作品）">
 
-<div class="concept" role="note"><span>Concept project · Maple &amp; Main is a fictional restaurant</span>
+<div class="concept" role="note"><span data-ja="コンセプト作品 · Maple &amp; Main は架空のお店です">Concept project · Maple &amp; Main is a fictional restaurant</span>
    · 
-  <a href="../../work/brunch/index.html">Return</a>
+  <a href="../../work/brunch/index.html" data-ja="戻る">Return</a>
 </div>
 
 <header class="top">
   <a class="brand" href="index.html">Maple <span>&amp;</span> Main</a>
-  <nav class="bnav"><a href="menu.html">Menu</a><a href="events.html">Private events</a><a href="visit.html">Visit</a></nav>
+  <nav class="bnav"><a href="menu.html" data-ja="メニュー">Menu</a><a href="events.html" data-ja="貸切">Private events</a><a href="visit.html" data-ja="アクセス">Visit</a></nav>
   <div class="lang" role="group" aria-label="Language · 言語" data-lang-toggle><button type="button" data-set-lang="en" aria-label="English"><span class="lang-base">EN</span></button><button type="button" data-set-lang="ja" aria-label="日本語"><span class="lang-ja">JA</span></button></div>
-  <a class="pill" href="#waitlist">Join the waitlist</a>
+  <a class="pill" href="#waitlist" data-ja="順番待ちに登録">Join the waitlist</a>
 </header>
-<!-- pages --><nav class="pages" aria-label="Pages" style="--pg:#1F3B2D"><a href="index.html" aria-current="page">Home</a><a href="menu.html">Menu</a><a href="events.html">Private events</a><a href="visit.html">Visit</a></nav><!-- /pages -->
+<!-- pages --><nav class="pages" aria-label="Pages" style="--pg:#1F3B2D"><a href="index.html" aria-current="page" data-ja="トップ">Home</a><a href="menu.html" data-ja="メニュー">Menu</a><a href="events.html" data-ja="貸切">Private events</a><a href="visit.html" data-ja="アクセス">Visit</a></nav><!-- /pages -->
 
 <main>
   <section class="hero">
     <div class="hero-copy">
       <p class="status" data-status></p>
-      <h1>Brunch is not a meal.<br><em>It's a plan.</em></h1>
-      <p class="lead">Eggs benedict, buttermilk pancakes and bottomless coffee on Queen Street East. No reservations on weekends, so join the waitlist from your sofa.</p>
-      <div class="cta"><a class="btn" href="#waitlist">Join the waitlist</a><a class="btn ghost" href="#menu">See the menu</a></div>
+      <h1 data-ja="ブランチは、ただの食事じゃない。&lt;br&gt;&lt;em&gt;週末の予定です。&lt;/em&gt;" data-html>Brunch is not a meal.<br><em>It's a plan.</em></h1>
+      <p class="lead" data-ja="クイーン・ストリート・イーストで、エッグベネディクトにバターミルクパンケーキ、おかわり自由のコーヒーを。週末は予約を受け付けていないので、順番待ちの登録はおうちのソファからどうぞ。">Eggs benedict, buttermilk pancakes and bottomless coffee on Queen Street East. No reservations on weekends, so join the waitlist from your sofa.</p>
+      <div class="cta"><a class="btn" href="#waitlist" data-ja="順番待ちに登録">Join the waitlist</a><a class="btn ghost" href="#menu" data-ja="メニューを見る">See the menu</a></div>
     </div>
-    <div class="hero-plate"><img src="../../assets/photos/brunch-2.webp" alt="Eggs benedict with asparagus"><span class="sticker">Bottomless<br>coffee</span></div>
+    <div class="hero-plate"><img src="../../assets/photos/brunch-2.webp" alt="Eggs benedict with asparagus" data-ja-alt="アスパラガスを添えたエッグベネディクト"><span class="sticker" data-ja="コーヒー&lt;br&gt;おかわり自由" data-html>Bottomless<br>coffee</span></div>
   </section>
 
   <section class="waitlist" id="waitlist">
     <div class="wl-card">
       <div>
-        <p class="eyebrow">Weekend waitlist</p>
-        <h2>About <b data-wait>25</b> minutes right now</h2>
-        <p>Add your name and we will text you when your table is ten minutes away. Go for a walk in Jimmie Simpson Park.</p>
+        <p class="eyebrow" data-ja="週末の順番待ち">Weekend waitlist</p>
+        <h2 data-ja="ただいまの待ち時間は約&lt;b data-wait&gt;25&lt;/b&gt;分" data-html>About <b data-wait>25</b> minutes right now</h2>
+        <p data-ja="お名前を登録しておけば、席が空く10分前にSMSでお知らせします。それまでジミー・シンプソン公園をお散歩でもどうぞ。">Add your name and we will text you when your table is ten minutes away. Go for a walk in Jimmie Simpson Park.</p>
       </div>
       <form class="wl-form" data-wl>
-        <label><span>Name</span><input id="wl-name" required autocomplete="given-name"></label>
-        <label><span>Party size
+        <label><span data-ja="お名前">Name</span><input id="wl-name" required autocomplete="given-name"></label>
+        <label><span data-ja="人数">Party size
           </span><select id="wl-size"><option>1</option><option selected>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>
         </label>
-        <button type="submit">Add me to the list</button>
+        <button type="submit" data-ja="順番待ちに登録する">Add me to the list</button>
         <p class="wl-out" data-wl-out aria-live="polite"></p>
       </form>
     </div>
   </section>
 
   <section class="menu" id="menu">
-    <header class="head"><p class="eyebrow">The menu</p><h2>Served until 3pm, every day but Tuesday</h2></header>
+    <header class="head"><p class="eyebrow" data-ja="メニュー">The menu</p><h2 data-ja="火曜以外の毎日、15時まで">Served until 3pm, every day but Tuesday</h2></header>
     <div class="dishes">
-      <article><img src="../../assets/photos/brunch-4.webp" loading="lazy" alt="Eggs benedict"><div><h3>Peameal benny</h3><p>Toronto's own cured back bacon, poached eggs, hollandaise.</p><span class="tags"><i>House favourite</i></span></div><b>$19</b></article>
-      <article><img src="../../assets/photos/brunch-1.webp" loading="lazy" alt="Avocado toast with egg"><div><h3>Green toast</h3><p>Avocado, soft eggs, chilli crisp, sourdough.</p><span class="tags"><i>V</i></span></div><b>$17</b></article>
-      <article><img src="../../assets/photos/brunch-3.webp" loading="lazy" alt="Fried egg on rye with salad"><div><h3>Farmer's plate</h3><p>Fried eggs, rye, market salad, pickled onions.</p><span class="tags"><i>V</i><i>GF option</i></span></div><b>$18</b></article>
-      <article><img src="../../assets/photos/brunch-6.webp" loading="lazy" alt="Avocado toast with lemon"><div><h3>Smashed avo</h3><p>Lemon, chives, flaky salt. Add bacon for $4.</p><span class="tags"><i>VG</i></span></div><b>$15</b></article>
+      <article><img src="../../assets/photos/brunch-4.webp" loading="lazy" alt="Eggs benedict" data-ja-alt="エッグベネディクト"><div><h3 data-ja="ピーミール・ベニー">Peameal benny</h3><p data-ja="トロント名物のピーミールベーコンに、ポーチドエッグとオランデーズソース。">Toronto's own cured back bacon, poached eggs, hollandaise.</p><span class="tags"><i data-ja="いちばん人気">House favourite</i></span></div><b>$19</b></article>
+      <article><img src="../../assets/photos/brunch-1.webp" loading="lazy" alt="Avocado toast with egg" data-ja-alt="卵をのせたアボカドトースト"><div><h3 data-ja="グリーン・トースト">Green toast</h3><p data-ja="アボカド、半熟卵、食べるラー油をサワードウにのせて。">Avocado, soft eggs, chilli crisp, sourdough.</p><span class="tags"><i>V</i></span></div><b>$17</b></article>
+      <article><img src="../../assets/photos/brunch-3.webp" loading="lazy" alt="Fried egg on rye with salad" data-ja-alt="ライ麦パンに目玉焼きとサラダ"><div><h3 data-ja="ファーマーズ・プレート">Farmer's plate</h3><p data-ja="目玉焼き、ライ麦パン、季節のサラダ、玉ねぎのピクルス。">Fried eggs, rye, market salad, pickled onions.</p><span class="tags"><i>V</i><i data-ja="グルテンフリー可">GF option</i></span></div><b>$18</b></article>
+      <article><img src="../../assets/photos/brunch-6.webp" loading="lazy" alt="Avocado toast with lemon" data-ja-alt="レモンを添えたアボカドトースト"><div><h3 data-ja="スマッシュ・アボカド">Smashed avo</h3><p data-ja="レモン、チャイブ、フレーク塩で。ベーコン追加は$4。">Lemon, chives, flaky salt. Add bacon for $4.</p><span class="tags"><i data-ja="ヴィーガン">VG</i></span></div><b>$15</b></article>
     </div>
   </section>
 
   <section class="visit">
     <div class="v-grid">
-      <img src="../../assets/photos/brunch-5.webp" loading="lazy" alt="Hands holding a plate of toast">
+      <img src="../../assets/photos/brunch-5.webp" loading="lazy" alt="Hands holding a plate of toast" data-ja-alt="トーストの皿を手に持つ人">
       <dl>
-        <div><dt>Wed – Mon</dt><dd>8:00 – 15:00</dd></div>
-        <div><dt>Tuesday</dt><dd>Closed</dd></div>
-        <div><dt>Address</dt><dd>Queen Street East, Toronto (fictional)</dd></div>
-        <div><dt>Transit</dt><dd>501 streetcar, Logan Avenue stop</dd></div>
-        <div><dt>Good to know</dt><dd>High chairs, step-free entrance, dogs on the patio. <a href="visit.html">Plan your visit</a></dd></div>
+        <div><dt data-ja="水〜月">Wed – Mon</dt><dd>8:00 – 15:00</dd></div>
+        <div><dt data-ja="火">Tuesday</dt><dd data-ja="定休（貸切のみ）">Closed</dd></div>
+        <div><dt data-ja="住所">Address</dt><dd data-ja="トロント、クイーン・ストリート・イースト（架空）">Queen Street East, Toronto (fictional)</dd></div>
+        <div><dt data-ja="アクセス">Transit</dt><dd data-ja="路面電車501番、ローガン・アベニュー停留所">501 streetcar, Logan Avenue stop</dd></div>
+        <div><dt data-ja="ご来店の前に">Good to know</dt><dd data-ja="子ども用いすあり、入口は段差なし、テラス席はワンちゃんOK。&lt;a href=&quot;visit.html&quot;&gt;来店ガイドを見る&lt;/a&gt;" data-html>High chairs, step-free entrance, dogs on the patio. <a href="visit.html">Plan your visit</a></dd></div>
       </dl>
     </div>
   </section>
@@ -82,11 +82,11 @@
 
 <footer class="foot">
   <p class="foot-brand">Maple &amp; Main</p>
-  <p>This is a concept project. The restaurant, address and prices are fictional. Photos: CC0 (public domain).</p>
-  <details class="credits"><summary>Photo credits</summary><ul data-credits></ul></details>
+  <p data-ja="これはコンセプト作品です。お店、住所、価格はすべて架空のものです。写真：CC0（パブリックドメイン）。">This is a concept project. The restaurant, address and prices are fictional. Photos: CC0 (public domain).</p>
+  <details class="credits"><summary data-ja="写真クレジット">Photo credits</summary><ul data-credits></ul></details>
 </footer>
 
-<a class="dock" href="#waitlist">Join the waitlist</a>
+<a class="dock" href="#waitlist" data-ja="順番待ちに登録">Join the waitlist</a>
 <script src="../../assets/concept.js"></script>
 <script>
   // فهرستِ انتظار: زمانِ انتظار از روی ساعتِ تورنتو (آخرِ هفته شلوغ‌تر)؛ ثبت فقط نمایشی است
@@ -94,14 +94,22 @@
     var now = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Toronto' }));
     var weekend = now.getDay() === 0 || now.getDay() === 6, h = now.getHours();
     var wait = h < 8 || h >= 15 ? 0 : weekend ? (h >= 10 && h < 13 ? 45 : 25) : 10;
-    var w = document.querySelector('[data-wait]');
-    w.textContent = wait;
-    if (!wait) w.parentNode.innerHTML = 'No wait right now. See you tomorrow from 8am.';
+    function show() {
+      var b = document.querySelector('[data-wait]');
+      if (!b) return;
+      b.textContent = wait;
+      if (!wait) b.parentNode.textContent = tx({ ja: 'ただいま待ち時間はありません。また明日、朝8時からお待ちしています。', en: 'No wait right now. See you tomorrow from 8am.' });
+    }
+    var out = document.querySelector('[data-wl-out]'), msg = null;
+    show();
+    document.addEventListener('langchange', function () { show(); if (msg) out.textContent = msg(); });
     document.querySelector('[data-wl]').addEventListener('submit', function (e) {
       e.preventDefault();
       var name = document.getElementById('wl-name').value.trim();
       if (!name) { document.getElementById('wl-name').focus(); return; }
-      document.querySelector('[data-wl-out]').textContent = 'You are on the list, ' + name + ', party of ' + document.getElementById('wl-size').value + '. This is a concept, so no text will arrive.';
+      var size = document.getElementById('wl-size').value;
+      msg = function () { return tx({ ja: name + 'さま（' + size + '名）、順番待ちに登録しました。※コンセプトサイトのため、実際にSMSは届きません。', en: 'You are on the list, ' + name + ', party of ' + size + '. This is a concept, so no text will arrive.' }); };
+      out.textContent = msg();
     });
   })();
 </script>
