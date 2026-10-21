@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LINEで会員証とポイント｜こむぎ日和（コンセプト作品）</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="紙のポイントカードの代わりに、LINEの中の会員証。ポイント・クーポン・焼き上がりのお知らせ。パン屋「こむぎ日和」を例にした、LINEミニアプリのデモです。">
+<meta name="theme-color" content="#121010">
+<link rel="icon" href="../../favicon.ico" sizes="32x32">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kaisei+Decol:wght@400;500;700&family=M+PLUS+2:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="th-komugi" data-tz="Asia/Tokyo" data-open="07:30" data-close="18:00" data-closed-day="1" data-key="lo" data-title-en="Member card and points in LINE · Komugi Biyori (concept)">
+
+<div class="concept" role="note">
+  <span data-en="Concept · A demo of a LINE MINI App member card for a fictional bakery. The points and coupons are not real.">コンセプト作品 · 架空のパン屋でお見せする、LINEミニアプリの会員証デモです。ポイントやクーポンは実際には使えません。</span>
+   · <a href="../../work/line-komugi/index.html" data-en="Return">戻る</a>
+  <button class="lang" type="button" aria-label="JA EN, switch language" data-lang-toggle><span class="lang-ja">JA</span><span class="lang-en">EN</span></button>
+</div>
+<nav class="scen" aria-label="Scenarios" data-en-label><a href="index.html" data-en="Yakitori · pay later">焼き鳥 · 後払い</a><a href="hotaru.html" data-en="Ramen · pay in the queue">ラーメン · 並びながら先払い</a><a href="kaede.html" data-en="Coffee · takeaway">珈琲 · テイクアウト予約</a><a href="tomoshibi.html" data-en="Izakaya · free flow">居酒屋 · 飲み放題</a><a href="tsuki.html" data-en="Hair salon · booking">美容室 · LINEで予約</a><a href="sakura.html" data-en="Clinic · queue from home">クリニック · 順番受付</a><a href="komugi.html" aria-current="page" data-en="Bakery · member card">パン屋 · 会員証とポイント</a></nav>
+
+<div class="stage">
+  <aside class="intro">
+    <p class="eyebrow" data-en="Bakery · member card, points, coupons">パン屋 · 会員証・ポイント・クーポン</p>
+    <h1 data-en="The loyalty card&lt;br&gt;lives in LINE." data-html>会員証は、<br>LINEの中に。</h1>
+    <p class="lead" data-en="Instead of a paper card forgotten in a wallet, a member card in the LINE app guests open every day. Show the barcode at the till to earn points and use coupons. Tell them when their favourite bread comes out of the oven, and they come while it’s warm.">財布の中で忘れられる紙のカードの代わりに、いつも開いているLINEに会員証を。レジでバーコードを見せればポイントがたまり、クーポンもそのまま使えます。好きなパンの焼き上がりをお知らせすれば、焼きたての時間にお客さまが来てくれます。</p>
+    <figure class="tent">
+      <div class="tent-card">
+        <p class="tent-shop">こむぎ日和</p>
+        <img src="qr-komugi.svg" width="132" height="132" alt="このデモを開くQRコード" data-en-alt="QR code that opens this demo">
+        <p class="tent-seat" data-en="LINE member card">LINE会員証</p>
+        <p class="tent-hint" data-en="Scan with your phone to join">スマホで読み取って入会</p>
+      </div>
+      <figcaption data-en="Scan this with your phone camera to try the demo on your own phone.">スマホのカメラで読み取ると、ご自分のスマホでデモを試せます。</figcaption>
+    </figure>
+    <ol class="flow">
+      <li data-en="Add the shop from the QR by the till">レジ横のQRから友だち追加</li>
+      <li data-en="Join free, get 100 points">無料で会員になり、100ポイント</li>
+      <li data-en="Show the barcode at the till">レジでバーコードを見せる</li>
+      <li data-en="Get coupons and fresh-bread alerts">クーポンと焼き上がりのお知らせ</li>
+    </ol>
+  </aside>
+
+  <div class="device">
+    <div class="app" id="app" data-app>
+      <header class="mh">
+        <span class="mh-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16 29V9" stroke="#E3A65A" stroke-width="1.8" stroke-linecap="round"/><g fill="#E3A65A"><ellipse cx="16" cy="6" rx="2.4" ry="3.6"/><ellipse cx="12.6" cy="11" rx="2.2" ry="3.4" transform="rotate(-35 12.6 11)"/><ellipse cx="19.4" cy="11" rx="2.2" ry="3.4" transform="rotate(35 19.4 11)"/><ellipse cx="12.6" cy="16.5" rx="2.2" ry="3.4" transform="rotate(-35 12.6 16.5)"/><ellipse cx="19.4" cy="16.5" rx="2.2" ry="3.4" transform="rotate(35 19.4 16.5)"/><ellipse cx="12.8" cy="22" rx="2.1" ry="3.2" transform="rotate(-35 12.8 22)"/><ellipse cx="19.2" cy="22" rx="2.1" ry="3.2" transform="rotate(35 19.2 22)"/></g></svg></span>
+        <span class="mh-title"><b data-mh-title></b><small data-mh-sub></small></span>
+        <button class="mh-btn" type="button" data-restart><span class="sr" data-mh-restart></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </header>
+      <div class="screens" data-screens></div>
+      <div class="sheet-wrap" data-sheet hidden><div class="sheet-bg" data-close-sheet></div><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" data-sheet-body></div></div>
+      <div class="toast" data-toast role="status" aria-live="polite" hidden></div>
+    </div>
+  </div>
+
+  <aside class="kitchen" data-kitchen aria-labelledby="k-title">
+    <div class="k-head">
+      <div>
+        <p class="eyebrow" data-en="What the shop sees">お店側の画面</p>
+        <h2 id="k-title" data-en="Till screen">レジの画面</h2>
+      </div>
+      <button class="k-close" type="button" data-kitchen-close><span data-en="Back to the guest view">お客さまの画面に戻る</span></button>
+    </div>
+    <p class="k-note" data-en="Scan the member card and points and coupons apply on the spot.">スマホの会員証を読み取ると、ポイントとクーポンがその場で反映されます。</p>
+    <div data-side aria-live="polite"></div>
+  </aside>
+</div>
+
+<footer class="foot">
+  <p data-en="This is a concept project. The bakery, products and prices are fictional. A real version runs as a LINE MINI App connected to the shop’s till. Photos from free sources, see the credits.">これはコンセプト作品です。お店・商品・価格は架空です。実際の導入では、LINEミニアプリとして公開し、お店のPOSレジとつなげて動かします。写真は無料素材より、クレジットをご覧ください。</p>
+  <details class="credits"><summary data-en="Photo credits">写真クレジット</summary><ul data-credits></ul></details>
+</footer>
+
+<script src="scenarios/komugi.js"></script>
+<script src="auto.js"></script>
+<script src="svc.js"></script>
+<script src="../../assets/concept.js"></script>
+</body>
+</html>

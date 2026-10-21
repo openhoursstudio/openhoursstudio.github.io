@@ -858,6 +858,12 @@ html:not([lang="ja"]) .lx-card-body b { font: 700 22px/1.2 var(--display); lette
 .lx-others .note { margin-top: 26px; }
 @media (min-width: 900px) { .lx-apps.four { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 1181px) { .lx-apps.four { grid-template-columns: repeat(4, 1fr); } }
+/* گروهِ دوم (رزرو، نوبت، کارت عضویت): سه گوشی؛ و کاشیِ آخرِ فهرست که به تماس می‌برد */
+@media (min-width: 900px) { .lx-live.three { grid-template-columns: repeat(3, 1fr); } .lx-live.three .lx-phone { --k: .6; } }
+.lx-more { grid-template-rows: 1fr; min-height: 200px; background: var(--ink); color: #fff; box-shadow: none; }
+.lx-more .lx-card-body { align-content: center; padding: 28px 26px; }
+.lx-more .lx-card-body p { color: rgba(255, 255, 255, .75); }
+.lx-more .arrow { color: #fff; }
 .lx-home { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 6px 20px; margin: 48px 0 18px; padding-top: 28px; border-top: 1px solid var(--line); }
 .lx-home h3 { margin: 0; font: 700 21px/1.5 var(--jp-display); }
 html:not([lang="ja"]) .lx-home h3 { font: 700 26px/1.2 var(--display); letter-spacing: -.01em; }
