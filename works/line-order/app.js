@@ -528,21 +528,7 @@
   // ?embed … アプリだけを表示。?auto … 指の印つきで一巡して、また最初から。画面に触れたら自動は止まり、そのまま操作できる。
   var Q = new URLSearchParams(location.search);
   if (Q.has('embed')) document.body.classList.add('embed');
-  if (Q.has('auto') && !reduce.matches) autoplay();
-  function autoplay() {
-    var finger = document.createElement('i'), live = true, tm;
-    finger.className = 'tap'; finger.setAttribute('aria-hidden', 'true'); app.appendChild(finger);
-    function stop(e) {
-      if (!e.isTrusted || !live) return;
-      live = false; clearTimeout(tm); finger.remove();
-    }
-    // 自動のあいだはフォーカスを動かさない（埋め込んだページの入力欄からフォーカスを奪わないように）
-    var nativeFocus = HTMLElement.prototype.focus;
-    HTMLElement.prototype.focus = function () { if (!live) nativeFocus.apply(this, arguments); };
-    ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach(function (ev) { app.addEventListener(ev, stop, { capture: true, passive: true }); });
-    function scroller(el) { while (el && el !== app) { var o = getComputedStyle(el).overflowY; if ((o === 'auto' || o === 'scroll') && el.scrollHeight > el.clientHeight) return el; el = el.parentElement; } return null; }
-    function glide(sc, top) { if (sc) sc.scrollTo({ top: Math.max(0, top), behavior: 'smooth' }); }
-    function find(sel) { var el = app.querySelector(sel); if (el && el.matches('input')) el = el.closest('label') || el; return el && !el.disabled ? el : null; }
+  if (Q.has('auto') && !reduce.matches && window.LOAuto) {
     var A = (C.rank || []).filter(function (id) { return !byId[id].soldout; });
     var steps = [{ w: 1600 }, { s: '.welcome .pad', f: .45, w: 2200 }, { s: '.welcome .pad', f: 0, w: 900 }];
     if (C.guests) steps.push({ t: '[data-guests="2"]', w: 700 });
@@ -553,31 +539,7 @@
     if (PAY_FIRST) steps.push({ t: '[data-go="bill"]', w: 1800 }, { t: '[data-pay]', w: 6500 }, { t: '[data-finish]', w: 3800 });
     else steps.push({ t: '[data-send]', w: 6500 }, { t: '[data-go="bill"]', w: 2000 }, { t: '[data-pay]', w: 5200 });
     steps.push({ s: '.done .pad', f: 1, w: 2600 }, { r: 1, w: 600 });
-    var i = 0;
-    // 画面の外にあるあいだは止めておく（ページに4台並ぶので）
-    var seen = true;
-    if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { seen = en[0].isIntersecting; }).observe(app);
-    function next() {
-      if (!live) return;
-      if (!seen) return later(600);
-      var st = steps[i]; i = (i + 1) % steps.length;
-      if (st.r) { restart(); return later(st.w); }
-      if (st.s) { var sc = app.querySelector(st.s); if (sc) glide(sc, (sc.scrollHeight - sc.clientHeight) * st.f); return later(st.w); }
-      if (!st.t) return later(st.w);
-      var el = find(st.t); if (!el) return later(200);
-      var sc2 = scroller(el);
-      if (sc2) { var r = el.getBoundingClientRect(), b = sc2.getBoundingClientRect(); if (r.top < b.top + 40 || r.bottom > b.bottom - 80) glide(sc2, sc2.scrollTop + r.top - b.top - sc2.clientHeight / 2 + r.height / 2); }
-      tm = setTimeout(function () {
-        if (!live) return;
-        var r = el.getBoundingClientRect(), a = app.getBoundingClientRect();
-        finger.style.left = (r.left - a.left + r.width / 2) + 'px'; finger.style.top = (r.top - a.top + r.height / 2) + 'px';
-        finger.classList.remove('go'); void finger.offsetWidth; finger.classList.add('go');
-        tm = setTimeout(function () { var x = document.body.contains(el) ? el : find(st.t); if (live && x) x.click(); later(st.w); }, 380);
-      }, sc2 ? 520 : 120);
-    }
-    function later(ms) { tm = setTimeout(next, ms); }
-    later(400);
+    window.LOAuto(app, steps, restart);
   }
-
   render();
 })();

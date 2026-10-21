@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>LINEで順番受付｜さくら通りクリニック（コンセプト作品）</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="家からLINEで順番を取り、近づいたらLINEでお知らせ。待合室で長く待たずにすむ順番受付。内科・小児科「さくら通りクリニック」を例にした、LINEミニアプリのデモです。">
+<meta name="theme-color" content="#121010">
+<link rel="icon" href="../../favicon.ico" sizes="32x32">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=M+PLUS+Rounded+1c:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="th-sakura" data-tz="Asia/Tokyo" data-open="08:45" data-close="18:15" data-closed-day="0" data-key="lo" data-title-en="Queue from home in LINE · Sakura-dori Clinic (concept)">
+
+<div class="concept" role="note">
+  <span data-en="Concept · A demo of a LINE MINI App queue for a fictional clinic. Not medical advice.">コンセプト作品 · 架空のクリニックでお見せする、LINEミニアプリの順番受付デモです。医療の情報ではありません。</span>
+   · <a href="../../work/line-sakura/index.html" data-en="Return">戻る</a>
+  <button class="lang" type="button" aria-label="JA EN, switch language" data-lang-toggle><span class="lang-ja">JA</span><span class="lang-en">EN</span></button>
+</div>
+<nav class="scen" aria-label="Scenarios" data-en-label><a href="index.html" data-en="Yakitori · pay later">焼き鳥 · 後払い</a><a href="hotaru.html" data-en="Ramen · pay in the queue">ラーメン · 並びながら先払い</a><a href="kaede.html" data-en="Coffee · takeaway">珈琲 · テイクアウト予約</a><a href="tomoshibi.html" data-en="Izakaya · free flow">居酒屋 · 飲み放題</a><a href="tsuki.html" data-en="Hair salon · booking">美容室 · LINEで予約</a><a href="sakura.html" aria-current="page" data-en="Clinic · queue from home">クリニック · 順番受付</a><a href="komugi.html" data-en="Bakery · member card">パン屋 · 会員証とポイント</a></nav>
+
+<div class="stage">
+  <aside class="intro">
+    <p class="eyebrow" data-en="Clinic · wait at home, not in the waiting room">クリニック · 家で待てる順番受付</p>
+    <h1 data-en="Wait at home,&lt;br&gt;not in the waiting room." data-html>待合室ではなく、<br>家で待つ。</h1>
+    <p class="lead" data-en="An hour in a crowded waiting room with a feverish child. This changes that. Patients take a number in LINE from home, see which number is being called, and get a LINE message when three people are left. A short check-in form comes with it.">熱のある子を抱えて、混んだ待合室で一時間。そんな待ち方を変える順番受付です。家からLINEで順番を取り、いま何番を呼んでいるかをいつでも確認。あと3人になったらLINEでお知らせが届きます。かんたんな問診も、受付と一緒に。</p>
+    <figure class="tent">
+      <div class="tent-card">
+        <p class="tent-shop">さくら通りクリニック</p>
+        <img src="qr-sakura.svg" width="132" height="132" alt="このデモを開くQRコード" data-en-alt="QR code that opens this demo">
+        <p class="tent-seat" data-en="Take a number in LINE">LINEで順番受付</p>
+        <p class="tent-hint" data-en="Scan with your phone">スマホで読み取って受付</p>
+      </div>
+      <figcaption data-en="Scan this with your phone camera to try the demo on your own phone.">スマホのカメラで読み取ると、ご自分のスマホでデモを試せます。</figcaption>
+    </figure>
+    <ol class="flow">
+      <li data-en="Tap “Take a number” in LINE">LINEのメニューから「順番受付」</li>
+      <li data-en="Answer a few quick questions">かんたんな問診に答える</li>
+      <li data-en="Wait at home and watch the queue">家で待ち、呼び出し状況を見る</li>
+      <li data-en="Get a LINE message when 3 are left">あと3人でLINEにお知らせ</li>
+    </ol>
+  </aside>
+
+  <div class="device">
+    <div class="app" id="app" data-app>
+      <header class="mh">
+        <span class="mh-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><g fill="#FFC9D6"><ellipse cx="16" cy="8.5" rx="4" ry="5.5"/><ellipse cx="16" cy="8.5" rx="4" ry="5.5" transform="rotate(72 16 16)"/><ellipse cx="16" cy="8.5" rx="4" ry="5.5" transform="rotate(144 16 16)"/><ellipse cx="16" cy="8.5" rx="4" ry="5.5" transform="rotate(216 16 16)"/><ellipse cx="16" cy="8.5" rx="4" ry="5.5" transform="rotate(288 16 16)"/></g><path d="M14 12.5h4v2h2v4h-2v2h-4v-2h-2v-4h2z" fill="#187575"/></svg></span>
+        <span class="mh-title"><b data-mh-title></b><small data-mh-sub></small></span>
+        <button class="mh-btn" type="button" data-restart><span class="sr" data-mh-restart></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </header>
+      <div class="screens" data-screens></div>
+      <div class="sheet-wrap" data-sheet hidden><div class="sheet-bg" data-close-sheet></div><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" data-sheet-body></div></div>
+      <div class="toast" data-toast role="status" aria-live="polite" hidden></div>
+    </div>
+  </div>
+
+  <aside class="kitchen" data-kitchen aria-labelledby="k-title">
+    <div class="k-head">
+      <div>
+        <p class="eyebrow" data-en="What the clinic sees">クリニック側の画面</p>
+        <h2 id="k-title" data-en="Reception screen">受付の画面</h2>
+      </div>
+      <button class="k-close" type="button" data-kitchen-close><span data-en="Back to the guest view">お客さまの画面に戻る</span></button>
+    </div>
+    <p class="k-note" data-en="LINE and walk-in patients share one queue. Press “Call the next patient” and the phone updates too.">LINEの受付と窓口の受付が、一つの列に並びます。「次の方を呼ぶ」を押すと、患者さんのスマホにも反映されます。</p>
+    <div data-side aria-live="polite"></div>
+  </aside>
+</div>
+
+<footer class="foot">
+  <p data-en="This is a concept project. The clinic is fictional and nothing here is medical advice. A real version runs as a LINE MINI App connected to the clinic’s reception system.">これはコンセプト作品です。クリニック・診療内容は架空で、医療の情報ではありません。実際の導入では、LINEミニアプリとして公開し、クリニックの受付システムとつなげて動かします。</p>
+</footer>
+
+<script src="scenarios/sakura.js"></script>
+<script src="auto.js"></script>
+<script src="svc.js"></script>
+<script src="../../assets/concept.js"></script>
+</body>
+</html>
