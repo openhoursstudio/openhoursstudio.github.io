@@ -1,8 +1,9 @@
 // 大衆酒場ともしび（新橋の居酒屋）：飲み放題を席で選び、残り時間を見ながら注文。グラス交換制で、最後にお会計。
 window.LO = {
   flow: 'course', seats: 12, seat: 4, seq: 1203, prefix: '#', guests: true,
+  picks: ['karaage', 'potesara', 'dashimaki', 'kushi'], rank: ['karaage', 'potesara', 'lemon'], calls: true,
   hero: { src: 'torisumi-22.webp' },
-  otoshi: { p: 300 },
+  otoshi: { p: 300, img: 'lo-izakaya-otoshi' }, courseImg: 'lo-izakaya-beer',
   courses: [
     { min: 90, p: 1800, ja: ['飲み放題 90分', '生ビール・ハイボール・サワー・日本酒・ソフトドリンク'], en: ['Free flow, 90 minutes', 'Draught beer, highballs, sours, sake and soft drinks'] },
     { min: 120, p: 2300, ja: ['飲み放題 120分', '内容は90分と同じです'], en: ['Free flow, 120 minutes', 'Same drinks as the 90-minute plan'] },
@@ -11,22 +12,23 @@ window.LO = {
   cats: [{ id: 'drink', ja: 'お飲みもの', en: 'Drinks' }, { id: 'food', ja: 'おつまみ', en: 'Small plates' }, { id: 'main', ja: '揚げもの・焼きもの', en: 'Fried & grilled' }, { id: 'shime', ja: '〆', en: 'To finish' }],
   menu: [
     { id: 'beer', cat: 'drink', drink: true, p: 550, img: 'torisumi-14', tag: ['とりあえず', 'First round'], ja: ['生ビール（中）', ''], en: ['Draught beer (medium)', ''] },
-    { id: 'high', cat: 'drink', drink: true, p: 450, ja: ['角ハイボール', ''], en: ['Highball', ''] },
-    { id: 'lemon', cat: 'drink', drink: true, p: 450, opts: [{ def: 0, ja: ['濃さ', ['ふつう', '濃いめ']], en: ['Strength', ['Regular', 'Strong']] }], ja: ['レモンサワー', '生のレモンを搾って。'], en: ['Lemon sour', 'With fresh-squeezed lemon.'] },
+    { id: 'high', cat: 'drink', drink: true, p: 450, img: 'lo-highball', ja: ['角ハイボール', ''], en: ['Highball', ''] },
+    { id: 'lemon', cat: 'drink', drink: true, p: 450, img: 'lo-lemon-sour', opts: [{ def: 0, ja: ['濃さ', ['ふつう', '濃いめ']], en: ['Strength', ['Regular', 'Strong']] }], ja: ['レモンサワー', '生のレモンを搾って。'], en: ['Lemon sour', 'With fresh-squeezed lemon.'] },
     { id: 'sake', cat: 'drink', drink: true, p: 600, img: 'torisumi-13', opts: [{ def: 0, ja: ['温度', ['冷や', '熱燗']], en: ['Serve', ['Cold', 'Hot']] }], ja: ['日本酒（一合）', ''], en: ['Sake (180 ml)', ''] },
-    { id: 'oolong', cat: 'drink', drink: true, p: 300, ja: ['ウーロン茶', ''], en: ['Oolong tea', ''] },
-    { id: 'orange', cat: 'drink', drink: true, p: 300, ja: ['オレンジジュース', ''], en: ['Orange juice', ''] },
-    { id: 'edamame', cat: 'food', p: 380, ja: ['枝豆', '塩ゆでで、すぐ出ます。'], en: ['Edamame', 'Salted, out in a minute.'] },
-    { id: 'potesara', cat: 'food', p: 480, tag: ['名物', 'House special'], ja: ['ポテトサラダ', 'いぶりがっこ入り。'], en: ['Potato salad', 'With smoked pickled radish.'] },
+    { id: 'oolong', cat: 'drink', drink: true, p: 300, img: 'lo-oolong', ja: ['ウーロン茶', ''], en: ['Oolong tea', ''] },
+    { id: 'orange', cat: 'drink', drink: true, p: 300, img: 'lo-orange', ja: ['オレンジジュース', ''], en: ['Orange juice', ''] },
+    { id: 'edamame', cat: 'food', pair: ['beer'], p: 380, img: 'lo-edamame', ja: ['枝豆', '塩ゆでで、すぐ出ます。'], en: ['Edamame', 'Salted, out in a minute.'] },
+    { id: 'potesara', cat: 'food', pair: ['beer'], p: 480, img: 'lo-potesara', tag: ['名物', 'House special'], ja: ['ポテトサラダ', 'いぶりがっこ入り。'], en: ['Potato salad', 'With smoked pickled radish.'] },
     { id: 'tsuke', cat: 'food', p: 450, img: 'torisumi-15', ja: ['漬物盛り合わせ', ''], en: ['Pickle plate', ''] },
-    { id: 'dashimaki', cat: 'food', p: 580, ja: ['だし巻き玉子', '注文を受けてから焼きます。'], en: ['Dashimaki omelette', 'Rolled to order.'] },
-    { id: 'karaage', cat: 'main', p: 680, tag: ['人気', 'Popular'], ja: ['鶏の唐揚げ（5個）', 'にんにく醤油に一晩。'], en: ['Fried chicken (5)', 'Marinated overnight in garlic and soy.'] },
-    { id: 'kushi', cat: 'main', p: 980, img: 'torisumi-5', ja: ['焼き鳥盛り合わせ（5本）', '塩とタレ、おまかせで。'], en: ['Yakitori platter (5)', 'Salt and tare, chef’s choice.'] },
-    { id: 'onigiri', cat: 'shime', p: 380, ja: ['焼きおにぎり（2個）', '醤油を塗って、香ばしく。'], en: ['Grilled rice balls (2)', 'Brushed with soy and toasted.'] },
-    { id: 'ochazuke', cat: 'shime', p: 480, ja: ['鮭茶漬け', ''], en: ['Salmon ochazuke', 'Rice in hot tea broth.'] }
+    { id: 'dashimaki', cat: 'food', pair: ['sake'], p: 580, img: 'lo-dashimaki', ja: ['だし巻き玉子', '注文を受けてから焼きます。'], en: ['Dashimaki omelette', 'Rolled to order.'] },
+    { id: 'karaage', cat: 'main', pair: ['lemon', 'high'], p: 680, img: 'lo-karaage', ja: ['鶏の唐揚げ（5個）', 'にんにく醤油に一晩。'], en: ['Fried chicken (5)', 'Marinated overnight in garlic and soy.'] },
+    { id: 'kushi', cat: 'main', pair: ['beer', 'sake'], p: 980, img: 'torisumi-5', ja: ['焼き鳥盛り合わせ（5本）', '塩とタレ、おまかせで。'], en: ['Yakitori platter (5)', 'Salt and tare, chef’s choice.'] },
+    { id: 'onigiri', cat: 'shime', p: 380, img: 'lo-yaki-onigiri', ja: ['焼きおにぎり（2個）', '醤油を塗って、香ばしく。'], en: ['Grilled rice balls (2)', 'Brushed with soy and toasted.'] },
+    { id: 'ochazuke', cat: 'shime', soldout: true, p: 480, img: 'lo-ochazuke', ja: ['鮭茶漬け', ''], en: ['Salmon ochazuke', 'Rice in hot tea broth.'] }
   ],
   t: {
     ja: {
+      kind: '大衆酒場 · 新橋', newsBody: ['だし巻き玉子は、注文を受けてから焼いています。', '忘年会のご予約を受付中です。LINEのトークからどうぞ。'], infoRows: [['営業時間', '16:00〜23:30（日曜定休）'], ['お席', 'テーブル12卓・小上がり'], ['お支払い', 'PayPay・クレジットカード・交通系IC・現金'], ['場所', '東京・新橋（架空のお店です）'], ['メニュー', '日本語・English']], calls: ['お水', '取り皿', 'おしぼり', 'お箸', 'お会計について', 'そのほか'],
       shop: '大衆酒場ともしび', title: 'ともしび モバイルオーダー', sub: function (s) { return 'テーブル ' + s + '番'; },
       welcome: 'ともしびへ、ようこそ。', scanned: function (s) { return 'テーブル ' + s + '番 のQRコードを読み取りました。'; },
       courseQ: '飲み放題をつけますか？', perHeadUnit: '／人',
@@ -41,6 +43,7 @@ window.LO = {
       couponBody: '次回、生ビール一杯サービス', kSeat: function (s) { return 'テーブル ' + s + '番'; }, kPaid: function (m) { return 'お会計済み · ' + m; }
     },
     en: {
+      kind: 'Izakaya · Shinbashi', newsBody: ['Our dashimaki omelette is rolled to order.', 'Booking a year-end party? Message us in LINE.'], infoRows: [['Hours', '16:00–23:30, closed Sundays'], ['Seats', '12 tables and a raised tatami area'], ['Payment', 'PayPay, cards, transit IC, cash'], ['Where', 'Shinbashi, Tokyo (a fictional shop)'], ['Menu', 'Japanese and English']], calls: ['Water', 'Extra plates', 'Hand towels', 'Chopsticks', 'About the bill', 'Something else'],
       shop: 'Tomoshibi', title: 'Tomoshibi · Order', sub: function (s) { return 'Table ' + s; },
       welcome: 'Welcome to Tomoshibi.', scanned: function (s) { return 'You scanned the QR code at table ' + s + '.'; },
       courseQ: 'Add a free-flow drinks plan?', perHeadUnit: ' per person',
