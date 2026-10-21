@@ -14,17 +14,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
-<body data-tz="Asia/Tokyo" data-open="17:00" data-close="00:00" data-closed-day="1" data-key="lo" data-title-en="Table ordering in LINE · Tori to Sumi (concept)">
+<body class="th-tori" data-tz="Asia/Tokyo" data-open="17:00" data-close="00:00" data-closed-day="1" data-key="lo" data-title-en="Table ordering in LINE · Tori to Sumi (concept)">
 
 <div class="concept" role="note">
   <span data-en="Concept · A demo of LINE MINI App ordering for a fictional yakitori bar. No real payment is made.">コンセプト作品 · 架空の焼き鳥屋でお見せする、LINEミニアプリの注文デモです。実際の支払いは発生しません。</span>
    · <a href="../../work/line-order/index.html" data-en="Return">戻る</a>
   <button class="lang" type="button" aria-label="JA EN, switch language" data-lang-toggle><span class="lang-ja">JA</span><span class="lang-en">EN</span></button>
 </div>
+<nav class="scen" aria-label="Scenarios" data-en-label><a href="index.html" aria-current="page" data-en="Yakitori · pay later">焼き鳥 · 後払い</a><a href="hotaru.html" data-en="Ramen · pay in the queue">ラーメン · 並びながら先払い</a><a href="kaede.html" data-en="Coffee · takeaway">珈琲 · テイクアウト予約</a><a href="tomoshibi.html" data-en="Izakaya · free flow">居酒屋 · 飲み放題</a></nav>
 
 <div class="stage">
   <aside class="intro">
-    <p class="eyebrow" data-en="LINE MINI App · Mobile order">LINEミニアプリ · モバイルオーダー</p>
+    <p class="eyebrow" data-en="Yakitori bar · order as you go, pay at the end">焼き鳥屋 · 少しずつ頼んで、最後にお会計</p>
     <h1 data-en="Scan the seat,&lt;br&gt;order in LINE." data-html>席のQRから、<br>LINEで注文。</h1>
     <p class="lead" data-en="No app to install, no waving for staff. Guests open the menu in the LINE they already use, order a few skewers at a time, and pay from their phone at the end.">アプリのインストールも、店員さんを呼ぶ声もいりません。いつものLINEでメニューを開き、串を少しずつ注文して、最後はスマホでお会計。</p>
     <figure class="tent">
@@ -73,10 +74,11 @@
 </div>
 
 <footer class="foot">
-  <p data-en="This is a concept project. The bar, menu and prices are fictional, and no payment is processed. A real version runs as a LINE MINI App with a payment provider such as PayPay or a card company. Photos from Wikimedia Commons under CC licences, see the credits.">これはコンセプト作品です。お店・メニュー・価格は架空で、決済は行われません。実際の導入では、LINEミニアプリとして公開し、PayPayやカード会社などの決済サービスと契約して動かします。写真はWikimedia Commons（CCライセンス）より、クレジットをご覧ください。</p>
+  <p data-en="This is a concept project. The bar, menu and prices are fictional, and no payment is processed. A real version runs as a LINE MINI App with a payment provider such as PayPay or a card company. Photos from Wikimedia Commons and other free sources, see the credits.">これはコンセプト作品です。お店・メニュー・価格は架空で、決済は行われません。実際の導入では、LINEミニアプリとして公開し、PayPayやカード会社などの決済サービスと契約して動かします。写真はWikimedia Commonsなどの無料素材より、クレジットをご覧ください。</p>
   <details class="credits"><summary data-en="Photo credits">写真クレジット</summary><ul data-credits></ul></details>
 </footer>
 
+<script src="scenarios/tori.js"></script>
 <script src="app.js"></script>
 <script src="../../assets/concept.js"></script>
 </body>

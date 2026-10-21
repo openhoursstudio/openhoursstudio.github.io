@@ -15,6 +15,7 @@
   --ink-2: #61564D;
   --rule: #E7DCCB;
   --ok: #1F8A4C;
+  --on-accent: var(--night);
   --mincho: "Shippori Mincho B1", "Hiragino Mincho ProN", "Yu Mincho", serif;
   --sans: "Zen Kaku Gothic New", "Hiragino Sans", system-ui, sans-serif;
   --ease: cubic-bezier(.22, 1, .36, 1);
@@ -38,6 +39,18 @@ button { font: inherit; color: inherit; }
 .lang { display: inline-flex; gap: 2px; min-height: 30px; padding: 3px; border: 0; border-radius: 999px; background: rgba(18, 16, 16, .1); cursor: pointer; font-size: 12px; font-weight: 700; }
 .lang span { padding: 2px 9px; border-radius: 999px; }
 html:not([lang="en"]) .lang-ja, html[lang="en"] .lang-en { background: var(--night); color: var(--paper); }
+
+/* رنگِ هر سناریو: فقط رنگِ تأکید عوض می‌شود، بقیه‌ی صحنه یکی است */
+.th-hotaru { --ember: #C8281E; --ember-2: #F0614F; --ember-ink: #A01E16; --on-accent: #fff; }
+.th-kaede { --ember: #B04A2A; --ember-2: #E0835F; --ember-ink: #8E3519; --on-accent: #fff; }
+.th-tomoshibi { --ember: #F2B705; --ember-2: #FFD54A; --ember-ink: #8A6400; --on-accent: #1C1816; }
+
+/* نوارِ انتخابِ سناریو */
+.scen { flex: none; display: flex; gap: 6px; overflow-x: auto; padding: 6px 12px; background: var(--night-2); scrollbar-width: none; font-size: 12px; }
+.scen::-webkit-scrollbar { display: none; }
+.scen a { flex: none; padding: 4px 11px; border-radius: 999px; color: var(--paper-2); text-decoration: none; box-shadow: inset 0 0 0 1px rgba(243, 234, 219, .2); white-space: nowrap; }
+.scen a:hover { color: var(--paper); }
+.scen a[aria-current] { background: var(--paper); color: var(--night); font-weight: 700; box-shadow: none; }
 
 /* صحنه: روی گوشی فقط خودِ اپ، به اندازه‌ی صفحه و بدون اسکرولِ صفحه */
 body { display: flex; flex-direction: column; height: 100vh; height: 100dvh; overflow: hidden; }
@@ -66,10 +79,10 @@ body { display: flex; flex-direction: column; height: 100vh; height: 100dvh; ove
 .pad { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 18px 18px 24px; }
 .bar { flex: none; display: grid; gap: 8px; padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); border-top: 1px solid var(--rule); background: #fff; }
 .bar.two, .two { grid-template-columns: 1fr 1.3fr; display: grid; gap: 8px; }
-.cta { display: flex; align-items: center; justify-content: center; min-height: 50px; padding: 0 16px; border: 0; border-radius: 14px; background: var(--ember); color: var(--night); font-weight: 700; font-size: 15px; cursor: pointer; text-align: center; line-height: 1.3; transition: transform .15s; }
+.cta { display: flex; align-items: center; justify-content: center; min-height: 50px; padding: 0 16px; border: 0; border-radius: 14px; background: var(--ember); color: var(--on-accent); font-weight: 700; font-size: 15px; cursor: pointer; text-align: center; line-height: 1.3; transition: transform .15s; }
 .cta:active { transform: scale(.98); }
 .cta:disabled { opacity: .4; cursor: default; }
-.cta.ghost { background: transparent; box-shadow: inset 0 0 0 1.5px var(--ink); }
+.cta.ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); }
 .link { border: 0; background: none; padding: 8px 0; color: var(--ember-ink); font-weight: 700; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
 .back { border: 0; background: none; padding: 6px 0; margin-bottom: 6px; color: var(--ink-2); font-size: 14px; cursor: pointer; }
 .small { font-size: 13px; color: var(--ink-2); margin-top: 8px; }
@@ -107,7 +120,7 @@ html[lang="en"] .scr h2 { letter-spacing: 0; }
 .i-text b { font-size: 15px; line-height: 1.4; }
 .i-text span { font-size: 12.5px; color: var(--ink-2); line-height: 1.5; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .i-text em { font-style: normal; font-weight: 700; color: var(--ember-ink); font-variant-numeric: tabular-nums; }
-.tag { display: inline-block; margin-left: 6px; padding: 0 7px; border-radius: 999px; background: var(--ember); color: var(--night); font-style: normal; font-size: 11px; vertical-align: 2px; }
+.tag { display: inline-block; margin-left: 6px; padding: 0 7px; border-radius: 999px; background: var(--ember); color: var(--on-accent); font-style: normal; font-size: 11px; vertical-align: 2px; }
 .plus { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--ink); color: var(--cream); font-size: 20px; line-height: 1; }
 .allergy { margin-top: 18px; }
 
@@ -250,6 +263,8 @@ body.k-open .kitchen { display: block; position: fixed; inset: 0; z-index: 50; o
 /* ── پنجره‌ی بزرگ: معرفی، گوشی، تبلت ── */
 @media (min-width: 1000px) {
   body { display: block; height: auto; overflow: visible; }
+  .scen { justify-content: center; flex-wrap: wrap; padding: 10px 20px; font-size: 13px; }
+  .scen a { padding: 5px 14px; }
   .concept { justify-content: center; font-size: 13px; padding: 8px 20px; }
   .concept .lang { margin-inline-start: 12px; }
   .stage { height: auto; display: grid; grid-template-columns: 390px minmax(300px, 420px); grid-template-areas: "intro intro" "device kitchen"; justify-content: center; align-items: start; gap: 40px 48px; padding: 40px 32px 56px; }
@@ -290,6 +305,27 @@ html[lang="en"] .intro h1 { letter-spacing: -.01em; }
 .credits summary { cursor: pointer; }
 .credits ul { margin: 8px 0 0; padding-left: 1.2em; }
 .credits a { color: var(--paper-2); }
+
+/* اجزای سناریوها */
+.courses .pm { grid-template-columns: auto 1fr auto; }
+.courses .pm em { font-style: normal; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.slots { margin: 18px 0 0; padding: 0; border: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.slots legend { margin-bottom: 8px; font-weight: 700; font-size: 14px; }
+.slots label { display: flex; align-items: center; gap: 8px; min-height: 48px; padding: 8px 12px; border-radius: 14px; background: #fff; box-shadow: inset 0 0 0 1px var(--rule); cursor: pointer; font-size: 14px; line-height: 1.3; }
+.slots label:has(input:checked) { box-shadow: inset 0 0 0 2px var(--ink); font-weight: 700; }
+.slots input { flex: none; width: 18px; height: 18px; margin: 0; accent-color: var(--ink); }
+.timer { flex: none; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 7px 14px; background: var(--ink); color: var(--cream); font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.timer button { flex: none; min-height: 32px; padding: 0 10px; border: 0; border-radius: 999px; background: rgba(251, 246, 238, .14); color: inherit; font-size: 12px; font-weight: 500; cursor: pointer; }
+.timer.pick { justify-content: center; background: #F3EDE3; color: var(--ink); font-weight: 500; }
+.pick-at { font-weight: 700; }
+.pick-no { display: grid; justify-items: center; gap: 2px; margin: 12px auto 0; padding: 14px 18px; max-width: 260px; border-radius: 18px; background: #fff; box-shadow: inset 0 0 0 2px var(--ink); text-align: center; line-height: 1.3; }
+.pick-no small { font-size: 12px; color: var(--ink-2); }
+.pick-no b { font-family: var(--mincho); font-size: 44px; letter-spacing: .04em; }
+.pick-no span { font-size: 14px; font-weight: 700; }
+.freep { color: var(--ok); }
+.item:disabled { opacity: .45; cursor: default; }
+.cup { margin-top: 10px; padding: 8px 10px; border-radius: 10px; background: #F3EDE3; }
+.t-paid { display: inline-block; margin-top: 6px; padding: 1px 8px; border-radius: 999px; background: var(--ok); color: #fff; font-size: 12px; font-weight: 700; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
