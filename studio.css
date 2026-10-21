@@ -414,6 +414,7 @@ html[lang="ja"] .foot-line { font: 700 17px var(--jp); }
 .svc-card b { font-size: 20px; }
 html:not([lang="ja"]) .svc-card b { font: 700 24px/1.15 var(--display); letter-spacing: -.01em; }
 .svc-short { color: var(--ink-2); font-size: 15px; }
+.svc-card.wide { grid-column: 1 / -1; }
 .svc-grid.small .svc-card { padding: 18px; }
 .svc-grid.small .svc-card b { font-size: 18px; }
 .svc-more h2, .related h2 { margin-bottom: 20px; }

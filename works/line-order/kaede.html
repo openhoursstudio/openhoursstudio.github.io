@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>テイクアウトの事前注文｜かえでとケトル（コンセプト作品）</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="LINEの公式アカウントから、テイクアウトを事前に注文して支払い。受け取り時間と番号つき。珈琲店「かえでとケトル」を例にした、LINEミニアプリのデモです。">
+<meta name="theme-color" content="#121010">
+<link rel="icon" href="../../favicon.ico" sizes="32x32">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="th-kaede" data-tz="Asia/Tokyo" data-open="08:00" data-close="18:00" data-closed-day="3" data-key="lo" data-title-en="Order ahead for takeaway · Kaede &amp; Kettle (concept)">
+
+<div class="concept" role="note">
+  <span data-en="Concept · A demo of LINE MINI App ordering for a fictional coffee shop. No real payment is made.">コンセプト作品 · 架空の珈琲店でお見せする、LINEミニアプリの注文デモです。実際の支払いは発生しません。</span>
+   · <a href="../../work/line-order/index.html" data-en="Return">戻る</a>
+  <button class="lang" type="button" aria-label="JA EN, switch language" data-lang-toggle><span class="lang-ja">JA</span><span class="lang-en">EN</span></button>
+</div>
+<nav class="scen" aria-label="Scenarios" data-en-label><a href="index.html" data-en="Yakitori · pay later">焼き鳥 · 後払い</a><a href="hotaru.html" data-en="Ramen · pay in the queue">ラーメン · 並びながら先払い</a><a href="kaede.html" aria-current="page" data-en="Coffee · takeaway">珈琲 · テイクアウト予約</a><a href="tomoshibi.html" data-en="Izakaya · free flow">居酒屋 · 飲み放題</a></nav>
+
+<div class="stage">
+  <aside class="intro">
+    <p class="eyebrow" data-en="Coffee shop · order ahead for takeaway">珈琲店 · テイクアウトの事前注文</p>
+    <h1 data-en="Skip the queue.&lt;br&gt;Just pick it up." data-html>並ばずに、<br>受け取るだけ。</h1>
+    <p class="lead" data-en="A coffee without the morning queue. Order and pay from the shop’s LINE menu and choose a pick-up time. LINE tells you when it’s ready, and your cup waits on the shelf with your number on it.">朝の行列でも、待たずに一杯を。LINEの公式アカウントのメニューから注文と支払いをすませ、受け取り時間を選ぶだけ。できあがったらLINEに届き、番号の札がついたカップを棚から持っていきます。</p>
+    <figure class="tent">
+      <div class="tent-card">
+        <p class="tent-shop">かえでとケトル</p>
+        <img src="qr-kaede.svg" width="132" height="132" alt="このデモを開くQRコード" data-en-alt="QR code that opens this demo">
+        <p class="tent-seat" data-en="Add us on LINE">LINEで友だち追加</p>
+        <p class="tent-hint" data-en="Tap “Takeaway” in our menu">メニューの「テイクアウト」から</p>
+      </div>
+      <figcaption data-en="Scan this with your phone camera to try the demo on your own phone.">スマホのカメラで読み取ると、ご自分のスマホでデモを試せます。</figcaption>
+    </figure>
+    <ol class="flow">
+      <li data-en="Open the shop’s LINE menu">公式アカウントのメニューを開く</li>
+      <li data-en="Choose a pick-up time">受け取り時間を選ぶ</li>
+      <li data-en="Order and pay ahead">注文して、先に支払う</li>
+      <li data-en="Get the “ready” message, pick it up">できあがりの通知で、棚から受け取る</li>
+    </ol>
+  </aside>
+
+  <div class="device">
+    <div class="app" id="app" data-app>
+      <header class="mh">
+        <span class="mh-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M8 12h14v7a7 7 0 0 1-14 0z" fill="#F5EFE6"/><path d="M22 14h2a3 3 0 0 1 0 6h-2" stroke="#F5EFE6" stroke-width="2" fill="none"/><path d="M15 4l1.6 3.4 3.4-1-1.2 3.3H11.2L10 6.4l3.4 1z" fill="#E08A5C"/></svg></span>
+        <span class="mh-title"><b data-mh-title></b><small data-mh-sub></small></span>
+        <button class="mh-btn" type="button" data-restart><span class="sr" data-mh-restart></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </header>
+      <div class="screens" data-screens></div>
+      <div class="sheet-wrap" data-sheet hidden><div class="sheet-bg" data-close-sheet></div><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" data-sheet-body></div></div>
+      <div class="toast" data-toast role="status" aria-live="polite" hidden></div>
+    </div>
+  </div>
+
+  <aside class="kitchen" data-kitchen aria-labelledby="k-title">
+    <div class="k-head">
+      <div>
+        <p class="eyebrow" data-en="What the shop sees">お店側の画面</p>
+        <h2 id="k-title" data-en="Counter tablet">カウンターのタブレット</h2>
+      </div>
+      <button class="k-close" type="button" data-kitchen-close><span data-en="Back to the guest view">お客さまの画面に戻る</span></button>
+    </div>
+    <p class="k-note" data-en="Orders from the phone appear here instantly. Tap to move them along; the guest sees the change.">スマホからの注文は、すぐにここへ届きます。ボタンを押すと、お客さまの画面にも反映されます。</p>
+    <div class="k-sum"><span data-en="Today’s sales in this demo">このデモでの今日の売上</span><b data-k-total>¥0</b></div>
+    <ol class="tickets" data-tickets aria-live="polite"></ol>
+    <p class="k-empty" data-k-empty data-en="No orders yet. Try ordering on the phone.">まだ注文はありません。スマホの画面から注文してみてください。</p>
+  </aside>
+</div>
+
+<footer class="foot">
+  <p data-en="This is a concept project. The shop, menu and prices are fictional, and no payment is processed. A real version runs as a LINE MINI App with a payment provider such as PayPay or a card company. Photos from Wikimedia Commons and other free sources, see the credits.">これはコンセプト作品です。お店・メニュー・価格は架空で、決済は行われません。実際の導入では、LINEミニアプリとして公開し、PayPayやカード会社などの決済サービスと契約して動かします。写真はWikimedia Commonsなどの無料素材より、クレジットをご覧ください。</p>
+  <details class="credits"><summary data-en="Photo credits">写真クレジット</summary><ul data-credits></ul></details>
+</footer>
+
+<script src="scenarios/kaede.js"></script>
+<script src="app.js"></script>
+<script src="../../assets/concept.js"></script>
+</body>
+</html>
