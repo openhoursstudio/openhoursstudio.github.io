@@ -187,3 +187,8 @@ h2 { font-size: 32px; line-height: 1.1; font-weight: 800; }
   .asp-who { grid-template-columns: 1fr 1fr; }
   .asp-cook .two-col { align-items: center; }
 }
+
+/* ژاپنی: حروفِ ژاپنی در همان اندازه درشت‌تر دیده می‌شوند */
+html[data-l="ja"] h1 { font-size: 32px; }
+html[data-l="ja"] .subhead h1 { font-size: 30px; }
+@media (min-width: 820px) { html[data-l="ja"] h1 { font-size: 50px; } html[data-l="ja"] .subhead h1 { font-size: 46px; } }
