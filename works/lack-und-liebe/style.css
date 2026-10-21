@@ -416,3 +416,7 @@ h1 em { font-size: 1.3em; line-height: .95; }
   .after-grid { grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .after-grid li { padding: 24px; }
 }
+
+/* ژاپنی: حروفِ ژاپنی در همان اندازه درشت‌تر دیده می‌شوند */
+html[data-l="ja"] h1, html[data-l="ja"] .subhead h1 { font-size: 28px; }
+@media (min-width: 900px) { html[data-l="ja"] h1 { font-size: 46px; } html[data-l="ja"] .subhead h1 { font-size: 44px; } }
