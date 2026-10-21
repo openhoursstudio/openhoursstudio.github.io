@@ -39,7 +39,7 @@ p { margin: 0; }
 .nav a:hover { color: var(--frag-d); }
 .lang { display: inline-flex; align-items: center; border: 1px solid var(--line); border-radius: 999px; background: var(--card); color: var(--cocoa); padding: 3px; font: 600 12px/1 var(--sans); cursor: pointer; min-height: 36px; }
 .lang span { padding: 7px 10px; border-radius: 999px; color: var(--cocoa-2); transition: background .2s, color .2s; }
-html[lang="it"] .lang-base, html[lang="en"] .lang-en { background: var(--cocoa); color: var(--cream); }
+html[lang="it"] .lang-base, html[lang="ja"] .lang-ja, html[lang="en"] .lang-en { background: var(--cocoa); color: var(--cream); }
 .order-top { display: none; }
 @media (min-width: 900px) {
   .top { padding: 12px 40px; gap: 28px; }
@@ -249,3 +249,12 @@ html[lang="it"] .lang-base, html[lang="en"] .lang-en { background: var(--cocoa);
 .steps-list li::before { background: var(--frag-d); }
 .wide-photo { margin: 0; border-radius: 28px; overflow: hidden; aspect-ratio: 16 / 10; }
 .wide-photo img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ژاپنی: حروفِ ژاپنی در همان اندازه خیلی درشت‌تر دیده می‌شوند */
+html[data-l="ja"] .hero h1 { font-size: clamp(36px, 9vw, 88px); }
+html[data-l="ja"] .head h2, html[data-l="ja"] .intro h2 { font-size: clamp(28px, 5.5vw, 54px); }
+html[data-l="ja"] .fcard h3 { font-size: clamp(30px, 6.5vw, 64px); }
+html[data-l="ja"] .canal h2 { font-size: clamp(30px, 6.5vw, 72px); }
+html[data-l="ja"] .page-hero h1 { font-size: clamp(30px, 6.5vw, 68px); }
+html[lang="ja"] .gusti h3 { font-size: 17px; }
+@media (min-width: 720px) { html[lang="ja"] .gusti h3 { font-size: 23px; } }

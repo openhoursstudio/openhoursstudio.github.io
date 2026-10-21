@@ -212,3 +212,12 @@ h2 { font-size: 34px; line-height: 1.05; color: var(--crust); }
   .week-strip span { font-size: 14px; }
   .drop-facts { grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: start; }
 }
+
+/* دکمه‌ی زبان (EN · JA) */
+html[data-l="base"] .lang-base, html[data-l="ja"] .lang-ja { background: #D7263D; color: #fff; }
+
+/* ژاپنی: حروفِ ژاپنی در همان اندازه درشت‌تر دیده می‌شوند */
+html[data-l="ja"] h1 { font-size: 36px; }
+@media (min-width: 900px) { html[data-l="ja"] h1 { font-size: 60px; } }
+/* با دکمه‌ی زبان، دکمه‌ی بالای سربرگ روی گوشی جا نمی‌شود؛ همان دکمه پایینِ صفحه (.dock) هست */
+@media (max-width: 479px) { .top .pill { display: none; } }

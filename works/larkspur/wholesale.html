@@ -12,11 +12,11 @@
 <link rel="stylesheet" href="../pages.css">
 <link rel="stylesheet" href="style.css">
 </head>
-<body data-default-lang="en" data-tz="Europe/London" data-open="07:00" data-close="16:00" data-closed-day="1" data-key="lb">
+<body data-base="en" data-default-lang="en" data-tz="Europe/London" data-open="07:00" data-close="16:00" data-closed-day="1" data-key="lb" data-title-ja="カフェ向け卸売り · Larkspur Bakery ロンドン・ハックニー（コンセプト作品）" data-title-ja="カフェ向け卸売り · Larkspur Bakery ロンドン・ハックニー（コンセプト作品）">
 
-<div class="concept" role="note">Concept project · Larkspur Bakery is a fictional bakery
+<div class="concept" role="note"><span data-ja="コンセプト作品 · Larkspur Bakery は架空のベーカリーです">Concept project · Larkspur Bakery is a fictional bakery</span>
    · 
-  <a href="../../work/larkspur/index.html">Return</a>
+  <a href="../../work/larkspur/index.html" data-ja="戻る">Return</a>
 </div>
 
 <header class="top">
@@ -24,108 +24,109 @@
     <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3c3 4 3 8 0 11-3-3-3-7 0-11zM16 14c4-1 7 1 9 4-4 1-7 0-9-4zM16 14c-4-1-7 1-9 4 4 1 7 0 9-4zM16 14v15"/></svg>
     Larkspur
   </a>
-  <nav class="nav"><a href="index.html#oven">Today</a><a href="menu.html">Menu</a><a href="cakes.html">Cakes</a><a href="wholesale.html">Wholesale</a><a href="index.html#visit">Visit</a></nav>
-  <a class="pill" href="index.html#order">Order for collection</a>
+  <nav class="nav"><a href="index.html#oven" data-ja="今日の焼き上がり">Today</a><a href="menu.html" data-ja="メニュー">Menu</a><a href="cakes.html" data-ja="ケーキ">Cakes</a><a href="wholesale.html" data-ja="卸売り">Wholesale</a><a href="index.html#visit" data-ja="店舗案内">Visit</a></nav>
+  <div class="lang" role="group" aria-label="Language · 言語" data-lang-toggle><button type="button" data-set-lang="en" aria-label="English"><span class="lang-base">EN</span></button><button type="button" data-set-lang="ja" aria-label="日本語"><span class="lang-ja">JA</span></button></div>
+  <a class="pill" href="index.html#order" data-ja="取り置きを予約">Order for collection</a>
 </header>
-<!-- pages --><nav class="pages" aria-label="Pages" style="--pg:#D7263D"><a href="index.html">Today</a><a href="menu.html">Menu</a><a href="cakes.html">Celebration cakes</a><a href="wholesale.html" aria-current="page">Wholesale</a></nav><!-- /pages -->
+<!-- pages --><nav class="pages" aria-label="Pages" style="--pg:#D7263D"><a href="index.html" data-ja="今日の焼き上がり">Today</a><a href="menu.html" data-ja="メニュー">Menu</a><a href="cakes.html" data-ja="お祝いケーキ">Celebration cakes</a><a href="wholesale.html" aria-current="page" data-ja="卸売り">Wholesale</a></nav><!-- /pages -->
 
 <main>
 <section class="subhead hero-lite">
-  <p class="eyebrow">Wholesale for cafés</p>
-  <h1>Our bread on<br>your counter by 7:30.</h1>
-  <p class="lead">We bake for six cafés around Hackney and deliver by cargo bike before they open. Same dough as our own shelves, trade prices, no contract. We have room for two more this autumn.</p>
+  <p class="eyebrow" data-ja="カフェ向け卸売り">Wholesale for cafés</p>
+  <h1 data-ja="朝7時半には、&lt;br&gt;うちのパンをあなたのお店に。" data-html>Our bread on<br>your counter by 7:30.</h1>
+  <p class="lead" data-ja="ハックニー周辺の6軒のカフェのためにパンを焼き、開店前にカーゴバイクでお届けしています。お店に並べるのと同じ生地を卸値で。契約の縛りはありません。この秋は、あと2軒お受けできます。">We bake for six cafés around Hackney and deliver by cargo bike before they open. Same dough as our own shelves, trade prices, no contract. We have room for two more this autumn.</p>
   <p class="cutoff" data-cutoff aria-live="polite"></p>
 </section>
 
 <section class="trade" id="trade">
-  <header class="head"><p class="eyebrow">The trade list</p><h2>What we supply, and what it costs</h2><p>Prices per item, delivered. Bread, pastries and cakes are zero-rated, so there is no VAT to add. Set a number for a normal day and we work out the week.</p></header>
+  <header class="head"><p class="eyebrow" data-ja="卸売り商品一覧">The trade list</p><h2 data-ja="お届けできる商品と価格">What we supply, and what it costs</h2><p data-ja="価格は1個あたりの配送込みです。パン・焼き菓子・ケーキは付加価値税がゼロ税率なので、税の上乗せはありません。ふだんの1日分の数を入れると、1週間分を計算します。">Prices per item, delivered. Bread, pastries and cakes are zero-rated, so there is no VAT to add. Set a number for a normal day and we work out the week.</p></header>
   <div class="trade-grid">
     <form class="trade-list" data-trade>
       <fieldset class="menu-group">
-        <legend><h3>Bread</h3></legend>
-        <div class="t-row" data-p="3.40" data-r="5.50"><div><b>Country sourdough</b><span>900 g, 48-hour ferment. Sliced for sandwiches at no cost.</span></div><span class="t-pr">£3.40</span><div class="step"><button type="button" data-step="-1" aria-label="One fewer country sourdough">−</button><input type="number" inputmode="numeric" min="0" max="60" value="2" aria-label="Country sourdough per delivery"><button type="button" data-step="1" aria-label="One more country sourdough">+</button></div></div>
-        <div class="t-row" data-p="3.80" data-r="6.00"><div><b>Seeded rye</b><span>Keeps a week, so it suits a slower toast menu.</span></div><span class="t-pr">£3.80</span><div class="step"><button type="button" data-step="-1" aria-label="One fewer seeded rye">−</button><input type="number" inputmode="numeric" min="0" max="60" value="0" aria-label="Seeded rye per delivery"><button type="button" data-step="1" aria-label="One more seeded rye">+</button></div></div>
-        <div class="t-row" data-p="2.80" data-r="4.50"><div><b>Milk loaf</b><span>Soft tin loaf for toasties and children's plates.</span></div><span class="t-pr">£2.80</span><div class="step"><button type="button" data-step="-1" aria-label="One fewer milk loaf">−</button><input type="number" inputmode="numeric" min="0" max="60" value="0" aria-label="Milk loaf per delivery"><button type="button" data-step="1" aria-label="One more milk loaf">+</button></div></div>
-        <div class="t-row" data-p="2.40" data-r="4.00"><div><b>Rosemary focaccia</b><span>One slab, baked at five for the morning bike.</span></div><span class="t-pr">£2.40</span><div class="step"><button type="button" data-step="-1" aria-label="One fewer focaccia slab">−</button><input type="number" inputmode="numeric" min="0" max="60" value="0" aria-label="Rosemary focaccia per delivery"><button type="button" data-step="1" aria-label="One more focaccia slab">+</button></div></div>
+        <legend><h3 data-ja="パン">Bread</h3></legend>
+        <div class="t-row" data-p="3.40" data-r="5.50"><div><b data-ja="カントリーサワードウ">Country sourdough</b><span data-ja="900g、48時間発酵。サンドイッチ用のスライスは無料です。">900 g, 48-hour ferment. Sliced for sandwiches at no cost.</span></div><span class="t-pr">£3.40</span><div class="step"><button type="button" data-step="-1" aria-label="One fewer country sourdough">−</button><input type="number" inputmode="numeric" min="0" max="60" value="2" aria-label="Country sourdough per delivery"><button type="button" data-step="1" aria-label="One more country sourdough">+</button></div></div>
+        <div class="t-row" data-p="3.80" data-r="6.00"><div><b data-ja="雑穀ライ麦パン">Seeded rye</b><span data-ja="1週間もつので、あまり出ないトーストメニューにも向いています。">Keeps a week, so it suits a slower toast menu.</span></div><span class="t-pr">£3.80</span><div class="step"><button type="button" data-step="-1" aria-label="One fewer seeded rye">−</button><input type="number" inputmode="numeric" min="0" max="60" value="0" aria-label="Seeded rye per delivery"><button type="button" data-step="1" aria-label="One more seeded rye">+</button></div></div>
+        <div class="t-row" data-p="2.80" data-r="4.50"><div><b data-ja="ミルク食パン">Milk loaf</b><span data-ja="ホットサンドやお子さま向けプレートに、ふんわり型焼き食パン。">Soft tin loaf for toasties and children's plates.</span></div><span class="t-pr">£2.80</span><div class="step"><button type="button" data-step="-1" aria-label="One fewer milk loaf">−</button><input type="number" inputmode="numeric" min="0" max="60" value="0" aria-label="Milk loaf per delivery"><button type="button" data-step="1" aria-label="One more milk loaf">+</button></div></div>
+        <div class="t-row" data-p="2.40" data-r="4.00"><div><b data-ja="ローズマリーのフォカッチャ">Rosemary focaccia</b><span data-ja="1枚単位。朝の配達に合わせて5時に焼いています。">One slab, baked at five for the morning bike.</span></div><span class="t-pr">£2.40</span><div class="step"><button type="button" data-step="-1" aria-label="One fewer focaccia slab">−</button><input type="number" inputmode="numeric" min="0" max="60" value="0" aria-label="Rosemary focaccia per delivery"><button type="button" data-step="1" aria-label="One more focaccia slab">+</button></div></div>
       </fieldset>
       <fieldset class="menu-group">
-        <legend><h3>Pastry</h3></legend>
-        <div class="t-row" data-p="1.60" data-r="2.90"><div><b>Butter croissant</b><span>Baked that morning, or frozen to bake in your own oven for £1.20.</span></div><span class="t-pr">£1.60</span><div class="step"><button type="button" data-step="-1" aria-label="One fewer butter croissant">−</button><input type="number" inputmode="numeric" min="0" max="60" value="12" aria-label="Butter croissants per delivery"><button type="button" data-step="1" aria-label="One more butter croissant">+</button></div></div>
-        <div class="t-row" data-p="1.80" data-r="3.20"><div><b>Pain au chocolat</b><span>Two bars of dark chocolate, as in the shop.</span></div><span class="t-pr">£1.80</span><div class="step"><button type="button" data-step="-1" aria-label="One fewer pain au chocolat">−</button><input type="number" inputmode="numeric" min="0" max="60" value="6" aria-label="Pain au chocolat per delivery"><button type="button" data-step="1" aria-label="One more pain au chocolat">+</button></div></div>
-        <div class="t-row" data-p="1.90" data-r="3.40"><div><b>Cardamom bun</b><span>Knotted by hand. The one people ask you about.</span></div><span class="t-pr">£1.90</span><div class="step"><button type="button" data-step="-1" aria-label="One fewer cardamom bun">−</button><input type="number" inputmode="numeric" min="0" max="60" value="0" aria-label="Cardamom buns per delivery"><button type="button" data-step="1" aria-label="One more cardamom bun">+</button></div></div>
-        <div class="t-row" data-p="1.80" data-r="3.20"><div><b>Cinnamon bun</b><span>Brown sugar, cinnamon, a little salt.</span></div><span class="t-pr">£1.80</span><div class="step"><button type="button" data-step="-1" aria-label="One fewer cinnamon bun">−</button><input type="number" inputmode="numeric" min="0" max="60" value="6" aria-label="Cinnamon buns per delivery"><button type="button" data-step="1" aria-label="One more cinnamon bun">+</button></div></div>
-        <div class="t-row" data-p="1.90" data-r="3.40"><div><b>Vegan apple turnover<span class="tags-inline"><i>VG</i></span></b><span>Plant butter pastry, Bramley apples.</span></div><span class="t-pr">£1.90</span><div class="step"><button type="button" data-step="-1" aria-label="One fewer apple turnover">−</button><input type="number" inputmode="numeric" min="0" max="60" value="0" aria-label="Vegan apple turnovers per delivery"><button type="button" data-step="1" aria-label="One more apple turnover">+</button></div></div>
+        <legend><h3 data-ja="ペストリー">Pastry</h3></legend>
+        <div class="t-row" data-p="1.60" data-r="2.90"><div><b data-ja="バタークロワッサン">Butter croissant</b><span data-ja="その日の朝に焼いたもの。冷凍生地をお店のオーブンで焼くなら£1.20です。">Baked that morning, or frozen to bake in your own oven for £1.20.</span></div><span class="t-pr">£1.60</span><div class="step"><button type="button" data-step="-1" aria-label="One fewer butter croissant">−</button><input type="number" inputmode="numeric" min="0" max="60" value="12" aria-label="Butter croissants per delivery"><button type="button" data-step="1" aria-label="One more butter croissant">+</button></div></div>
+        <div class="t-row" data-p="1.80" data-r="3.20"><div><b data-ja="パン・オ・ショコラ">Pain au chocolat</b><span data-ja="お店と同じく、ビターチョコを2本。">Two bars of dark chocolate, as in the shop.</span></div><span class="t-pr">£1.80</span><div class="step"><button type="button" data-step="-1" aria-label="One fewer pain au chocolat">−</button><input type="number" inputmode="numeric" min="0" max="60" value="6" aria-label="Pain au chocolat per delivery"><button type="button" data-step="1" aria-label="One more pain au chocolat">+</button></div></div>
+        <div class="t-row" data-p="1.90" data-r="3.40"><div><b data-ja="カルダモンロール">Cardamom bun</b><span data-ja="ひとつずつ手で結んでいます。きっとお客さんに聞かれる一品です。">Knotted by hand. The one people ask you about.</span></div><span class="t-pr">£1.90</span><div class="step"><button type="button" data-step="-1" aria-label="One fewer cardamom bun">−</button><input type="number" inputmode="numeric" min="0" max="60" value="0" aria-label="Cardamom buns per delivery"><button type="button" data-step="1" aria-label="One more cardamom bun">+</button></div></div>
+        <div class="t-row" data-p="1.80" data-r="3.20"><div><b data-ja="シナモンロール">Cinnamon bun</b><span data-ja="ブラウンシュガー、シナモン、ひとつまみの塩。">Brown sugar, cinnamon, a little salt.</span></div><span class="t-pr">£1.80</span><div class="step"><button type="button" data-step="-1" aria-label="One fewer cinnamon bun">−</button><input type="number" inputmode="numeric" min="0" max="60" value="6" aria-label="Cinnamon buns per delivery"><button type="button" data-step="1" aria-label="One more cinnamon bun">+</button></div></div>
+        <div class="t-row" data-p="1.90" data-r="3.40"><div><b data-ja="ヴィーガンのアップルターンオーバー&lt;span class=&quot;tags-inline&quot;&gt;&lt;i&gt;VG&lt;/i&gt;&lt;/span&gt;" data-html>Vegan apple turnover<span class="tags-inline"><i>VG</i></span></b><span data-ja="植物性バターの生地に、ブラムリー種のりんご。">Plant butter pastry, Bramley apples.</span></div><span class="t-pr">£1.90</span><div class="step"><button type="button" data-step="-1" aria-label="One fewer apple turnover">−</button><input type="number" inputmode="numeric" min="0" max="60" value="0" aria-label="Vegan apple turnovers per delivery"><button type="button" data-step="1" aria-label="One more apple turnover">+</button></div></div>
       </fieldset>
       <fieldset class="menu-group">
-        <legend><h3>Loaf cakes, whole</h3></legend>
-        <div class="t-row" data-p="15.00" data-r="35.00"><div><b>Lemon drizzle</b><span>Cuts into ten slices. We sell a slice for £3.50.</span></div><span class="t-pr">£15.00</span><div class="step"><button type="button" data-step="-1" aria-label="One fewer lemon drizzle">−</button><input type="number" inputmode="numeric" min="0" max="60" value="0" aria-label="Lemon drizzle cakes per delivery"><button type="button" data-step="1" aria-label="One more lemon drizzle">+</button></div></div>
-        <div class="t-row" data-p="16.00" data-r="34.00"><div><b>Banana and walnut loaf<span class="tags-inline"><i>VG</i><i>N</i></span></b><span>Ten slices, made with oat milk.</span></div><span class="t-pr">£16.00</span><div class="step"><button type="button" data-step="-1" aria-label="One fewer banana loaf">−</button><input type="number" inputmode="numeric" min="0" max="60" value="0" aria-label="Banana and walnut loaves per delivery"><button type="button" data-step="1" aria-label="One more banana loaf">+</button></div></div>
+        <legend><h3 data-ja="パウンドケーキ（1本）">Loaf cakes, whole</h3></legend>
+        <div class="t-row" data-p="15.00" data-r="35.00"><div><b data-ja="レモンドリズルケーキ">Lemon drizzle</b><span data-ja="10切れに切り分けられます。うちの店では1切れ£3.50で販売しています。">Cuts into ten slices. We sell a slice for £3.50.</span></div><span class="t-pr">£15.00</span><div class="step"><button type="button" data-step="-1" aria-label="One fewer lemon drizzle">−</button><input type="number" inputmode="numeric" min="0" max="60" value="0" aria-label="Lemon drizzle cakes per delivery"><button type="button" data-step="1" aria-label="One more lemon drizzle">+</button></div></div>
+        <div class="t-row" data-p="16.00" data-r="34.00"><div><b data-ja="バナナとくるみのパウンドケーキ&lt;span class=&quot;tags-inline&quot;&gt;&lt;i&gt;VG&lt;/i&gt;&lt;i&gt;N&lt;/i&gt;&lt;/span&gt;" data-html>Banana and walnut loaf<span class="tags-inline"><i>VG</i><i>N</i></span></b><span data-ja="10切れ分。オーツミルク使用。">Ten slices, made with oat milk.</span></div><span class="t-pr">£16.00</span><div class="step"><button type="button" data-step="-1" aria-label="One fewer banana loaf">−</button><input type="number" inputmode="numeric" min="0" max="60" value="0" aria-label="Banana and walnut loaves per delivery"><button type="button" data-step="1" aria-label="One more banana loaf">+</button></div></div>
       </fieldset>
     </form>
 
     <aside class="trade-sum" aria-labelledby="sum-title">
-      <h3 id="sum-title">Your standing order</h3>
+      <h3 id="sum-title" data-ja="定期注文のシミュレーション">Your standing order</h3>
       <div class="filter-chips day-chips" role="group" aria-label="Delivery days">
-        <button type="button" aria-pressed="true" data-day="2">Tue</button><button type="button" aria-pressed="true" data-day="3">Wed</button><button type="button" aria-pressed="true" data-day="4">Thu</button><button type="button" aria-pressed="true" data-day="5">Fri</button><button type="button" aria-pressed="true" data-day="6">Sat</button><button type="button" aria-pressed="false" data-day="0">Sun</button>
+        <button type="button" aria-pressed="true" data-day="2" data-ja="火">Tue</button><button type="button" aria-pressed="true" data-day="3" data-ja="水">Wed</button><button type="button" aria-pressed="true" data-day="4" data-ja="木">Thu</button><button type="button" aria-pressed="true" data-day="5" data-ja="金">Fri</button><button type="button" aria-pressed="true" data-day="6" data-ja="土">Sat</button><button type="button" aria-pressed="false" data-day="0" data-ja="日">Sun</button>
       </div>
       <dl class="sum-figs">
-        <div><dt>Each delivery</dt><dd data-per>£0.00</dd></div>
-        <div><dt>Deliveries a week</dt><dd data-n>5</dd></div>
-        <div class="big"><dt>Each week</dt><dd data-week>£0.00</dd></div>
+        <div><dt data-ja="1回あたり">Each delivery</dt><dd data-per>£0.00</dd></div>
+        <div><dt data-ja="週の配達回数">Deliveries a week</dt><dd data-n>5</dd></div>
+        <div class="big"><dt data-ja="1週間あたり">Each week</dt><dd data-week>£0.00</dd></div>
       </dl>
       <p class="sum-note" data-sum-note aria-live="polite"></p>
-      <a class="btn" href="#enquire">Ask for a tasting box</a>
+      <a class="btn" href="#enquire" data-ja="試食ボックスを申し込む">Ask for a tasting box</a>
     </aside>
   </div>
 </section>
 
 <section class="drops" id="delivery">
-  <header class="head"><p class="eyebrow">Delivery</p><h2>Order by 2pm, at your door by 7:30</h2><p>Our bike leaves at 6:15 with linen bags in wooden crates. Leave out yesterday's crate and we swap it. No plastic, no cardboard.</p></header>
+  <header class="head"><p class="eyebrow" data-ja="配達について">Delivery</p><h2 data-ja="午後2時までのご注文で、翌朝7時半までにお届け">Order by 2pm, at your door by 7:30</h2><p data-ja="朝6時15分、リネンの袋を木箱に詰めて自転車で出発します。前日の木箱を出しておいていただければ交換します。プラスチックも段ボールも使いません。">Our bike leaves at 6:15 with linen bags in wooden crates. Leave out yesterday's crate and we swap it. No plastic, no cardboard.</p></header>
   <ol class="week-strip" data-week-strip aria-label="Delivery days this week">
-    <li data-d="1" class="off"><b>Mon</b><span>Closed</span></li>
-    <li data-d="2"><b>Tue</b><span>7:30</span></li>
-    <li data-d="3"><b>Wed</b><span>7:30</span></li>
-    <li data-d="4"><b>Thu</b><span>7:30</span></li>
-    <li data-d="5"><b>Fri</b><span>7:30</span></li>
-    <li data-d="6"><b>Sat</b><span>7:30</span></li>
-    <li data-d="0"><b>Sun</b><span>7:30</span></li>
+    <li data-d="1" class="off"><b data-ja="月">Mon</b><span data-ja="定休日">Closed</span></li>
+    <li data-d="2"><b data-ja="火">Tue</b><span>7:30</span></li>
+    <li data-d="3"><b data-ja="水">Wed</b><span>7:30</span></li>
+    <li data-d="4"><b data-ja="木">Thu</b><span>7:30</span></li>
+    <li data-d="5"><b data-ja="金">Fri</b><span>7:30</span></li>
+    <li data-d="6"><b data-ja="土">Sat</b><span>7:30</span></li>
+    <li data-d="0"><b data-ja="日">Sun</b><span>7:30</span></li>
   </ol>
   <div class="drop-facts">
     <dl>
-      <div><dt>Cut-off</dt><dd>2pm the day before. For Tuesday, 2pm on Sunday.</dd></div>
-      <div><dt>Minimum</dt><dd>£40 per delivery, any mix.</dd></div>
-      <div><dt>Free round</dt><dd>E5, E8 and E9.</dd></div>
-      <div><dt>Further out</dt><dd>E2, E3 and N16 for £6 a drop.</dd></div>
-      <div><dt>Changes</dt><dd>Text or email by the cut-off. Skip a day whenever you like.</dd></div>
-      <div><dt>Paying</dt><dd>One invoice on the 1st of the month, 14 days to pay.</dd></div>
+      <div><dt data-ja="注文締め切り">Cut-off</dt><dd data-ja="前日の午後2時。火曜日分は日曜日の午後2時です。">2pm the day before. For Tuesday, 2pm on Sunday.</dd></div>
+      <div><dt data-ja="最低注文金額">Minimum</dt><dd data-ja="1回の配達につき£40から。組み合わせは自由です。">£40 per delivery, any mix.</dd></div>
+      <div><dt data-ja="配送無料エリア">Free round</dt><dd data-ja="E5、E8、E9。">E5, E8 and E9.</dd></div>
+      <div><dt data-ja="エリア外">Further out</dt><dd data-ja="E2、E3、N16は1回£6。">E2, E3 and N16 for £6 a drop.</dd></div>
+      <div><dt data-ja="変更">Changes</dt><dd data-ja="締め切りまでにSMSかメールでご連絡ください。お休みはいつでもできます。">Text or email by the cut-off. Skip a day whenever you like.</dd></div>
+      <div><dt data-ja="お支払い">Paying</dt><dd data-ja="毎月1日に請求書を1通お送りします。お支払い期限は14日後です。">One invoice on the 1st of the month, 14 days to pay.</dd></div>
     </dl>
-    <figure class="cake-photo"><img src="../../assets/photos/larkspur-7.webp" loading="lazy" alt="A tray of buns ready to go out"></figure>
+    <figure class="cake-photo"><img src="../../assets/photos/larkspur-7.webp" loading="lazy" alt="A tray of buns ready to go out" data-ja-alt="配達を待つパンのトレー"></figure>
   </div>
 </section>
 
 <section class="how">
-  <header class="head"><p class="eyebrow">How it starts</p><h2>Taste first, then decide</h2></header>
+  <header class="head"><p class="eyebrow" data-ja="始め方">How it starts</p><h2 data-ja="まず食べてから、決めてください">Taste first, then decide</h2></header>
   <ol class="steps-list how-steps">
-    <li><b>A tasting box, on us</b><span>Two loaves and a dozen pastries, dropped on a Tuesday morning. Put them out and see what sells.</span></li>
-    <li><b>A standing order</b><span>The same order every week, so we can plan the dough. Change it by the cut-off whenever you need to.</span></li>
-    <li><b>A check-in after two weeks</b><span>We do not take back unsold bread, so after a fortnight we look at what is left over and adjust the numbers with you.</span></li>
+    <li><b data-ja="無料の試食ボックス">A tasting box, on us</b><span data-ja="パン2本と焼き菓子12個を、火曜の朝にお届けします。お店に並べて、どれが売れるか試してみてください。">Two loaves and a dozen pastries, dropped on a Tuesday morning. Put them out and see what sells.</span></li>
+    <li><b data-ja="定期注文">A standing order</b><span data-ja="生地の仕込みを計画できるよう、毎週同じ内容でご注文いただきます。変更は締め切りまでならいつでも可能です。">The same order every week, so we can plan the dough. Change it by the cut-off whenever you need to.</span></li>
+    <li><b data-ja="2週間後の見直し">A check-in after two weeks</b><span data-ja="売れ残りの返品はお受けしていないので、2週間たったら残り具合を一緒に確認し、数を調整します。">We do not take back unsold bread, so after a fortnight we look at what is left over and adjust the numbers with you.</span></li>
   </ol>
 </section>
 
 <section class="enquire" id="enquire">
-  <header class="head"><p class="eyebrow">Enquire</p><h2>Tell us about your café</h2><p>We reply within a day, usually in the afternoon once the ovens are off.</p></header>
+  <header class="head"><p class="eyebrow" data-ja="お問い合わせ">Enquire</p><h2 data-ja="あなたのカフェについて教えてください">Tell us about your café</h2><p data-ja="1日以内にお返事します。たいていはオーブンを止めた午後になります。">We reply within a day, usually in the afternoon once the ovens are off.</p></header>
   <form class="form-card cake-form ws-form" data-ws-form novalidate>
-    <label>Café name<input name="cafe" required autocomplete="organization"></label>
-    <label>Your name<input name="name" required autocomplete="name"></label>
-    <label>Email<input name="email" type="email" required autocomplete="email"></label>
-    <label>Postcode<input name="postcode" autocomplete="postal-code" placeholder="E5 0LH" aria-describedby="zone-out"></label>
-    <p class="zone" id="zone-out" data-zone aria-live="polite">We deliver free in E5, E8 and E9.</p>
-    <fieldset class="ws-days"><legend>Days you would like bread</legend>
-      <label><input type="checkbox" name="days" value="Tue" checked> Tue</label><label><input type="checkbox" name="days" value="Wed" checked> Wed</label><label><input type="checkbox" name="days" value="Thu" checked> Thu</label><label><input type="checkbox" name="days" value="Fri" checked> Fri</label><label><input type="checkbox" name="days" value="Sat" checked> Sat</label><label><input type="checkbox" name="days" value="Sun"> Sun</label>
+    <label><span data-ja="カフェの名前">Café name</span><input name="cafe" required autocomplete="organization"></label>
+    <label><span data-ja="お名前">Your name</span><input name="name" required autocomplete="name"></label>
+    <label><span data-ja="メールアドレス">Email</span><input name="email" type="email" required autocomplete="email"></label>
+    <label><span data-ja="郵便番号">Postcode</span><input name="postcode" autocomplete="postal-code" placeholder="E5 0LH" aria-describedby="zone-out"></label>
+    <p class="zone" id="zone-out" data-zone aria-live="polite" data-ja="E5、E8、E9は配送無料です。">We deliver free in E5, E8 and E9.</p>
+    <fieldset class="ws-days"><legend data-ja="配達を希望する曜日">Days you would like bread</legend>
+      <label><input type="checkbox" name="days" value="Tue" checked> <span data-ja="火">Tue</span></label><label><input type="checkbox" name="days" value="Wed" checked> <span data-ja="水">Wed</span></label><label><input type="checkbox" name="days" value="Thu" checked> <span data-ja="木">Thu</span></label><label><input type="checkbox" name="days" value="Fri" checked> <span data-ja="金">Fri</span></label><label><input type="checkbox" name="days" value="Sat" checked> <span data-ja="土">Sat</span></label><label><input type="checkbox" name="days" value="Sun"> <span data-ja="日">Sun</span></label>
     </fieldset>
-    <label>Start with<select name="start"><option>A free tasting box</option><option>A standing order straight away</option></select></label>
-    <label>Anything else<textarea name="note" placeholder="We have an oven and would like frozen croissants"></textarea></label>
-    <button class="btn" type="submit">Send enquiry</button>
+    <label><span data-ja="始め方">Start with</span><select name="start"><option data-ja="無料の試食ボックスから">A free tasting box</option><option data-ja="すぐに定期注文を始める">A standing order straight away</option></select></label>
+    <label><span data-ja="その他">Anything else</span><textarea name="note" placeholder="We have an oven and would like frozen croissants" data-ja-ph="オーブンがあるので、冷凍クロワッサンを希望します"></textarea></label>
+    <button class="btn" type="submit" data-ja="問い合わせを送る">Send enquiry</button>
     <p class="out" data-ws-out aria-live="polite" hidden></p>
   </form>
 </section>
@@ -133,11 +134,11 @@
 
 <footer class="foot">
   <p class="foot-brand">Larkspur Bakery</p>
-  <p>This is a concept project. The bakery, address and prices are fictional. Photos: CC0 (public domain).</p>
-  <details class="credits"><summary>Photo credits</summary><ul data-credits></ul></details>
+  <p data-ja="これはコンセプト作品です。お店・住所・価格はすべて架空のものです。写真：CC0（パブリックドメイン）。">This is a concept project. The bakery, address and prices are fictional. Photos: CC0 (public domain).</p>
+  <details class="credits"><summary data-ja="写真クレジット">Photo credits</summary><ul data-credits></ul></details>
 </footer>
 
-<a class="dock" href="#enquire">Ask for a tasting box</a>
+<a class="dock" href="#enquire" data-ja="試食ボックスを申し込む">Ask for a tasting box</a>
 <script src="../../assets/concept.js"></script>
 <script>
   // عمده‌فروشی: جمعِ سفارشِ ثابت، مهلتِ سفارش به وقتِ لندن، منطقه‌ی تحویل از روی کدپستی؛ فرم فقط نمایشی است
@@ -146,7 +147,9 @@
     var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     function london() { return new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/London' })); }
     function money(n) { return '£' + n.toFixed(2); }
-    function nice(d) { return DAYS[d.getDay()] + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()]; }
+    var JA_D = '日月火水木金土';
+    function ja() { return document.documentElement.lang === 'ja'; }
+    function nice(d) { return ja() ? (d.getMonth() + 1) + '月' + d.getDate() + '日（' + JA_D[d.getDay()] + '）' : DAYS[d.getDay()] + ' ' + d.getDate() + ' ' + MONTHS[d.getMonth()]; }
 
     // ۱) ماشین‌حسابِ سفارشِ ثابت
     var form = document.querySelector('[data-trade]'), rows = form.querySelectorAll('.t-row');
@@ -161,10 +164,10 @@
       });
       var n = document.querySelectorAll('[data-day][aria-pressed="true"]').length;
       per.textContent = money(sum); nOut.textContent = n; week.textContent = money(sum * n);
-      if (!n) note.textContent = 'Pick at least one delivery day.';
-      else if (sum === 0) note.textContent = 'Add a few things to see the week.';
-      else if (sum < 40) note.textContent = 'Add ' + money(40 - sum) + ' more to reach the £40 minimum per delivery.';
-      else note.textContent = 'Over the £40 minimum. At our own counter prices, one delivery sells for about ' + money(shop) + '.';
+      if (!n) note.textContent = tx({ ja: '配達する曜日を1日以上選んでください。', en: 'Pick at least one delivery day.' });
+      else if (sum === 0) note.textContent = tx({ ja: '商品をいくつか追加すると、1週間分の金額が出ます。', en: 'Add a few things to see the week.' });
+      else if (sum < 40) note.textContent = tx({ ja: '1回あたりの最低金額£40まで、あと' + money(40 - sum) + 'です。', en: 'Add ' + money(40 - sum) + ' more to reach the £40 minimum per delivery.' });
+      else note.textContent = tx({ ja: '最低金額£40をクリアしています。うちの店頭価格なら、1回分でおよそ' + money(shop) + 'の売り上げになります。', en: 'Over the £40 minimum. At our own counter prices, one delivery sells for about ' + money(shop) + '.' });
     }
     form.addEventListener('click', function (e) {
       var b = e.target.closest('[data-step]'); if (!b) return;
@@ -176,6 +179,7 @@
     form.addEventListener('submit', function (e) { e.preventDefault(); });
     chips.forEach(function (c) { c.addEventListener('click', function () { c.setAttribute('aria-pressed', c.getAttribute('aria-pressed') !== 'true'); total(); }); });
     total();
+    document.addEventListener('langchange', total);
 
     // ۲) مهلتِ سفارش: ساعتِ ۱۴ روزِ قبل؛ برای سه‌شنبه، یکشنبه ساعتِ ۱۴ (دوشنبه‌ها تعطیلیم)
     var cutEl = document.querySelector('[data-cutoff]'), strip = document.querySelectorAll('[data-week-strip] li');
@@ -191,18 +195,22 @@
       var now = london(), n = nextDrop(now), left = Math.round((n.cut - now) / 60000);
       var h = Math.floor(left / 60), m = left % 60;
       var tmr = new Date(now); tmr.setDate(now.getDate() + 1);
-      var when = n.cut.toDateString() === now.toDateString() ? 'today' : n.cut.toDateString() === tmr.toDateString() ? 'tomorrow' : DAYS[n.cut.getDay()];
-      cutEl.innerHTML = '<i></i><span>Next delivery you can still order for</span><b>' + nice(n.drop) + ', by 7:30</b><span>Order by ' + when + ' at 2pm' + (left < 24 * 60 ? ' · ' + (h ? h + ' h ' : '') + m + ' min left' : '') + '</span>';
+      var when = n.cut.toDateString() === now.toDateString() ? tx({ ja: '今日', en: 'today' }) : n.cut.toDateString() === tmr.toDateString() ? tx({ ja: '明日', en: 'tomorrow' }) : tx({ ja: JA_D[n.cut.getDay()] + '曜日', en: DAYS[n.cut.getDay()] });
+      cutEl.innerHTML = ja()
+        ? '<i></i><span>今から注文できる次の配達</span><b>' + nice(n.drop) + ' 7:30まで</b><span>' + when + 'の午後2時までにご注文ください' + (left < 24 * 60 ? ' · 残り' + (h ? h + '時間' : '') + m + '分' : '') + '</span>'
+        : '<i></i><span>Next delivery you can still order for</span><b>' + nice(n.drop) + ', by 7:30</b><span>Order by ' + when + ' at 2pm' + (left < 24 * 60 ? ' · ' + (h ? h + ' h ' : '') + m + ' min left' : '') + '</span>';
       strip.forEach(function (li) {
         var on = Number(li.dataset.d) === n.drop.getDay();
         li.classList.toggle('next', on);
         var tag = li.querySelector('em');
-        if (on && !tag) { tag = document.createElement('em'); tag.textContent = 'Next'; li.appendChild(tag); }
+        if (on && !tag) { tag = document.createElement('em'); li.appendChild(tag); }
+        if (tag) tag.textContent = tx({ ja: '次回', en: 'Next' });
         if (!on && tag) tag.remove();
       });
     }
     renderCut();
     setInterval(renderCut, 60000);
+    document.addEventListener('langchange', renderCut);
 
     // ۳) فرمِ درخواست: منطقه‌ی تحویل از روی بخشِ اولِ کدپستی
     var ws = document.querySelector('[data-ws-form]'), zone = document.querySelector('[data-zone]'), out = document.querySelector('[data-ws-out]');
@@ -213,24 +221,31 @@
     function renderZone() {
       var a = area();
       zone.className = 'zone';
-      if (!a) { zone.textContent = 'We deliver free in E5, E8 and E9.'; return; }
-      if (['E5', 'E8', 'E9'].indexOf(a) > -1) { zone.textContent = a + ' is on our free round.'; zone.classList.add('ok'); }
-      else if (['E2', 'E3', 'N16'].indexOf(a) > -1) { zone.textContent = a + ' is on the round for £6 a drop.'; zone.classList.add('ok'); }
-      else if (/^[A-Z]{1,2}\d/.test(a)) { zone.textContent = a + ' is outside our bike round for now. Send the form anyway and we will tell you if that changes.'; zone.classList.add('far'); }
-      else zone.textContent = 'That does not look like a postcode yet.';
+      if (!a) { zone.textContent = tx({ ja: 'E5、E8、E9は配送無料です。', en: 'We deliver free in E5, E8 and E9.' }); return; }
+      if (['E5', 'E8', 'E9'].indexOf(a) > -1) { zone.textContent = tx({ ja: a + 'は配送無料エリアです。', en: a + ' is on our free round.' }); zone.classList.add('ok'); }
+      else if (['E2', 'E3', 'N16'].indexOf(a) > -1) { zone.textContent = tx({ ja: a + 'は1回£6で配達できます。', en: a + ' is on the round for £6 a drop.' }); zone.classList.add('ok'); }
+      else if (/^[A-Z]{1,2}\d/.test(a)) { zone.textContent = tx({ ja: a + 'は今のところ自転車の配達エリア外です。フォームを送っていただければ、エリアが広がったときにお知らせします。', en: a + ' is outside our bike round for now. Send the form anyway and we will tell you if that changes.' }); zone.classList.add('far'); }
+      else zone.textContent = tx({ ja: '郵便番号の形式ではないようです。', en: 'That does not look like a postcode yet.' });
     }
     ws.postcode.addEventListener('input', renderZone);
+    document.addEventListener('langchange', renderZone);
     ws.addEventListener('submit', function (e) {
       e.preventDefault();
       var bad = [ws.cafe, ws.name, ws.email].filter(function (f) { return !f.checkValidity(); })[0];
       [ws.cafe, ws.name, ws.email].forEach(function (f) { f.setAttribute('aria-invalid', !f.checkValidity()); });
-      if (bad) { out.hidden = false; out.textContent = 'Please fill in ' + (bad === ws.email ? 'a valid email' : bad.parentNode.firstChild.textContent.trim().toLowerCase()) + '.'; bad.focus(); return; }
+      if (bad) { var lab = bad.parentNode.firstChild.textContent.trim(); out.hidden = false; out.textContent = tx({ ja: (bad === ws.email ? '正しいメールアドレス' : lab) + 'を入力してください。', en: 'Please fill in ' + (bad === ws.email ? 'a valid email' : lab.toLowerCase()) + '.' }); bad.focus(); return; }
       var days = [].slice.call(ws.querySelectorAll('[name="days"]:checked')).map(function (c) { return c.value; });
       var tue = london(); do { tue.setDate(tue.getDate() + 1); } while (tue.getDay() !== 2 || (tue - london()) < 2 * 864e5);
       out.hidden = false;
-      out.textContent = 'Thanks, ' + ws.name.value.trim().split(' ')[0] + '. ' + (ws.start.selectedIndex === 0
-        ? 'We would bring a tasting box to ' + ws.cafe.value.trim() + ' on ' + nice(tue) + ', before 7:30.'
-        : 'We would call you about a standing order for ' + ws.cafe.value.trim() + (days.length ? ' on ' + days.join(', ') : '') + '.') + ' This is a concept site, so nothing was sent.';
+      var who = ws.name.value.trim().split(' ')[0], cafe = ws.cafe.value.trim();
+      var jaDays = days.map(function (d) { return { Tue: '火', Wed: '水', Thu: '木', Fri: '金', Sat: '土', Sun: '日' }[d]; });
+      out.textContent = tx({
+        ja: who + '様、ありがとうございます。' + (ws.start.selectedIndex === 0
+          ? nice(tue) + 'の朝7時半までに、' + cafe + 'へ試食ボックスをお届けします。'
+          : cafe + 'の定期注文' + (days.length ? '（' + jaDays.join('・') + '曜日）' : '') + 'について、お電話でご相談します。') + 'これはコンセプトサイトのため、実際には送信されていません。',
+        en: 'Thanks, ' + who + '. ' + (ws.start.selectedIndex === 0
+          ? 'We would bring a tasting box to ' + cafe + ' on ' + nice(tue) + ', before 7:30.'
+          : 'We would call you about a standing order for ' + cafe + (days.length ? ' on ' + days.join(', ') : '') + '.') + ' This is a concept site, so nothing was sent.' });
     });
   })();
 </script>

@@ -12,40 +12,41 @@
 <link rel="stylesheet" href="../pages.css">
 <link rel="stylesheet" href="style.css">
 </head>
-<body data-base="en" data-default-lang="en" data-tz="America/Toronto" data-open="08:00" data-close="15:00" data-closed-day="2" data-key="mm">
+<body data-base="en" data-default-lang="en" data-tz="America/Toronto" data-open="08:00" data-close="15:00" data-closed-day="2" data-key="mm" data-title-ja="アクセス · Maple &amp; Main トロント・レスリービル（コンセプト作品）">
 
-<div class="concept" role="note">Concept project · Maple &amp; Main is a fictional restaurant
+<div class="concept" role="note"><span data-ja="コンセプト作品 · Maple &amp; Main は架空のお店です">Concept project · Maple &amp; Main is a fictional restaurant</span>
    · 
-  <a href="../../work/brunch/index.html">Return</a>
+  <a href="../../work/brunch/index.html" data-ja="戻る">Return</a>
 </div>
 
 <header class="top">
   <a class="brand" href="index.html">Maple <span>&amp;</span> Main</a>
-  <nav class="bnav"><a href="menu.html">Menu</a><a href="events.html">Private events</a><a href="visit.html">Visit</a></nav>
-  <a class="pill" href="index.html#waitlist">Join the waitlist</a>
+  <nav class="bnav"><a href="menu.html" data-ja="メニュー">Menu</a><a href="events.html" data-ja="貸切">Private events</a><a href="visit.html" data-ja="アクセス">Visit</a></nav>
+  <div class="lang" role="group" aria-label="Language · 言語" data-lang-toggle><button type="button" data-set-lang="en" aria-label="English"><span class="lang-base">EN</span></button><button type="button" data-set-lang="ja" aria-label="日本語"><span class="lang-ja">JA</span></button></div>
+  <a class="pill" href="index.html#waitlist" data-ja="順番待ちに登録">Join the waitlist</a>
 </header>
-<!-- pages --><nav class="pages" aria-label="Pages" style="--pg:#1F3B2D"><a href="index.html">Home</a><a href="menu.html">Menu</a><a href="events.html">Private events</a><a href="visit.html" aria-current="page">Visit</a></nav><!-- /pages -->
+<!-- pages --><nav class="pages" aria-label="Pages" style="--pg:#1F3B2D"><a href="index.html" data-ja="トップ">Home</a><a href="menu.html" data-ja="メニュー">Menu</a><a href="events.html" data-ja="貸切">Private events</a><a href="visit.html" aria-current="page" data-ja="アクセス">Visit</a></nav><!-- /pages -->
 
 <main>
 <section class="subhead">
-  <p class="eyebrow">Visit</p>
-  <h1>Before you<br><em>walk over.</em></h1>
-  <p class="lead">How the weekend waitlist works, when it is quiet, what we have for kids and dogs, and how to reach Queen Street East without circling for parking.</p>
+  <p class="eyebrow" data-ja="アクセス">Visit</p>
+  <h1 data-ja="お店に来る&lt;br&gt;&lt;em&gt;その前に。&lt;/em&gt;" data-html>Before you<br><em>walk over.</em></h1>
+  <p class="lead" data-ja="週末の順番待ちのしくみ、空いている時間帯、お子さま連れやワンちゃん連れへの対応、そして駐車場探しで迷わずにクイーン・ストリート・イーストへ来る方法をまとめました。">How the weekend waitlist works, when it is quiet, what we have for kids and dogs, and how to reach Queen Street East without circling for parking.</p>
 </section>
 
 <section class="now">
   <div class="benny-card now-card">
     <div>
-      <p class="eyebrow">Right now</p>
-      <h2 data-now-title>Checking the room</h2>
-      <p data-now-text>Our wait times follow Toronto time.</p>
-      <a class="btn" href="index.html#waitlist" data-now-btn>Join the waitlist</a>
+      <p class="eyebrow" data-ja="ただいま">Right now</p>
+      <h2 data-now-title data-ja="店内の状況を確認中">Checking the room</h2>
+      <p data-now-text data-ja="待ち時間はトロント時間で表示しています。">Our wait times follow Toronto time.</p>
+      <a class="btn" href="index.html#waitlist" data-now-btn data-ja="順番待ちに登録">Join the waitlist</a>
     </div>
     <div class="busy">
-      <h3>When is it busy?</h3>
-      <p class="bars-cap">Typical wait in minutes, by the hour</p>
+      <h3 data-ja="混む時間帯は？">When is it busy?</h3>
+      <p class="bars-cap" data-ja="時間帯ごとのおおよその待ち時間（分）">Typical wait in minutes, by the hour</p>
       <div class="filter-chips busy-days" role="group" aria-label="Day of the week" data-busy-days>
-        <button type="button" aria-pressed="false" data-day="3">Wed</button><button type="button" aria-pressed="false" data-day="4">Thu</button><button type="button" aria-pressed="false" data-day="5">Fri</button><button type="button" aria-pressed="false" data-day="6">Sat</button><button type="button" aria-pressed="false" data-day="0">Sun</button><button type="button" aria-pressed="false" data-day="1">Mon</button>
+        <button type="button" aria-pressed="false" data-day="3" data-ja="水">Wed</button><button type="button" aria-pressed="false" data-day="4" data-ja="木">Thu</button><button type="button" aria-pressed="false" data-day="5" data-ja="金">Fri</button><button type="button" aria-pressed="false" data-day="6" data-ja="土">Sat</button><button type="button" aria-pressed="false" data-day="0" data-ja="日">Sun</button><button type="button" aria-pressed="false" data-day="1" data-ja="月">Mon</button>
       </div>
       <ol class="bars" data-bars></ol>
       <p class="busy-out" data-busy-out aria-live="polite"></p>
@@ -54,70 +55,71 @@
 </section>
 
 <section class="how-wl">
-  <header class="head"><p class="eyebrow">The weekend waitlist</p><h2>No line on the sidewalk</h2><p>We do not take reservations on Saturdays and Sundays. Instead, everyone goes on one list, in order, and nobody has to stand in the cold.</p></header>
+  <header class="head"><p class="eyebrow" data-ja="週末の順番待ち">The weekend waitlist</p><h2 data-ja="歩道に並ばなくて大丈夫">No line on the sidewalk</h2><p data-ja="土日は予約を受け付けていません。そのかわり、全員がひとつのリストに順番どおり登録するので、寒い中で外に並ぶ必要はありません。">We do not take reservations on Saturdays and Sundays. Instead, everyone goes on one list, in order, and nobody has to stand in the cold.</p></header>
   <ol class="steps-list wl-steps">
-    <li><b>Add your name from anywhere</b><span>Use the <a href="index.html#waitlist">waitlist on our home page</a> from your sofa, or give your name at the door.</span></li>
-    <li><b>We text you ten minutes before</b><span>Walk over to Jimmie Simpson Park or grab a coffee to go from the window. Your phone tells you when to head back.</span></li>
-    <li><b>Reply if you are running late</b><span>We hold the table for ten minutes after the text. Reply “late” and we move you down one place instead of off the list.</span></li>
-    <li><b>Sit down when everyone is here</b><span>We seat the whole party at once, so the table does not sit half empty while the line grows.</span></li>
+    <li><b data-ja="どこからでも登録OK">Add your name from anywhere</b><span data-ja="おうちから&lt;a href=&quot;index.html#waitlist&quot;&gt;トップページの順番待ち&lt;/a&gt;で登録するか、入口でお名前をお伝えください。" data-html>Use the <a href="index.html#waitlist">waitlist on our home page</a> from your sofa, or give your name at the door.</span></li>
+    <li><b data-ja="10分前にSMSでお知らせ">We text you ten minutes before</b><span data-ja="ジミー・シンプソン公園まで歩くもよし、窓口でテイクアウトのコーヒーを買うもよし。戻るタイミングはスマホがお知らせします。">Walk over to Jimmie Simpson Park or grab a coffee to go from the window. Your phone tells you when to head back.</span></li>
+    <li><b data-ja="遅れそうなときは返信を">Reply if you are running late</b><span data-ja="お知らせから10分間は席を確保しておきます。「late」と返信してもらえれば、リストから外さずに順番をひとつ後ろにずらします。">We hold the table for ten minutes after the text. Reply “late” and we move you down one place instead of off the list.</span></li>
+    <li><b data-ja="全員そろってからご案内">Sit down when everyone is here</b><span data-ja="グループ全員がそろってからまとめてご案内します。列が伸びる中で、席が半分空いたままにならないように。">We seat the whole party at once, so the table does not sit half empty while the line grows.</span></li>
   </ol>
 </section>
 
 <section class="needs">
-  <header class="head"><p class="eyebrow">Good to know</p><h2>Plan around what you need</h2></header>
+  <header class="head"><p class="eyebrow" data-ja="ご来店の前に">Good to know</p><h2 data-ja="目的に合わせて">Plan around what you need</h2></header>
   <div class="filter-chips" role="group" aria-label="Show tips for" data-needs>
-    <button type="button" aria-pressed="true" data-k="all">Everything</button><button type="button" aria-pressed="false" data-k="kids">Kids</button><button type="button" aria-pressed="false" data-k="access">Access</button><button type="button" aria-pressed="false" data-k="dogs">Dogs</button><button type="button" aria-pressed="false" data-k="groups">Groups</button><button type="button" aria-pressed="false" data-k="diet">Diets and allergies</button>
+    <button type="button" aria-pressed="true" data-k="all" data-ja="すべて">Everything</button><button type="button" aria-pressed="false" data-k="kids" data-ja="お子さま">Kids</button><button type="button" aria-pressed="false" data-k="access" data-ja="バリアフリー">Access</button><button type="button" aria-pressed="false" data-k="dogs" data-ja="ワンちゃん">Dogs</button><button type="button" aria-pressed="false" data-k="groups" data-ja="グループ">Groups</button><button type="button" aria-pressed="false" data-k="diet" data-ja="食事制限・アレルギー">Diets and allergies</button>
   </div>
   <p class="need-count" data-need-count aria-live="polite"></p>
   <div class="need-grid" data-need-grid>
-    <article data-k="kids"><h3>High chairs and a kids' plate</h3><p>Six high chairs and two booster seats. Under-10s get half pancakes or a small benny for $9, and crayons come with the cutlery.</p></article>
-    <article data-k="kids access"><h3>Room for a stroller</h3><p>Park it by the window bench and we keep the aisle clear. On a busy Sunday, folded is kinder to everyone.</p></article>
-    <article data-k="access kids"><h3>Accessible washroom</h3><p>On the main floor, with grab bars, room to turn a wheelchair, and the change table.</p></article>
-    <article data-k="access"><h3>Step-free from the sidewalk</h3><p>A level entrance on Queen Street East and a wide aisle all the way to the back tables.</p></article>
-    <article data-k="access"><h3>A quieter table</h3><p>Ask for the back corner, away from the coffee grinder. Weekday mornings before ten are the calmest time to come.</p></article>
-    <article data-k="dogs"><h3>Dogs on the patio <span class="season" data-patio></span></h3><p>Open May to October, weather allowing. Water bowls by the gate and a hook for the leash. Inside, service dogs only.</p></article>
-    <article data-k="groups"><h3>Parties of up to six</h3><p>Add everyone to the waitlist as one party. We seat you as soon as the whole group has arrived.</p></article>
-    <article data-k="groups"><h3>Seven or more</h3><p>On weekends we cannot promise a table that big. On Tuesdays the whole room can be yours: see <a href="events.html">private events</a>.</p></article>
-    <article data-k="diet"><h3>Vegan, vegetarian, gluten-free</h3><p>Every dish is tagged on the <a href="menu.html">menu</a>. Swap the muffin for a potato rösti and your benny has no gluten in the base.</p></article>
-    <article data-k="diet"><h3>Allergies</h3><p>Tell your server before you order. The kitchen is small, so we will be honest about what we can and cannot promise.</p></article>
+    <article data-k="kids"><h3 data-ja="子ども用いすとキッズプレート">High chairs and a kids' plate</h3><p data-ja="ハイチェアが6脚、補助いすが2つあります。10歳未満のお子さまはハーフサイズのパンケーキか小さめのベネディクトが$9。カトラリーと一緒にクレヨンもお持ちします。">Six high chairs and two booster seats. Under-10s get half pancakes or a small benny for $9, and crayons come with the cutlery.</p></article>
+    <article data-k="kids access"><h3 data-ja="ベビーカーもOK">Room for a stroller</h3><p data-ja="窓際のベンチ横に置いていただければ、通路はスタッフが空けておきます。混み合う日曜日は、たたんでいただけると助かります。">Park it by the window bench and we keep the aisle clear. On a busy Sunday, folded is kinder to everyone.</p></article>
+    <article data-k="access kids"><h3 data-ja="多目的トイレ">Accessible washroom</h3><p data-ja="1階にあり、手すり付きで車椅子でも方向転換できる広さ。おむつ替え台もあります。">On the main floor, with grab bars, room to turn a wheelchair, and the change table.</p></article>
+    <article data-k="access"><h3 data-ja="歩道から段差なし">Step-free from the sidewalk</h3><p data-ja="クイーン・ストリート・イースト側の入口は段差がなく、奥の席まで広い通路が続いています。">A level entrance on Queen Street East and a wide aisle all the way to the back tables.</p></article>
+    <article data-k="access"><h3 data-ja="静かな席">A quieter table</h3><p data-ja="コーヒーグラインダーから離れた奥の角の席をご指定ください。いちばん落ち着いているのは平日の朝10時前です。">Ask for the back corner, away from the coffee grinder. Weekday mornings before ten are the calmest time to come.</p></article>
+    <article data-k="dogs"><h3 data-ja="テラス席はワンちゃんOK &lt;span class=&quot;season&quot; data-patio&gt;&lt;/span&gt;" data-html>Dogs on the patio <span class="season" data-patio></span></h3><p data-ja="5月から10月まで、天気がよければオープン。入口に水飲みボウルとリードを掛けるフックがあります。店内は補助犬のみ入店できます。">Open May to October, weather allowing. Water bowls by the gate and a hook for the leash. Inside, service dogs only.</p></article>
+    <article data-k="groups"><h3 data-ja="6名さままで">Parties of up to six</h3><p data-ja="全員まとめて1グループで順番待ちに登録してください。皆さんがそろい次第ご案内します。">Add everyone to the waitlist as one party. We seat you as soon as the whole group has arrived.</p></article>
+    <article data-k="groups"><h3 data-ja="7名さま以上">Seven or more</h3><p data-ja="週末はその人数のお席をお約束できません。火曜日ならお店を丸ごと貸し切れます。&lt;a href=&quot;events.html&quot;&gt;貸切プラン&lt;/a&gt;をご覧ください。" data-html>On weekends we cannot promise a table that big. On Tuesdays the whole room can be yours: see <a href="events.html">private events</a>.</p></article>
+    <article data-k="diet"><h3 data-ja="ヴィーガン、ベジタリアン、グルテンフリー">Vegan, vegetarian, gluten-free</h3><p data-ja="&lt;a href=&quot;menu.html&quot;&gt;メニュー&lt;/a&gt;の全料理に表示があります。マフィンをポテトロスティに替えれば、ベネディクトの土台はグルテンなしに。" data-html>Every dish is tagged on the <a href="menu.html">menu</a>. Swap the muffin for a potato rösti and your benny has no gluten in the base.</p></article>
+    <article data-k="diet"><h3 data-ja="アレルギー">Allergies</h3><p data-ja="ご注文前にスタッフへお知らせください。小さなキッチンなので、対応できること・できないことを正直にお伝えします。">Tell your server before you order. The kitchen is small, so we will be honest about what we can and cannot promise.</p></article>
   </div>
 </section>
 
 <section class="getting">
-  <header class="head"><p class="eyebrow">Getting here</p><h2>Queen Street East, by Logan Avenue</h2></header>
+  <header class="head"><p class="eyebrow" data-ja="アクセス">Getting here</p><h2 data-ja="クイーン・ストリート・イースト、ローガン・アベニューのそば">Queen Street East, by Logan Avenue</h2></header>
   <div class="v-grid">
     <div class="b-map" aria-hidden="true"><svg viewBox="0 0 400 280"><rect width="400" height="280" class="bm-bg"/><rect x="24" y="166" width="150" height="92" rx="16" class="bm-park"/><path class="bm-road" d="M0 140 H400 M232 0 V280 M96 0 V140 M330 0 V280"/><path class="bm-track" d="M0 140 H400"/><circle cx="214" cy="140" r="9" class="bm-stop"/><text x="40" y="216" class="bm-small">Jimmie Simpson Park</text><text x="238" y="22" class="bm-small" transform="rotate(90 238 22)">Logan Ave</text><text x="10" y="130" class="bm-small">Queen St E</text><text x="152" y="166" class="bm-small">501 stop</text><circle cx="270" cy="118" r="13" class="bm-pin"/><text x="252" y="94" class="bm-label">Maple &amp; Main</text></svg></div>
     <dl>
-      <div><dt>Wed – Mon</dt><dd>8:00 – 15:00, last orders 14:45</dd></div>
-      <div><dt>Tuesday</dt><dd>Closed for <a href="events.html">private events</a></dd></div>
-      <div><dt>Streetcar</dt><dd>501 Queen to Logan Avenue, then one minute east</dd></div>
-      <div><dt>Bike</dt><dd>Rings out front, room for a cargo bike on the patio side</dd></div>
-      <div><dt>Car</dt><dd>Paid street parking on Queen. Most side streets are permit-only, so check the signs</dd></div>
-      <div><dt>Address</dt><dd>Queen Street East, Toronto (fictional)</dd></div>
+      <div><dt data-ja="水〜月">Wed – Mon</dt><dd data-ja="8:00〜15:00（ラストオーダー14:45）">8:00 – 15:00, last orders 14:45</dd></div>
+      <div><dt data-ja="火">Tuesday</dt><dd data-ja="&lt;a href=&quot;events.html&quot;&gt;貸切&lt;/a&gt;のみ営業" data-html>Closed for <a href="events.html">private events</a></dd></div>
+      <div><dt data-ja="路面電車">Streetcar</dt><dd data-ja="501番「Queen」線でローガン・アベニュー下車、東へ徒歩1分">501 Queen to Logan Avenue, then one minute east</dd></div>
+      <div><dt data-ja="自転車">Bike</dt><dd data-ja="店の前に駐輪スペースあり。カーゴバイクはテラス側に置けます">Rings out front, room for a cargo bike on the patio side</dd></div>
+      <div><dt data-ja="車">Car</dt><dd data-ja="クイーン通りに有料の路上駐車スペースがあります。脇道の多くは許可車専用なので、標識をご確認ください">Paid street parking on Queen. Most side streets are permit-only, so check the signs</dd></div>
+      <div><dt data-ja="住所">Address</dt><dd data-ja="トロント、クイーン・ストリート・イースト（架空）">Queen Street East, Toronto (fictional)</dd></div>
     </dl>
   </div>
 </section>
 
 <section class="faq-b">
-  <h2>Short answers</h2>
-  <details><summary>Can I book a table?</summary><p>Not on weekends: the waitlist keeps it fair for everyone. On weekdays there is rarely more than a ten-minute wait, so just walk in.</p></details>
-  <details><summary>When can I join the waitlist?</summary><p>From 7:30 on weekend mornings. The first names on the list sit down at 8:00.</p></details>
-  <details><summary>Do you do takeout?</summary><p>Coffee and juice to go from the window, all day. The plates are made for the table, so they stay here.</p></details>
-  <details><summary>Can I work on my laptop?</summary><p>Weekdays, yes, and there is Wi-Fi. On weekends we ask laptops to wait until after 1pm, when the line has gone.</p></details>
+  <h2 data-ja="よくあるご質問">Short answers</h2>
+  <details><summary data-ja="予約はできますか？">Can I book a table?</summary><p data-ja="週末はできません。順番待ちのほうが、どなたにも公平なので。平日は待っても10分ほどなので、そのままお越しください。">Not on weekends: the waitlist keeps it fair for everyone. On weekdays there is rarely more than a ten-minute wait, so just walk in.</p></details>
+  <details><summary data-ja="順番待ちには何時から登録できますか？">When can I join the waitlist?</summary><p data-ja="週末の朝7:30からです。最初の方々は8:00にご案内します。">From 7:30 on weekend mornings. The first names on the list sit down at 8:00.</p></details>
+  <details><summary data-ja="テイクアウトはできますか？">Do you do takeout?</summary><p data-ja="コーヒーとジュースは一日中、窓口でテイクアウトできます。お料理はテーブルで食べていただくためのものなので、店内のみです。">Coffee and juice to go from the window, all day. The plates are made for the table, so they stay here.</p></details>
+  <details><summary data-ja="パソコン作業はしてもいいですか？">Can I work on my laptop?</summary><p data-ja="平日はどうぞ。Wi-Fiもあります。週末は、行列が落ち着く13時以降にお願いしています。">Weekdays, yes, and there is Wi-Fi. On weekends we ask laptops to wait until after 1pm, when the line has gone.</p></details>
 </section>
 </main>
 
 <footer class="foot">
   <p class="foot-brand">Maple &amp; Main</p>
-  <p>This is a concept project. The restaurant, address and prices are fictional. Photos: CC0 (public domain).</p>
-  <details class="credits"><summary>Photo credits</summary><ul data-credits></ul></details>
+  <p data-ja="これはコンセプト作品です。お店、住所、価格はすべて架空のものです。写真：CC0（パブリックドメイン）。">This is a concept project. The restaurant, address and prices are fictional. Photos: CC0 (public domain).</p>
+  <details class="credits"><summary data-ja="写真クレジット">Photo credits</summary><ul data-credits></ul></details>
 </footer>
 
-<a class="dock" href="index.html#waitlist">Join the waitlist</a>
+<a class="dock" href="index.html#waitlist" data-ja="順番待ちに登録">Join the waitlist</a>
 <script src="../../assets/concept.js"></script>
 <script>
   // صفحه‌ی بازدید: انتظارِ همین حالا و نمودارِ ساعت‌های شلوغ (همان مدلِ صفحه‌ی اصلی، به وقتِ تورنتو)، فیلترِ نکته‌ها و فصلِ پاسیو
   (function () {
+    var LONG_JA = ['日曜日', '月曜日', '火曜日', '水曜日', '木曜日', '金曜日', '土曜日'];
     var LONG = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     var HOURS = [8, 9, 10, 11, 12, 13, 14];
     var now = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Toronto' }));
@@ -128,17 +130,21 @@
       var weekend = day === 0 || day === 6;
       return weekend ? (hr >= 10 && hr < 13 ? 45 : 25) : 10;
     }
-    function hl(hr) { return hr === 12 ? '12pm' : hr > 12 ? (hr - 12) + 'pm' : hr + 'am'; }
+    function hl(hr) { return tx({ ja: hr + '時', en: hr === 12 ? '12pm' : hr > 12 ? (hr - 12) + 'pm' : hr + 'am' }); }
     function el(s) { return document.querySelector(s); }
 
     // ۱) همین حالا
     var w = wait(today, h), title = el('[data-now-title]'), text = el('[data-now-text]'), btn = el('[data-now-btn]');
-    var back = today === 1 ? 'Wednesday' : 'tomorrow';
-    if (today === 2) { title.textContent = 'Closed today'; text.textContent = 'Tuesdays are for private events. We are back tomorrow from 8am.'; btn.textContent = 'Book a Tuesday'; btn.href = 'events.html'; }
-    else if (w === null && h < 8) { title.textContent = 'Opening at 8:00'; text.textContent = (today === 0 || today === 6) ? 'The waitlist opens at 7:30, and the first names sit down at 8.' : 'No list needed on a weekday morning. Just walk in.'; }
-    else if (w === null) { title.textContent = 'The kitchen is closed'; text.textContent = 'We close at 3pm. Back ' + back + ' from 8am, coffee on.'; btn.textContent = 'See the menu'; btn.href = 'menu.html'; }
-    else if (today === 0 || today === 6) { title.innerHTML = 'About <b>' + w + '</b> minutes'; text.textContent = 'Join the waitlist and we text you when your table is ten minutes away.'; }
-    else { title.innerHTML = 'About <b>' + w + '</b> minutes'; text.textContent = 'A weekday, so it is calm. Walk in, no list needed.'; btn.textContent = 'See the menu'; btn.href = 'menu.html'; }
+    var menuBtn = function () { btn.textContent = tx({ ja: 'メニューを見る', en: 'See the menu' }); btn.href = 'menu.html'; };
+    var about = function () { title.innerHTML = tx({ ja: '約<b>' + w + '</b>分待ち', en: 'About <b>' + w + '</b> minutes' }); };
+    function nowBox() {
+      if (today === 2) { title.textContent = tx({ ja: '本日は定休日', en: 'Closed today' }); text.textContent = tx({ ja: '火曜日は貸切営業のみです。明日の朝8時からお待ちしています。', en: 'Tuesdays are for private events. We are back tomorrow from 8am.' }); btn.textContent = tx({ ja: '火曜日を貸し切る', en: 'Book a Tuesday' }); btn.href = 'events.html'; }
+      else if (w === null && h < 8) { title.textContent = tx({ ja: '8:00オープン', en: 'Opening at 8:00' }); text.textContent = (today === 0 || today === 6) ? tx({ ja: '順番待ちの受付は7:30から。最初の方々は8時にご案内します。', en: 'The waitlist opens at 7:30, and the first names sit down at 8.' }) : tx({ ja: '平日の朝は順番待ち不要です。そのままお越しください。', en: 'No list needed on a weekday morning. Just walk in.' }); }
+      else if (w === null) { title.textContent = tx({ ja: '本日の営業は終了しました', en: 'The kitchen is closed' }); text.textContent = tx({ ja: '15時で閉店です。' + (today === 1 ? '水曜日' : '明日') + 'の朝8時から、コーヒーを用意してお待ちしています。', en: 'We close at 3pm. Back ' + (today === 1 ? 'Wednesday' : 'tomorrow') + ' from 8am, coffee on.' }); menuBtn(); }
+      else if (today === 0 || today === 6) { about(); text.textContent = tx({ ja: '順番待ちに登録すれば、席が空く10分前にSMSでお知らせします。', en: 'Join the waitlist and we text you when your table is ten minutes away.' }); }
+      else { about(); text.textContent = tx({ ja: '平日なので落ち着いています。順番待ちなしでどうぞ。', en: 'A weekday, so it is calm. Walk in, no list needed.' }); menuBtn(); }
+    }
+    nowBox();
 
     // ۲) نمودارِ ساعت‌های شلوغ برای هر روز
     var days = document.querySelectorAll('[data-busy-days] button'), bars = el('[data-bars]'), out = el('[data-busy-out]');
@@ -146,11 +152,16 @@
       days.forEach(function (b) { b.setAttribute('aria-pressed', Number(b.dataset.day) === day); });
       bars.innerHTML = HOURS.map(function (hr) {
         var v = wait(day, hr), cur = day === today && hr === h;
-        return '<li class="' + (v >= 45 ? 'peak' : '') + (cur ? ' cur' : '') + '" style="--v:' + v + '"><span class="bv">' + v + '<span class="sr-only"> minutes at ' + hl(hr) + '</span></span><span class="bar" aria-hidden="true"></span><small aria-hidden="true">' + (cur ? 'Now' : hl(hr)) + '</small></li>';
+        return '<li class="' + (v >= 45 ? 'peak' : '') + (cur ? ' cur' : '') + '" style="--v:' + v + '"><span class="bv">' + v + '<span class="sr-only">' + tx({ ja: '分（' + hl(hr) + '）', en: ' minutes at ' + hl(hr) }) + '</span></span><span class="bar" aria-hidden="true"></span><small aria-hidden="true">' + (cur ? tx({ ja: '今', en: 'Now' }) : hl(hr)) + '</small></li>';
       }).join('');
       var we = day === 0 || day === 6;
-      out.textContent = LONG[day] + (we ? ': busiest from 10am to 1pm, about 45 minutes. Come at 8 or after 1 and it is closer to 25.' : ': about 10 minutes, all day. Walk in.');
+      out.textContent = tx({
+        ja: LONG_JA[day] + (we ? '：10時〜13時がいちばん混み、待ち時間は約45分。8時か13時以降なら25分ほどです。' : '：一日を通して待ち時間は約10分。そのままお越しください。'),
+        en: LONG[day] + (we ? ': busiest from 10am to 1pm, about 45 minutes. Come at 8 or after 1 and it is closer to 25.' : ': about 10 minutes, all day. Walk in.')
+      });
+      shown = day;
     }
+    var shown;
     days.forEach(function (b) { b.addEventListener('click', function () { show(Number(b.dataset.day)); }); });
     show(today === 2 ? 3 : today);
 
@@ -160,16 +171,19 @@
       var n = 0;
       chips.forEach(function (c) { c.setAttribute('aria-pressed', c.dataset.k === k); });
       cards.forEach(function (a) { var ok = k === 'all' || a.dataset.k.split(' ').indexOf(k) > -1; a.hidden = !ok; if (ok) n++; });
-      count.textContent = n + (n === 1 ? ' tip' : ' tips');
+      count.textContent = tx({ ja: n + '件', en: n + (n === 1 ? ' tip' : ' tips') });
+      current = k;
     }
+    var current;
     chips.forEach(function (c) { c.addEventListener('click', function () { filter(c.dataset.k); }); });
     filter('all');
 
     // ۴) فصلِ پاسیو: مه تا اکتبر
     var mo = now.getMonth(), patio = el('[data-patio]');
     var open = mo >= 4 && mo <= 9;
-    patio.textContent = open ? (mo === 9 ? 'Open until Oct 31' : 'Open now') : 'Back in May';
-    patio.classList.toggle('off', !open);
+    function season() { patio = el('[data-patio]'); patio.classList.toggle('off', !open); patio.textContent = open ? (mo === 9 ? tx({ ja: '10月31日まで', en: 'Open until Oct 31' }) : tx({ ja: '営業中', en: 'Open now' })) : tx({ ja: '5月から再開', en: 'Back in May' }); }
+    season();
+    document.addEventListener('langchange', function () { nowBox(); show(shown); filter(current); season(); });
   })();
 </script>
 </body>

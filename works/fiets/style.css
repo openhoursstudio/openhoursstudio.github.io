@@ -15,7 +15,7 @@ h1, h2 { font-family: var(--display); font-weight: 400; margin: 0; letter-spacin
 .brand svg { width: 40px; height: 24px; fill: none; stroke: var(--ink); stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
 .lang { display: inline-flex; border: 0; border-radius: 999px; background: rgba(255, 255, 255, .3); padding: 3px; font: 700 12px var(--body); cursor: pointer; min-height: 36px; align-items: center; }
 .lang span { padding: 7px 10px; border-radius: 999px; }
-html[data-l="base"] .lang-base, html[data-l="en"] .lang-en { background: var(--ink); color: #fff; }
+html[data-l="base"] .lang-base, html[data-l="ja"] .lang-ja, html[data-l="en"] .lang-en { background: var(--ink); color: #fff; }
 .hero { display: grid; gap: 22px; padding: 30px 16px 10px; background: linear-gradient(var(--orange) 0 55%, var(--off) 55%); }
 .status { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 12px; font-weight: 700; font-size: 13px; background: var(--ink); color: #fff; padding: 4px 12px; border-radius: 999px; }
 .status:empty { display: none; }
@@ -194,3 +194,8 @@ h2 { font-size: 34px; line-height: 1; }
 }
 /* سرتیترِ «درباره‌ی ما» روی گوشی‌های باریک جا شود */
 @media (max-width: 819px) { .ov-head h1 { font-size: clamp(32px, 10vw, 40px); } }
+
+/* ژاپنی: حروفِ ژاپنی در همان اندازه درشت‌تر دیده می‌شوند */
+html[data-l="ja"] h1 { font-size: 34px; }
+html[data-l="ja"] .subhead h1 { font-size: 32px; }
+@media (min-width: 820px) { html[data-l="ja"] h1 { font-size: 60px; } html[data-l="ja"] .subhead h1 { font-size: 50px; } }

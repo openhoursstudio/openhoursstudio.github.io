@@ -12,11 +12,11 @@
 <link rel="stylesheet" href="../pages.css">
 <link rel="stylesheet" href="style.css">
 </head>
-<body data-default-lang="en" data-tz="Europe/London" data-open="07:00" data-close="16:00" data-closed-day="1" data-key="lb">
+<body data-base="en" data-default-lang="en" data-tz="Europe/London" data-open="07:00" data-close="16:00" data-closed-day="1" data-key="lb" data-title-ja="Larkspur Bakery · ハックニーのサワードウと焼き菓子（コンセプト作品）">
 
-<div class="concept" role="note">Concept project · Larkspur Bakery is a fictional bakery
+<div class="concept" role="note"><span data-ja="コンセプト作品 · Larkspur Bakery は架空のベーカリーです">Concept project · Larkspur Bakery is a fictional bakery</span>
    · 
-  <a href="../../work/larkspur/index.html">Return</a>
+  <a href="../../work/larkspur/index.html" data-ja="戻る">Return</a>
 </div>
 
 <header class="top">
@@ -24,69 +24,70 @@
     <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16 3c3 4 3 8 0 11-3-3-3-7 0-11zM16 14c4-1 7 1 9 4-4 1-7 0-9-4zM16 14c-4-1-7 1-9 4 4 1 7 0 9-4zM16 14v15"/></svg>
     Larkspur
   </a>
-  <nav class="nav"><a href="#oven">Today</a><a href="menu.html">Menu</a><a href="cakes.html">Cakes</a><a href="wholesale.html">Wholesale</a><a href="#visit">Visit</a></nav>
-  <a class="pill" href="#order">Order for collection</a>
+  <nav class="nav"><a href="#oven" data-ja="今日の焼き上がり">Today</a><a href="menu.html" data-ja="メニュー">Menu</a><a href="cakes.html" data-ja="ケーキ">Cakes</a><a href="wholesale.html" data-ja="卸売り">Wholesale</a><a href="#visit" data-ja="店舗案内">Visit</a></nav>
+  <div class="lang" role="group" aria-label="Language · 言語" data-lang-toggle><button type="button" data-set-lang="en" aria-label="English"><span class="lang-base">EN</span></button><button type="button" data-set-lang="ja" aria-label="日本語"><span class="lang-ja">JA</span></button></div>
+  <a class="pill" href="#order" data-ja="取り置きを予約">Order for collection</a>
 </header>
-<!-- pages --><nav class="pages" aria-label="Pages" style="--pg:#D7263D"><a href="index.html" aria-current="page">Today</a><a href="menu.html">Menu</a><a href="cakes.html">Celebration cakes</a><a href="wholesale.html">Wholesale</a></nav><!-- /pages -->
+<!-- pages --><nav class="pages" aria-label="Pages" style="--pg:#D7263D"><a href="index.html" aria-current="page" data-ja="今日の焼き上がり">Today</a><a href="menu.html" data-ja="メニュー">Menu</a><a href="cakes.html" data-ja="お祝いケーキ">Celebration cakes</a><a href="wholesale.html" data-ja="卸売り">Wholesale</a></nav><!-- /pages -->
 
 <main>
   <section class="hero">
     <div class="hero-copy">
       <p class="status" data-status></p>
-      <h1>Baked before<br>you wake up.</h1>
-      <p class="lead">Sourdough, croissants and cinnamon buns from a tiny bakery on Chatsworth Road. We start at four, so you do not have to.</p>
-      <div class="cta"><a class="btn" href="#oven">What is out of the oven</a><a class="btn ghost" href="#order">Pre-order</a></div>
+      <h1 data-ja="あなたが起きる前に、&lt;br&gt;焼き上げています。" data-html>Baked before<br>you wake up.</h1>
+      <p class="lead" data-ja="チャッツワース・ロードの小さなベーカリーの、サワードウとクロワッサンとシナモンロール。朝4時から仕込むのは私たちの仕事。あなたはゆっくり寝ていてください。">Sourdough, croissants and cinnamon buns from a tiny bakery on Chatsworth Road. We start at four, so you do not have to.</p>
+      <div class="cta"><a class="btn" href="#oven" data-ja="焼き上がりを見る">What is out of the oven</a><a class="btn ghost" href="#order" data-ja="取り置き予約">Pre-order</a></div>
     </div>
-    <figure class="hero-photo"><img src="../../assets/photos/larkspur-1.webp" alt="Croissant and coffee on a white table"></figure>
+    <figure class="hero-photo"><img src="../../assets/photos/larkspur-1.webp" alt="Croissant and coffee on a white table" data-ja-alt="白いテーブルにクロワッサンとコーヒー"></figure>
   </section>
 
-  <div class="ticker" aria-hidden="true"><div><span>Sourdough</span><span>Croissants</span><span>Cinnamon buns</span><span>Focaccia</span><span>Seeded rye</span><span>Sourdough</span><span>Croissants</span><span>Cinnamon buns</span><span>Focaccia</span><span>Seeded rye</span></div></div>
+  <div class="ticker" aria-hidden="true"><div><span data-ja="サワードウ">Sourdough</span><span data-ja="クロワッサン">Croissants</span><span data-ja="シナモンロール">Cinnamon buns</span><span data-ja="フォカッチャ">Focaccia</span><span data-ja="雑穀ライ麦パン">Seeded rye</span><span data-ja="サワードウ">Sourdough</span><span data-ja="クロワッサン">Croissants</span><span data-ja="シナモンロール">Cinnamon buns</span><span data-ja="フォカッチャ">Focaccia</span><span data-ja="雑穀ライ麦パン">Seeded rye</span></div></div>
 
   <section class="oven" id="oven">
-    <header class="head"><p class="eyebrow">Today's oven</p><h2>Fresh at these times</h2><p>Everything is baked on site. When it is gone, it is gone, so check before you come.</p></header>
+    <header class="head"><p class="eyebrow" data-ja="今日の焼き上がり">Today's oven</p><h2 data-ja="この時間に焼き上がります">Fresh at these times</h2><p data-ja="すべて店内で焼いています。売り切れたらその日は終わりなので、来店前にチェックしてください。">Everything is baked on site. When it is gone, it is gone, so check before you come.</p></header>
     <ol class="times" data-times>
-      <li data-at="07:00"><time>7:00</time><b>Country sourdough</b><span>£5.50 · loaf</span></li>
-      <li data-at="08:30"><time>8:30</time><b>Butter croissants</b><span>£2.90</span></li>
-      <li data-at="10:00"><time>10:00</time><b>Cardamom buns</b><span>£3.40</span></li>
-      <li data-at="11:30"><time>11:30</time><b>Cinnamon buns</b><span>£3.20</span></li>
-      <li data-at="13:00"><time>13:00</time><b>Rosemary focaccia</b><span>£4.00 · slab</span></li>
+      <li data-at="07:00"><time>7:00</time><b data-ja="カントリーサワードウ">Country sourdough</b><span data-ja="£5.50 · 1斤">£5.50 · loaf</span></li>
+      <li data-at="08:30"><time>8:30</time><b data-ja="バタークロワッサン">Butter croissants</b><span>£2.90</span></li>
+      <li data-at="10:00"><time>10:00</time><b data-ja="カルダモンロール">Cardamom buns</b><span>£3.40</span></li>
+      <li data-at="11:30"><time>11:30</time><b data-ja="シナモンロール">Cinnamon buns</b><span>£3.20</span></li>
+      <li data-at="13:00"><time>13:00</time><b data-ja="ローズマリーのフォカッチャ">Rosemary focaccia</b><span data-ja="£4.00 · 1枚">£4.00 · slab</span></li>
     </ol>
   </section>
 
   <section class="bakes" id="bakes">
-    <header class="head"><p class="eyebrow">The bakes</p><h2>Six things we are known for</h2></header>
+    <header class="head"><p class="eyebrow" data-ja="看板商品">The bakes</p><h2 data-ja="Larkspur といえば、この6つ">Six things we are known for</h2></header>
     <div class="cards">
-      <article><img src="../../assets/photos/larkspur-2.webp" loading="lazy" alt="Two sourdough loaves on a board"><h3>Country sourdough</h3><p>48 hours from flour to crust. Ask us to slice it.</p><b>£5.50</b></article>
-      <article><img src="../../assets/photos/larkspur-8.webp" loading="lazy" alt="A pile of croissants"><h3>Butter croissant</h3><p>Three days of folding, French butter, no shortcuts.</p><b>£2.90</b></article>
-      <article><img src="../../assets/photos/larkspur-6.webp" loading="lazy" alt="Cinnamon buns on a plate"><h3>Cinnamon bun</h3><p>Brown sugar, a lot of cinnamon, a little salt.</p><b>£3.20</b></article>
-      <article><img src="../../assets/photos/larkspur-3.webp" loading="lazy" alt="Slicing a sourdough loaf"><h3>Seeded rye</h3><p>Dense, dark and good for a week. Our Saturday regulars buy two.</p><b>£6.00</b></article>
-      <article><img src="../../assets/photos/larkspur-4.webp" loading="lazy" alt="Pastry display case"><h3>Seasonal tart</h3><p>Whatever fruit the market had on Friday, in an almond crust.</p><b>£4.20</b></article>
-      <article><img src="../../assets/photos/larkspur-7.webp" loading="lazy" alt="A tray of buns"><h3>Box of six buns</h3><p>Mix and match. Good for an office, better for a sofa.</p><b>£17.00</b></article>
+      <article><img src="../../assets/photos/larkspur-2.webp" loading="lazy" alt="Two sourdough loaves on a board" data-ja-alt="まな板にのった2つのサワードウ"><h3 data-ja="カントリーサワードウ">Country sourdough</h3><p data-ja="粉から焼き上がりまで48時間。スライスもお気軽にどうぞ。">48 hours from flour to crust. Ask us to slice it.</p><b>£5.50</b></article>
+      <article><img src="../../assets/photos/larkspur-8.webp" loading="lazy" alt="A pile of croissants" data-ja-alt="山積みのクロワッサン"><h3 data-ja="バタークロワッサン">Butter croissant</h3><p data-ja="フランス産バターで3日かけて折り込み。手間は惜しみません。">Three days of folding, French butter, no shortcuts.</p><b>£2.90</b></article>
+      <article><img src="../../assets/photos/larkspur-6.webp" loading="lazy" alt="Cinnamon buns on a plate" data-ja-alt="お皿にのったシナモンロール"><h3 data-ja="シナモンロール">Cinnamon bun</h3><p data-ja="ブラウンシュガーに、たっぷりのシナモンとひとつまみの塩。">Brown sugar, a lot of cinnamon, a little salt.</p><b>£3.20</b></article>
+      <article><img src="../../assets/photos/larkspur-3.webp" loading="lazy" alt="Slicing a sourdough loaf" data-ja-alt="サワードウをスライスしているところ"><h3 data-ja="雑穀ライ麦パン">Seeded rye</h3><p data-ja="ずっしり黒く、1週間もちます。土曜の常連さんは2本買っていきます。">Dense, dark and good for a week. Our Saturday regulars buy two.</p><b>£6.00</b></article>
+      <article><img src="../../assets/photos/larkspur-4.webp" loading="lazy" alt="Pastry display case" data-ja-alt="焼き菓子のショーケース"><h3 data-ja="季節のタルト">Seasonal tart</h3><p data-ja="金曜の市場で見つけた果物を、アーモンド生地のタルトに。">Whatever fruit the market had on Friday, in an almond crust.</p><b>£4.20</b></article>
+      <article><img src="../../assets/photos/larkspur-7.webp" loading="lazy" alt="A tray of buns" data-ja-alt="パンが並ぶトレー"><h3 data-ja="パン6個入りボックス">Box of six buns</h3><p data-ja="好きな組み合わせで。オフィスへの差し入れにも、ソファでのんびり食べるのにも。">Mix and match. Good for an office, better for a sofa.</p><b>£17.00</b></article>
     </div>
   </section>
 
   <section class="order" id="order">
     <div class="order-card">
       <div>
-        <p class="eyebrow">Pre-order</p>
-        <h2>Order by 6pm, collect from 8am</h2>
-        <p>Loaves and boxes sell out by ten on Saturdays. Pre-order online and we keep yours on the shelf with your name on it.</p>
-        <a class="btn" href="#order" aria-disabled="true">Order for collection</a>
+        <p class="eyebrow" data-ja="取り置き予約">Pre-order</p>
+        <h2 data-ja="夕方6時までのご予約で、翌朝8時からお渡し">Order by 6pm, collect from 8am</h2>
+        <p data-ja="土曜日は10時までにパンもボックスも売り切れます。オンラインで予約すれば、お名前をつけて棚に取り置きしておきます。">Loaves and boxes sell out by ten on Saturdays. Pre-order online and we keep yours on the shelf with your name on it.</p>
+        <a class="btn" href="#order" aria-disabled="true" data-ja="取り置きを予約">Order for collection</a>
       </div>
-      <img src="../../assets/photos/larkspur-5.webp" loading="lazy" alt="Butter and flour on a table">
+      <img src="../../assets/photos/larkspur-5.webp" loading="lazy" alt="Butter and flour on a table" data-ja-alt="テーブルの上のバターと小麦粉">
     </div>
-    <p class="wholesale">Run a café nearby? We deliver bread and pastries to six cafés in Hackney every morning. <a href="wholesale.html">Ask about wholesale</a></p>
+    <p class="wholesale" data-ja="近くでカフェを営んでいますか？ ハックニーの6軒のカフェに、毎朝パンと焼き菓子を届けています。&lt;a href=&quot;wholesale.html&quot;&gt;卸売りについて問い合わせる&lt;/a&gt;" data-html>Run a café nearby? We deliver bread and pastries to six cafés in Hackney every morning. <a href="wholesale.html">Ask about wholesale</a></p>
   </section>
 
   <section class="visit" id="visit">
-    <header class="head"><p class="eyebrow">Visit</p><h2>Chatsworth Road, Hackney</h2></header>
+    <header class="head"><p class="eyebrow" data-ja="店舗案内">Visit</p><h2 data-ja="ハックニー、チャッツワース・ロード">Chatsworth Road, Hackney</h2></header>
     <div class="visit-grid">
       <dl>
-        <div><dt>Tue – Fri</dt><dd>7:00 – 16:00</dd></div>
-        <div><dt>Sat – Sun</dt><dd>8:00 – 15:00</dd></div>
-        <div><dt>Monday</dt><dd>Closed, we sleep</dd></div>
-        <div><dt>Address</dt><dd>Chatsworth Road, London E5 (fictional)</dd></div>
-        <div><dt>Buses</dt><dd>242 and 308, stop at Chatsworth Road</dd></div>
+        <div><dt data-ja="火〜金">Tue – Fri</dt><dd>7:00 – 16:00</dd></div>
+        <div><dt data-ja="土・日">Sat – Sun</dt><dd>8:00 – 15:00</dd></div>
+        <div><dt data-ja="月曜">Monday</dt><dd data-ja="定休日（寝ています）">Closed, we sleep</dd></div>
+        <div><dt data-ja="住所">Address</dt><dd data-ja="ロンドン E5、チャッツワース・ロード（架空の住所）">Chatsworth Road, London E5 (fictional)</dd></div>
+        <div><dt data-ja="バス">Buses</dt><dd data-ja="242番・308番「チャッツワース・ロード」下車">242 and 308, stop at Chatsworth Road</dd></div>
       </dl>
       <div class="map" aria-hidden="true"><svg viewBox="0 0 400 260"><rect width="400" height="260" class="m-bg"/><path class="m-road" d="M0 150 H400 M200 0 V260 M80 0 L120 260"/><path class="m-park" d="M250 20h120v90H250z"/><circle cx="200" cy="150" r="12" class="m-pin"/><text x="216" y="140" class="m-label">Larkspur</text><text x="262" y="70" class="m-small">Millfields Park</text></svg></div>
     </div>
@@ -95,11 +96,11 @@
 
 <footer class="foot">
   <p class="foot-brand">Larkspur Bakery</p>
-  <p>This is a concept project. The bakery, address and prices are fictional. Photos: CC0 (public domain).</p>
-  <details class="credits"><summary>Photo credits</summary><ul data-credits></ul></details>
+  <p data-ja="これはコンセプト作品です。お店・住所・価格はすべて架空のものです。写真：CC0（パブリックドメイン）。">This is a concept project. The bakery, address and prices are fictional. Photos: CC0 (public domain).</p>
+  <details class="credits"><summary data-ja="写真クレジット">Photo credits</summary><ul data-credits></ul></details>
 </footer>
 
-<a class="dock" href="#order">Pre-order</a>
+<a class="dock" href="#order" data-ja="取り置き予約">Pre-order</a>
 <script src="../../assets/concept.js"></script>
 <script>
   // پختِ امروز: بر اساسِ ساعتِ لندن، گذشته‌ها «تازه از فر» و ۳ ساعت بعد «تمام شد»
@@ -111,9 +112,17 @@
       var state = m < t ? 'soon' : m < t + 180 ? 'fresh' : 'gone';
       li.className = state;
       var tag = document.createElement('em');
-      tag.textContent = state === 'soon' ? 'Coming up' : state === 'fresh' ? 'Out of the oven' : 'Sold out today';
+      tag.dataset.state = state;
       li.appendChild(tag);
     });
+    function label() {
+      document.querySelectorAll('[data-times] em[data-state]').forEach(function (tag) {
+        var s = tag.dataset.state;
+        tag.textContent = s === 'soon' ? tx({ ja: 'まもなく', en: 'Coming up' }) : s === 'fresh' ? tx({ ja: '焼きたて', en: 'Out of the oven' }) : tx({ ja: '本日分は完売', en: 'Sold out today' });
+      });
+    }
+    document.addEventListener('langchange', label);
+    label();
   })();
 </script>
 </body>

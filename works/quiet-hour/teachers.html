@@ -12,129 +12,130 @@
 <link rel="stylesheet" href="../pages.css">
 <link rel="stylesheet" href="style.css">
 </head>
-<body data-base="en" data-default-lang="en" data-tz="America/Toronto" data-open="06:30" data-close="21:00" data-key="qh">
+<body data-base="en" data-default-lang="en" data-tz="America/Toronto" data-open="06:30" data-close="21:00" data-key="qh" data-title-ja="講師紹介 · Quiet Hour Yoga トロント・レスリービル（コンセプト作品）">
 
-<div class="concept" role="note">Concept project · Quiet Hour Yoga is a fictional studio
+<div class="concept" role="note"><span data-ja="コンセプト作品 · Quiet Hour Yoga は架空のスタジオです">Concept project · Quiet Hour Yoga is a fictional studio</span>
    · 
-  <a href="../../work/quiet-hour/index.html">Return</a>
+  <a href="../../work/quiet-hour/index.html" data-ja="戻る">Return</a>
 </div>
 
 <header class="top">
   <a class="brand" href="index.html"><svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13"/><path d="M21 7.5a10 10 0 1 0 3.5 13.6A8.5 8.5 0 0 1 21 7.5z"/></svg><span>Quiet Hour</span></a>
-  <nav class="nav" aria-label="Menu"><a href="index.html#classes">Timetable</a><a href="teachers.html">Teachers</a><a href="workshops.html">Workshops</a><a href="index.html#prices">Prices</a><a href="studio.html">The studio</a></nav>
-  <a class="btn btn-sm" href="index.html#classes">Book a class</a>
+  <nav class="nav" aria-label="Menu"><a href="index.html#classes" data-ja="スケジュール">Timetable</a><a href="teachers.html" data-ja="講師">Teachers</a><a href="workshops.html" data-ja="ワークショップ">Workshops</a><a href="index.html#prices" data-ja="料金">Prices</a><a href="studio.html" data-ja="スタジオ">The studio</a></nav>
+  <div class="lang" role="group" aria-label="Language · 言語" data-lang-toggle><button type="button" data-set-lang="en" aria-label="English"><span class="lang-base">EN</span></button><button type="button" data-set-lang="ja" aria-label="日本語"><span class="lang-ja">JA</span></button></div>
+  <a class="btn btn-sm" href="index.html#classes" data-ja="クラスを予約">Book a class</a>
 </header>
-<!-- pages --><nav class="pages" aria-label="Pages" style="--pg:#2B2340"><a href="index.html">Classes</a><a href="workshops.html">Workshops</a><a href="studio.html">The studio</a><a href="teachers.html" aria-current="page">Teachers</a></nav><!-- /pages -->
+<!-- pages --><nav class="pages" aria-label="Pages" style="--pg:#2B2340"><a href="index.html" data-ja="クラス">Classes</a><a href="workshops.html" data-ja="ワークショップ">Workshops</a><a href="studio.html" data-ja="スタジオ">The studio</a><a href="teachers.html" aria-current="page" data-ja="講師">Teachers</a></nav><!-- /pages -->
 
 <main>
 <section class="subhead">
-  <p class="eyebrow">Teachers</p>
-  <h1>Five teachers,<br><em>who learn your name.</em></h1>
-  <p class="lead">Small classes mean the teacher actually sees you. Find who teaches the level you are at, then book them on the timetable.</p>
+  <p class="eyebrow" data-ja="講師">Teachers</p>
+  <h1 data-ja="5人の講師が、&lt;br&gt;&lt;em&gt;あなたの名前を覚えます。&lt;/em&gt;" data-html>Five teachers,<br><em>who learn your name.</em></h1>
+  <p class="lead" data-ja="少人数だから、講師がちゃんと一人ひとりを見ています。自分のレベルに合う講師を見つけて、スケジュールから予約してください。">Small classes mean the teacher actually sees you. Find who teaches the level you are at, then book them on the timetable.</p>
 </section>
 
 <section class="today-t">
-  <header class="head"><p class="eyebrow">In the room today</p><h2 data-today-title>Who is teaching today</h2><p class="sub">Toronto time. Finished classes fade out as the day goes on.</p></header>
+  <header class="head"><p class="eyebrow" data-ja="今日のスタジオ">In the room today</p><h2 data-today-title data-ja="今日の担当講師">Who is teaching today</h2><p class="sub" data-ja="トロント時間。終わったクラスは時間とともに薄く表示されます。">Toronto time. Finished classes fade out as the day goes on.</p></header>
   <ol class="list today-list" data-today aria-live="polite"></ol>
   <p class="today-note" data-today-note hidden></p>
 </section>
 
 <section class="teachers">
-  <header class="head"><p class="eyebrow">Who teaches what</p><h2>Find your teacher</h2></header>
+  <header class="head"><p class="eyebrow" data-ja="講師と担当クラス">Who teaches what</p><h2 data-ja="講師をさがす">Find your teacher</h2></header>
   <div class="filter-chips lv-chips" role="group" aria-label="Show teachers by level">
-    <button type="button" aria-pressed="true" data-lv="any">Everyone</button><button type="button" aria-pressed="false" data-lv="beg"><i class="lv beg"></i>Beginners</button><button type="button" aria-pressed="false" data-lv="all"><i class="lv all"></i>All levels</button><button type="button" aria-pressed="false" data-lv="str"><i class="lv str"></i>Stronger</button>
+    <button type="button" aria-pressed="true" data-lv="any" data-ja="全員">Everyone</button><button type="button" aria-pressed="false" data-lv="beg" data-ja="&lt;i class=&quot;lv beg&quot;&gt;&lt;/i&gt;初心者向け" data-html><i class="lv beg"></i>Beginners</button><button type="button" aria-pressed="false" data-lv="all" data-ja="&lt;i class=&quot;lv all&quot;&gt;&lt;/i&gt;どなたでも" data-html><i class="lv all"></i>All levels</button><button type="button" aria-pressed="false" data-lv="str" data-ja="&lt;i class=&quot;lv str&quot;&gt;&lt;/i&gt;しっかり動く" data-html><i class="lv str"></i>Stronger</button>
   </div>
   <p class="t-count" data-t-count aria-live="polite"></p>
 
   <div class="t-grid">
     <article class="t-card" id="hannah" data-lv="beg">
-      <div class="t-head"><span class="t-face" style="--f:var(--sun)" aria-hidden="true">HO</span><div><h3>Hannah Okafor</h3><p class="t-role">Beginners · she/her</p></div></div>
-      <p class="t-bio">A primary school teacher for ten years before yoga. She explains every pose twice and never lets anyone feel behind. If it is your first class here, it will probably be hers.</p>
+      <div class="t-head"><span class="t-face" style="--f:var(--sun)" aria-hidden="true">HO</span><div><h3 data-ja="ハンナ・オカフォー">Hannah Okafor</h3><p class="t-role" data-ja="初心者クラス担当">Beginners · she/her</p></div></div>
+      <p class="t-bio" data-ja="ヨガの前は10年間、小学校の先生でした。どのポーズも2回ずつ説明し、誰も置いてきぼりにしません。ここで最初に受けるクラスは、きっと彼女のクラスです。">A primary school teacher for ten years before yoga. She explains every pose twice and never lets anyone feel behind. If it is your first class here, it will probably be hers.</p>
       <p class="t-next" data-next></p>
       <ul class="t-classes">
-        <li data-day="1 3" data-t="17:30" data-len="60"><i class="lv beg"></i><b>Slow Flow</b><span>Mon, Wed · 17:30</span></li>
-        <li data-day="2 4" data-t="17:30" data-len="60"><i class="lv beg"></i><b>Basics</b><span>Tue, Thu · 17:30</span></li>
-        <li data-day="6" data-t="11:00" data-len="60"><i class="lv beg"></i><b>Basics</b><span>Sat · 11:00</span></li>
+        <li data-day="1 3" data-t="17:30" data-len="60"><i class="lv beg"></i><b data-ja="スローフロー">Slow Flow</b><span data-ja="月・水 · 17:30">Mon, Wed · 17:30</span></li>
+        <li data-day="2 4" data-t="17:30" data-len="60"><i class="lv beg"></i><b data-ja="ベーシック">Basics</b><span data-ja="火・木 · 17:30">Tue, Thu · 17:30</span></li>
+        <li data-day="6" data-t="11:00" data-len="60"><i class="lv beg"></i><b data-ja="ベーシック">Basics</b><span data-ja="土 · 11:00">Sat · 11:00</span></li>
       </ul>
-      <p class="t-extra">Also runs the <a href="workshops.html">four-week Beginners course</a>.</p>
+      <p class="t-extra" data-ja="&lt;a href=&quot;workshops.html&quot;&gt;4週間の初心者コース&lt;/a&gt;も担当しています。" data-html>Also runs the <a href="workshops.html">four-week Beginners course</a>.</p>
     </article>
 
     <article class="t-card" id="priya" data-lv="all str">
-      <div class="t-head"><span class="t-face" style="--f:#8A63D2;--fc:#fff" aria-hidden="true">PR</span><div><h3>Priya Raman</h3><p class="t-role">Founder · she/her</p></div></div>
-      <p class="t-bio">Opened Quiet Hour in what used to be the bakery's storeroom. Fifteen years of vinyasa, and still the first one in at a quarter past six to warm the floor.</p>
+      <div class="t-head"><span class="t-face" style="--f:#8A63D2;--fc:#fff" aria-hidden="true">PR</span><div><h3 data-ja="プリヤ・ラマン">Priya Raman</h3><p class="t-role" data-ja="オーナー">Founder · she/her</p></div></div>
+      <p class="t-bio" data-ja="パン屋さんの元倉庫だった場所に Quiet Hour をオープン。ヴィンヤサ歴15年、今でも毎朝6時15分にいちばんに来て床を温めています。">Opened Quiet Hour in what used to be the bakery's storeroom. Fifteen years of vinyasa, and still the first one in at a quarter past six to warm the floor.</p>
       <p class="t-next" data-next></p>
       <ul class="t-classes">
-        <li data-day="1 3 5" data-t="06:30" data-len="60"><i class="lv all"></i><b>Sunrise Flow</b><span>Mon, Wed, Fri · 06:30</span></li>
-        <li data-day="1 3" data-t="19:00" data-len="75"><i class="lv str"></i><b>Strong Vinyasa</b><span>Mon, Wed · 19:00</span></li>
+        <li data-day="1 3 5" data-t="06:30" data-len="60"><i class="lv all"></i><b data-ja="サンライズフロー">Sunrise Flow</b><span data-ja="月・水・金 · 06:30">Mon, Wed, Fri · 06:30</span></li>
+        <li data-day="1 3" data-t="19:00" data-len="75"><i class="lv str"></i><b data-ja="ストロング・ヴィンヤサ">Strong Vinyasa</b><span data-ja="月・水 · 19:00">Mon, Wed · 19:00</span></li>
       </ul>
-      <p class="t-extra">Teaches the <a href="workshops.html">Inversions without fear</a> workshop.</p>
+      <p class="t-extra" data-ja="ワークショップ&lt;a href=&quot;workshops.html&quot;&gt;「こわくない逆転のポーズ」&lt;/a&gt;を担当。" data-html>Teaches the <a href="workshops.html">Inversions without fear</a> workshop.</p>
     </article>
 
     <article class="t-card" id="tomas" data-lv="all">
-      <div class="t-head"><span class="t-face" style="--f:var(--lav)" aria-hidden="true">TR</span><div><h3>Tomás Reyes</h3><p class="t-role">Yin and rest · he/him</p></div></div>
-      <p class="t-bio">Came to yoga for a bad back after years of restaurant shifts. Teaches long, quiet holds, and the pay-what-you-can Restore on Sunday mornings.</p>
+      <div class="t-head"><span class="t-face" style="--f:var(--lav)" aria-hidden="true">TR</span><div><h3 data-ja="トマス・レジェス">Tomás Reyes</h3><p class="t-role" data-ja="陰ヨガとリラックス担当">Yin and rest · he/him</p></div></div>
+      <p class="t-bio" data-ja="長年のレストラン勤務で痛めた腰のために、ヨガを始めました。ひとつのポーズを静かに長く保つクラスと、日曜朝の「払える分だけ」のリストアを担当しています。">Came to yoga for a bad back after years of restaurant shifts. Teaches long, quiet holds, and the pay-what-you-can Restore on Sunday mornings.</p>
       <p class="t-next" data-next></p>
       <ul class="t-classes">
-        <li data-day="2 4" data-t="19:00" data-len="75"><i class="lv all"></i><b>Yin and Breath</b><span>Tue, Thu · 19:00</span></li>
-        <li data-day="5" data-t="18:00" data-len="75"><i class="lv all"></i><b>Candlelight Yin</b><span>Fri · 18:00</span></li>
-        <li data-day="0" data-t="11:30" data-len="60"><i class="lv all"></i><b>Restore</b><span>Sun · 11:30 · pay what you can</span></li>
+        <li data-day="2 4" data-t="19:00" data-len="75"><i class="lv all"></i><b data-ja="陰ヨガと呼吸">Yin and Breath</b><span data-ja="火・木 · 19:00">Tue, Thu · 19:00</span></li>
+        <li data-day="5" data-t="18:00" data-len="75"><i class="lv all"></i><b data-ja="キャンドル陰ヨガ">Candlelight Yin</b><span data-ja="金 · 18:00">Fri · 18:00</span></li>
+        <li data-day="0" data-t="11:30" data-len="60"><i class="lv all"></i><b data-ja="リストア">Restore</b><span data-ja="日 · 11:30 · 払える分だけ">Sun · 11:30 · pay what you can</span></li>
       </ul>
-      <p class="t-extra">Leads <a href="workshops.html">Yin and sound bath</a> and <a href="workshops.html">Breath for sleep</a>.</p>
+      <p class="t-extra" data-ja="&lt;a href=&quot;workshops.html&quot;&gt;「陰ヨガとサウンドバス」&lt;/a&gt;と&lt;a href=&quot;workshops.html&quot;&gt;「眠りのための呼吸」&lt;/a&gt;を担当。" data-html>Leads <a href="workshops.html">Yin and sound bath</a> and <a href="workshops.html">Breath for sleep</a>.</p>
     </article>
 
     <article class="t-card" id="mei" data-lv="all">
-      <div class="t-head"><span class="t-face" style="--f:var(--teal);--fc:#fff" aria-hidden="true">MC</span><div><h3>Mei Lin Chu</h3><p class="t-role">Lunchtime · she/her</p></div></div>
-      <p class="t-bio">A physiotherapist in the mornings. At lunchtime she undoes what desks do to necks, shoulders and hips. Tell her about old injuries: she will have a version for you.</p>
+      <div class="t-head"><span class="t-face" style="--f:var(--teal);--fc:#fff" aria-hidden="true">MC</span><div><h3 data-ja="メイリン・チュー">Mei Lin Chu</h3><p class="t-role" data-ja="ランチタイム担当">Lunchtime · she/her</p></div></div>
+      <p class="t-bio" data-ja="午前中は理学療法士。お昼は、デスクワークでこわばった首・肩・腰をほぐします。昔のケガのことも気軽に話してください。あなたに合ったやり方を用意してくれます。">A physiotherapist in the mornings. At lunchtime she undoes what desks do to necks, shoulders and hips. Tell her about old injuries: she will have a version for you.</p>
       <p class="t-next" data-next></p>
       <ul class="t-classes">
-        <li data-day="1 2 4 5" data-t="12:15" data-len="45"><i class="lv all"></i><b>Lunch Stretch</b><span>Mon, Tue, Thu, Fri · 12:15</span></li>
-        <li data-day="3" data-t="12:15" data-len="45"><i class="lv all"></i><b>Desk Reset</b><span>Wed · 12:15</span></li>
+        <li data-day="1 2 4 5" data-t="12:15" data-len="45"><i class="lv all"></i><b data-ja="ランチストレッチ">Lunch Stretch</b><span data-ja="月・火・木・金 · 12:15">Mon, Tue, Thu, Fri · 12:15</span></li>
+        <li data-day="3" data-t="12:15" data-len="45"><i class="lv all"></i><b data-ja="デスクリセット">Desk Reset</b><span data-ja="水 · 12:15">Wed · 12:15</span></li>
       </ul>
-      <p class="t-extra">Teaches <a href="workshops.html">Hips and lower back</a> and the desk reset for teams.</p>
+      <p class="t-extra" data-ja="&lt;a href=&quot;workshops.html&quot;&gt;「股関節と腰」&lt;/a&gt;と、企業向けデスクリセットを担当。" data-html>Teaches <a href="workshops.html">Hips and lower back</a> and the desk reset for teams.</p>
     </article>
 
     <article class="t-card" id="claire" data-lv="all">
-      <div class="t-head"><span class="t-face" style="--f:var(--ink);--fc:var(--lav)" aria-hidden="true">CD</span><div><h3>Claire Dubois</h3><p class="t-role">Mornings and weekends · she/her</p></div></div>
-      <p class="t-bio">Trained in Montréal and teaches in English or French, whichever you answer in. A mother of two, and the reason our prenatal course exists.</p>
+      <div class="t-head"><span class="t-face" style="--f:var(--ink);--fc:var(--lav)" aria-hidden="true">CD</span><div><h3 data-ja="クレール・デュボワ">Claire Dubois</h3><p class="t-role" data-ja="朝と週末の担当">Mornings and weekends · she/her</p></div></div>
+      <p class="t-bio" data-ja="モントリオールで資格を取り、英語でもフランス語でも、あなたが話しやすいほうでレッスンします。2児の母で、マタニティコースが生まれたのは彼女のおかげです。">Trained in Montréal and teaches in English or French, whichever you answer in. A mother of two, and the reason our prenatal course exists.</p>
       <p class="t-next" data-next></p>
       <ul class="t-classes">
-        <li data-day="2 4" data-t="06:30" data-len="60"><i class="lv all"></i><b>Sunrise Flow</b><span>Tue, Thu · 06:30</span></li>
-        <li data-day="6" data-t="09:00" data-len="75"><i class="lv all"></i><b>Weekend Flow</b><span>Sat · 09:00</span></li>
-        <li data-day="0" data-t="09:30" data-len="75"><i class="lv all"></i><b>Slow Sunday</b><span>Sun · 09:30</span></li>
+        <li data-day="2 4" data-t="06:30" data-len="60"><i class="lv all"></i><b data-ja="サンライズフロー">Sunrise Flow</b><span data-ja="火・木 · 06:30">Tue, Thu · 06:30</span></li>
+        <li data-day="6" data-t="09:00" data-len="75"><i class="lv all"></i><b data-ja="ウィークエンドフロー">Weekend Flow</b><span data-ja="土 · 09:00">Sat · 09:00</span></li>
+        <li data-day="0" data-t="09:30" data-len="75"><i class="lv all"></i><b data-ja="スローサンデー">Slow Sunday</b><span data-ja="日 · 09:30">Sun · 09:30</span></li>
       </ul>
-      <p class="t-extra">Runs the <a href="workshops.html">six-week Prenatal course</a>.</p>
+      <p class="t-extra" data-ja="&lt;a href=&quot;workshops.html&quot;&gt;6週間のマタニティコース&lt;/a&gt;を担当。" data-html>Runs the <a href="workshops.html">six-week Prenatal course</a>.</p>
     </article>
   </div>
-  <p class="t-empty" data-t-empty hidden>Nobody matches that level. Try Everyone.</p>
+  <p class="t-empty" data-t-empty hidden data-ja="そのレベルの講師はいません。「全員」でお探しください。">Nobody matches that level. Try Everyone.</p>
 </section>
 
 <section class="start">
   <div class="new-in start-in">
     <div>
-      <p class="eyebrow">Not sure where to start?</p>
-      <h2>Three good first classes</h2>
-      <p class="sub">All three are covered by the <a href="index.html#new">two-week intro pass</a>, $39 for as many classes as you like.</p>
+      <p class="eyebrow" data-ja="何から始めればいいか迷ったら">Not sure where to start?</p>
+      <h2 data-ja="最初におすすめの3クラス">Three good first classes</h2>
+      <p class="sub" data-ja="3つとも&lt;a href=&quot;index.html#new&quot;&gt;2週間のお試しパス&lt;/a&gt;で受けられます。$39で何回でも通い放題です。" data-html>All three are covered by the <a href="index.html#new">two-week intro pass</a>, $39 for as many classes as you like.</p>
     </div>
     <ul class="picks">
-      <li><a href="#hannah"><span>Never done yoga</span><b>Basics with Hannah</b></a></li>
-      <li><a href="#mei"><span>Stiff back or an old injury</span><b>Lunch Stretch with Mei</b></a></li>
-      <li><a href="#tomas"><span>Want to sleep better</span><b>Candlelight Yin with Tomás</b></a></li>
+      <li><a href="#hannah"><span data-ja="ヨガがはじめての方">Never done yoga</span><b data-ja="ハンナのベーシック">Basics with Hannah</b></a></li>
+      <li><a href="#mei"><span data-ja="腰がかたい、昔のケガが気になる方">Stiff back or an old injury</span><b data-ja="メイリンのランチストレッチ">Lunch Stretch with Mei</b></a></li>
+      <li><a href="#tomas"><span data-ja="ぐっすり眠りたい方">Want to sleep better</span><b data-ja="トマスのキャンドル陰ヨガ">Candlelight Yin with Tomás</b></a></li>
     </ul>
   </div>
 </section>
 
 <section class="faq">
-  <h2>About the teachers</h2>
-  <details><summary>Can I book a private class?</summary><p>Yes, with any teacher: $95 for an hour in the studio, for one or two people. Ask at the desk or reply to any booking email.</p></details>
-  <details><summary>What if my teacher is away?</summary><p>Cover teachers are on the timetable by the evening before. If you only come for one person, cancel for free up to two hours before class.</p></details>
-  <details><summary>How are teachers trained?</summary><p>Everyone has at least 500 hours of teacher training and a current first aid certificate, and the five of them practise together every Monday afternoon.</p></details>
+  <h2 data-ja="講師について">About the teachers</h2>
+  <details><summary data-ja="プライベートレッスンは予約できますか？">Can I book a private class?</summary><p data-ja="はい、どの講師でも可能です。スタジオで1時間$95、1〜2名まで。受付でお尋ねいただくか、予約メールにそのまま返信してください。">Yes, with any teacher: $95 for an hour in the studio, for one or two people. Ask at the desk or reply to any booking email.</p></details>
+  <details><summary data-ja="担当講師が休みのときは？">What if my teacher is away?</summary><p data-ja="代わりの講師は前日の夜までにスケジュールに載せます。特定の講師のクラスだけに通っている方は、クラスの2時間前まで無料でキャンセルできます。">Cover teachers are on the timetable by the evening before. If you only come for one person, cancel for free up to two hours before class.</p></details>
+  <details><summary data-ja="講師はどんなトレーニングを受けていますか？">How are teachers trained?</summary><p data-ja="全員が500時間以上の指導者養成を修了し、有効な救命講習の資格を持っています。毎週月曜の午後には5人そろって練習しています。">Everyone has at least 500 hours of teacher training and a current first aid certificate, and the five of them practise together every Monday afternoon.</p></details>
 </section>
 </main>
 
 <footer class="foot">
   <p class="foot-brand">Quiet Hour Yoga</p>
-  <p>This is a concept project. The studio, timetable, address and prices are fictional. Photos: CC0 (public domain).</p>
-  <details class="credits"><summary>Photo credits</summary><ul data-credits></ul></details>
+  <p data-ja="これはコンセプト作品です。スタジオ、スケジュール、住所、料金はすべて架空のものです。写真：CC0（パブリックドメイン）。">This is a concept project. The studio, timetable, address and prices are fictional. Photos: CC0 (public domain).</p>
+  <details class="credits"><summary data-ja="写真クレジット">Photo credits</summary><ul data-credits></ul></details>
 </footer>
 
 <script src="../../assets/concept.js"></script>
@@ -142,7 +143,9 @@
   // معلم‌ها: «امروز چه کسی درس می‌دهد» و «کلاسِ بعدیِ هر معلم» به وقتِ تورنتو، از روی همان فهرستِ کلاس‌ها در کارت‌ها؛ و فیلترِ سطح
   (function () {
     var LONG = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    var LV = { all: 'All levels', beg: 'Beginners', str: 'Stronger' };
+    var LV = { all: 'All levels', beg: 'Beginners', str: 'Stronger' }, LV_JA = { all: 'どなたでも', beg: '初心者向け', str: 'しっかり動く' };
+    var WD_JA = ['日', '月', '火', '水', '木', '金', '土'];
+    function lv(k) { return tx({ ja: LV_JA[k], en: LV[k] }); }
     function now() { return new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Toronto' })); }
     function mins(t) { var p = t.split(':'); return +p[0] * 60 + +p[1]; }
     function hm(m) { return String(Math.floor(m / 60)).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'); }
@@ -150,10 +153,14 @@
     // همه‌ی کلاس‌ها: روز، ساعت، مدت، سطح، معلم
     var all = [];
     cards.forEach(function (c) {
-      var who = c.querySelector('h3').textContent;
+      // نامِ کلاس و معلم هر بار از خودِ صفحه خوانده می‌شود تا با زبانِ انتخاب‌شده یکی باشد
+      var h3 = c.querySelector('h3');
       c.querySelectorAll('[data-day]').forEach(function (li) {
         li.dataset.day.split(' ').forEach(function (d) {
-          all.push({ d: +d, t: li.dataset.t, len: +li.dataset.len, name: li.querySelector('b').textContent, lv: li.querySelector('.lv').classList[1], who: who, id: c.id, card: c });
+          var x = { d: +d, t: li.dataset.t, len: +li.dataset.len, lv: li.querySelector('.lv').classList[1], id: c.id, card: c };
+          Object.defineProperty(x, 'name', { get: function () { return li.querySelector('b').textContent; } });
+          Object.defineProperty(x, 'who', { get: function () { return h3.textContent; } });
+          all.push(x);
         });
       });
     });
@@ -163,20 +170,20 @@
       // ۱) برنامه‌ی امروز
       var list = all.filter(function (x) { return x.d === d; }).sort(function (a, b) { return mins(a.t) - mins(b.t); });
       var nextShown = false;
-      todayTitle.textContent = 'Who is teaching this ' + LONG[d];
+      todayTitle.textContent = tx({ ja: WD_JA[d] + '曜日の担当講師', en: 'Who is teaching this ' + LONG[d] });
       todayEl.innerHTML = list.map(function (x) {
         var s = mins(x.t), e = s + x.len, state;
-        if (m >= e) state = '<span class="done">Finished</span>';
-        else if (m >= s) state = '<span class="tag on">On now · until ' + hm(e) + '</span>';
-        else { state = '<span class="tag' + (nextShown ? '' : ' nx') + '">' + (nextShown ? 'Later' : (s - m < 60 ? 'In ' + (s - m) + ' min' : 'Up next')) + '</span>'; nextShown = true; }
-        return '<li class="' + (m >= e ? 'past' : '') + '"><span class="time">' + x.t + '</span><span class="what"><b>' + x.name + '</b><span><i class="lv ' + x.lv + '"></i>' + LV[x.lv] + ' · ' + x.len + ' min</span></span><span class="spots who">with <a href="#' + x.id + '">' + x.who + '</a></span>' + state + '</li>';
+        if (m >= e) state = '<span class="done">' + tx({ ja: '終了', en: 'Finished' }) + '</span>';
+        else if (m >= s) state = '<span class="tag on">' + tx({ ja: 'レッスン中 · ' + hm(e) + 'まで', en: 'On now · until ' + hm(e) }) + '</span>';
+        else { state = '<span class="tag' + (nextShown ? '' : ' nx') + '">' + (nextShown ? tx({ ja: 'このあと', en: 'Later' }) : (s - m < 60 ? tx({ ja: 'あと' + (s - m) + '分', en: 'In ' + (s - m) + ' min' }) : tx({ ja: '次はこちら', en: 'Up next' }))) + '</span>'; nextShown = true; }
+        return '<li class="' + (m >= e ? 'past' : '') + '"><span class="time">' + x.t + '</span><span class="what"><b>' + x.name + '</b><span><i class="lv ' + x.lv + '"></i>' + lv(x.lv) + ' · ' + tx({ ja: x.len + '分', en: x.len + ' min' }) + '</span></span><span class="spots who">' + tx({ ja: '担当：', en: 'with ' }) + '<a href="#' + x.id + '">' + x.who + '</a></span>' + state + '</li>';
       }).join('');
       // وقتی کلاس‌های امروز تمام شد، اولین کلاسِ فردا را نشان بده
       var note = document.querySelector('[data-today-note]'), rest = list.filter(function (x) { return m < mins(x.t) + x.len; });
       note.hidden = rest.length > 0;
       if (!rest.length) {
         var tm = all.filter(function (x) { return x.d === (d + 1) % 7; }).sort(function (a, b) { return mins(a.t) - mins(b.t); })[0];
-        note.innerHTML = 'That is all for today. First class tomorrow: <b>' + tm.name + '</b> at ' + tm.t + ' with <a href="#' + tm.id + '">' + tm.who + '</a>.';
+        note.innerHTML = tx({ ja: '今日のクラスはすべて終了しました。明日の最初のクラスは ' + tm.t + 'からの<b>' + tm.name + '</b>（講師：<a href="#' + tm.id + '">' + tm.who + '</a>）です。', en: 'That is all for today. First class tomorrow: <b>' + tm.name + '</b> at ' + tm.t + ' with <a href="#' + tm.id + '">' + tm.who + '</a>.' });
       }
       // ۲) کلاسِ بعدیِ هر معلم در هفت روزِ آینده
       cards.forEach(function (c) {
@@ -189,8 +196,8 @@
         });
         var x = best.x, s = mins(x.t);
         c.classList.toggle('in-today', mine.some(function (y) { return y.d === d && m < mins(y.t) + y.len; }));
-        if (best.k === 0 && m >= s) out.innerHTML = '<b>Teaching now</b> ' + x.name + ', until ' + hm(s + x.len);
-        else out.innerHTML = '<b>Next class</b> ' + x.name + ', ' + (best.k === 0 ? 'today at ' : best.k === 1 ? 'tomorrow at ' : LONG[x.d] + ' at ') + x.t;
+        if (best.k === 0 && m >= s) out.innerHTML = tx({ ja: '<b>レッスン中</b> ' + x.name + '（' + hm(s + x.len) + 'まで）', en: '<b>Teaching now</b> ' + x.name + ', until ' + hm(s + x.len) });
+        else out.innerHTML = tx({ ja: '<b>次のクラス</b> ' + (best.k === 0 ? '今日 ' : best.k === 1 ? '明日 ' : WD_JA[x.d] + '曜 ') + x.t + ' ' + x.name, en: '<b>Next class</b> ' + x.name + ', ' + (best.k === 0 ? 'today at ' : best.k === 1 ? 'tomorrow at ' : LONG[x.d] + ' at ') + x.t });
       });
     }
     render();
@@ -202,9 +209,12 @@
       var k = 0;
       chips.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.lv === lv); });
       cards.forEach(function (c) { var ok = lv === 'any' || c.dataset.lv.split(' ').indexOf(lv) > -1; c.hidden = !ok; if (ok) k++; });
-      count.textContent = lv === 'any' ? 'All five teachers' : k + (k === 1 ? ' teacher teaches ' : ' teachers teach ') + LV[lv] + ' classes';
+      count.textContent = lv === 'any' ? tx({ ja: '講師5人すべて', en: 'All five teachers' }) : tx({ ja: '「' + LV_JA[lv] + '」のクラスを担当する講師：' + k + '人', en: k + (k === 1 ? ' teacher teaches ' : ' teachers teach ') + LV[lv] + ' classes' });
       empty.hidden = k > 0;
+      cur = lv;
     }
+    var cur;
+    document.addEventListener('langchange', function () { render(); filter(cur); });
     chips.forEach(function (b) { b.addEventListener('click', function () { filter(b.dataset.lv); }); });
     filter('any');
   })();
