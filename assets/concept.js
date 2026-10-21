@@ -1,40 +1,68 @@
-// コンセプト作品と制作スタジオの共通スクリプト：言語切り替え（基本言語＋英語）、営業中表示（現地時間、5言語）、タブ、表示アニメーション、写真クレジット。
+// コンセプト作品と制作スタジオの共通スクリプト：言語切り替え（基本言語・日本語・英語）、営業中表示（現地時間、5言語）、タブ、表示アニメーション、写真クレジット。
 // 設定は <body> の data 属性：data-open="08:00" data-close="18:00" data-closed-day="3"（0=日曜）data-key="kk"
 (function () {
   'use strict';
   var root = document.documentElement, body = document.body;
   var cfg = { open: body.dataset.open || "09:00", close: body.dataset.close || "18:00", closedDay: body.dataset.closedDay == null ? -1 : Number(body.dataset.closedDay), tz: body.dataset.tz || "Asia/Tokyo", key: (body.dataset.key || "concept") + "-lang" };
   var self = document.currentScript;
+  var STUDIO_KEY = 'ohs-ja-lang';
   // زبانِ پایه‌ی صفحه (متنِ داخلِ HTML) و انگلیسی در data-en. پیش‌فرض ژاپنی؛ برای ایتالیایی، آلمانی، هلندی: data-base="it" و…
   var base = body.dataset.base || 'ja';
   var titles = { en: body.dataset.titleEn || document.title };
   titles[base] = document.title;
   function mins(t) { var p = t.split(":"); return Number(p[0]) * 60 + Number(p[1]); }
 
-  // ── 言語：data-en に英語、元の日本語は data-ja に保存 ──
-  var nodes = document.querySelectorAll('[data-en]');
-  var alts = document.querySelectorAll('[data-en-alt]');
-  function setLang(lang) {
+  // ── 言語：基本言語は HTML の本文、英語は data-en、日本語は data-ja（基本言語が日本語でない作品のみ）──
+  // 基本言語の元の内容は要素ごとに JS 側に保存（data-ja は日本語訳に使うため）
+  var nodes = document.querySelectorAll('[data-en],[data-ja]');
+  var alts = document.querySelectorAll('[data-en-alt],[data-ja-alt]');
+  var phs = document.querySelectorAll('[data-en-ph],[data-ja-ph]');
+  if (body.dataset.titleJa) titles.ja = body.dataset.titleJa;
+  var langs = [base];
+  if (base !== 'ja' && document.querySelector('[data-ja]')) langs.push('ja');
+  if (base !== 'en') langs.push('en');
+  function has(l) { return langs.indexOf(l) !== -1; }
+  function setLang(lang, save) {
     root.lang = lang;
-    root.dataset.l = lang === 'en' ? 'en' : 'base';
+    root.dataset.l = lang === base ? 'base' : lang;
     nodes.forEach(function (el) {
-      if (el.dataset.ja == null) el.dataset.ja = el.innerHTML;
-      var html = el.hasAttribute('data-html');
-      var next = lang === 'en' ? el.dataset.en : el.dataset.ja;
-      if (html || lang !== 'en') el.innerHTML = next; else el.textContent = next;
+      if (el._base == null) el._base = el.innerHTML;
+      var next = lang === base ? null : el.getAttribute('data-' + lang);
+      if (next == null) el.innerHTML = el._base;
+      else if (el.hasAttribute('data-html')) el.innerHTML = next;
+      else el.textContent = next;
     });
     alts.forEach(function (img) {
-      if (img.dataset.jaAlt == null) img.dataset.jaAlt = img.alt;
-      img.alt = lang === 'en' ? img.dataset.enAlt : img.dataset.jaAlt;
+      if (img._baseAlt == null) img._baseAlt = img.alt;
+      var next = lang === base ? null : img.getAttribute('data-' + lang + '-alt');
+      img.alt = next == null ? img._baseAlt : next;
     });
-    document.title = titles[lang];
-    try { localStorage.setItem(cfg.key, lang); } catch (e) { /* 保存できなくても動く */ }
+    phs.forEach(function (f) {
+      if (f._basePh == null) f._basePh = f.placeholder;
+      var next = lang === base ? null : f.getAttribute('data-' + lang + '-ph');
+      f.placeholder = next == null ? f._basePh : next;
+    });
+    document.title = titles[lang] || titles[base];
+    if (toggle) toggle.querySelectorAll('[data-set-lang]').forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.setLang === lang); });
+    if (save) {
+      try {
+        localStorage.setItem(cfg.key, lang);
+        // スタジオで言語を選び直したら、各作品で個別に選んだ言語はリセットして、スタジオの言語に合わせる
+        if (cfg.key === STUDIO_KEY) Object.keys(localStorage).forEach(function (k) { if (/-lang$/.test(k) && k !== STUDIO_KEY) localStorage.removeItem(k); });
+      } catch (e) { /* 保存できなくても動く */ }
+    }
     renderStatus();
     // بقیه‌ی اسکریپت‌ها (مثلاً فرمِ استودیو) برچسب‌هایشان را با زبانِ تازه به‌روز کنند
     document.dispatchEvent(new CustomEvent('langchange', { detail: lang }));
   }
+  // اسکریپت‌های داخلِ صفحه‌ها متنِ زنده را با این می‌سازند: tx({ it: '…', ja: '…', en: '…' })
+  window.tx = function (o) { var l = root.lang; return o[l] != null ? o[l] : o.en != null ? o.en : o[base]; };
   var toggle = document.querySelector('[data-lang-toggle]');
-  if (toggle) toggle.addEventListener('click', function () { setLang(root.lang === 'en' ? base : 'en'); });
+  if (toggle) toggle.addEventListener('click', function (e) {
+    var pick = e.target.closest('[data-set-lang]');
+    // دکمه‌ی سه‌زبانه: هر بخش زبانِ خودش را می‌گذارد؛ دکمه‌ی دوزبانه: بین زبانِ پایه و انگلیسی جابه‌جا می‌شود
+    setLang(pick ? pick.dataset.setLang : root.lang === base ? langs[1] : base, true);
+  });
 
   // ── 営業中表示：お店の現地時刻で判定（data-tz、既定は東京）──
   var statusEl = document.querySelector('[data-status]');
@@ -108,10 +136,33 @@
     });
   }).catch(function () { /* クレジットが読めなくてもページは動く */ });
 
-  var saved = null;
-  try { saved = new URLSearchParams(location.search).get('lang') || localStorage.getItem(cfg.key); } catch (e) { /* 無視 */ }
+  // زبانِ شروع: ?lang= در نشانی ← انتخابِ خودِ بازدیدکننده در همین نمونه ← زبانِ سایتِ استودیو ← پیش‌فرضِ نمونه
+  var saved = null, fromUrl = null, studio = null;
+  try {
+    fromUrl = new URLSearchParams(location.search).get('lang');
+    saved = localStorage.getItem(cfg.key);
+    studio = localStorage.getItem(STUDIO_KEY);
+  } catch (e) { /* 無視 */ }
   // پیش‌فرض: data-default-lang روی body؛ «auto» یعنی از زبانِ مرورگر (زبانِ پایه اگر مرورگر همان است، وگرنه انگلیسی)
   var def = body.dataset.defaultLang || base;
   if (def === 'auto') def = new RegExp('^' + base, 'i').test(navigator.language || '') ? base : 'en';
-  setLang(saved === 'en' || saved === base ? saved : def);
+  // زبانِ سایتِ استودیو: اگر بازدیدکننده آن‌جا ژاپنی دیده، نمونه‌ها هم ژاپنی باز شوند؛ اگر انگلیسی، نمونه‌های ژاپنی انگلیسی
+  function follow() {
+    var s = studio || (/^ja/i.test(navigator.language || '') ? 'ja' : 'en');
+    if (cfg.key === STUDIO_KEY) return null;
+    if (s === 'ja' && has('ja')) return 'ja';
+    if (s === 'en' && base === 'ja') return 'en';
+    return null;
+  }
+  if (fromUrl && has(fromUrl)) setLang(fromUrl, true);
+  else setLang(saved && has(saved) ? saved : follow() || def);
+
+  // پیش‌نمایشِ زنده در صفحه‌ی معرفیِ کار (iframe): وقتی زبانِ استودیو عوض شد، نمونه هم همراهش عوض شود
+  window.addEventListener('storage', function (e) {
+    if (e.key !== STUDIO_KEY || cfg.key === STUDIO_KEY) return;
+    try { if (localStorage.getItem(cfg.key)) return; } catch (err) { return; }
+    studio = e.newValue;
+    var l = follow();
+    if (l) setLang(l); else if (root.lang !== def) setLang(def);
+  });
 })();

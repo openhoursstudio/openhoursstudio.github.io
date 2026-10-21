@@ -32,3 +32,9 @@
 .form-card textarea { min-height: 90px; resize: vertical; }
 .form-card .out { margin: 0; font-weight: 600; }
 @media (min-width: 900px) { .two-col { grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; } .subhead { padding-top: 64px; } }
+/* دکمه‌ی سه‌زبانه (زبانِ محلی · JA · EN): ظاهرِ هر بخش از .lang span خودِ نمونه می‌آید */
+.lang button { appearance: none; border: 0; margin: 0; padding: 0; background: none; color: inherit; font: inherit; cursor: pointer; border-radius: 999px; }
+/* متنِ ژاپنیِ نمونه‌هایی که زبانِ اصلی‌شان ژاپنی نیست: ایتالیکِ ساختگی برای حروفِ ژاپنی زشت است */
+html[data-l="ja"] em { font-style: normal; }
+html[data-l="ja"] body { line-break: strict; }
+html[data-l="ja"] :is(h1, h2, h3) { word-break: auto-phrase; line-height: 1.25; letter-spacing: .02em; }
