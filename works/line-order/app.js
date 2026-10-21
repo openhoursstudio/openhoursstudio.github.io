@@ -339,12 +339,12 @@
   function openSheet(html) {
     lastFocus = document.activeElement;
     sheetBody.innerHTML = html; sheetWrap.hidden = false;
-    requestAnimationFrame(function () { sheetWrap.classList.add('open'); var f = sheetBody.querySelector('.cta, button'); if (f) f.focus(); });
+    requestAnimationFrame(function () { sheetWrap.classList.add('open'); var f = sheetBody.querySelector('.cta, button'); if (f) f.focus({ preventScroll: true }); });
   }
   function closeSheet() {
     if (sheetWrap.hidden) return;
     sheetWrap.classList.remove('open'); sheetWrap.hidden = true; sheetBody.innerHTML = '';
-    if (lastFocus && document.body.contains(lastFocus)) lastFocus.focus();
+    if (lastFocus && document.body.contains(lastFocus)) lastFocus.focus({ preventScroll: true });
   }
   function consentSheet() {
     var t = L();
@@ -450,7 +450,7 @@
   app.addEventListener('click', function (e) {
     var el = e.target.closest('button, a, [data-close-sheet]'); if (!el || el.disabled) return;
     var d = el.dataset;
-    if (d.guests) { S.guests = Number(d.guests); render(); screens.querySelector('[data-guests="' + d.guests + '"]').focus(); }
+    if (d.guests) { S.guests = Number(d.guests); render(); screens.querySelector('[data-guests="' + d.guests + '"]').focus({ preventScroll: true }); }
     else if (d.go === 'consent') consentSheet();
     else if (d.consent) {
       if (d.consent === '0') { S.pending = null; closeSheet(); return; }
@@ -482,10 +482,10 @@
   app.addEventListener('change', function (e) {
     var el = e.target;
     if (el.dataset.g) { draft.o[Number(el.dataset.g)] = Number(el.value); updDraft(); }
-    else if (el.name === 'pm') { S.method = el.value; render(); screens.querySelector('input[value="' + el.value + '"]').focus(); }
+    else if (el.name === 'pm') { S.method = el.value; render(); screens.querySelector('input[value="' + el.value + '"]').focus({ preventScroll: true }); }
     else if (el.name === 'course') { S.course = Number(el.value); }
     else if (el.name === 'slot') { S.slot = Number(el.value); }
-    else if (el.matches('[data-split]')) { S.split = el.checked; render(); screens.querySelector('[data-split]').focus(); }
+    else if (el.matches('[data-split]')) { S.split = el.checked; render(); screens.querySelector('[data-split]').focus({ preventScroll: true }); }
   });
   app.addEventListener('input', function (e) { if (e.target.matches('[data-note]')) S.note = e.target.value.slice(0, 120); });
   document.addEventListener('keydown', function (e) {
@@ -512,11 +512,11 @@
     if (kc) { S.calls[Number(kc.dataset.kc)].done = true; renderKitchen(); return; }
     var b = e.target.closest('[data-k]'); if (!b) return;
     advance(S.orders[Number(b.dataset.k)], Number(b.dataset.to));
-    var nb = ticketsEl.querySelector('[data-k="' + b.dataset.k + '"]'); if (nb) nb.focus();
+    var nb = ticketsEl.querySelector('[data-k="' + b.dataset.k + '"]'); if (nb) nb.focus({ preventScroll: true });
   });
   var kBack = null;
-  function openKitchen() { kBack = document.activeElement; document.body.classList.add('k-open'); kitchen.querySelector('[data-kitchen-close]').focus(); }
-  function closeKitchen() { document.body.classList.remove('k-open'); if (kBack && document.body.contains(kBack)) kBack.focus(); }
+  function openKitchen() { kBack = document.activeElement; document.body.classList.add('k-open'); kitchen.querySelector('[data-kitchen-close]').focus({ preventScroll: true }); }
+  function closeKitchen() { document.body.classList.remove('k-open'); if (kBack && document.body.contains(kBack)) kBack.focus({ preventScroll: true }); }
   kitchen.querySelector('[data-kitchen-close]').addEventListener('click', closeKitchen);
 
   document.addEventListener('langchange', function () { toastEl.hidden = true; var open = !sheetWrap.hidden; closeSheet(); render(); if (open && S.screen === 'welcome') consentSheet(); });
@@ -524,5 +524,60 @@
   var pre = document.createElement('div'); pre.hidden = true;
   pre.innerHTML = MENU.map(function (m) { return m.img; }).concat([C.otoshi && C.otoshi.img, C.courseImg]).filter(Boolean).map(function (n) { return '<img src="' + P + n + '-s.webp" loading="lazy" alt="">'; }).join('');
   document.body.appendChild(pre);
+  // ── 埋め込みと自動再生：制作事例のページでは、触らなくても注文の流れがひとりでに進む ──
+  // ?embed … アプリだけを表示。?auto … 指の印つきで一巡して、また最初から。画面に触れたら自動は止まり、そのまま操作できる。
+  var Q = new URLSearchParams(location.search);
+  if (Q.has('embed')) document.body.classList.add('embed');
+  if (Q.has('auto') && !reduce.matches) autoplay();
+  function autoplay() {
+    var finger = document.createElement('i'), live = true, tm;
+    finger.className = 'tap'; finger.setAttribute('aria-hidden', 'true'); app.appendChild(finger);
+    function stop(e) {
+      if (!e.isTrusted || !live) return;
+      live = false; clearTimeout(tm); finger.remove();
+    }
+    // 自動のあいだはフォーカスを動かさない（埋め込んだページの入力欄からフォーカスを奪わないように）
+    var nativeFocus = HTMLElement.prototype.focus;
+    HTMLElement.prototype.focus = function () { if (!live) nativeFocus.apply(this, arguments); };
+    ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach(function (ev) { app.addEventListener(ev, stop, { capture: true, passive: true }); });
+    function scroller(el) { while (el && el !== app) { var o = getComputedStyle(el).overflowY; if ((o === 'auto' || o === 'scroll') && el.scrollHeight > el.clientHeight) return el; el = el.parentElement; } return null; }
+    function glide(sc, top) { if (sc) sc.scrollTo({ top: Math.max(0, top), behavior: 'smooth' }); }
+    function find(sel) { var el = app.querySelector(sel); if (el && el.matches('input')) el = el.closest('label') || el; return el && !el.disabled ? el : null; }
+    var A = (C.rank || []).filter(function (id) { return !byId[id].soldout; });
+    var steps = [{ w: 1600 }, { s: '.welcome .pad', f: .45, w: 2200 }, { s: '.welcome .pad', f: 0, w: 900 }];
+    if (C.guests) steps.push({ t: '[data-guests="2"]', w: 700 });
+    if (FLOW === 'pickup') steps.push({ t: 'input[name="slot"][value="1"]', w: 800 });
+    steps.push({ t: '[data-go="consent"]', w: 1300 }, { t: '[data-consent="1"]', w: 1600 });
+    A.slice(0, 2).forEach(function (id) { steps.push({ t: '[data-item="' + id + '"]', w: 1500 }, { t: '[data-add]', w: 1000 }); });
+    steps.push({ t: '[data-go="cart"]', w: 2000 });
+    if (PAY_FIRST) steps.push({ t: '[data-go="bill"]', w: 1800 }, { t: '[data-pay]', w: 6500 }, { t: '[data-finish]', w: 3800 });
+    else steps.push({ t: '[data-send]', w: 6500 }, { t: '[data-go="bill"]', w: 2000 }, { t: '[data-pay]', w: 5200 });
+    steps.push({ s: '.done .pad', f: 1, w: 2600 }, { r: 1, w: 600 });
+    var i = 0;
+    // 画面の外にあるあいだは止めておく（ページに4台並ぶので）
+    var seen = true;
+    if ('IntersectionObserver' in window) new IntersectionObserver(function (en) { seen = en[0].isIntersecting; }).observe(app);
+    function next() {
+      if (!live) return;
+      if (!seen) return later(600);
+      var st = steps[i]; i = (i + 1) % steps.length;
+      if (st.r) { restart(); return later(st.w); }
+      if (st.s) { var sc = app.querySelector(st.s); if (sc) glide(sc, (sc.scrollHeight - sc.clientHeight) * st.f); return later(st.w); }
+      if (!st.t) return later(st.w);
+      var el = find(st.t); if (!el) return later(200);
+      var sc2 = scroller(el);
+      if (sc2) { var r = el.getBoundingClientRect(), b = sc2.getBoundingClientRect(); if (r.top < b.top + 40 || r.bottom > b.bottom - 80) glide(sc2, sc2.scrollTop + r.top - b.top - sc2.clientHeight / 2 + r.height / 2); }
+      tm = setTimeout(function () {
+        if (!live) return;
+        var r = el.getBoundingClientRect(), a = app.getBoundingClientRect();
+        finger.style.left = (r.left - a.left + r.width / 2) + 'px'; finger.style.top = (r.top - a.top + r.height / 2) + 'px';
+        finger.classList.remove('go'); void finger.offsetWidth; finger.classList.add('go');
+        tm = setTimeout(function () { var x = document.body.contains(el) ? el : find(st.t); if (live && x) x.click(); later(st.w); }, 380);
+      }, sc2 ? 520 : 120);
+    }
+    function later(ms) { tm = setTimeout(next, ms); }
+    later(400);
+  }
+
   render();
 })();
