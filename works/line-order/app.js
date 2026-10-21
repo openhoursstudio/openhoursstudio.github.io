@@ -48,7 +48,13 @@
       timer: function (m) { return '飲み放題 残り ' + m; }, skip: '時間を進める（デモ）',
       lo: 'ラストオーダーの時間です。お飲みものは、あと一回ご注文いただけます。', over: '飲み放題の時間が終わりました。',
       cupRule: function (n) { return '飲み放題は、お一人さま一杯ずつのご注文です（グラス交換制）。今回は' + n + '杯までです。'; },
-      drinksClosed: '飲み放題は終了しました'
+      drinksClosed: '飲み放題は終了しました',
+      openNow: function (c) { return '営業中 · ' + c + 'まで'; }, openAt: function (o) { return '本日 ' + o + 'から営業'; }, closedToday: '本日定休日',
+      news: 'お知らせ', picks: '本日のおすすめ', rank: '人気ランキング', rankTag: function (n) { return '人気No.' + n; }, info: 'お店の情報',
+      soldout: '本日分終了', pairQ: '一緒にいかがですか？', pairAdd: '追加', pairDone: '追加しました',
+      member: 'LINE会員証', stampLeft: function (n) { return 'あと' + n + '個で特典'; }, stampGot: 'スタンプが1つたまりました',
+      call: '店員を呼ぶ', callTitle: 'スタッフを呼びます', callLead: 'ご用件を選ぶと、スタッフの端末に届きます。',
+      callSent: function (x) { return 'スタッフに伝えました：' + x + '。少々お待ちください。'; }, kCall: '呼び出し', kCallDone: '対応済み'
     },
     en: {
       restart: 'Restart the demo', credits: 'Photo credits', close: 'Close', hello: 'Welcome',
@@ -78,7 +84,13 @@
       timer: function (m) { return 'Free flow · ' + m + ' left'; }, skip: 'Skip ahead (demo)',
       lo: 'Last orders. You can order one more round of drinks.', over: 'Your free-flow time is over.',
       cupRule: function (n) { return 'Free-flow drinks are one per guest per round, a fresh glass for an empty one. Up to ' + n + ' this time.'; },
-      drinksClosed: 'Free flow has ended'
+      drinksClosed: 'Free flow has ended',
+      openNow: function (c) { return 'Open now · until ' + c; }, openAt: function (o) { return 'Opens today at ' + o; }, closedToday: 'Closed today',
+      news: 'News', picks: 'Today’s picks', rank: 'Most ordered', rankTag: function (n) { return 'No.' + n; }, info: 'About the shop',
+      soldout: 'Sold out today', pairQ: 'Goes well with', pairAdd: 'Add', pairDone: 'Added',
+      member: 'LINE member card', stampLeft: function (n) { return n + ' more for a reward'; }, stampGot: 'You earned a stamp',
+      call: 'Call staff', callTitle: 'Call a member of staff', callLead: 'Pick what you need and it goes straight to the staff’s device.',
+      callSent: function (x) { return 'We’ve let the staff know: ' + x + '. Someone will be right with you.'; }, kCall: 'Call', kCallDone: 'Done'
     }
   };
   function L() { var l = lang(), t = {}, k; for (k in BASE[l]) t[k] = BASE[l][k]; for (k in C.t[l]) t[k] = C.t[l][k]; return t; }
@@ -91,7 +103,7 @@
   var S;
   function reset() {
     S = { screen: 'welcome', guests: FLOW === 'first' || FLOW === 'pickup' ? 1 : 2, friend: true, cart: [], orders: [], note: '', split: false,
-      method: 'paypay', paid: null, seq: C.seq, course: 0, slot: 1, end: 0, loSaid: false, overSaid: false };
+      method: 'paypay', paid: null, seq: C.seq, course: 0, slot: 1, end: 0, loSaid: false, overSaid: false, started: false, pending: null, calls: [] };
   }
   reset();
 
@@ -116,14 +128,15 @@
   function extras() {
     var out = [], t = C.t[lang()];
     if (!firstOrder()) return out;
-    if (C.otoshi) out.push({ label: t.otoshi, sub: C.otoshi.p === 0 ? '' : yen(C.otoshi.p) + ' × ' + S.guests, total: C.otoshi.p * S.guests, kind: 'otoshi' });
+    if (C.otoshi) out.push({ label: t.otoshi, sub: C.otoshi.p === 0 ? '' : yen(C.otoshi.p) + ' × ' + S.guests, total: C.otoshi.p * S.guests, kind: 'otoshi', img: C.otoshi.img });
     var c = course();
-    if (c && c.p) out.push({ label: c[lang()][0], sub: yen(c.p) + ' × ' + S.guests, total: c.p * S.guests, kind: 'course' });
+    if (c && c.p) out.push({ label: c[lang()][0], sub: yen(c.p) + ' × ' + S.guests, total: c.p * S.guests, kind: 'course', img: C.courseImg });
     return out;
   }
   function cartTotal() { return S.cart.reduce(function (a, l) { return a + linePrice(l); }, 0) + extras().reduce(function (a, e) { return a + e.total; }, 0); }
   function billTotal() { return S.orders.reduce(function (a, o) { return a + o.total; }, 0); }
   function tax(t) { return Math.floor(t * 10 / 110); }
+  function img(name, cls, alt) { return '<img class="' + cls + '" src="' + P + name + '-s.webp" width="360" height="360" loading="lazy" alt="' + (alt || '') + '">'; }
   function thumb(m, cls) {
     if (!m.img) return '<span class="' + cls + ' ph" aria-hidden="true">' + esc(m.ja[0].charAt(0)) + '</span>';
     return '<img class="' + cls + '" src="' + P + m.img + '-s.webp" width="360" height="360" loading="lazy" alt="">';
@@ -133,7 +146,26 @@
   function slotLabel(i) { var t = L(); return i === 0 ? t.slotNow : t.slotIn(C.slots[i], slotTime(i)); }
   function left() { return Math.max(0, S.end - Date.now()); }
   function mmss(ms) { var s = Math.ceil(ms / 1000), h = Math.floor(s / 3600), m = Math.floor(s % 3600 / 60); s %= 60; return (h ? h + ':' + String(m).padStart(2, '0') : m) + ':' + String(s).padStart(2, '0'); }
+  function rankOf(m) { return C.rank ? C.rank.indexOf(m.id) + 1 : 0; }
+  // 営業時間は <body> の data 属性から（concept.js と同じ設定）
+  function hours(t) {
+    var b = document.body.dataset, now = new Date(new Date().toLocaleString('en-US', { timeZone: b.tz || 'Asia/Tokyo' }));
+    var o = b.open.split(':').map(Number), c = b.close.split(':').map(Number), min = now.getHours() * 60 + now.getMinutes();
+    var om = o[0] * 60 + o[1], cm = c[0] * 60 + c[1], close = b.close === '00:00' ? '24:00' : b.close;
+    var yday = (now.getDay() + 6) % 7, closedDay = Number(b.closedDay);
+    var open = cm > om ? (min >= om && min < cm && now.getDay() !== closedDay) : ((min >= om && now.getDay() !== closedDay) || (min < cm && yday !== closedDay));
+    if (open) return { on: true, text: t.openNow(close) };
+    return { on: false, text: now.getDay() === closedDay ? t.closedToday : t.openAt(b.open) };
+  }
   function drinksOpen() { var c = course(); return !(c && c.min && S.end && left() === 0); }
+
+  // 店員呼び出し（店内で食べるお店だけ）
+  var callBtn = null;
+  if (C.calls) {
+    callBtn = document.createElement('button'); callBtn.type = 'button'; callBtn.className = 'mh-call'; callBtn.dataset.callOpen = '';
+    callBtn.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15zM10 20.5a2 2 0 0 0 4 0"/></svg><span></span>';
+    app.querySelector('.mh').insertBefore(callBtn, app.querySelector('[data-restart]'));
+  }
 
   // ── 画面 ──
   var VIEWS = {
@@ -154,22 +186,38 @@
           return '<label><input type="radio" name="slot" value="' + i + '"' + (S.slot === i ? ' checked' : '') + '><span>' + slotLabel(i) + '</span></label>';
         }).join('') + '</fieldset>';
       }
-      return '<div class="scr welcome">' +
-        '<figure class="w-hero"><img src="' + P + C.hero.src + '"' + (C.hero.srcset ? ' srcset="' + C.hero.srcset.replace(/(\S+\.webp)/g, P + '$1') + '" sizes="400px"' : '') + ' alt=""><figcaption><span>' + t.hello + '</span></figcaption></figure>' +
-        '<div class="pad"><h2 class="w-title">' + t.welcome + '</h2><p class="w-scan"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4"/><path d="M8 12h8"/></svg>' + t.scanned(seat) + '</p>' +
-        extra + t.notes.map(function (n, i) { return '<p class="small' + (i === t.notes.length - 1 ? ' lo' : '') + '">' + n + '</p>'; }).join('') +
-        '<button type="button" class="link small cr-link" data-credits-open>' + t.credits + '</button></div>' +
+      var h = hours(t);
+      var queue = C.queue ? '<div class="w-queue"><span><small>' + t.queueLabel + '</small><b>' + t.queueNow(C.queue.groups) + '</b></span><span><small>' + t.queueWaitLabel + '</small><b>' + t.queueWait(C.queue.min) + '</b></span><p>' + t.queueNote + '</p></div>' : '';
+      var news = t.newsBody ? '<div class="w-news"><b>' + t.news + '</b><ul>' + t.newsBody.map(function (n) { return '<li>' + n + '</li>'; }).join('') + '</ul></div>' : '';
+      var picks = C.picks ? '<h3 class="w-h">' + t.picks + '</h3><div class="w-picks">' + C.picks.map(function (id) {
+        var m = byId[id];
+        return '<button type="button" class="pk" data-pick="' + id + '">' + thumb(m, 'pk-img') + '<b>' + esc(name(m)) + '</b><span>' + (free(m) ? t.free : yen(m.p)) + '</span></button>';
+      }).join('') + '</div>' : '';
+      var rank = C.rank ? '<h3 class="w-h">' + t.rank + '</h3><ol class="w-rank">' + C.rank.map(function (id, i) {
+        var m = byId[id];
+        return '<li><button type="button" data-pick="' + id + '"><span class="rk rk' + (i + 1) + '">' + (i + 1) + '</span>' + thumb(m, 'thumb sm') + '<span class="rk-t"><b>' + esc(name(m)) + '</b><small>' + esc(m[lang()][1]) + '</small></span><em>' + yen(m.p) + '</em></button></li>';
+      }).join('') + '</ol>' : '';
+      var card = C.stamps ? stampCard(t, C.stamps.have, false) : '';
+      var info = t.infoRows ? '<h3 class="w-h">' + t.info + '</h3><dl class="w-info">' + t.infoRows.map(function (r) { return '<div><dt>' + r[0] + '</dt><dd>' + r[1] + '</dd></div>'; }).join('') + '</dl>' : '';
+      return '<div class="scr welcome"><div class="pad">' +
+        '<figure class="w-hero"><img src="' + P + C.hero.src + '"' + (C.hero.srcset ? ' srcset="' + C.hero.srcset.replace(/(\S+\.webp)/g, P + '$1') + '" sizes="400px"' : '') + ' alt=""><figcaption>' +
+        '<span class="w-open' + (h.on ? ' on' : '') + '"><i></i>' + h.text + '</span><span class="w-shop"><b>' + esc(t.shop) + '</b><small>' + t.kind + '</small></span></figcaption></figure>' +
+        '<div class="w-in"><h2 class="w-title">' + t.welcome + '</h2><p class="w-scan"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4"/><path d="M8 12h8"/></svg>' + t.scanned(seat) + '</p>' +
+        queue + extra + news + picks + rank + card + info +
+        '<div class="w-notes">' + t.notes.map(function (n, i) { return '<p class="small' + (i === t.notes.length - 1 ? ' lo' : '') + '">' + n + '</p>'; }).join('') + '</div>' +
+        '<button type="button" class="link small cr-link" data-credits-open>' + t.credits + '</button></div></div>' +
         '<div class="bar"><button type="button" class="cta" data-go="consent">' + t.start + '</button></div></div>';
     },
     menu: function (t) {
       var tabs = C.cats.map(function (c) { return '<a href="#c-' + c.id + '" data-cat="' + c.id + '">' + c[lang()] + '</a>'; }).join('');
       var body = C.cats.map(function (c) {
         return '<section class="cat" id="c-' + c.id + '"><h3>' + c[lang()] + '</h3><ul class="items">' + MENU.filter(function (m) { return m.cat === c.id; }).map(function (m) {
-          var tag = m.tag ? '<i class="tag">' + m.tag[lang() === 'en' ? 1 : 0] + '</i>' : '';
-          var off = m.drink && !drinksOpen();
+          var r = rankOf(m);
+          var tag = (r ? '<i class="tag rank">' + t.rankTag(r) + '</i>' : '') + (m.tag ? '<i class="tag">' + m.tag[lang() === 'en' ? 1 : 0] + '</i>' : '');
+          var off = (m.drink && !drinksOpen()) || m.soldout;
           var price = free(m) ? '<em class="freep">' + t.free + '</em>' : '<em>' + yen(m.p) + (m.from ? '〜' : '') + '</em>';
-          return '<li><button type="button" class="item" data-item="' + m.id + '"' + (off ? ' disabled' : '') + '>' + thumb(m, 'thumb') +
-            '<span class="i-text"><b>' + esc(name(m)) + tag + '</b>' + (m[lang()][1] ? '<span>' + esc(m[lang()][1]) + '</span>' : '') + (off ? '<em>' + t.drinksClosed + '</em>' : price) + '</span>' +
+          return '<li><button type="button" class="item' + (m.soldout ? ' sold' : '') + '" data-item="' + m.id + '"' + (off ? ' disabled' : '') + '>' + thumb(m, 'thumb') +
+            '<span class="i-text"><b>' + esc(name(m)) + tag + '</b>' + (m[lang()][1] ? '<span>' + esc(m[lang()][1]) + '</span>' : '') + (m.soldout ? '<em class="so">' + t.soldout + '</em>' : off ? '<em>' + t.drinksClosed + '</em>' : price) + '</span>' +
             '<span class="plus" aria-hidden="true">+</span></button></li>';
         }).join('') + '</ul></section>';
       }).join('');
@@ -186,7 +234,7 @@
         return '<li class="line">' + thumb(m, 'thumb sm') + '<span class="l-name"><b>' + esc(name(m)) + '</b>' + (o ? '<small>' + o + '</small>' : '') + '<em>' + (free(m) ? t.free : yen(linePrice(l))) + '</em></span>' +
           '<span class="step" role="group" aria-label="' + t.qty + '"><button type="button" data-dec="' + i + '" aria-label="−">' + (l.q === 1 ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14M10 7V5h4v2M7 7l1 12h8l1-12"/></svg>' : '−') + '</button><output>' + l.q + '</output><button type="button" data-inc="' + i + '" aria-label="+">+</button></span></li>';
       }).join('');
-      rows += extras().map(function (e) { return '<li class="line otoshi"><span class="thumb sm ph" aria-hidden="true">' + e.label.charAt(0) + '</span><span class="l-name"><b>' + e.label + '</b><small>' + t.firstOrder + '</small><em>' + yen(e.total) + '</em></span><span class="step"><output>' + e.sub + '</output></span></li>'; }).join('');
+      rows += extras().map(function (e) { return '<li class="line otoshi">' + (e.img ? img(e.img, 'thumb sm') : '<span class="thumb sm ph" aria-hidden="true">' + e.label.charAt(0) + '</span>') + '<span class="l-name"><b>' + e.label + '</b><small>' + t.firstOrder + '</small><em>' + yen(e.total) + '</em></span><span class="step"><output>' + e.sub + '</output></span></li>'; }).join('');
       var tot = cartTotal();
       return '<div class="scr cart"><div class="pad"><button type="button" class="back" data-go="menu">← ' + t.backMenu + '</button><h2>' + t.cartTitle + '</h2>' +
         (S.cart.length ? '<ul class="lines">' + rows + '</ul>' : '<p class="small">' + t.empty + '</p>') +
@@ -206,7 +254,7 @@
       var bar = PAY_FIRST ? '<div class="bar two"><button type="button" class="cta ghost" data-go="menu">' + t.more + '</button><button type="button" class="cta" data-finish>' + t.finish + '</button></div>'
         : '<div class="bar two"><button type="button" class="cta ghost" data-go="menu">' + t.more + '</button><button type="button" class="cta" data-go="bill">' + t.toBill + '</button></div>';
       return '<div class="scr sent"><div class="pad"><div class="ok" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5 10 17 19 7"/></svg></div>' +
-        '<h2>' + t.sentTitle + '</h2>' + head + '<p class="small center">' + t.eta + '</p>' +
+        '<h2>' + t.sentTitle + '</h2>' + head + (C.queue ? '<p class="ahead' + (last.stage ? ' ready' : '') + '">' + (last.stage ? t.seatReady : t.ahead(2)) + '</p>' : '') + '<p class="small center">' + t.eta + '</p>' +
         '<ol class="track" aria-live="polite">' + steps + '</ol>' +
         '<h3 class="h-title">' + t.history + '</h3><ul class="hist">' + hist + '</ul>' +
         '<button type="button" class="link see-k" data-kitchen-open>' + t.seeKitchen + ' →</button></div>' + bar + '</div>';
@@ -237,11 +285,17 @@
       else if (till) head = '<h2>' + t.tillTitle + '</h2><p class="center">' + t.tillLead + '</p><div class="till-code"><b>' + t.sub(seat) + '</b><span>' + yen(billTotal()) + '</span><i aria-hidden="true"></i></div>';
       else head = '<div class="ok" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 12.5 10 17 19 7"/></svg></div><h2>' + t.paidTitle + '</h2><p class="paid-sum">' + yen(billTotal()) + ' · ' + methodName(S.paid) + '</p><p class="center">' + t.receipt + '</p>';
       return '<div class="scr done"><div class="pad">' + head + '<p class="center">' + t.thanks + '</p>' +
+        (C.stamps ? stampCard(t, C.stamps.have + 1, true) : '') +
         (S.friend ? '<div class="coupon"><small>' + t.coupon + '</small><b>' + t.couponBody + '</b><span>' + t.couponSub + '</span></div>' : '') +
         '<button type="button" class="link see-k" data-kitchen-open>' + t.seeKitchen + ' →</button></div>' +
         '<div class="bar"><button type="button" class="cta ghost" data-restart-btn>' + t.restart + '</button></div></div>';
     }
   };
+  function stampCard(t, have, got) {
+    var dots = ''; for (var i = 1; i <= C.stamps.need; i++) dots += '<li class="' + (i <= have ? 'on' : '') + (got && i === have ? ' new' : '') + '"></li>';
+    return '<div class="w-card"><div class="wc-top"><small>' + t.member + '</small><b>' + t.stampName + '</b></div><ol class="stamps" aria-label="' + have + ' / ' + C.stamps.need + '">' + dots + '</ol>' +
+      '<p>' + (got ? t.stampGot + ' · ' : '') + t.stampLeft(C.stamps.need - have) + '（' + t.stampReward + '）</p></div>';
+  }
   function methodName(m) { var t = L(); return { paypay: t.mPay, card: t.mCard, wallet: t.mWallet, till: t.mTill }[m] || ''; }
 
   function render(focus) {
@@ -249,6 +303,7 @@
     app.querySelector('[data-mh-title]').textContent = t.title;
     app.querySelector('[data-mh-sub]').textContent = t.sub(seat);
     app.querySelector('[data-mh-restart]').textContent = t.restart;
+    if (callBtn) { callBtn.hidden = S.screen === 'welcome'; callBtn.querySelector('span').textContent = t.call; callBtn.title = t.call; }
     var y = S.screen === 'menu' ? (screens.querySelector('[data-menu-body]') || {}).scrollTop : 0;
     screens.innerHTML = VIEWS[S.screen](t);
     var mb = screens.querySelector('[data-menu-body]');
@@ -298,6 +353,15 @@
       '<label class="switch fr"><input type="checkbox" data-friend' + (S.friend ? ' checked' : '') + '><span><b>' + t.consentFriend + '</b><small>' + t.consentFriendSub + '</small></span></label>' +
       '<div class="two"><button type="button" class="cta ghost" data-consent="0">' + t.cancel + '</button><button type="button" class="cta" data-consent="1">' + t.allow + '</button></div><p class="small center">' + t.consentNote + '</p></div>');
   }
+  function callSheet() {
+    var t = L();
+    openSheet('<div class="call-sheet"><h2 id="sheet-title">' + t.callTitle + '</h2><p class="small">' + t.callLead + '</p><div class="calls">' +
+      t.calls.map(function (c, i) { return '<button type="button" data-call="' + i + '">' + c + '</button>'; }).join('') + '</div><button type="button" class="cta ghost" data-close-sheet>' + t.cancel + '</button></div>');
+  }
+  function scrollToItem(id) {
+    var b = screens.querySelector('[data-item="' + id + '"]'), mb = screens.querySelector('[data-menu-body]');
+    if (b && mb) mb.scrollTop = b.getBoundingClientRect().top - mb.getBoundingClientRect().top + mb.scrollTop - 60;
+  }
   var draft = null;
   function itemSheet(id) {
     var m = byId[id], t = L();
@@ -314,6 +378,10 @@
       '<p class="s-price">' + (free(m) ? t.free : yen(m.p) + ' <small>' + t.taxin + '</small>') + '</p>' + opts +
       '<div class="s-qty"><span>' + t.qty + '</span><span class="step"><button type="button" data-dq="-1" aria-label="−">−</button><output data-q>1</output><button type="button" data-dq="1" aria-label="+">+</button></span></div>' +
       '<p class="small cup" data-cup hidden></p>' +
+      (m.pair ? '<div class="pair"><p>' + t.pairQ + '</p><div class="pair-row">' + m.pair.map(function (id) {
+        var x = byId[id];
+        return '<button type="button" data-pair="' + id + '">' + thumb(x, 'thumb sm') + '<span><b>' + esc(name(x)) + '</b><small>' + (free(x) ? t.free : '+' + yen(x.p)) + '</small></span><i>' + t.pairAdd + '</i></button>';
+      }).join('') + '</div></div>' : '') +
       '<button type="button" class="cta" data-add>' + t.addFor(free(m) ? t.free : yen(m.p)) + '</button></div>');
     updDraft();
   }
@@ -366,9 +434,10 @@
   }
   function renderKitchen() {
     var t = L();
-    kEmpty.hidden = S.orders.length > 0;
+    kEmpty.hidden = S.orders.length > 0 || S.calls.length > 0;
     kTotal.textContent = yen(billTotal());
-    ticketsEl.innerHTML = S.orders.slice().reverse().map(function (o) {
+    var calls = S.calls.map(function (c, i) { return c.done ? '' : '<li class="ticket call"><div class="t-top"><b>' + t.kSeat(seat) + '</b><span>' + t.kCall + ' · ' + c.time + '</span></div><p class="k-call">' + t.calls[c.i] + '</p><div class="t-foot"><span></span><button type="button" class="k-btn" data-kc="' + i + '">' + t.kCallDone + '</button></div></li>'; }).join('');
+    ticketsEl.innerHTML = calls + S.orders.slice().reverse().map(function (o) {
       var i = S.orders.indexOf(o);
       var items = o.extras.map(function (e) { return '<li><b>' + S.guests + '</b> ' + (e.kind === 'otoshi' ? t.kOtoshi : course()[lang()][0]) + '</li>'; }).join('') + o.lines.map(function (l) { var x = optText(l); return '<li><b>' + l.q + '</b> ' + esc(name(byId[l.id])) + (x ? ' <small>' + x + '</small>' : '') + '</li>'; }).join('');
       var act = o.stage === 0 ? '<button type="button" class="k-btn" data-k="' + i + '" data-to="1">' + t.kStart + '</button>' : o.stage === 1 ? '<button type="button" class="k-btn hot" data-k="' + i + '" data-to="2">' + t.kServe + '</button>' : '<span class="k-done">✓ ' + t.kDone + '</span>';
@@ -383,7 +452,17 @@
     var d = el.dataset;
     if (d.guests) { S.guests = Number(d.guests); render(); screens.querySelector('[data-guests="' + d.guests + '"]').focus(); }
     else if (d.go === 'consent') consentSheet();
-    else if (d.consent) { var f = sheetBody.querySelector('[data-friend]'); S.friend = d.consent === '1' && !!(f && f.checked); if (course() && course().min && !S.end) S.end = Date.now() + course().min * 60000; go('menu'); }
+    else if (d.consent) {
+      if (d.consent === '0') { S.pending = null; closeSheet(); return; }
+      var f = sheetBody.querySelector('[data-friend]'); S.friend = !!(f && f.checked); S.started = true;
+      if (course() && course().min && !S.end) S.end = Date.now() + course().min * 60000;
+      go('menu');
+      if (S.pending) { var pid = S.pending; S.pending = null; scrollToItem(pid); itemSheet(pid); }
+    }
+    else if (d.pick) { if (S.started) { go('menu'); scrollToItem(d.pick); itemSheet(d.pick); } else { S.pending = d.pick; consentSheet(); } }
+    else if (d.pair) { var px = byId[d.pair]; addLine({ id: d.pair, q: 1, o: px.opts ? px.opts.map(function (g) { return g.def; }) : [] }); el.disabled = true; el.classList.add('done'); el.querySelector('i').textContent = '✓ ' + L().pairDone; }
+    else if (d.callOpen !== undefined) callSheet();
+    else if (d.call) { S.calls.push({ i: Number(d.call), time: clock() }); closeSheet(); toast(L().callSent(L().calls[Number(d.call)])); renderKitchen(); }
     else if (d.go) go(d.go);
     else if (d.item) itemSheet(d.item);
     else if (d.dq) { draft.q = Math.max(1, Math.min(20, draft.q + Number(d.dq))); updDraft(); }
@@ -429,6 +508,8 @@
 
   // 厨房：スマホでは全画面で重ねて見せる
   ticketsEl.addEventListener('click', function (e) {
+    var kc = e.target.closest('[data-kc]');
+    if (kc) { S.calls[Number(kc.dataset.kc)].done = true; renderKitchen(); return; }
     var b = e.target.closest('[data-k]'); if (!b) return;
     advance(S.orders[Number(b.dataset.k)], Number(b.dataset.to));
     var nb = ticketsEl.querySelector('[data-k="' + b.dataset.k + '"]'); if (nb) nb.focus();
@@ -441,7 +522,7 @@
   document.addEventListener('langchange', function () { toastEl.hidden = true; var open = !sheetWrap.hidden; closeSheet(); render(); if (open && S.screen === 'welcome') consentSheet(); });
   // 写真クレジット用に、メニューの写真も最初からページに置いておく（読み込みは遅延）
   var pre = document.createElement('div'); pre.hidden = true;
-  pre.innerHTML = MENU.filter(function (m) { return m.img; }).map(function (m) { return '<img src="' + P + m.img + '-s.webp" loading="lazy" alt="">'; }).join('');
+  pre.innerHTML = MENU.map(function (m) { return m.img; }).concat([C.otoshi && C.otoshi.img, C.courseImg]).filter(Boolean).map(function (n) { return '<img src="' + P + n + '-s.webp" loading="lazy" alt="">'; }).join('');
   document.body.appendChild(pre);
   render();
 })();
