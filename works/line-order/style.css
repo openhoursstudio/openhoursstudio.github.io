@@ -597,3 +597,63 @@ body.embed { display: flex; height: 100vh; height: 100dvh; overflow: hidden; }
 .sv-pos .t-foot span { font-size: 12.5px; color: var(--ink-2); }
 .k-btn:disabled { opacity: .35; cursor: default; }
 .th-sakura .tent-shop { font-size: 17px; letter-spacing: .02em; }
+
+/* ── منوی چندزبانه برای توریست‌ها (tabi.js، ایزاکایای «ゆうなぎ»): آبیِ نیلیِ پرده‌ی نورن؛ چینی و کره‌ای با فونتِ خودِ همان زبان ── */
+.th-tabi { --mincho: "Shippori Mincho B1", "Hiragino Mincho ProN", serif; --sans: "Zen Kaku Gothic New", "Hiragino Sans", system-ui, sans-serif; --ember: #2E5C8A; --ember-2: #7FA8D1; --ember-ink: #23476B; --on-accent: #fff; }
+.th-tabi :is(.scr h2, .w-shop b, .w-h, .cat h3, .coupon b, .kitchen h2, .intro h1, .tent-shop) { font-weight: 700; }
+.app[data-gl="zh"] { font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", system-ui, sans-serif; }
+.app[data-gl="tw"] { font-family: "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", system-ui, sans-serif; }
+.app[data-gl="ko"] { font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", system-ui, sans-serif; }
+.app:is([data-gl="zh"], [data-gl="tw"], [data-gl="ko"]) :is(.scr h2, .w-shop b, .w-h, .cat h3) { font-family: inherit; }
+.app :is([lang="ja"]) { font-family: var(--sans); }
+.tb-multi { display: grid; gap: 2px; }
+.tb-multi small { font-family: var(--sans); font-size: 13px; font-weight: 500; color: var(--ink-2); }
+.tb-multi small[lang="zh-Hans"] { font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif; }
+.tb-multi small[lang="ko"] { font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif; }
+.tb-langs { display: grid; gap: 8px; margin: 16px 0 6px; }
+.tb-langs button { min-height: 52px; padding: 0 16px; border: 0; border-radius: 14px; background: #fff; box-shadow: inset 0 0 0 1px var(--rule); font-size: 17px; font-weight: 700; text-align: left; cursor: pointer; }
+.tb-langs button[lang="zh-Hans"] { font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif; }
+.tb-langs button[lang="zh-Hant"] { font-family: "PingFang TC", "Microsoft JhengHei", "Noto Sans TC", sans-serif; }
+.tb-langs button[lang="ko"] { font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif; }
+.tb-langs button[aria-checked="true"] { background: var(--ink); color: var(--cream); box-shadow: none; }
+.tb-langs button[aria-checked="true"]::after { content: "✓"; float: right; }
+.call-sheet .tb-langs { margin: 12px 0 14px; }
+.tb-h { margin-top: 12px; font-size: 12.5px; font-weight: 700; color: var(--ink-2); }
+.tb-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.tb-chip { min-height: 36px; padding: 0 12px; border: 0; border-radius: 999px; background: #fff; box-shadow: inset 0 0 0 1px var(--rule); font-size: 13.5px; font-weight: 700; cursor: pointer; }
+.tb-chip[aria-pressed="true"] { background: #B3261E; color: #fff; box-shadow: none; }
+.tb-chip[aria-pressed="true"]::before { content: "✕ "; }
+.timer.tb-filt { background: #B3261E; color: #fff; }
+.tb-filt span { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.i-text small { font-size: 11.5px; line-height: 1.45; }
+.tb-ja { color: var(--ink-2); }
+.tb-al { color: var(--ink-2); }
+.tb-warn { color: #B3261E !important; font-weight: 700; }
+.item.tb-bad .thumb { opacity: .55; }
+.item.tb-bad .i-text b { color: var(--ink-2); }
+.tag.tb-veg { background: #2E7D32; color: #fff; }
+.tb-ja-big { margin: 2px 0 6px; font-size: 20px; font-weight: 700; line-height: 1.3; }
+.tb-ja-big small { display: block; font-size: 11px; font-weight: 500; color: var(--ink-2); }
+.s-body .tb-al, .s-body .tb-warn { margin-top: 6px; }
+.tb-tip { margin-top: 10px; padding: 9px 12px; border-radius: 12px; background: #EAF1F8; font-size: 13.5px; line-height: 1.55; }
+.tb-tip b { display: block; font-size: 12px; color: var(--ember-ink); }
+.tb-ticket { margin-top: 16px; }
+.tb-ticket .small { margin: 0 0 6px; }
+.tb-slip { padding: 12px 14px; border-radius: 12px; background: #fff; box-shadow: inset 0 0 0 1px var(--rule); border-left: 5px solid var(--ember); font-size: 14px; line-height: 1.6; }
+.tb-slip p b { font-size: 15px; }
+.tb-slip ul { list-style: none; margin: 6px 0 0; padding: 0; }
+.tb-slip li b { display: inline-block; min-width: 20px; color: var(--ember-ink); }
+.tb-slip li small { color: var(--ink-2); }
+.tb-calls button { display: grid; gap: 2px; align-content: center; }
+.tb-calls b { font-size: 16px; }
+.tb-calls small { font-weight: 500; font-size: 12px; color: var(--ink-2); }
+.ticket li.tb-kbad { color: #B3261E; }
+.pm-qr { background: #1677FF; }
+.pm-qr::before { content: "QR"; display: grid; place-items: center; height: 100%; color: #fff; font-size: 12px; font-weight: 800; }
+.tb-review { justify-items: start; }
+.tb-review b { color: #F4B400; letter-spacing: 2px; font-family: inherit; }
+.tb-review .cta { margin-top: 8px; width: auto; min-height: 40px; padding: 0 16px; background: transparent; color: var(--paper); box-shadow: inset 0 0 0 1.5px var(--paper-2); }
+.mh .tb-lbtn { width: auto; padding: 0 10px; gap: 4px; border-radius: 999px; grid-auto-flow: column; }
+.mh .tb-lbtn span { position: static; width: auto; height: auto; clip-path: none; font-size: 12px; font-weight: 700; }
+.tb-who { display: block; margin-top: 6px; padding: 5px 10px; border-radius: 8px; background: #E4EDF7; color: var(--ink); font-size: 13px; }
+.opts small { margin-left: 4px; color: var(--ink-2); font-weight: 400; font-size: 11px; }

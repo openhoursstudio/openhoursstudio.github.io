@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>観光のお客さま向け 多言語メニュー｜居酒屋 ゆうなぎ（コンセプト作品）</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="席のQRから、英語・中国語（簡体字・繁体字）・韓国語のメニューで注文。アレルギーや食べられないものに印がつき、厨房には日本語で届きます。浅草の居酒屋「ゆうなぎ」を例にしたデモです。">
+<meta name="theme-color" content="#121010">
+<link rel="icon" href="../../favicon.ico" sizes="32x32">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="th-tabi" data-tz="Asia/Tokyo" data-open="16:00" data-close="23:30" data-closed-day="3" data-key="lo" data-title-en="Menu in five languages for tourists · Izakaya Yunagi (concept)">
+
+<div class="concept" role="note">
+  <span data-en="Concept · A demo of a multilingual QR menu for a fictional izakaya. No order or payment is actually made.">コンセプト作品 · 架空の居酒屋でお見せする、観光のお客さま向け多言語メニューのデモです。注文や支払いは実際には行われません。</span>
+   · <a href="../../work/line-tabi/index.html" data-en="Return">戻る</a>
+  <button class="lang" type="button" aria-label="JA EN, switch language" data-lang-toggle><span class="lang-ja">JA</span><span class="lang-en">EN</span></button>
+</div>
+<nav class="scen" aria-label="Scenarios" data-en-label><a href="index.html" data-en="Yakitori · pay later">焼き鳥 · 後払い</a><a href="hotaru.html" data-en="Ramen · pay in the queue">ラーメン · 並びながら先払い</a><a href="kaede.html" data-en="Coffee · takeaway">珈琲 · テイクアウト予約</a><a href="tomoshibi.html" data-en="Izakaya · free flow">居酒屋 · 飲み放題</a><a href="tabi.html" aria-current="page" data-en="Tourists · menu in 5 languages">観光客 · 5か国語メニュー</a><a href="tsuki.html" data-en="Hair salon · booking">美容室 · LINEで予約</a><a href="sakura.html" data-en="Clinic · queue from home">クリニック · 順番受付</a><a href="komugi.html" data-en="Bakery · member card">パン屋 · 会員証とポイント</a></nav>
+
+<div class="stage">
+  <aside class="intro">
+    <p class="eyebrow" data-en="Izakaya · for guests from abroad">居酒屋 · 海外からのお客さまに</p>
+    <h1 data-en="One QR code,&lt;br&gt;a menu in five languages." data-html>QRひとつで、<br>5か国語で注文。</h1>
+    <p class="lead" data-en="Guests read the menu in English, Chinese (Simplified or Traditional) or Korean, mark what they can’t eat, and order. The kitchen gets every order in Japanese, so no one on the team has to speak another language. It opens in the phone’s browser, so guests don’t need LINE.">英語・中国語（簡体字・繁体字）・韓国語。お客さまは自分の言葉でメニューを読み、食べられないものを選んで注文します。厨房にはすべて日本語で届くので、スタッフが外国語を話せなくても大丈夫。スマホのブラウザで開くので、LINEを使っていない旅行者にも届きます。</p>
+    <figure class="tent">
+      <div class="tent-card">
+        <p class="tent-shop">ゆうなぎ</p>
+        <img src="qr-tabi.svg" width="132" height="132" alt="このデモを開くQRコード" data-en-alt="QR code that opens this demo">
+        <p class="tent-seat" data-en="Table 3">3番テーブル</p>
+        <p class="tent-hint">Menu · 菜单 · 菜單 · 메뉴</p>
+      </div>
+      <figcaption data-en="Scan this with your phone camera to try the demo on your own phone.">スマホのカメラで読み取ると、ご自分のスマホでデモを試せます。</figcaption>
+    </figure>
+    <ol class="flow">
+      <li data-en="Scan the QR code on the table, no app needed">テーブルのQRを読み取る（アプリ不要）</li>
+      <li data-en="Choose from five languages">5つの言語から選ぶ</li>
+      <li data-en="Mark allergies, pork, alcohol or vegetarian">アレルギー・豚肉・お酒・ベジタリアンを選ぶ</li>
+      <li data-en="The order reaches the kitchen in Japanese">注文は日本語で厨房へ</li>
+    </ol>
+  </aside>
+
+  <div class="device">
+    <div class="app" id="app" data-app>
+      <header class="mh">
+        <span class="mh-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M6 7h20" stroke="#F3EADB" stroke-width="2" stroke-linecap="round"/><path d="M8 8v14M13.3 8v16M18.7 8v16M24 8v14" stroke="#7FA8D1" stroke-width="3.6"/><path d="M10 26c2-1.6 4-1.6 6 0s4 1.6 6 0" stroke="#F3EADB" stroke-width="1.6" fill="none" stroke-linecap="round"/></svg></span>
+        <span class="mh-title"><b data-mh-title></b><small data-mh-sub></small></span>
+        <button class="mh-btn" type="button" data-restart><span class="sr" data-mh-restart></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </header>
+      <div class="screens" data-screens></div>
+      <div class="sheet-wrap" data-sheet hidden><div class="sheet-bg" data-close-sheet></div><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" data-sheet-body></div></div>
+      <div class="toast" data-toast role="status" aria-live="polite" hidden></div>
+    </div>
+  </div>
+
+  <aside class="kitchen" data-kitchen aria-labelledby="k-title">
+    <div class="k-head">
+      <div>
+        <p class="eyebrow" data-en="What the shop sees">お店側の画面</p>
+        <h2 id="k-title" data-en="Kitchen tablet">厨房のタブレット</h2>
+      </div>
+      <button class="k-close" type="button" data-kitchen-close><span data-en="Back to the guest view">お客さまの画面に戻る</span></button>
+    </div>
+    <p class="k-note" data-en="Whatever language the guest uses, the ticket arrives in Japanese, with the guest’s language and anything they avoid on top. Dishes that clash are marked ⚠.">お客さまが何語で注文しても、伝票は日本語で届きます。いちばん上に、お客さまの言語と食べられないものが出て、当てはまる料理には ⚠ がつきます。</p>
+    <div class="k-sum"><span data-en="Tonight’s orders in this demo">このデモでの今夜の注文</span><b data-k-total>¥0</b></div>
+    <ol class="tickets" data-tickets aria-live="polite"></ol>
+    <p class="k-empty" data-k-empty data-en="No orders yet. Try ordering on the phone.">まだ注文はありません。スマホの画面から注文してみてください。</p>
+  </aside>
+</div>
+
+<footer class="foot">
+  <p data-en="This is a concept project. The izakaya, menu and prices are fictional, and no order or payment is processed. Allergy details are an example, not checked recipes. A real version runs as a web page on a server, with the shop’s own menu checked dish by dish, and can also open inside LINE. Photos from Wikimedia Commons and other free sources, see the credits.">これはコンセプト作品です。お店・メニュー・価格は架空で、注文も決済も行われません。アレルギーの内容も例で、実際のレシピを確かめたものではありません。実際の導入では、お店のメニューを一品ずつ確かめて、サーバー上のウェブページとして動かします。LINEの中から開くこともできます。写真はWikimedia Commonsなどの無料素材より、クレジットをご覧ください。</p>
+  <details class="credits"><summary data-en="Photo credits">写真クレジット</summary><ul data-credits></ul></details>
+</footer>
+
+<script src="scenarios/yunagi.js"></script>
+<script src="auto.js"></script>
+<script src="tabi.js"></script>
+<script src="../../assets/concept.js"></script>
+</body>
+</html>
