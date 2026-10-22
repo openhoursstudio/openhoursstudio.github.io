@@ -37,7 +37,8 @@ window.LOAuto = function (app, steps, restart) {
       finger.style.left = (r.left - a.left + r.width / 2) + 'px'; finger.style.top = (r.top - a.top + r.height / 2) + 'px';
       finger.classList.remove('go'); void finger.offsetWidth; finger.classList.add('go');
       // 描き直しで要素が入れ替わっていたら、同じ場所のものを探し直して押す
-      tm = setTimeout(function () { var x = document.body.contains(el) ? el : find(st.t); if (live && x) x.click(); later(st.w); }, 380);
+      // ラベルを押すとブラウザが入力欄にフォーカスし、親ページまでスクロールしてしまうので、入力欄そのものを押す
+      tm = setTimeout(function () { var x = document.body.contains(el) ? el : find(st.t); if (x && x.tagName === 'LABEL') x = x.querySelector('input') || x; if (live && x) x.click(); later(st.w); }, 380);
     }, sc2 ? 520 : 120);
   }
   later(400);
