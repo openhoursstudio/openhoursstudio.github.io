@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>無断キャンセルを防ぐLINE予約｜鮨 澪（コンセプト作品）</title>
+<meta name="robots" content="noindex">
+<meta name="description" content="LINEで空席を見て、コースと人数を選んで予約。カード登録か予約金で席を確保し、前日にはLINEで来店確認。カウンター8席のおまかせ寿司「鮨 澪」を例にした、無断キャンセルを防ぐ予約のデモです。">
+<meta name="theme-color" content="#121010">
+<link rel="icon" href="../../favicon.ico" sizes="32x32">
+<link rel="icon" href="../../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="th-mio" data-tz="Asia/Tokyo" data-open="17:00" data-close="23:00" data-closed-day="1" data-key="lo" data-title-en="No-show-proof booking in LINE · Sushi Mio (concept)">
+
+<div class="concept" role="note">
+  <span data-en="Concept · A demo of LINE MINI App booking with a card guarantee for a fictional sushi restaurant. No booking or payment is actually made.">コンセプト作品 · 架空の寿司店でお見せする、カード保証つきのLINE予約のデモです。予約も決済も実際には行われません。</span>
+   · <a href="../../work/line-mio/index.html" data-en="Return">戻る</a>
+  <button class="lang" type="button" aria-label="JA EN, switch language" data-lang-toggle><span class="lang-ja">JA</span><span class="lang-en">EN</span></button>
+</div>
+<nav class="scen" aria-label="Scenarios" data-en-label><a href="index.html" data-en="Yakitori · pay later">焼き鳥 · 後払い</a><a href="hotaru.html" data-en="Ramen · pay in the queue">ラーメン · 並びながら先払い</a><a href="kaede.html" data-en="Coffee · takeaway">珈琲 · テイクアウト予約</a><a href="tomoshibi.html" data-en="Izakaya · free flow">居酒屋 · 飲み放題</a><a href="tabi.html" data-en="Tourists · menu in 5 languages">観光客 · 5か国語メニュー</a><a href="mio.html" aria-current="page" data-en="Sushi · booking with a card">寿司 · カード保証で予約</a><a href="tsuki.html" data-en="Hair salon · booking">美容室 · LINEで予約</a><a href="sakura.html" data-en="Clinic · queue from home">クリニック · 順番受付</a><a href="komugi.html" data-en="Bakery · member card">パン屋 · 会員証とポイント</a></nav>
+
+<div class="stage">
+  <aside class="intro">
+    <p class="eyebrow" data-en="Omakase · bookings without no-shows">おまかせ · 無断キャンセルを防ぐ予約</p>
+    <h1 data-en="Hold the seat,&lt;br&gt;not the phone." data-html>席を守る、<br>LINEの予約。</h1>
+    <p class="lead" data-en="For an eight-seat counter, one no-show can wipe out a night. Guests see free seats in LINE, choose a course and party size, and hold the seat with a card or a small deposit. The day before, LINE asks whether they’re coming, and a cancelled seat goes straight to the waiting list.">カウンター8席のお店では、一組の無断キャンセルが、その夜の売上を大きく減らします。お客さまはLINEで空席を見て、コースと人数を選び、カードの登録か予約金で席を確保。前日にはLINEで来店を確認し、キャンセルが出た席は、キャンセル待ちの方へすぐにお知らせします。</p>
+    <figure class="tent">
+      <div class="tent-card">
+        <p class="tent-shop">鮨 澪</p>
+        <img src="qr-mio.svg" width="132" height="132" alt="このデモを開くQRコード" data-en-alt="QR code that opens this demo">
+        <p class="tent-seat" data-en="Book a seat">席のご予約</p>
+        <p class="tent-hint" data-en="Scan with your phone to book">スマホで読み取って予約</p>
+      </div>
+      <figcaption data-en="Scan this with your phone camera to try the demo on your own phone.">スマホのカメラで読み取ると、ご自分のスマホでデモを試せます。</figcaption>
+    </figure>
+    <ol class="flow">
+      <li data-en="Choose a course and party size">コースと人数を選ぶ</li>
+      <li data-en="Pick a sitting with free seats">空席のある回を選ぶ</li>
+      <li data-en="Hold the seat with a card or a deposit">カード登録か予約金で席を確保</li>
+      <li data-en="Confirm with one tap in LINE the day before">前日、LINEのボタンひとつで来店確認</li>
+    </ol>
+  </aside>
+
+  <div class="device">
+    <div class="app" id="app" data-app>
+      <header class="mh">
+        <span class="mh-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M5 12c3.6-3 7.4-3 11 0s7.4 3 11 0" stroke="#F1E6D2" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M5 18.5c3.6-3 7.4-3 11 0s7.4 3 11 0" stroke="#D2B07A" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M8 25h16" stroke="#F1E6D2" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+        <span class="mh-title"><b data-mh-title></b><small data-mh-sub></small></span>
+        <button class="mh-btn" type="button" data-restart><span class="sr" data-mh-restart></span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+      </header>
+      <div class="screens" data-screens></div>
+      <div class="sheet-wrap" data-sheet hidden><div class="sheet-bg" data-close-sheet></div><div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title" data-sheet-body></div></div>
+      <div class="toast" data-toast role="status" aria-live="polite" hidden></div>
+    </div>
+  </div>
+
+  <aside class="kitchen" data-kitchen aria-labelledby="k-title">
+    <div class="k-head">
+      <div>
+        <p class="eyebrow" data-en="What the restaurant sees">お店側の画面</p>
+        <h2 id="k-title" data-en="Reservation book">予約台帳</h2>
+      </div>
+      <button class="k-close" type="button" data-kitchen-close><span data-en="Back to the guest view">お客さまの画面に戻る</span></button>
+    </div>
+    <p class="k-note" data-en="Both sittings for one night: who is coming, whether the seat is held by a card or deposit, and who has confirmed. Choose another date and the book follows.">その日の二回転ぶんの予約です。誰が何名で来るか、カードや予約金で保証されているか、前日の確認が取れているか。日付を選ぶと、その日の台帳に切り替わります。</p>
+    <div data-side aria-live="polite"></div>
+  </aside>
+</div>
+
+<footer class="foot">
+  <p data-en="This is a concept project. The restaurant, prices and the other bookings are fictional, and no booking or payment is made. A real version runs as a LINE MINI App, with the card held through a payment provider such as Stripe, so the restaurant never sees card numbers. The cancellation policy is an example; each restaurant sets its own. Photos from Wikimedia Commons, see the credits.">これはコンセプト作品です。お店・料金・ほかのお客さまの予約は架空で、予約も決済も行われません。実際の導入ではLINEミニアプリとして公開し、カードの保証はStripeなどの決済会社を通すため、お店がカード番号を見ることはありません。キャンセルポリシーは一例で、お店ごとに決めます。写真はWikimedia Commonsより、クレジットをご覧ください。</p>
+  <details class="credits"><summary data-en="Photo credits">写真クレジット</summary><ul data-credits></ul></details>
+</footer>
+
+<script src="scenarios/mio.js"></script>
+<script src="auto.js"></script>
+<script src="svc.js"></script>
+<script src="../../assets/concept.js"></script>
+</body>
+</html>

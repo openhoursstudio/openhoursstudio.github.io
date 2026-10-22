@@ -860,6 +860,8 @@ html:not([lang="ja"]) .lx-card-body b { font: 700 22px/1.2 var(--display); lette
 @media (min-width: 1181px) { .lx-apps.four { grid-template-columns: repeat(4, 1fr); } }
 /* گروهِ دوم (رزرو، نوبت، کارت عضویت): سه گوشی؛ و کاشیِ آخرِ فهرست که به تماس می‌برد */
 @media (min-width: 900px) { .lx-live.three { grid-template-columns: repeat(3, 1fr); } .lx-live.three .lx-phone { --k: .6; } }
+/* گروهِ دو تایی (منوی گردشگر و رزرو با کارت): دو گوشی کنار هم */
+@media (min-width: 1181px) { .lx-live.two { grid-template-columns: repeat(2, 1fr); } .lx-live.two .lx-phone { --k: .62; } }
 .lx-more { grid-template-rows: 1fr; min-height: 200px; background: var(--ink); color: #fff; box-shadow: none; }
 .lx-more .lx-card-body { align-content: center; padding: 28px 26px; }
 .lx-more .lx-card-body p { color: rgba(255, 255, 255, .75); }

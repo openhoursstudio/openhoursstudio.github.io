@@ -1,6 +1,6 @@
 // デモ「LINEミニアプリ」の注文以外の使い方：予約・順番受付・会員証。注文のデモ（app.js）と同じページの作りで、お店ごとの設定と文言は scenario ファイルが window.LS に入れる。
 // 流れは3種類：book＝美容室の予約（メニュー→担当→日時→確認）／queue＝クリニックの順番受付（家で待って、近づいたらLINEでお知らせ）／
-// member＝パン屋の会員証（ポイント・クーポン・焼き上がりのお知らせ）。通信も決済もしない、ページの中だけで完結する見本。
+// member＝パン屋の会員証（ポイント・クーポン・焼き上がりのお知らせ）／reserve＝おまかせの店の予約（カード保証か予約金、前日にLINEで来店確認）。通信も決済もしない、ページの中だけで完結する見本。
 (function () {
   'use strict';
   var C = window.LS;
@@ -541,7 +541,238 @@
     }
   }
 
-  var F = { book: Book, queue: Queue, member: Member }[C.flow]();
+  // ════════ reserve：おまかせの店の予約（カード保証か予約金。前日にLINEで来店確認） ════════
+  function Reserve() {
+    var cBy = {}, cache = {};
+    C.courses.forEach(function (c) { cBy[c.id] = c; });
+    var DAYS = 14;
+    function day(i) {
+      var d = tokyo(); d.setHours(0, 0, 0, 0); d.setDate(d.getDate() + i);
+      return { d: d, i: i, closed: d.getDay() === C.closed, key: d.getFullYear() * 10000 + (d.getMonth() + 1) * 100 + d.getDate() };
+    }
+    // 近い日付の種から似た乱数が出ないよう、先に混ぜておく
+    function mix(n) { n = (n ^ 61) ^ (n >>> 16); n = n + (n << 3); n ^= n >>> 4; n = Math.imul(n, 0x27d4eb2d); n ^= n >>> 15; return n >>> 0; }
+    // ほかのお客さまの予約（架空）。金土はほぼ満席、近い日ほど埋まっている
+    function book(di, s) {
+      var D = day(di), id = D.key * 10 + s;
+      if (cache[id]) return cache[id];
+      var r = rng(mix(D.key * 10 + s)), wd = D.d.getDay();
+      var want = wd === 5 || wd === 6 ? C.seats - Math.floor(r() * 2) : 2 + Math.floor(r() * (C.seats - 2));
+      if (di < 3) want = Math.max(want, C.seats - 2 - Math.floor(r() * 2));
+      var out = [], used = 0, n = 0;
+      while (used < want) {
+        var size = [2, 2, 2, 3, 1, 4][Math.floor(r() * 6)];
+        if (used + size > want) size = want - used;
+        var src = r() < .62 ? 'line' : r() < .7 ? 'web' : 'tel';
+        out.push({ who: C.names[(D.key + s * 5 + n * 3) % C.names.length], n: size, c: r() < .55 ? 'mio' : 'nagi', src: src, g: src === 'tel' ? 'none' : r() < .8 ? 'card' : 'dep', ok: di < 2 && src !== 'tel' && r() < .8 });
+        used += size; n++;
+      }
+      return (cache[id] = out);
+    }
+    function taken(di, s) { return book(di, s).reduce(function (a, b) { return a + b.n; }, 0) + (S.booked && S.booked.di === di && S.booked.s === s && !S.cancelled ? S.party : 0); }
+    // 今日の回は、始まる1時間前で受付を締める
+    function past(di, s) { var n = tokyo(); return di === 0 && toMin(C.seatings[s]) - 60 <= n.getHours() * 60 + n.getMinutes(); }
+    function left(di, s) { return day(di).closed || past(di, s) ? 0 : C.seats - taken(di, s); }
+    function fits(di, s) { return left(di, s) >= S.party; }
+    function dayFree(di) { return C.seatings.some(function (x, s) { return fits(di, s); }); }
+    function first(party) {
+      var keep = S.party; S.party = party || S.party;
+      for (var di = 0; di < DAYS; di++) for (var s = 0; s < C.seatings.length; s++) if (!day(di).closed && fits(di, s)) { S.party = keep; return { di: di, s: s }; }
+      S.party = keep; return null;
+    }
+    function when(x, t) { var D = day(x.di); return (x.di === 0 ? t.today + ' ' : x.di === 1 ? t.tomorrow + ' ' : dLabel(D.d) + ' ') + C.seatings[x.s]; }
+    function course() { return cBy[S.course]; }
+    function food() { return course() ? course().p * S.party : 0; }
+    function total() { return food() + (S.pair ? C.pairing.p * S.party : 0); }
+    function dep() { return C.deposit * S.party; }
+    function fee() { return Math.floor(food() * C.feeRate / 10) * 10; }
+    function stepper(n, t) {
+      return '<ol class="sv-steps" aria-label="' + t.stepOf(n, 4) + '">' + t.stepNames.map(function (s, i) {
+        return '<li class="' + (i < n - 1 ? 'done' : i === n - 1 ? 'on' : '') + '"' + (i === n - 1 ? ' aria-current="step"' : '') + '><i>' + (i < n - 1 ? '✓' : i + 1) + '</i><span>' + s + '</span></li>';
+      }).join('') + '</ol>';
+    }
+    function chip(name, val, label, type, on) { return '<label class="sv-chip"><input type="' + type + '" name="' + name + '" value="' + val + '"' + (on ? ' checked' : '') + '><span>' + label + '</span></label>'; }
+    function policy(t) { return '<dl class="w-info rv-pol">' + t.policy.map(function (r) { return '<div><dt>' + r[0] + '</dt><dd>' + r[1] + '</dd></div>'; }).join('') + '</dl>'; }
+    function pick(t) { return esc(nm(course())) + ' · ' + t.people(S.party) + (S.pair ? ' · ' + esc(nm(C.pairing)) : ''); }
+    function dateLine(x) { var D = day(x.di); return dLabel(D.d) + ' ' + C.seatings[x.s]; }
+    var CARD = '<span class="rv-cardic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 9.5h19M6 15h4"/></svg></span>';
+
+    var views = {
+      home: function (t) {
+        var soon = first(2);
+        return '<div class="scr welcome"><div class="pad">' + hero(t) + '<div class="w-in">' + intro(t) +
+          (soon ? '<div class="sv-soon"><small>' + t.soonLabel + '</small><b>' + when(soon, t) + '</b><span>' + t.soonFor + '</span></div>' : '') +
+          '<h3 class="w-h">' + t.coursesH + '</h3><div class="w-picks">' + C.courses.map(function (c) {
+            return '<button type="button" class="pk" data-pick="' + c.id + '">' + pic(c.img, 'pk-img') + '<b>' + esc(nm(c)) + '</b><span>' + yen(c.p) + '</span></button>';
+          }).join('') + '</div>' +
+          '<h3 class="w-h">' + t.tasteH + '</h3><ul class="rv-strip">' + C.taste.map(function (x) { return '<li>' + pic(x.img, 'rv-sq') + '<span>' + x[lang()] + '</span></li>'; }).join('') + '</ul>' +
+          '<div class="sv-rule rv-why"><b>' + t.whyTitle + '</b>' + t.whyBody + '</div>' +
+          news(t) + info(t) + notes(t) + '</div></div>' +
+          bar('<button type="button" class="cta" data-go="consent">' + t.start + '</button>') + '</div>';
+      },
+      plan: function (t) {
+        return '<div class="scr book"><div class="pad">' + stepper(1, t) + '<h2>' + t.planTitle + '</h2>' +
+          '<div class="rv-courses" role="radiogroup" aria-label="' + t.planTitle + '">' + C.courses.map(function (c) {
+            return '<label class="rv-course"><input type="radio" name="course" value="' + c.id + '" data-course' + (S.course === c.id ? ' checked' : '') + '>' + pic(c.img, 'thumb') +
+              '<span class="i-text"><b>' + esc(nm(c)) + (c.tag ? '<i class="tag">' + c.tag[lang() === 'en' ? 1 : 0] + '</i>' : '') + '</b><span>' + esc(sub(c)) + '</span><em>' + t.per(yen(c.p)) + '</em></span></label>';
+          }).join('') + '</div>' +
+          '<h3 class="sv-h">' + t.partyH + '</h3><div class="rv-party"><button type="button" class="rv-pm" data-party="-1" aria-label="' + t.less + '"' + (S.party <= 1 ? ' disabled' : '') + '>−</button><b aria-live="polite">' + t.people(S.party) + '</b>' +
+          '<button type="button" class="rv-pm" data-party="1" aria-label="' + t.more + '"' + (S.party >= C.maxParty ? ' disabled' : '') + '>＋</button></div><p class="small center">' + t.bigParty + '</p>' +
+          '<label class="switch fr rv-pair"><input type="checkbox" data-pair' + (S.pair ? ' checked' : '') + '>' + pic(C.pairing.img, 'rv-pairimg') + '<span><b>' + esc(nm(C.pairing)) + ' <small>+' + t.per(yen(C.pairing.p)) + '</small></b><small>' + esc(sub(C.pairing)) + '</small></span></label>' +
+          (course() ? '<p class="sv-pick rv-est">' + t.estimate(yen(total())) + '</p>' : '') + '</div>' +
+          bar('<button type="button" class="cta" data-go="when"' + (course() ? '' : ' disabled') + '>' + t.toWhen + '</button>') + '</div>';
+      },
+      when: function (t) {
+        var D = day(S.day), days = '';
+        for (var i = 0; i < DAYS; i++) {
+          var x = day(i), free = !x.closed && dayFree(i), few = free && C.seatings.every(function (y, s) { return left(i, s) <= 2; });
+          days += '<button type="button" class="sv-day" data-day="' + i + '" aria-pressed="' + (i === S.day) + '"' + (x.closed ? ' disabled' : '') + '><small>' + WD[lang()][x.d.getDay()] + '</small><b>' + x.d.getDate() + '</b><i>' + (x.closed ? t.closedShort : !free ? '×' : few ? '△' : '○') + '</i></button>';
+        }
+        var seats = C.seatings.map(function (at, s) {
+          var l = left(S.day, s), ok = l >= S.party;
+          return '<li><button type="button" class="rv-seat" data-seating="' + s + '"' + (ok ? '' : ' disabled') + '><b>' + at + '</b><span>' + (past(S.day, s) ? t.closedSeat : l === 0 ? t.full : ok ? t.seatsLeft(l) : t.tooFew(l)) + '</span>' +
+            '<i class="rv-dots" aria-hidden="true">' + Array.apply(null, Array(C.seats)).map(function (z, k) { return '<i' + (k < C.seats - l ? ' class="on"' : '') + '></i>'; }).join('') + '</i></button>' +
+            (ok || past(S.day, s) ? '' : '<button type="button" class="link small rv-wait" data-wait="' + s + '">' + t.waitBtn + '</button>') + '</li>';
+        }).join('');
+        return '<div class="scr book"><div class="pad">' + stepper(2, t) + '<button type="button" class="back" data-go="plan">← ' + t.backPlan + '</button><h2>' + t.whenTitle + '</h2>' +
+          '<p class="sv-pick">' + pick(t) + '</p>' +
+          '<p class="sv-month">' + (lang() === 'en' ? MON[D.d.getMonth()] + ' ' + D.d.getFullYear() : D.d.getFullYear() + '年' + (D.d.getMonth() + 1) + '月') + '</p>' +
+          '<div class="sv-days" role="group" aria-label="' + t.whenTitle + '">' + days + '</div>' +
+          '<h3 class="sv-h">' + t.seatsFor(dLabel(D.d)) + '</h3><ul class="rv-seats">' + seats + '</ul>' +
+          '<p class="small">' + t.legend + '</p></div></div>';
+      },
+      guest: function (t) {
+        return '<div class="scr book"><div class="pad">' + stepper(3, t) + '<button type="button" class="back" data-go="when">← ' + t.backWhen + '</button><h2>' + t.guestTitle + '</h2>' +
+          '<p class="sv-pick">' + pick(t) + ' · ' + dateLine(S.pick) + '</p>' +
+          '<dl class="w-info"><div><dt>' + t.nameL + '</dt><dd>' + t.lineName + '<small class="rv-from">' + t.fromLine + '</small></dd></div></dl>' +
+          '<label class="note"><span>' + t.telL + '</span><input class="rv-in" type="tel" inputmode="tel" autocomplete="off" data-tel value="' + esc(S.tel) + '" placeholder="' + t.telPh + '"></label>' +
+          '<fieldset class="sv-field"><legend>' + t.allergyQ + '</legend><div class="sv-chips">' + C.allergies.map(function (a) { return chip('al', a.id, a[lang()], 'checkbox', S.al.indexOf(a.id) >= 0); }).join('') + '</div></fieldset>' +
+          '<fieldset class="sv-field"><legend>' + t.occasionQ + '</legend><div class="sv-chips">' + C.occasions.map(function (o) { return chip('oc', o.id, o[lang()], 'radio', S.oc === o.id); }).join('') + '</div></fieldset>' +
+          (S.oc === 'bday' || S.oc === 'anniv' ? '<p class="small rv-ocnote">' + t.ocNote + '</p>' : '') +
+          '<label class="note"><span>' + t.note + '</span><textarea rows="2" data-note placeholder="' + esc(t.notePh) + '">' + esc(S.note) + '</textarea></label></div>' +
+          bar('<button type="button" class="cta" data-go="pay">' + t.toPay + '</button>') + '</div>';
+      },
+      pay: function (t) {
+        var rows = [[t.rCourse, esc(nm(course())) + ' × ' + t.people(S.party)], [t.rWhen, dateLine(S.pick)]];
+        if (S.pair) rows.push([t.rPair, esc(nm(C.pairing))]);
+        if (S.al.length) rows.push([t.rAllergy, C.allergies.filter(function (a) { return S.al.indexOf(a.id) >= 0; }).map(function (a) { return a[lang()]; }).join('・')]);
+        if (S.oc !== 'none') rows.push([t.rOccasion, C.occasions.filter(function (o) { return o.id === S.oc; })[0][lang()]]);
+        var g = function (id, title, subt) { return '<label class="rv-g"><input type="radio" name="g" value="' + id + '" data-g' + (S.g === id ? ' checked' : '') + '><span><b>' + title + '</b><small>' + subt + '</small></span></label>'; };
+        var btn = S.g === 'dep' ? t.payDep(yen(dep())) : t.payCard;
+        return '<div class="scr book confirm"><div class="pad">' + stepper(4, t) + '<button type="button" class="back" data-go="guest">← ' + t.backGuest + '</button><h2>' + t.payTitle + '</h2>' +
+          '<dl class="w-info sv-sumtbl">' + rows.map(function (r) { return '<div><dt>' + r[0] + '</dt><dd>' + r[1] + '</dd></div>'; }).join('') + '</dl>' +
+          '<div class="total"><span>' + t.estTotal + '</span><b>' + yen(total()) + '</b></div><p class="small">' + t.payAtShop + '</p>' +
+          '<h3 class="sv-h">' + t.gTitle + '</h3><div class="rv-gs" role="radiogroup" aria-label="' + t.gTitle + '">' + g('card', t.gCard, t.gCardSub) + g('dep', t.gDep(yen(C.deposit)), t.gDepSub(yen(dep()))) + '</div>' +
+          '<div class="rv-card">' + CARD + '<span><b>VISA •••• 4242</b><small>' + t.demoCard + '</small></span></div><p class="small">' + t.cardNote + '</p>' +
+          '<h3 class="sv-h">' + t.polTitle + '</h3>' + policy(t) + '<p class="small">' + t.polNote + '</p>' +
+          '<label class="switch fr"><input type="checkbox" data-agree' + (S.agree ? ' checked' : '') + '><span><b>' + t.agree + '</b></span></label></div>' +
+          bar('<button type="button" class="cta" data-reserve' + (S.agree ? '' : ' disabled') + '>' + btn + '</button>') + '</div>';
+      },
+      done: function (t) {
+        var b = S.booked;
+        return '<div class="scr done"><div class="pad">' + OK + '<h2>' + t.doneTitle + '</h2>' +
+          '<div class="sv-ticket"><small>' + t.bookNo + ' ' + b.no + '</small><b>' + dLabel(day(b.di).d) + '<span>' + C.seatings[b.s] + (lang() === 'ja' ? '〜' : '') + '</span></b>' +
+          '<p>' + pick(t) + '</p><p>' + (S.g === 'dep' ? t.depPaid(yen(dep())) : t.cardHeld) + '</p></div>' +
+          '<h3 class="h-title">' + t.nextTitle + '</h3><ol class="sv-flow">' + t.nextList.map(function (x) { return '<li><b>' + x[0] + '</b><span>' + x[1] + '</span></li>'; }).join('') + '</ol>' +
+          '<button type="button" class="cta rv-demo" data-go="remind">' + t.seeRemind + '</button>' + seeSide(t) + '</div>' +
+          bar('<button type="button" class="cta ghost" data-restart-btn>' + t.restart + '</button>') + '</div>';
+      },
+      remind: function (t) {
+        var b = S.booked, icon = app.querySelector('.mh-icon').innerHTML;
+        var shop = function (html) { return '<div class="rv-msg"><span class="mh-icon" aria-hidden="true">' + icon + '</span><div class="rv-bub">' + html + '</div></div>'; };
+        var me = function (txt) { return '<div class="rv-msg me"><div class="rv-bub">' + txt + '</div></div>'; };
+        var ask = S.ans ? '' : '<div class="rv-acts"><button type="button" class="cta" data-ans="yes">' + t.ansYes + '</button><button type="button" class="cta ghost" data-ans="change">' + t.ansChange + '</button><button type="button" class="cta ghost" data-ans="cancel">' + t.ansCancel + '</button></div>';
+        var reply = S.ans === 'yes' ? me(t.ansYes) + shop(t.thanksYes) : S.ans === 'cancel' ? me(t.ansCancel) + shop(t.cancelled(yen(fee()), S.g === 'dep' ? yen(Math.min(fee(), dep())) : null)) : '';
+        return '<div class="scr rv-talk"><div class="pad"><p class="rv-day">' + t.talkDay + '</p>' +
+          shop(t.remindMsg(dLabel(day(b.di).d), C.seatings[b.s], pick(t), t.lineName) + ask) + reply +
+          (S.ans ? '<p class="small center rv-after">' + (S.ans === 'yes' ? t.afterYes : t.afterCancel) + '</p>' + seeSide(t) : '<p class="small center">' + t.talkNote + '</p>') + '</div>' +
+          bar(S.ans ? '<button type="button" class="cta ghost" data-restart-btn>' + t.restart + '</button>' : '<button type="button" class="cta ghost" data-go="done">← ' + t.backDone + '</button>') + '</div>';
+      }
+    };
+    function cancelSheet() {
+      var t = L(), f = fee();
+      sheet('<div class="s-body rv-csheet"><h2 id="sheet-title">' + t.cTitle + '</h2><p>' + t.cBody(yen(f)) + '</p>' + policy(t) +
+        (S.g === 'dep' ? '<p class="small">' + t.cDep(yen(Math.min(f, dep())), yen(Math.max(0, f - dep()))) + '</p>' : '') +
+        '<div class="two"><button type="button" class="cta ghost" data-close-sheet>' + t.cKeep + '</button><button type="button" class="cta" data-cancel-ok>' + t.cGo + '</button></div></div>');
+    }
+    return {
+      reset: function () { return { course: null, party: 2, pair: false, day: 0, pick: null, tel: '', al: [], oc: 'none', note: '', g: 'card', agree: false, booked: null, ans: null, cancelled: false, waits: [], pending: null }; },
+      views: views,
+      start: function () { if (S.pending) { S.course = S.pending; S.pending = null; } go('plan'); },
+      click: function (d) {
+        var t = L();
+        if (d.pick) { S.pending = d.pick; if (S.started) { S.course = d.pick; S.pending = null; go('plan'); } else consentSheet(); }
+        else if (d.party) { S.party = Math.max(1, Math.min(C.maxParty, S.party + Number(d.party))); render(); }
+        else if (d.go === 'when') {
+          // 選んでいる日に人数分の空きがなければ、空きのある最初の日へ
+          if (!dayFree(S.day)) { var f = first(); S.day = f ? f.di : 0; }
+          go('when');
+        }
+        else if (d.day) { S.day = Number(d.day); render(); }
+        else if (d.seating) { S.pick = { di: S.day, s: Number(d.seating) }; go('guest'); }
+        else if (d.wait) {
+          var k = S.day + '-' + d.wait;
+          if (S.waits.indexOf(k) < 0) S.waits.push(k);
+          toast(t.toastWait(dLabel(day(S.day).d) + ' ' + C.seatings[Number(d.wait)]));
+        }
+        else if (d.reserve !== undefined) {
+          S.booked = { di: S.pick.di, s: S.pick.s, no: C.prefix + String(C.seq + 1) };
+          go('done');
+          toast(t.toastBooked(dateLine(S.booked), t.people(S.party)));
+        }
+        else if (d.ans === 'yes') { S.ans = 'yes'; render(); }
+        else if (d.ans === 'change') toast(t.changeToast);
+        else if (d.ans === 'cancel') cancelSheet();
+        else if (d.cancelOk !== undefined) { S.ans = 'cancel'; S.cancelled = true; closeSheet(); render(); }
+        else return false;
+        return true;
+      },
+      change: function (el) {
+        if (el.matches('[data-course]')) { S.course = el.value; render(); var c = app.querySelector('[data-course][value="' + el.value + '"]'); if (c) c.focus({ preventScroll: true }); }
+        else if (el.matches('[data-pair]')) { S.pair = el.checked; render(); app.querySelector('[data-pair]').focus({ preventScroll: true }); }
+        else if (el.name === 'al') { S.al = S.al.filter(function (x) { return x !== el.value; }); if (el.checked) S.al.push(el.value); }
+        else if (el.name === 'oc') { S.oc = el.value; render(); var o = app.querySelector('input[name="oc"][value="' + el.value + '"]'); if (o) o.focus({ preventScroll: true }); }
+        else if (el.matches('[data-g]')) { S.g = el.value; render(); app.querySelector('[data-g][value="' + el.value + '"]').focus({ preventScroll: true }); }
+        else if (el.matches('[data-agree]')) { S.agree = el.checked; render(); app.querySelector('[data-agree]').focus({ preventScroll: true }); }
+      },
+      input: function (el) { if (el.matches('[data-tel]')) S.tel = el.value.slice(0, 20); else if (el.matches('[data-note]')) S.note = el.value.slice(0, 120); },
+      // 予約台帳：その日の二つの回。誰が何名で、保証があるか、前日の確認が取れているか
+      side: function (t) {
+        var di = S.booked ? S.booked.di : S.pick ? S.pick.di : S.day, D = day(di);
+        if (D.closed) return '<div class="k-sum"><span>' + t.ledgerFor(dLabel(D.d)) + '</span><b>—</b></div><p class="k-empty">' + t.closedDay + '</p>';
+        var all = 0, safe = 0;
+        var blocks = C.seatings.map(function (at, s) {
+          var list = book(di, s).slice(), mine = S.booked && S.booked.di === di && S.booked.s === s;
+          var rows = list.map(function (b) {
+            all++; if (b.g !== 'none') safe++;
+            return '<li class="rv-row' + (b.g === 'none' ? ' risk' : '') + '"><b>' + esc(b.who[lang() === 'en' ? 1 : 0]) + t.sama + '</b><span>' + t.people(b.n) + ' · ' + esc(nm(cBy[b.c])) + ' · ' + t.src[b.src] + '</span>' +
+              '<em>' + t.gLabel[b.g] + (b.ok ? ' · ' + t.confirmed : '') + '</em></li>';
+          });
+          if (mine) {
+            all++; if (!S.cancelled) safe++;
+            rows.push('<li class="rv-row new' + (S.cancelled ? ' gone' : '') + '"><b>' + t.lineName + t.sama + ' <i>' + t.newLine + '</i></b><span>' + t.people(S.party) + ' · ' + esc(nm(course())) + (S.al.length ? ' · ⚠ ' + C.allergies.filter(function (a) { return S.al.indexOf(a.id) >= 0; }).map(function (a) { return a[lang()]; }).join('・') : '') + '</span>' +
+              '<em>' + (S.cancelled ? t.feeCharged(yen(fee())) : t.gLabel[S.g] + (S.ans === 'yes' ? ' · ' + t.confirmed : '')) + '</em></li>');
+          }
+          var used = taken(di, s), seatDots = '';
+          for (var k = 0; k < C.seats; k++) seatDots += '<i class="' + (k < used ? 'on' : '') + (mine && !S.cancelled && k >= used - S.party && k < used ? ' me' : '') + '"></i>';
+          var waitNote = mine && S.cancelled ? '<p class="t-note rv-wnote">' + t.waitNotified + '</p>' : S.waits.indexOf(di + '-' + s) >= 0 ? '<p class="t-note rv-wnote">' + t.waitOn + '</p>' : '';
+          return '<div class="ticket rv-block"><div class="t-top"><b>' + at + '〜</b><span>' + t.seatUse(used, C.seats) + '</span></div><div class="rv-seatmap" aria-hidden="true">' + seatDots + '</div><ul class="rv-rows">' + rows.join('') + '</ul>' + waitNote + '</div>';
+        }).join('');
+        return '<div class="k-sum"><span>' + t.ledgerFor(dLabel(D.d)) + '</span><b>' + t.safeCount(safe, all) + '</b></div>' + blocks +
+          '<p class="k-note">' + (S.booked ? t.ledAfter : t.ledHint) + '</p>';
+      },
+      auto: function () {
+        return [{ w: 1600 }, { s: '.welcome .pad', f: .45, w: 2200 }, { s: '.welcome .pad', f: 0, w: 900 },
+          { t: '[data-go="consent"]', w: 1300 }, { t: '[data-consent="1"]', w: 1500 },
+          { t: 'input[data-course][value="' + C.auto.course + '"]', w: 1400 }, { t: 'input[data-pair]', w: 1400 }, { t: '[data-go="when"]', w: 1500 },
+          { t: '.rv-seat:not([disabled])', w: 1500 }, { t: 'input[name="al"][value="' + C.auto.allergy + '"]', w: 1300 }, { t: 'input[name="oc"][value="' + C.auto.occasion + '"]', w: 1300 }, { t: '[data-go="pay"]', w: 1500 },
+          { s: '.confirm .pad', f: 1, w: 1500 }, { t: 'input[data-agree]', w: 1100 }, { t: '[data-reserve]', w: 3000 },
+          { s: '.done .pad', f: 1, w: 1800 }, { t: '[data-go="remind"]', w: 2600 }, { t: '[data-ans="yes"]', w: 4200 }, { r: 1, w: 600 }];
+      }
+    };
+  }
+
+  var F = { book: Book, queue: Queue, member: Member, reserve: Reserve }[C.flow]();
 
   // ── 状態と描画 ──
   var S, timers = [];
