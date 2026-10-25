@@ -256,8 +256,10 @@
   }
   cards.forEach(function (c) {
     c.addEventListener('click', function (e) {
-      if (wide.matches) return;
-      e.preventDefault(); lastCard = c; openModal(c.hash.slice(1)); history.pushState(null, '', c.hash);
+      e.preventDefault();
+      // desktop: skip the browser's own jump to the (still hidden) target, which can scroll to the top
+      if (wide.matches) { if (location.hash !== c.hash) history.pushState(null, '', c.hash); fromHash(); return; }
+      lastCard = c; openModal(c.hash.slice(1)); history.pushState(null, '', c.hash);
     });
   });
   secs.forEach(function (s) { s.querySelector('.svc-x').addEventListener('click', dismiss); });
@@ -277,4 +279,11 @@
   });
   sync();
   wide.addEventListener('change', sync);
+})();
+
+// منوی بالا: صفحه‌ی فعلی (و زیرصفحه‌هایش) علامت می‌خورد.
+(function () {
+  document.querySelectorAll('.nav a, .menu-links a').forEach(function (a) {
+    if (location.pathname.indexOf(a.pathname.replace(/[^\/]*$/, '')) === 0) a.setAttribute('aria-current', 'page');
+  });
 })();
