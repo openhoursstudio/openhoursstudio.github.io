@@ -1,0 +1,1021 @@
+<!doctype html>
+<html lang="fa">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="見積・契約">
+<meta name="theme-color" content="#18202C">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<!-- Internal tool for the Japan team (price calculator, quote/invoice, contract). Not linked from the site; hidden from search.
+     Source of truth: this file. The same content (without this head) is published as a private Claude artifact. -->
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+<title>Open Hours 見積・契約</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Vazirmatn:wght@400;500;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one phone-first column. Top: tab strip (見積 / 書類 / 契約 / تیم). The calculator is a stack of service sheets with
+   checklist rows; a sticky tally bar at the bottom always shows 月額 / 初期 / 期間合計. Documents render as an A4 "paper" sheet. */
+:root{
+ --bg:#EEF0F3; --paper:#FFFFFF; --ink:#18202C; --muted:#5A6474; --line:#D7DCE4; --soft:#F5F7FA;
+ --ai:#23417A; --ai-soft:#E3EAF5; --shu:#B8432B; --shu-soft:#F7E7E2; --ok:#1F7A4D; --ok-soft:#E1F1E8; --warn:#93600A; --warn-soft:#FAEFD8;
+ --f-ja:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP",sans-serif;
+ --f-fa:"Vazirmatn",Tahoma,sans-serif;
+ --f-num:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+ --bg:#0F1218; --paper:#171B23; --ink:#E6E9EF; --muted:#9AA3B2; --line:#2A303B; --soft:#1D222B;
+ --ai:#93B2EA; --ai-soft:#1D2740; --shu:#F08C74; --shu-soft:#3A221D; --ok:#6FCF9C; --ok-soft:#163125; --warn:#E6B45A; --warn-soft:#382B14; color-scheme:dark}}
+:root[data-theme="dark"]{
+ --bg:#0F1218; --paper:#171B23; --ink:#E6E9EF; --muted:#9AA3B2; --line:#2A303B; --soft:#1D222B;
+ --ai:#93B2EA; --ai-soft:#1D2740; --shu:#F08C74; --shu-soft:#3A221D; --ok:#6FCF9C; --ok-soft:#163125; --warn:#E6B45A; --warn-soft:#382B14; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-ja);font-size:15px;line-height:1.7;
+ padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 140px}
+body.fa .ui{font-family:var(--f-fa)}
+.wrap{max-width:860px;width:100%;min-width:0;margin:0 auto;display:flex;flex-direction:column;gap:18px}
+.sheet li,.sheet p,.sheet td{overflow-wrap:anywhere}
+h1,h2,h3{margin:0;line-height:1.35;text-wrap:balance}
+p{margin:0}
+.num{font-family:var(--f-num);font-variant-numeric:tabular-nums;direction:ltr;unicode-bidi:isolate;white-space:nowrap}
+.muted{color:var(--muted)} .small{font-size:13px}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ai);outline-offset:2px}
+
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:12px 10px;display:flex;flex-direction:column;gap:10px;border-bottom:1px solid var(--line)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.brand{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.brand h1{font-size:16px;font-weight:700;letter-spacing:.02em;min-width:0}
+.brand h1 small{font-weight:500;color:var(--muted);font-size:12px;margin-inline-start:6px}
+.lang{display:flex;flex:none;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.lang button{border:0;background:transparent;padding:4px 12px;font-size:13px;cursor:pointer;white-space:nowrap}
+.lang button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+nav.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:3px}
+nav.tabs a{text-align:center;text-decoration:none;color:var(--muted);font-size:13.5px;font-weight:600;padding:7px 4px;border-radius:8px}
+nav.tabs a[aria-current="page"]{background:var(--paper);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+
+.sheet{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.sheet h2{font-size:16px;font-weight:700}
+.row2{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px}
+.f{display:flex;flex-direction:column;gap:3px;min-width:0}
+.f label{font-size:12.5px;color:var(--muted);font-weight:600}
+.f input,.f select,.f textarea{border:1px solid var(--line);background:var(--soft);border-radius:8px;padding:8px 10px;font-size:16px;width:100%}
+.f textarea{min-height:64px;resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 14px;cursor:pointer;font-size:14px}
+.chip[aria-pressed="true"]{background:var(--ai);border-color:var(--ai);color:var(--paper)}
+.chip small{opacity:.8;font-size:11.5px;margin-inline-start:6px;font-family:var(--f-num)}
+
+/* service sheet */
+.svc{padding:0;gap:0;overflow:hidden}
+.svc-head{display:flex;gap:12px;align-items:center;padding:14px 16px;cursor:pointer;user-select:none}
+.svc-head input{width:22px;height:22px;accent-color:var(--ai);flex:none}
+.svc-head .t{flex:1;min-width:0}
+.svc-head .t b{display:block;font-size:16px}
+.svc-head .t span{font-size:12.5px;color:var(--muted)}
+.svc-head .sum{text-align:end;font-size:13px}
+.svc-head .sum b{display:block;font-family:var(--f-num);font-size:16px;font-weight:500}
+.svc-body{border-top:1px solid var(--line);padding:6px 16px 14px;display:flex;flex-direction:column;gap:2px}
+.svc.off .svc-body{display:none}
+.svc.off .svc-head{opacity:.75}
+.grp{padding-block:10px 4px;display:flex;flex-direction:column;gap:6px;border-bottom:1px dashed var(--line)}
+.grp:last-child{border-bottom:0}
+.grp > .q{font-size:13.5px;font-weight:700}
+.opt{display:grid;grid-template-columns:22px 1fr auto;gap:10px;align-items:start;padding:7px 8px;border-radius:8px;cursor:pointer}
+.opt:hover{background:var(--soft)}
+.opt input{margin:3px 0 0;width:18px;height:18px;accent-color:var(--ai)}
+.opt .l{min-width:0}
+.opt .l small{display:block;color:var(--muted);font-size:12px;line-height:1.5}
+.opt .p{text-align:end;font-size:12.5px;color:var(--muted);line-height:1.5}
+.opt.sel{background:var(--ai-soft)}
+.opt.sel .p{color:var(--ink)}
+.base{display:grid;grid-template-columns:22px 1fr auto;gap:10px;padding:7px 8px;font-size:14px}
+.base .dot{width:8px;height:8px;border-radius:50%;background:var(--ai);margin:8px 0 0 6px}
+.range{font-size:12.5px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;background:var(--soft);border-radius:8px;padding:6px 10px;margin-top:6px}
+.note{border-inline-start:3px solid var(--ai);background:var(--ai-soft);padding:9px 12px;border-radius:6px;font-size:13.5px}
+.note.warn{border-color:var(--shu);background:var(--shu-soft)}
+.note.ok{border-color:var(--ok);background:var(--ok-soft)}
+
+/* tally bar */
+.tally{position:fixed;inset:auto 0 0;z-index:6;background:var(--ink);color:var(--paper);
+ padding:10px max(16px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.tally .in{max-width:860px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;align-items:center}
+.tally .k{font-size:11px;opacity:.75;display:block}
+.tally .v{font-family:var(--f-num);font-size:16px}
+.tally button{border:0;background:var(--paper);color:var(--ink);border-radius:999px;padding:9px 14px;font-weight:700;cursor:pointer;font-size:13.5px;white-space:nowrap}
+@media (max-width:420px){.tally .in{grid-template-columns:1fr 1fr 1fr}.tally button{grid-column:1/-1}}
+
+.btns{display:flex;flex-wrap:wrap;gap:8px}
+.btn{border:1px solid var(--ai);background:var(--ai);color:var(--paper);border-radius:999px;padding:8px 16px;cursor:pointer;font-weight:700;font-size:14px}
+.btn.ghost{background:transparent;color:var(--ai)}
+.msg{font-size:13px;min-height:1.2em}
+details.sheet summary{cursor:pointer;font-weight:700}
+details.sheet[open] summary{margin-bottom:6px}
+
+/* team */
+table.t{border-collapse:collapse;width:100%;font-size:13.5px}
+table.t th,table.t td{padding:7px 8px;border-bottom:1px solid var(--line);text-align:start;vertical-align:top}
+table.t th{color:var(--muted);font-weight:600;font-size:12.5px}
+table.t td.n{text-align:end}
+.tw{overflow-x:auto;min-width:0}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px}
+.kpis div{background:var(--soft);border-radius:8px;padding:9px 11px;display:flex;flex-direction:column}
+.kpis span{font-size:12px;color:var(--muted)}
+.kpis b{font-family:var(--f-num);font-weight:500;font-size:17px}
+.pill{display:inline-block;border-radius:999px;padding:0 9px;font-size:12px;font-weight:700}
+.pill.good{background:var(--ok-soft);color:var(--ok)} .pill.mid{background:var(--warn-soft);color:var(--warn)} .pill.bad{background:var(--shu-soft);color:var(--shu)}
+ul.list{margin:0;padding-inline-start:20px;display:flex;flex-direction:column;gap:6px}
+
+/* the paper (見積書 / 請求書 / 契約書) — same CSS is shipped inside downloaded files */
+.paperbox{overflow-x:auto;min-width:0;border-radius:6px}
+@media print{body{background:#fff;padding:0}body::before,header.top,.tally,.sheet,#v-calc,#v-team{display:none!important}.paperbox{overflow:visible}.wrap{max-width:none;gap:0}}
+</style>
+<style id="papercss">
+.paper{background:#fff;color:#1a1a1a;font-family:"Zen Kaku Gothic New","Hiragino Sans","Noto Sans JP","Yu Gothic",sans-serif;font-size:12.5px;line-height:1.75;
+ width:100%;max-width:794px;margin:0 auto;padding:36px 34px;border:1px solid #d9d9d9}
+.paper.fa{font-family:"Vazirmatn",Tahoma,sans-serif;direction:rtl}
+.paper h1{font-size:24px;letter-spacing:.5em;text-align:center;margin:0 0 18px;font-weight:700;padding-bottom:6px;border-bottom:3px double #1a1a1a}
+.paper.fa h1{letter-spacing:0}
+.paper .n{font-family:"IBM Plex Mono",ui-monospace,monospace;font-variant-numeric:tabular-nums;white-space:nowrap;direction:ltr;unicode-bidi:isolate}
+.paper .meta{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:16px}
+.paper .to{font-size:17px;font-weight:700;border-bottom:1px solid #1a1a1a;padding:0 12px 2px 0;min-width:240px}
+.paper .from{text-align:right;font-size:12px;position:relative;padding-right:64px;min-height:64px}
+.paper .seal{position:absolute;right:0;top:0;width:56px;height:56px;border:1.5px solid #b8432b;color:#b8432b;display:flex;align-items:center;justify-content:center;font-size:11px;border-radius:4px}
+.paper .total{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border:2px solid #1a1a1a;padding:8px 14px;margin:6px 0 16px;flex-wrap:wrap}
+.paper .total b{font-size:20px}
+.paper table{width:100%;border-collapse:collapse;margin-bottom:12px}
+.paper th,.paper td{border:1px solid #9a9a9a;padding:5px 7px;text-align:left;vertical-align:top}
+.paper th{background:#eef1f6;font-weight:700;font-size:11.5px}
+.paper td.r,.paper th.r{text-align:right}
+.paper tr.sec td{background:#eceff4;font-weight:700}
+.paper tr.sv td{font-weight:700;border-bottom:0;padding-top:7px}
+.paper td.it{padding-left:1.4em}
+.paper .sum{width:auto;margin-left:auto;min-width:280px}
+.paper .sum td{border:0;border-bottom:1px solid #c9c9c9}
+.paper .sum tr.g td{font-weight:700;font-size:14px;border-bottom:2px solid #1a1a1a}
+.paper .box{border:1px solid #9a9a9a;padding:8px 12px;margin-top:10px;font-size:11.5px;white-space:pre-wrap}
+.paper .art{margin:0 0 10px}
+.paper .art h3{font-size:13px;margin:0 0 2px}
+.paper .art p{margin:0 0 2px}
+.paper .art ol{margin:0;padding-left:1.6em}
+.paper.fa .art ol{padding-left:0;padding-right:1.6em}
+.paper .sign{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:22px}
+.paper .sign div{border-top:1px solid #1a1a1a;padding-top:6px;min-height:110px;position:relative;font-size:12px}
+.paper .sign .seal{top:auto;bottom:4px}
+.paper.fa .sign .seal{right:auto;left:0}
+.paper .pre{font-size:11px;color:#555}
+.paper .pagebreak{break-before:page;margin-top:28px}
+@media (max-width:560px){.paper{padding:22px 14px;font-size:11px}.paper th,.paper td{padding:4px 4px}.paper td.it{padding-left:.8em}.paper h1{font-size:19px;letter-spacing:.3em}.paper .sign{grid-template-columns:1fr}}
+@media print{.paper{border:0;padding:0;max-width:none}}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+ <header class="top ui">
+  <div class="brand">
+   <h1>Open Hours 見積・契約<small id="hSub"></small></h1>
+   <div class="lang" role="group" aria-label="Language">
+    <button id="lgFa" type="button">فارسی</button><button id="lgJa" type="button">日本語</button>
+   </div>
+  </div>
+  <nav class="tabs" aria-label="Sections">
+   <a href="#calc" data-v="calc" id="tbCalc"></a>
+   <a href="#doc" data-v="doc" id="tbDoc"></a>
+   <a href="#contract" data-v="contract" id="tbCon"></a>
+   <a href="#team" data-v="team" id="tbTeam"></a>
+  </nav>
+ </header>
+
+ <!-- 1. calculator -->
+ <section id="v-calc" class="wrap" style="gap:14px">
+  <div class="sheet">
+   <h2 class="ui" id="lCust"></h2>
+   <div class="row2">
+    <div class="f"><label for="cName" id="lName"></label><input id="cName" autocomplete="off"></div>
+    <div class="f"><label for="cPerson" id="lPerson"></label><input id="cPerson" autocomplete="off"></div>
+   </div>
+   <div class="row2">
+    <div class="f"><label for="cStart" id="lStart"></label><input id="cStart" type="date"></div>
+    <div class="f"><label id="lMonths"></label><div class="chips" id="monthChips"></div></div>
+   </div>
+   <p class="small muted ui" id="termNote"></p>
+  </div>
+  <div id="svcList" class="wrap" style="gap:12px"></div>
+  <div class="sheet">
+   <h2 class="ui" id="lPay"></h2>
+   <label class="opt" id="splitRow"><input type="checkbox" id="cSplit"><span class="l ui" id="lSplit"></span><span class="p"></span></label>
+   <div class="row2">
+    <div class="f"><label for="cDisc" id="lDisc"></label><input id="cDisc" type="number" inputmode="numeric" min="0" step="1000"></div>
+   </div>
+   <div id="calcWarn" class="wrap" style="gap:8px"></div>
+  </div>
+ </section>
+
+ <!-- 2. documents -->
+ <section id="v-doc" class="wrap" style="gap:14px" hidden>
+  <div class="sheet ui">
+   <div class="chips" id="docChips"></div>
+   <div class="row2">
+    <div class="f"><label for="dDate" id="lDDate"></label><input id="dDate" type="date"></div>
+    <div class="f" id="fBillMonth"><label for="dMonth" id="lDMonth"></label><input id="dMonth" type="month"></div>
+    <div class="f"><label for="dNo" id="lDNo"></label><input id="dNo" autocomplete="off"></div>
+   </div>
+   <div class="btns"><button class="btn" id="dlDoc" type="button"></button><button class="btn ghost" id="cpDoc" type="button"></button><button class="btn ghost onsite" id="prDoc" type="button" hidden></button></div>
+   <p class="msg" id="docMsg" aria-live="polite"></p>
+  </div>
+  <div class="paperbox"><div id="docOut"></div></div>
+ </section>
+
+ <!-- 3. contract -->
+ <section id="v-contract" class="wrap" style="gap:14px" hidden>
+  <div class="sheet ui">
+   <div class="chips" id="conChips"></div>
+   <div class="row2">
+    <div class="f"><label for="kAddr" id="lKAddr"></label><input id="kAddr" autocomplete="off"></div>
+    <div class="f"><label for="kTel" id="lKTel"></label><input id="kTel" autocomplete="off"></div>
+    <div class="f"><label for="kSignDate" id="lKDate"></label><input id="kSignDate" type="date"></div>
+   </div>
+   <div class="btns"><button class="btn" id="dlCon" type="button"></button><button class="btn ghost onsite" id="prCon" type="button" hidden></button></div>
+   <p class="msg" id="conMsg" aria-live="polite"></p>
+   <div class="note warn" id="conWarn"></div>
+  </div>
+  <div class="paperbox"><div id="conOut"></div></div>
+ </section>
+
+ <!-- 4. team -->
+ <section id="v-team" class="wrap" style="gap:14px" hidden>
+  <div class="sheet ui" id="teamMargin"></div>
+  <details class="sheet ui" id="setBox">
+   <summary id="lSet"></summary>
+   <div class="row2">
+    <div class="f"><label for="sName" id="lSName"></label><input id="sName"></div>
+    <div class="f"><label for="sPerson" id="lSPerson"></label><input id="sPerson"></div>
+    <div class="f"><label for="sAddr" id="lSAddr"></label><input id="sAddr"></div>
+    <div class="f"><label for="sTel" id="lSTel"></label><input id="sTel"></div>
+    <div class="f"><label for="sMail" id="lSMail"></label><input id="sMail"></div>
+    <div class="f"><label for="sT" id="lST"></label><input id="sT" placeholder="T1234567890123"></div>
+    <div class="f"><label for="sCourt" id="lSCourt"></label><input id="sCourt"></div>
+    <div class="f"><label for="sAbroad" id="lSAbroad"></label><input id="sAbroad" placeholder="例：イラン、ドイツ"></div>
+    <div class="f"><label for="sRate" id="lSRate"></label><input id="sRate" type="number" inputmode="numeric" step="100"></div>
+   </div>
+   <div class="f"><label for="sBank" id="lSBank"></label><textarea id="sBank"></textarea></div>
+   <p class="small muted" id="setNote"></p>
+  </details>
+  <div class="sheet ui" id="teamGuide"></div>
+ </section>
+</div>
+
+<div class="tally ui" id="tally"><div class="in">
+ <div><span class="k" id="kMo"></span><span class="v" id="vMo"></span></div>
+ <div><span class="k" id="kIn"></span><span class="v" id="vIn"></span></div>
+ <div><span class="k" id="kTot"></span><span class="v" id="vTot"></span></div>
+ <button type="button" id="goDoc"></button>
+</div></div>
+
+<script>
+(function(){
+'use strict';
+/* ================= PRICE BOOK (launch prices, 2026-11) =================
+   Every number is yen. mo = monthly fee, init = one-time fee, h = team hours per month,
+   hi = team hours one-time, c = direct cost per month (train fare, printing, server), ci = direct cost one-time.
+   Edit prices here only. */
+const SVC = [
+ { id:'meo', ja:'Googleマップ運用（MEO）', fa:'مدیریت گوگل‌مپ (MEO)', minTerm:1,
+   jaD:'Googleで「近くのカフェ」などと探した人に、お店の情報・写真・口コミがきちんと見えるようにします。',
+   faD:'وقتی کسی در گوگل‌مپ دنبال «کافه‌ی نزدیک» می‌گردد، صفحه‌ی مغازه کامل، به‌روز و با عکس و جواب نظرها دیده شود.',
+   base:[{ja:'プロフィール運用・月次レポート',fa:'مدیریت پروفایل و گزارش ماهانه',jaS:'投稿 月4回／口コミ返信 月10件まで／営業時間・メニュー更新',faS:'۴ پست در ماه، جواب ۱۰ نظر، به‌روز کردن ساعت و منو',mo:20000,h:4}],
+   groups:[
+    {id:'setup',t:'radio',dj:'Google登録',ja:'今のGoogleの登録状態は？',fa:'وضعیت فعلی صفحه‌ی گوگل؟',opts:[
+     {id:'have',ja:'オーナー確認済み・管理できている',fa:'تأیید مالکیت شده و دسترسی داریم',init:0,hi:1},
+     {id:'new',ja:'未登録・オーナー確認から必要',fa:'ثبت‌نشده یا باید مالکیت را تأیید کنیم',init:15000,hi:5}]},
+    {id:'posts',t:'radio',dj:'Google投稿',ja:'Google投稿の回数',fa:'تعداد پست در گوگل',opts:[
+     {id:'4',ja:'月4回',fa:'ماهی ۴ بار',mo:0},
+     {id:'8',ja:'月8回',fa:'ماهی ۸ بار',mo:6000,h:2}]},
+    {id:'rev',t:'radio',dj:'口コミ返信',ja:'口コミ返信',fa:'جواب نظرها',opts:[
+     {id:'10',ja:'月10件まで',fa:'تا ۱۰ نظر در ماه',mo:0},
+     {id:'all',ja:'件数無制限',fa:'بدون محدودیت',mo:5000,h:2}]},
+    {id:'x',t:'check',ja:'追加するもの',fa:'موارد اضافه',opts:[
+     {id:'photo',ja:'写真撮影（月1回訪問・10枚）',fa:'عکاسی (ماهی یک بار حضوری، ۱۰ عکس)',mo:8000,h:2.5,c:1000},
+     {id:'lang',ja:'英語・中国語・韓国語の店舗情報',fa:'اطلاعات مغازه به انگلیسی، چینی و کره‌ای',mo:4000,init:5000,h:1,hi:2},
+     {id:'qr',ja:'口コミお願いQRカード・POP',fa:'کارت و استند QR برای درخواست نظر',init:8000,hi:2,ci:2000},
+     {id:'rank',ja:'競合・検索順位レポート',fa:'گزارش رقبا و رتبه‌ی جستجو',mo:5000,h:1.5}]}
+   ]},
+ { id:'sns', ja:'Instagram・TikTok運用', fa:'مدیریت اینستاگرام و تیک‌تاک', minTerm:1,
+   jaD:'投稿の企画・撮影・編集・投稿まで。お店は確認するだけ。',
+   faD:'برنامه، عکاسی، تدوین و انتشار پست با ما؛ مغازه فقط تأیید می‌کند.',
+   base:[{ja:'アカウント初期設計・月次レポート',fa:'طراحی اولیه‌ی اکانت و گزارش ماهانه',jaS:'プロフィール・ハイライト・投稿テンプレート',faS:'پروفایل، هایلایت‌ها، قالب پست',init:15000,hi:5,h:1}],
+   groups:[
+    {id:'pf',t:'radio',dj:'対象SNS',ja:'どのSNS？',fa:'کدام شبکه؟',opts:[
+     {id:'ig',ja:'Instagramのみ',fa:'فقط اینستاگرام',mo:0},
+     {id:'tt',ja:'TikTokのみ',fa:'فقط تیک‌تاک',mo:0},
+     {id:'both',ja:'Instagram＋TikTok',fa:'اینستاگرام + تیک‌تاک',mo:10000,h:2}]},
+    {id:'feed',t:'radio',dj:'通常投稿',ja:'通常投稿（画像）',fa:'پست عکس',opts:[
+     {id:'0',ja:'なし',fa:'ندارد',mo:0},
+     {id:'4',ja:'月4本',fa:'ماهی ۴ پست',mo:20000,h:5},
+     {id:'8',ja:'月8本',fa:'ماهی ۸ پست',mo:34000,h:9},
+     {id:'12',ja:'月12本',fa:'ماهی ۱۲ پست',mo:46000,h:13}]},
+    {id:'reel',t:'radio',dj:'短尺動画',ja:'短い動画（リール・TikTok）',fa:'ویدیوی کوتاه (ریلز/تیک‌تاک)',opts:[
+     {id:'0',ja:'なし',fa:'ندارد',mo:0},
+     {id:'2',ja:'月2本',fa:'ماهی ۲ ویدیو',mo:16000,h:6},
+     {id:'4',ja:'月4本',fa:'ماهی ۴ ویدیو',mo:30000,h:11},
+     {id:'8',ja:'月8本',fa:'ماهی ۸ ویدیو',mo:56000,h:21}]},
+    {id:'shoot',t:'radio',dj:'撮影',ja:'撮影',fa:'عکاسی و فیلم‌برداری',opts:[
+     {id:'0',ja:'お店から写真・動画をもらう',fa:'مغازه عکس و فیلم می‌دهد',mo:0},
+     {id:'1',ja:'月1回お店で撮影',fa:'ماهی یک بار در مغازه',mo:10000,h:3,c:1000},
+     {id:'2',ja:'月2回お店で撮影',fa:'ماهی دو بار در مغازه',mo:18000,h:6,c:2000}]},
+    {id:'x',t:'check',ja:'追加するもの',fa:'موارد اضافه',opts:[
+     {id:'story',ja:'ストーリーズ（週2回）',fa:'استوری (هفته‌ای ۲ بار)',mo:6000,h:2.5},
+     {id:'dm',ja:'コメント・DM対応',fa:'جواب کامنت و دایرکت',mo:8000,h:3},
+     {id:'ads',ja:'広告運用代行（広告費は別）',fa:'مدیریت تبلیغ پولی (هزینه‌ی تبلیغ جدا)',mo:10000,h:3}]}
+   ]},
+ { id:'web', ja:'ホームページ制作・運用', fa:'ساخت و نگهداری وب‌سایت', minTerm:1,
+   jaD:'スマホで見やすいお店のホームページ。サーバー・SSL・小さな更新込み。',
+   faD:'سایت مغازه که روی گوشی خوب دیده شود؛ سرور، SSL و تغییرهای کوچک داخلش است.',
+   base:[{ja:'サーバー・SSL・保守',fa:'سرور، SSL و نگهداری',jaS:'月1回までの小さな更新（文字・写真の差し替え）',faS:'ماهی یک تغییر کوچک (متن یا عکس)',mo:5000,h:1}],
+   groups:[
+    {id:'pages',t:'radio',dj:'ページ数',ja:'ページ数',fa:'تعداد صفحه',opts:[
+     {id:'1',ja:'1ページ（縦に長い1枚）',fa:'۱ صفحه (یک صفحه‌ی بلند)',init:40000,hi:10},
+     {id:'3',ja:'3ページ',fa:'۳ صفحه',init:70000,hi:18},
+     {id:'5',ja:'5ページ',fa:'۵ صفحه',init:100000,hi:26},
+     {id:'8',ja:'8ページ',fa:'۸ صفحه',init:140000,hi:38}]},
+    {id:'lang',t:'radio',dj:'対応言語',ja:'言語',fa:'زبان',opts:[
+     {id:'ja',ja:'日本語のみ',fa:'فقط ژاپنی',init:0},
+     {id:'en',ja:'日本語＋英語',fa:'ژاپنی + انگلیسی',init:20000,hi:5,mo:1000},
+     {id:'multi',ja:'日本語＋英語・中国語・韓国語',fa:'ژاپنی + انگلیسی، چینی، کره‌ای',init:50000,hi:10,mo:3000}]},
+    {id:'domain',t:'radio',dj:'ドメイン',ja:'ドメイン（〇〇.jp など）',fa:'دامنه (مثل ○○.jp)',opts:[
+     {id:'have',ja:'もう持っている（設定のみ）',fa:'دارد (فقط تنظیم)',init:5000,hi:1},
+     {id:'new',ja:'新しく取る（お店の名義で取得代行・更新費込み）',fa:'باید بخریم (به اسم مغازه، تمدید داخل ماهانه)',init:5000,hi:1,mo:500,c:300}]},
+    {id:'upd',t:'radio',dj:'更新',ja:'更新の回数',fa:'تعداد به‌روزرسانی',opts:[
+     {id:'1',ja:'月1回まで',fa:'ماهی ۱ بار',mo:0},
+     {id:'4',ja:'月4回まで',fa:'ماهی ۴ بار',mo:6000,h:2},
+     {id:'u',ja:'小さな修正は無制限',fa:'تغییر کوچک نامحدود',mo:12000,h:4}]},
+    {id:'x',t:'check',ja:'追加するもの',fa:'موارد اضافه',opts:[
+     {id:'photo',ja:'写真撮影（訪問・約20枚）',fa:'عکاسی حضوری (حدود ۲۰ عکس)',init:20000,hi:5,ci:1000},
+     {id:'form',ja:'予約・お問い合わせフォーム',fa:'فرم رزرو یا تماس',init:10000,hi:3},
+     {id:'news',ja:'お知らせ・ブログ機能',fa:'بخش خبر یا وبلاگ',init:15000,hi:4},
+     {id:'blog',ja:'ブログ記事作成代行（月2本）',fa:'نوشتن ۲ مطلب وبلاگ در ماه',mo:12000,h:4}]}
+   ]},
+ { id:'line', ja:'LINEミニアプリ', fa:'مینی‌اپ LINE', minTerm:3,
+   jaD:'LINEからそのまま注文・予約・会員証。アプリのダウンロード不要。',
+   faD:'سفارش، رزرو یا کارت عضویت مستقیم داخل LINE، بدون نصب اپ.',
+   base:[{ja:'運用・保守・メニュー更新',fa:'نگهداری، سرور و به‌روز کردن منو',jaS:'サーバー・不具合対応・メニュー変更',faS:'سرور، رفع ایراد، تغییر منو',mo:15000,h:3,c:500}],
+   groups:[
+    {id:'main',t:'radio',dj:'メイン機能',ja:'メインの機能',fa:'کارکرد اصلی',opts:[
+     {id:'order',ja:'テーブル注文（QR）',fa:'سفارش سر میز (QR)',init:60000,hi:16},
+     {id:'take',ja:'テイクアウト事前注文',fa:'پیش‌سفارش بیرون‌بر',init:60000,hi:16},
+     {id:'book',ja:'予約',fa:'رزرو',init:50000,hi:13},
+     {id:'queue',ja:'順番待ち',fa:'نوبت‌دهی',init:40000,hi:10},
+     {id:'member',ja:'会員証・スタンプカード',fa:'کارت عضویت و امتیاز',init:40000,hi:10}]},
+    {id:'more',t:'radio',dj:'追加機能',ja:'ほかの機能も追加？',fa:'کارکرد دیگر هم بخواهد؟',opts:[
+     {id:'0',ja:'追加なし',fa:'نه',init:0},
+     {id:'1',ja:'＋1機能',fa:'+۱ کارکرد',init:30000,hi:8,mo:5000,h:1},
+     {id:'2',ja:'＋2機能',fa:'+۲ کارکرد',init:55000,hi:15,mo:10000,h:2}]},
+    {id:'items',t:'radio',dj:'メニュー数',ja:'メニュー・商品の数',fa:'تعداد آیتم منو',opts:[
+     {id:'30',ja:'30品まで',fa:'تا ۳۰ آیتم',init:0},
+     {id:'80',ja:'31〜80品',fa:'۳۱ تا ۸۰ آیتم',init:20000,hi:5},
+     {id:'81',ja:'81品以上',fa:'بیش از ۸۰ آیتم',init:40000,hi:10}]},
+    {id:'x',t:'check',ja:'追加するもの',fa:'موارد اضافه',opts:[
+     {id:'ml',ja:'多言語メニュー（英・中・韓）',fa:'منوی چندزبانه (انگلیسی، چینی، کره‌ای)',init:30000,hi:8,mo:5000,h:1},
+     {id:'pay',ja:'オンライン決済（お店のStripe・手数料はお店負担）',fa:'پرداخت آنلاین (Stripe به اسم مغازه، کارمزد با مغازه)',init:20000,hi:5,mo:3000,h:0.5},
+     {id:'kit',ja:'厨房画面・レシートプリンター連携',fa:'صفحه‌ی آشپزخانه و پرینتر',init:20000,hi:5,mo:2000,h:0.5},
+     {id:'mphoto',ja:'メニュー写真撮影',fa:'عکاسی منو',init:20000,hi:5,ci:1000},
+     {id:'rich',ja:'リッチメニュー・あいさつメッセージ設計',fa:'طراحی منوی LINE و پیام خوش‌آمد',init:10000,hi:3},
+     {id:'cast',ja:'LINE配信代行（月2回）',fa:'ارسال پیام LINE (ماهی ۲ بار)',mo:8000,h:2.5}]}
+   ]}
+];
+const FLOOR_MO = 20000;          // minimum monthly fee for any contract
+const DISC = m => m>=12?0.10:(m>=6?0.05:0);   // term discount on monthly fees
+const SPLIT_MIN = 6;             // initial fee can be split only on 6+ month terms
+const MONTHS = [1,3,6,12];
+
+/* ================= UI strings ================= */
+const T = {
+ sub:{fa:'ابزار میثم در مغازه',ja:'店頭用'},
+ tCalc:{fa:'محاسبه',ja:'見積もり'}, tDoc:{fa:'فاکتور',ja:'見積書・請求書'}, tCon:{fa:'قرارداد',ja:'契約書'}, tTeam:{fa:'تیم',ja:'社内'},
+ cust:{fa:'مشتری و مدت',ja:'お客様と期間'}, name:{fa:'اسم مغازه',ja:'店名・会社名'}, person:{fa:'اسم صاحب/مسئول',ja:'ご担当者名'},
+ start:{fa:'شروع',ja:'開始日'}, months:{fa:'چند ماه',ja:'契約期間'},
+ term:{fa:(m,e,d)=>`تا ${e} · ${d?('تخفیف '+Math.round(d*100)+'٪ روی ماهانه'):'۶ ماه: ۵٪ و ۱۲ ماه: ۱۰٪ تخفیف ماهانه'}`, ja:(m,e,d)=>`${e}まで · ${d?('月額 '+Math.round(d*100)+'% 割引'):'6ヶ月で5%、12ヶ月で10% 月額割引'}`},
+ range:{fa:'بازه‌ی این خدمت',ja:'このサービスの料金幅'}, permo:{fa:'/ماه',ja:'/月'}, once:{fa:'یک‌بار',ja:'初期'},
+ incl:{fa:'همیشه داخلش است',ja:'基本に含む'}, minTerm:{fa:m=>`حداقل ${m} ماه`,ja:m=>`最低${m}ヶ月`},
+ pay:{fa:'پرداخت',ja:'お支払い'},
+ split:{fa:n=>`هزینه‌ی راه‌اندازی قسطی شود (تقسیم بر ${n} ماه، فقط برای قرارداد ۶ ماه یا بیشتر)`,ja:n=>`初期費用を分割にする（${n}回払い・6ヶ月以上の契約のみ）`},
+ disc:{fa:'تخفیف روی هزینه‌ی راه‌اندازی (ین)',ja:'初期費用からの値引き（円）'},
+ mo:{fa:'ماهانه',ja:'月額'}, init:{fa:'راه‌اندازی',ja:'初期費用'}, tot:{fa:m=>`جمع ${m} ماه`,ja:m=>`${m}ヶ月合計`},
+ goDoc:{fa:'ساخت فاکتور',ja:'見積書を作る'},
+ wFloor:{fa:'جمع ماهانه زیر کف ¥20,000 بود؛ به کف رسانده شد (ردیف «حداقل ماهانه»).',ja:'月額が最低料金 ¥20,000 に満たないため、調整しています。'},
+ wLine:{fa:'مینی‌اپ LINE حداقل ۳ ماه است. یا مدت را ۳ ماه کنید یا قرارداد باید حداقل ۳ ماه برای LINE را بپذیرد (در قرارداد آمده).',ja:'LINEミニアプリは最低3ヶ月の契約です。'},
+ wSplit:{fa:'قسطی فقط برای ۶ ماه یا بیشتر؛ الان یک‌جا حساب شده.',ja:'分割は6ヶ月以上の契約のみです。'},
+ wDisc:{fa:'تخفیف از کل هزینه‌ی راه‌اندازی بیشتر بود؛ به همان سقف محدود شد.',ja:''},
+ wNone:{fa:'هیچ خدمتی انتخاب نشده.',ja:'サービスが選ばれていません。'},
+ dQuote:{fa:'پیش‌فاکتور (見積書)',ja:'見積書'}, dFirst:{fa:'فاکتور اول (請求書)',ja:'請求書（初回）'}, dMonthly:{fa:'فاکتور ماهانه',ja:'請求書（月次）'},
+ dDate:{fa:'تاریخ صدور',ja:'発行日'}, dMonth:{fa:'ماهِ فاکتور',ja:'請求月'}, dNo:{fa:'شماره',ja:'番号'},
+ dl:{fa:'ذخیره‌ی فایل (HTML قابل چاپ)',ja:'ファイルを保存'}, cp:{fa:'کپی متن برای LINE',ja:'LINE用にテキストをコピー'},
+ saved:{fa:'ذخیره شد. فایل را در مرورگر گوشی باز کنید و از «چاپ» یا «اشتراک ← PDF» استفاده کنید.',ja:'保存しました。'},
+ noDl:{fa:'ذخیره‌ی فایل اینجا در دسترس نیست. از صفحه اسکرین‌شات بگیرید یا متن را کپی کنید.',ja:'このページでは保存できません。'},
+ declined:{fa:'ذخیره لغو شد.',ja:'キャンセルしました。'}, copied:{fa:'کپی شد.',ja:'コピーしました。'}, copyFail:{fa:'کپی نشد؛ متن پایین را دستی انتخاب کنید.',ja:'コピーできませんでした。'},
+ cJa:{fa:'نسخه‌ی ژاپنی (برای امضا)',ja:'日本語（署名用）'}, cFa:{fa:'ترجمه‌ی فارسی (برای تیم)',ja:'ペルシャ語訳（社内用）'},
+ kAddr:{fa:'آدرس مغازه',ja:'お客様の住所'}, kDate:{fa:'تاریخ امضا',ja:'契約日'},
+ dlCon:{fa:'ذخیره‌ی قرارداد (HTML قابل چاپ)',ja:'契約書を保存'},
+ conWarn:{fa:'این متن را هنوز هیچ وکیل یا 行政書士 ژاپنی نخوانده. قبل از اولین امضای واقعی، یک بار بدهید بررسی کند (هزینه‌ی معمول بررسی قرارداد حدود ¥30,000 تا ¥50,000). اسم و آدرس «乙» را در بخش تیم ← اطلاعات ما پر کنید.',ja:'この契約書は専門家の確認を受けていません。'},
+ set:{fa:'اطلاعات ما (روی فاکتور و قرارداد می‌آید)',ja:'発行者情報'},
+ sName:{fa:'اسم کسب‌وکار (屋号)',ja:'屋号'}, sPerson:{fa:'اسم کامل امضاکننده (به ژاپنی یا لاتین)',ja:'代表者氏名'}, sAddr:{fa:'آدرس در ژاپن',ja:'住所'},
+ sTel:{fa:'تلفن',ja:'電話'}, sMail:{fa:'ایمیل',ja:'メール'}, sT:{fa:'شماره‌ی ثبت インボイス (اگر ندارید خالی)',ja:'登録番号'},
+ sCourt:{fa:'دادگاه صالح',ja:'管轄裁判所'}, sAbroad:{fa:'کشور(های) اعضای تیم بیرون از ژاپن، به ژاپنی (برای ماده‌ی اطلاعات شخصی)',ja:'海外の作業拠点'}, kTel:{fa:'ایمیل یا LINE مشتری',ja:'お客様の連絡先（メール・LINE）'}, pr:{fa:'چاپ / PDF',ja:'印刷 / PDF'}, sRate:{fa:'هزینه‌ی هر ساعت کار تیم (برای حساب سود)',ja:'時間単価'}, sBank:{fa:'حساب بانکی برای واریز (振込先)',ja:'振込先'},
+ setNote:{fa:'این‌ها فقط روی همین گوشی ذخیره می‌شوند. روی هر گوشی یک بار پر کنید.',ja:''}
+};
+const L = () => state.lang;
+const tr = (k,...a) => { const v=T[k][L()]; return typeof v==='function'?v(...a):v; };
+
+/* ================= state ================= */
+const today = () => { const d=new Date(); return iso(d); };
+function iso(d){ return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function addMonths(s,m){ const d=new Date(s+'T00:00:00'); const day=d.getDate(); d.setDate(1); d.setMonth(d.getMonth()+m); const last=new Date(d.getFullYear(),d.getMonth()+1,0).getDate(); d.setDate(Math.min(day,last)); return d; }
+function endDate(s,m){ const d=addMonths(s,m); d.setDate(d.getDate()-1); return iso(d); }
+function firstOfNext(){ const d=new Date(); return iso(new Date(d.getFullYear(),d.getMonth()+1,1)); }
+function jdate(s){ if(!s) return '　　年　月　日'; const [y,m,d]=s.split('-').map(Number); return `${y}年${m}月${d}日`; }
+function fdate(s){ if(!s) return ''; const [y,m,d]=s.split('-').map(Number); return `${y}/${m}/${d}`; }
+
+const DEFAULT = {
+ lang:'fa', view:'calc',
+ cust:{name:'（例）喫茶こもれび',person:'',addr:'',tel:''},
+ start:firstOfNext(), months:3, split:false, discount:0,
+ svc:{
+  meo:{on:true, sel:{setup:'new',posts:'4',rev:'10',x:[]}},
+  sns:{on:true, sel:{pf:'ig',feed:'4',reel:'2',shoot:'1',x:[]}},
+  web:{on:false,sel:{pages:'3',lang:'ja',domain:'new',upd:'1',x:['photo']}},
+  line:{on:false,sel:{main:'order',more:'0',items:'30',x:[]}}
+ },
+ doc:'quote', docDate:today(), docMonth:firstOfNext().slice(0,7), docNo:'',
+ con:'ja', signDate:today()
+};
+const DEFSET = {abroad:'',name:'Open Hours Studio',person:'',addr:'',tel:'',mail:'hmohammadjavad48@gmail.com',tnum:'',court:'東京地方裁判所',rate:2500,bank:''};
+let state, set;
+function load(k,def){ try{ const v=localStorage.getItem(k); if(v){ const o=JSON.parse(v); return Object.assign(structuredClone(def),o); } }catch(e){} return structuredClone(def); }
+function save(){ try{ localStorage.setItem('ohs-mitsu-state',JSON.stringify(state)); localStorage.setItem('ohs-mitsu-set',JSON.stringify(set)); }catch(e){} }
+state = load('ohs-mitsu-state',DEFAULT); set = load('ohs-mitsu-set',DEFSET);
+for(const s of SVC){ if(!state.svc[s.id]) state.svc[s.id]=structuredClone(DEFAULT.svc[s.id]); }
+
+/* ================= pricing engine ================= */
+const yen = v => (v<0?'-':'')+'¥'+Math.abs(Math.round(v)).toLocaleString('en-US');
+const r100 = v => Math.round(v/100)*100;
+function svcLines(s, sel){
+ // returns chosen lines: {ja, fa, init, mo, h, hi, c, ci}
+ const out=[];
+ for(const b of s.base) out.push(Object.assign({kind:'base'},b));
+ for(const g of s.groups){
+  if(g.t==='radio'){ const o=g.opts.find(o=>o.id===sel[g.id])||g.opts[0]; out.push(Object.assign({kind:'opt',q:g},o)); }
+  else for(const o of g.opts) if((sel[g.id]||[]).includes(o.id)) out.push(Object.assign({kind:'opt',q:g},o));
+ }
+ return out;
+}
+function svcRange(s){
+ let mn={mo:0,init:0}, mx={mo:0,init:0};
+ for(const b of s.base){ mn.mo+=b.mo||0; mx.mo+=b.mo||0; mn.init+=b.init||0; mx.init+=b.init||0; }
+ for(const g of s.groups){
+  if(g.t==='radio'){ mn.mo+=Math.min(...g.opts.map(o=>o.mo||0)); mx.mo+=Math.max(...g.opts.map(o=>o.mo||0));
+   mn.init+=Math.min(...g.opts.map(o=>o.init||0)); mx.init+=Math.max(...g.opts.map(o=>o.init||0)); }
+  else for(const o of g.opts){ mx.mo+=o.mo||0; mx.init+=o.init||0; }
+ }
+ return {mn,mx};
+}
+const dl_ = l => (l.q&&l.q.dj? l.q.dj+'：' : '')+l.ja;
+function sum(lines,k){ return lines.reduce((a,l)=>a+(l[k]||0),0); }
+function compute(){
+ const m=state.months, d=DISC(m), warn=[];
+ const per=[];
+ for(const s of SVC){ if(!state.svc[s.id].on) continue;
+  const lines=svcLines(s,state.svc[s.id].sel);
+  per.push({s,lines,mo:sum(lines,'mo'),init:sum(lines,'init'),h:sum(lines,'h'),hi:sum(lines,'hi'),c:sum(lines,'c'),ci:sum(lines,'ci')});
+  if(m<s.minTerm) warn.push(['warn',tr('wLine')]);
+ }
+ if(!per.length) warn.push(['warn',tr('wNone')]);
+ const moList=sum(per,'mo');
+ const moDisc=r100(moList*d);
+ let moNet=moList-moDisc, floorAdj=0;
+ if(per.length && moNet<FLOOR_MO){ floorAdj=FLOOR_MO-moNet; moNet=FLOOR_MO; warn.push(['note',tr('wFloor')]); }
+ const initList=sum(per,'init');
+ let dis=Math.max(0,Math.round(+state.discount||0));
+ if(dis>initList){ dis=initList; if(L()==='fa') warn.push(['note',tr('wDisc')]); }
+ const initNet=initList-dis;
+ let split=state.split, splitAmt=0;
+ if(split && m<SPLIT_MIN){ split=false; warn.push(['note',tr('wSplit')]); }
+ if(split) splitAmt=Math.ceil(initNet/m);           // keep exact yen so the sum never falls short
+ const initDue = split?0:initNet;
+ const moDue = moNet+splitAmt;
+ const total = initNet + moNet*m;
+ return {m,d,per,moList,moDisc,floorAdj,moNet,initList,dis,initNet,split,splitAmt,initDue,moDue,total,warn,
+  h:sum(per,'h'),hi:sum(per,'hi'),c:sum(per,'c'),ci:sum(per,'ci')};
+}
+
+/* ================= render: calculator ================= */
+const $ = s => document.querySelector(s);
+const esc = s => String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function priceTag(o){
+ const p=[]; if(o.init) p.push(`<span class="num">+${yen(o.init)}</span> ${tr('once')}`); if(o.mo) p.push(`<span class="num">+${yen(o.mo)}</span>${tr('permo')}`);
+ return p.join('<br>')||'<span class="num">¥0</span>';
+}
+function renderSvcs(){
+ const box=$('#svcList'); box.innerHTML='';
+ for(const s of SVC){
+  const st=state.svc[s.id], rg=svcRange(s);
+  const el=document.createElement('div'); el.className='sheet svc'+(st.on?'':' off');
+  let h=`<label class="svc-head"><input type="checkbox" data-svc="${s.id}" ${st.on?'checked':''}><span class="t"><b>${esc(s[L()])}</b><span class="ui">${esc(L()==='fa'?s.faD:s.jaD)}</span></span><span class="sum" id="sum-${s.id}"></span></label><div class="svc-body">`;
+  for(const b of s.base) h+=`<div class="base"><span class="dot"></span><span class="l">${esc(b[L()])}<small class="muted" style="display:block;font-size:12px">${esc(L()==='fa'?b.faS:b.jaS)}</small></span><span class="p small muted">${priceTag(b)}</span></div>`;
+  for(const g of s.groups){
+   h+=`<div class="grp"><div class="q ui">${esc(g[L()])}</div>`;
+   for(const o of g.opts){
+    const on = g.t==='radio' ? st.sel[g.id]===o.id : (st.sel[g.id]||[]).includes(o.id);
+    h+=`<label class="opt${on?' sel':''}"><input type="${g.t==='radio'?'radio':'checkbox'}" name="${s.id}-${g.id}" data-s="${s.id}" data-g="${g.id}" data-o="${o.id}" ${on?'checked':''}><span class="l">${esc(o[L()])}</span><span class="p">${priceTag(o)}</span></label>`;
+   }
+   h+='</div>';
+  }
+  h+=`<div class="range ui"><span>${tr('range')}</span><span><span class="num">${yen(rg.mn.mo)}〜${yen(rg.mx.mo)}</span>${tr('permo')}${rg.mx.init?` · ${tr('once')} <span class="num">${yen(rg.mn.init)}〜${yen(rg.mx.init)}</span>`:''}${s.minTerm>1?' · '+tr('minTerm',s.minTerm):''}</span></div></div>`;
+  el.innerHTML=h; box.appendChild(el);
+ }
+}
+function renderTally(){
+ const r=compute();
+ for(const p of r.per){ const e=$('#sum-'+p.s.id); if(e) e.innerHTML=`<b>${yen(p.mo)}</b>${p.init?`<span class="muted">${tr('once')} <span class="num">${yen(p.init)}</span></span>`:''}`; }
+ for(const s of SVC){ if(!state.svc[s.id].on){ const e=$('#sum-'+s.id); if(e) e.innerHTML=`<span class="muted num">${yen(svcRange(s).mn.mo)}〜</span>`; } }
+ $('#vMo').textContent=yen(r.moDue); $('#vIn').textContent=yen(r.initDue); $('#vTot').textContent=yen(r.total);
+ $('#kTot').textContent=tr('tot',r.m);
+ $('#termNote').textContent=tr('term',r.m,L()==='fa'?fdate(endDate(state.start,r.m)):jdate(endDate(state.start,r.m)),r.d);
+ $('#calcWarn').innerHTML=r.warn.map(([c,t])=>`<div class="note ${c==='warn'?'warn':''} ui">${esc(t)}</div>`).join('');
+ $('#splitRow .p').innerHTML = r.split?`<span class="num">${yen(r.splitAmt)}</span>${tr('permo')}`:'';
+ return r;
+}
+function renderMonths(){
+ $('#monthChips').innerHTML=MONTHS.map(m=>`<button type="button" class="chip" data-m="${m}" aria-pressed="${state.months===m}"><bdi>${L()==='fa'?m+' ماه':m+'ヶ月'}</bdi>${DISC(m)?`<small><bdi>−${DISC(m)*100}%</bdi></small>`:''}</button>`).join('');
+}
+
+/* ================= documents ================= */
+const taxOn = () => /^T\d{13}$/.test((set.tnum||'').trim());
+function issuerBlock(){
+ return `<div class="from"><div class="seal">印</div><b style="font-size:14px">${esc(set.name)}</b><br>${set.person?esc(set.person)+'<br>':''}${set.addr?esc(set.addr)+'<br>':''}${set.tel?'TEL '+esc(set.tel)+'<br>':''}${set.mail?esc(set.mail)+'<br>':''}${taxOn()?'登録番号 '+esc(set.tnum.trim()):''}</div>`;
+}
+function docRows(r, mode){
+ // mode: quote | first | monthly
+ let rows='', sub=0;
+ const svrow=p=>`<tr class="sv"><td colspan="4">■ ${esc(p.s.ja)}</td></tr>`;
+ const row=(name,q,unit,amt)=>{ sub+=amt; return `<tr><td class="it">${name}</td><td class="r">${q}</td><td class="r n">${unit}</td><td class="r n">${yen(amt)}</td></tr>`; };
+ if(mode!=='monthly' && r.initList>0){
+  rows+=`<tr class="sec"><td colspan="4">初期費用</td></tr>`;
+  for(const p of r.per){ const ls=p.lines.filter(l=>l.init); if(!ls.length) continue; rows+=svrow(p); for(const l of ls) rows+=row(esc(dl_(l)),'1式',yen(l.init),l.init); }
+  if(r.dis) rows+=row('初期費用 お値引き','1式','',-r.dis);
+  if(r.split && mode==='first'){ // first invoice only bills first instalment
+   rows=`<tr class="sec"><td colspan="4">初期費用（分割 ${r.m}回払い）</td></tr>`; sub=0;
+   rows+=row(`初期費用 分割 1回目（総額 ${yen(r.initNet)}）`,'1回',yen(r.splitAmt),r.splitAmt);
+  } else if(r.split){ // quote: show the plan but don't add twice
+   rows+=`<tr><td colspan="4" class="pre">※初期費用 ${yen(r.initNet)} は ${r.m}回の分割（月 ${yen(r.splitAmt)}、端数は最終回で調整）で月額と一緒にお支払いいただきます。</td></tr>`;
+  }
+ }
+ const q = mode==='quote'? r.m : 1;
+ const qs = mode==='quote'? `${r.m}ヶ月` : '1ヶ月';
+ const label = mode==='monthly' ? `月額費用（${state.docMonth? state.docMonth.replace('-','年').replace(/^(\d+年)0?/,'$1')+'月分':''}）` : (mode==='first'?'月額費用（初月分）':`月額費用（${r.m}ヶ月）`);
+ rows+=`<tr class="sec"><td colspan="4">${label}</td></tr>`;
+ for(const p of r.per){ const ls=p.lines.filter(l=>l.mo); if(!ls.length) continue; rows+=svrow(p); for(const l of ls) rows+=row(esc(dl_(l)),qs,yen(l.mo),l.mo*q); }
+ if(r.moDisc) rows+=row(`長期契約割引（月額 ${Math.round(r.d*100)}%）`,qs,yen(-r.moDisc),-r.moDisc*q);
+ if(r.floorAdj) rows+=row('最低月額料金への調整',qs,yen(r.floorAdj),r.floorAdj*q);
+ if(r.split && mode==='monthly') rows+=row('初期費用 分割払い分','1回',yen(r.splitAmt),r.splitAmt);
+ return {rows,sub};
+}
+function buildDoc(){
+ const r=compute(), mode=state.doc;
+ const {rows,sub}=docRows(r,mode);
+ const tax = taxOn()? Math.floor(sub*0.10) : 0, grand=sub+tax;
+ const title = mode==='quote'?'御見積書':'請求書';
+ const due = mode==='quote' ? '' : (mode==='first' ? jdate(iso(new Date(new Date(state.docDate+'T00:00:00').getTime()+7*864e5))) : (state.docMonth? jdate(iso(new Date(+state.docMonth.slice(0,4), +state.docMonth.slice(5,7), 0))) : ''));
+ const no = state.docNo || autoNo();
+ const sumRows = taxOn()
+  ? `<tr><td>小計（税抜・10%対象）</td><td class="r n">${yen(sub)}</td></tr><tr><td>消費税（10%）</td><td class="r n">${yen(tax)}</td></tr><tr class="g"><td>合計（税込）</td><td class="r n">${yen(grand)}</td></tr>`
+  : `<tr class="g"><td>合計</td><td class="r n">${yen(grand)}</td></tr>`;
+ const totLabel = mode==='quote' ? (r.split?'契約期間の総額':'お見積金額（契約期間の総額）') : 'ご請求金額';
+ const notes=[];
+ if(mode==='quote'){
+  notes.push(`契約期間：${jdate(state.start)}〜${jdate(endDate(state.start,r.m))}（${r.m}ヶ月）`);
+  notes.push(`お支払い：初期費用${r.split?'は分割（月額と一緒に）':'は契約時'}、月額 ${yen(r.moDue)} は毎月末までに当月分を振込`);
+  notes.push('有効期限：発行日から30日');
+  notes.push(`期間満了後は同じ内容で1ヶ月ごとに自動更新（前月末までのご連絡で解約できます）`);
+  if(r.per.some(p=>p.s.id==='line')) notes.push('LINEミニアプリは最低3ヶ月のご利用となります');
+  if(r.per.some(p=>p.s.id==='sns'&&state.svc.sns.sel.x.includes('ads'))) notes.push('広告費（Meta・TikTokへのお支払い）は含みません');
+  if(r.per.some(p=>p.s.id==='line'&&state.svc.line.sel.x.includes('pay'))) notes.push('決済手数料（Stripe 3.6% など）はお店のご負担です');
+ } else {
+  notes.push(`お支払期限：${due}`);
+  notes.push('お振込手数料はご負担ください');
+ }
+ if(!taxOn()) notes.push('当方は適格請求書発行事業者ではありません。表示金額に消費税は加算していません。');
+ const bank = set.bank? `<div class="box"><b>お振込先</b>\n${esc(set.bank)}</div>`:'';
+ const html = `<div class="paper"><h1>${title}</h1>
+ <div class="meta"><div><div class="to">${esc(state.cust.name||'　')} 御中</div>${state.cust.person?`<div style="margin-top:4px">${esc(state.cust.person)} 様</div>`:''}
+ <p style="margin:10px 0 0">${mode==='quote'?'下記のとおりお見積り申し上げます。':'下記のとおりご請求申し上げます。'}</p></div>
+ <div style="text-align:right"><div>No. <span class="n">${esc(no)}</span></div><div>発行日 ${jdate(state.docDate)}</div>${issuerBlock()}</div></div>
+ <div class="total"><span>${totLabel}${taxOn()?'（税込）':''}</span><b class="n">${yen(grand)}</b></div>
+ ${mode==='quote'?`<p style="margin:-8px 0 12px">月額 <b class="n">${yen(r.moDue)}</b> ／ 初期費用 <b class="n">${yen(r.initDue)}</b>${r.split?'（分割）':''}${taxOn()?'（いずれも税抜）':''}</p>`:''}
+ <table><thead><tr><th>品目</th><th class="r" style="width:13%">数量</th><th class="r" style="width:17%">単価</th><th class="r" style="width:19%">金額</th></tr></thead><tbody>${rows}</tbody></table>
+ <table class="sum"><tbody>${sumRows}</tbody></table>
+ <div class="box"><b>備考</b>\n${notes.map(n=>'・'+esc(n)).join('\n')}</div>${bank}</div>`;
+ return {html,grand,r,no,title,notes};
+}
+function autoNo(){ const d=(state.docDate||today()).replace(/-/g,''); return `OHS-${d}-${state.doc==='quote'?'Q':'I'}`; }
+function renderDoc(){
+ const chips=[['quote','dQuote'],['first','dFirst'],['monthly','dMonthly']];
+ $('#docChips').innerHTML=chips.map(([k,t])=>`<button type="button" class="chip" data-doc="${k}" aria-pressed="${state.doc===k}">${tr(t)}</button>`).join('');
+ $('#fBillMonth').hidden = state.doc!=='monthly';
+ $('#dNo').placeholder=autoNo();
+ $('#docOut').innerHTML=buildDoc().html;
+}
+function docText(){
+ const {grand,r,no,title,notes}=buildDoc();
+ const lines=[`【${title}】${state.cust.name||''} 御中`,`No. ${no}／発行日 ${jdate(state.docDate)}`,''];
+ for(const p of r.per){ lines.push('■ '+p.s.ja); for(const l of p.lines){ const a=[]; if(l.init&&state.doc!=='monthly') a.push('初期 '+yen(l.init)); if(l.mo) a.push('月額 '+yen(l.mo)); if(a.length) lines.push(`・${dl_(l)}　${a.join('／')}`);} }
+ lines.push('');
+ if(r.moDisc) lines.push(`長期契約割引 月額 -${yen(r.moDisc)}`);
+ if(r.dis) lines.push(`初期費用 お値引き -${yen(r.dis)}`);
+ lines.push(`月額 ${yen(r.moDue)}／初期費用 ${yen(r.initDue)}`);
+ lines.push(`${state.doc==='quote'?'総額':'ご請求金額'} ${yen(grand)}${taxOn()?'（税込）':''}`,'',...notes.map(n=>'※'+n),'',set.name+(set.person?'　'+set.person:''));
+ return lines.join('\n');
+}
+
+/* ================= contract ================= */
+function svcSummaryJa(r){
+ return r.per.map(p=>`<tr><td>${esc(p.s.ja)}</td><td>${p.lines.map(l=>esc(dl_(l))).join('、')}</td><td class="r n">${p.init?yen(p.init):'—'}</td><td class="r n">${yen(p.mo)}</td></tr>`).join('');
+}
+function svcSummaryFa(r){
+ return r.per.map(p=>`<tr><td>${esc(p.s.fa)}</td><td>${p.lines.map(l=>esc(l.fa)).join('، ')}</td><td class="r n">${p.init?yen(p.init):'—'}</td><td class="r n">${yen(p.mo)}</td></tr>`).join('');
+}
+function buildContract(lang){
+ const r=compute();
+ const A=esc(state.cust.name||'＿＿＿＿＿＿'), B=esc(set.name+(set.person?'（代表 '+set.person+'）':''));
+ const s=jdate(state.start), e=jdate(endDate(state.start,r.m));
+ const hasLine=r.per.some(p=>p.s.id==='line');
+ const tax=taxOn();
+ const court=esc(set.court||'東京地方裁判所');
+ const fs=fdate(state.start), fe=fdate(endDate(state.start,r.m));
+ const arts = CONTRACT(lang,{A,B,s,e,fs,fe,m:r.m,mo:yen(r.moDue),init:yen(r.initNet),split:r.split,splitAmt:yen(r.splitAmt),hasLine,tax,court,abroad:esc(set.abroad||'')});
+ const head = lang==='ja'
+  ? `<h1 style="letter-spacing:.2em">サービス利用契約書</h1><p class="art">${A}（以下「甲」という。）と${B}（以下「乙」という。）は、乙が甲に提供する集客支援サービスについて、次のとおり契約（以下「本契約」という。）を締結する。</p>`
+  : `<h1>قرارداد استفاده از خدمات</h1><p class="pre">ترجمه‌ی فارسی برای تیم. متن معتبر، نسخه‌ی ژاپنی است.</p><p class="art">${A} (از این پس «甲 / مشتری») و ${B} (از این پس «乙 / ما») درباره‌ی خدمات جذب مشتری که ما به مشتری می‌دهیم، این قرارداد را می‌بندند.</p>`;
+ const body = arts.map(a=>`<div class="art"><h3>${a[0]}</h3>${a[1].length>1?'<ol>'+a[1].map(x=>`<li>${x}</li>`).join('')+'</ol>':'<p>'+a[1][0]+'</p>'}</div>`).join('');
+ const tail = lang==='ja'
+  ? `<p class="art">本契約の成立を証するため、本書を作成し、甲乙記名押印（電子契約の場合は電子署名）のうえ、各自1通（又はその電磁的記録）を保有する。</p><p>${jdate(state.signDate)}</p>
+   <div class="sign"><div>甲<br>住所　${esc(state.cust.addr||'')}<br>名称　${A}<br>代表者　${esc(state.cust.person||'')}<br>連絡先　${esc(state.cust.tel||'')}<span class="seal">印</span></div>
+   <div>乙<br>住所　${esc(set.addr||'')}<br>名称　${esc(set.name)}<br>代表者　${esc(set.person||'')}<br>連絡先　${esc([set.tel,set.mail].filter(Boolean).join(' / '))}<span class="seal">印</span></div></div>`
+  : `<p class="art">برای اثبات این قرارداد، دو نسخه تهیه می‌شود و هر طرف امضا/مهر می‌کند (در قرارداد الکترونیکی، امضای الکترونیکی) و یک نسخه (یا فایل آن) را نگه می‌دارد.</p><p>${fdate(state.signDate)}</p>
+   <div class="sign"><div>甲 (مشتری)<br>آدرس: ${esc(state.cust.addr||'')}<br>نام: ${A}<br>نماینده: ${esc(state.cust.person||'')}<br>تماس: ${esc(state.cust.tel||'')}<span class="seal">印</span></div>
+   <div>乙 (ما)<br>آدرس: ${esc(set.addr||'')}<br>نام: ${esc(set.name)}<br>نماینده: ${esc(set.person||'')}<br>تماس: ${esc([set.tel,set.mail].filter(Boolean).join(' / '))}<span class="seal">印</span></div></div>`;
+ const annex = lang==='ja'
+  ? `<div class="pagebreak"></div><h1 style="font-size:18px;letter-spacing:.2em">別紙　申込内容</h1>
+   <table><tbody><tr><th style="width:120px">契約期間</th><td>${s}〜${e}（${r.m}ヶ月）。以後1ヶ月ごとの自動更新</td></tr>
+   <tr><th>月額料金</th><td class="n">${yen(r.moNet)}${r.moDisc?`（長期契約割引 ${Math.round(r.d*100)}% 適用後）`:''}${tax?'（税抜）':''}</td></tr>
+   <tr><th>初期費用</th><td class="n">${yen(r.initNet)}${r.dis?`（値引き ${yen(r.dis)} 適用後）`:''}${r.split?`　${r.m}回分割（月 ${yen(r.splitAmt)}）`:'　契約時一括'}</td></tr>
+   ${hasLine?'<tr><th>最低利用期間</th><td>LINEミニアプリ：3ヶ月</td></tr>':''}
+   <tr><th>消費税</th><td>${tax?'料金は税抜。別途消費税（10%）を申し受ける。':'乙は適格請求書発行事業者ではないため、消費税を加算しない。'}</td></tr></tbody></table>
+   <table><thead><tr><th>サービス</th><th>内容</th><th class="r">初期費用</th><th class="r">月額</th></tr></thead><tbody>${svcSummaryJa(r)}</tbody></table>
+   <p class="pre">※各サービスの詳細は、同日付の御見積書のとおり。</p>`
+  : `<div class="pagebreak"></div><h1 style="font-size:18px">پیوست: خدمات انتخاب‌شده</h1>
+   <table><tbody><tr><th style="width:120px">مدت</th><td>${fs} تا ${fe} (${r.m} ماه)، بعد ماه به ماه خودکار</td></tr>
+   <tr><th>ماهانه</th><td class="n">${yen(r.moNet)}</td></tr>
+   <tr><th>راه‌اندازی</th><td class="n">${yen(r.initNet)}${r.split?` — ${r.m} قسط ${yen(r.splitAmt)}`:' — یک‌جا موقع قرارداد'}</td></tr>
+   ${hasLine?'<tr><th>حداقل مدت</th><td>مینی‌اپ LINE: ۳ ماه</td></tr>':''}</tbody></table>
+   <table><thead><tr><th>خدمت</th><th>شامل</th><th class="r">راه‌اندازی</th><th class="r">ماهانه</th></tr></thead><tbody>${svcSummaryFa(r)}</tbody></table>`;
+ return `<div class="paper${lang==='fa'?' fa':''}">${head}${body}${tail}${annex}</div>`;
+}
+function CONTRACT(lang,v){
+ const ab = v.abroad ? `日本国外（${v.abroad}）` : '日本国外';
+ const abF = v.abroad ? `بیرون از ژاپن (${v.abroad})` : 'بیرون از ژاپن';
+ const J = [
+  ['第1条（目的）',[`乙は、甲の店舗の集客を支援するため、別紙「申込内容」に記載するサービス（以下「本サービス」という。）を提供し、甲はその対価を支払う。`]],
+  ['第2条（サービスの内容）',[
+   `本サービスの内容、数量及び料金は、別紙及び同日付の御見積書のとおりとする。`,
+   `別紙に記載のない作業は本サービスに含まれない。甲が追加の作業を希望するときは、乙は事前に見積りを示し、甲の承諾を得てから着手する。`,
+   `月ごとの作業回数（投稿、撮影、更新等）は別紙のとおりとする。甲の素材提供や確認の遅れにより実施できなかった分は、翌月以降に繰り越さない。乙の都合により実施できなかった分は、翌月に実施するか、その分の料金を減額する。`]],
+  ['第3条（契約期間）',[
+   `本契約の期間は、${v.s}から${v.e}までの${v.m}ヶ月間とする。`,
+   `期間満了の14日前までに甲乙いずれからも書面（電子メール及びLINEのメッセージを含む。以下同じ。）による申出がないときは、本契約は同一の条件でさらに1ヶ月間更新され、以後も同様とする。`,
+   `甲は、契約期間中であっても、解約を希望する月の前月末日までに書面で申し出ることにより、その月の末日をもって本契約を解約できる。${v.hasLine?'ただし、LINEミニアプリについては、利用開始から3ヶ月を経過する前に解約するときは、3ヶ月に満たない月数分の月額料金を支払う。':''}`]],
+  ['第4条（料金及び支払）',[
+   v.split?`甲は、初期費用${v.init}を${v.m}回に分割し、各回${v.splitAmt}（端数は最終回で調整する。）を月額料金と併せて支払う。`:`甲は、初期費用${v.init}を、乙の請求書の発行日から7日以内に支払う。`,
+   `甲は、月額料金${v.mo}${v.split?'（分割払い分を含む。）':''}を、毎月、当月分を当月末日までに支払う。初月の月額料金は日割りしない。`,
+   `支払は乙の指定する銀行口座への振込により行い、振込手数料は甲の負担とする。乙は、本書に記載する者以外の名義の口座への振込を求めない。`,
+   v.tax?`料金は消費税別とし、甲は料金に係る消費税を併せて支払う。`:`乙は消費税法上の適格請求書発行事業者ではなく、料金に消費税を加算しない。乙が適格請求書発行事業者となったときの料金の取扱いは、第5条に従う。`,
+   `甲が支払を遅延したときは、乙は、支払期日の翌日から支払日まで年14.6%（年365日の日割計算）の割合による遅延損害金を請求できる。`,
+   `甲が支払を30日以上遅延したとき、又は第21条第1項各号のいずれかに該当したときは、甲は分割残額その他乙に対する一切の債務について期限の利益を失い、直ちに一括して支払う。`,
+   `支払が30日以上遅延したときは、乙は、書面で催告したうえで、支払があるまで本サービスの提供を停止できる。`]],
+  ['第5条（料金の変更）',[`乙は、契約期間中に料金を変更しない。更新後の料金を変更するときは、乙は変更日の2ヶ月前までに書面で通知する。甲は、変更に同意しないときは、変更日の前日をもって本契約を解約できる。`]],
+  ['第6条（中途終了時の精算）',[
+   `契約期間の途中で本契約が終了したときでも、乙は既に受領した料金を返還しない。ただし、乙の責めに帰すべき事由により終了したときは、未提供の月の料金を返還する。`,
+   v.split?`初期費用を分割で支払っている場合において本契約が終了したときは、甲は、未払いの分割残額を、終了日の属する月の翌月末日までに一括して支払う。`:`初期費用を支払った後に本契約が終了したときも、初期費用は返還しない。ただし、乙が作業に着手する前に終了したときはこの限りでない。`]],
+  ['第7条（直接の契約）',[`本契約は甲と乙との直接の契約であり、リース契約、割賦販売契約その他の信販会社等を介する契約ではない。乙は、本サービスの提供にあたり、甲に機器の購入やリース契約を求めない。`]],
+  ['第8条（甲の協力）',[
+   `甲は、本サービスに必要な情報及び素材（写真、ロゴ、メニュー、価格、営業時間等）並びにアカウントの管理権限を、速やかに乙に提供する。`,
+   `甲は、乙からの確認依頼に原則として5営業日以内に回答する。甲の協力が得られないことにより生じた遅延について、乙は責任を負わない。甲からの回答が30日以上ないときは、乙は作業を中断でき、この間も月額料金は発生する。`,
+   `店舗での撮影にあたり、甲の従業員やお客様が写る場合は、甲が本人の同意を得る。乙は、同意のない人物の顔が判別できる写真・動画を公開しない。`]],
+  ['第9条（制作物の確認と検収）',[
+   `ホームページ及びミニアプリ（以下「制作物」という。）は、乙がデザイン案及び完成品を示し、甲が確認する。デザイン案の修正は2回まで初期費用に含み、これを超える修正及び確定後の大きな変更は別途見積りとする。`,
+   `甲は、完成品の提示から10日以内に検収を行い、不具合があるときは具体的に乙に通知する。期間内に通知がないとき、又は甲が制作物の公開・利用を始めたときは、検収に合格したものとみなす。`,
+   `検収後3ヶ月以内に、制作物が合意した内容と異なる不具合が見つかり甲が通知したときは、乙は無償で修補する。ただし、甲又は第三者による変更、第三者サービスの仕様変更、乙が示した推奨環境以外での利用に起因するものは除く。`]],
+  ['第10条（アカウントの名義と管理）',[
+   `Googleビジネスプロフィール、Instagram、TikTok、LINE公式アカウント、決済サービス等のアカウントは甲の名義とする。甲がアカウントを持たないときは、乙は甲の名義での開設を支援する。`,
+   `乙は、甲から付与された管理権限の範囲で操作し、ID・パスワード等を厳重に管理して、第三者に開示しない。`,
+   `甲及び乙は、不正ログインや乗っ取りの疑いを知ったときは、直ちに相手方に知らせ、復旧に協力する。`,
+   `本契約が終了したときは、乙は、終了日から14日以内に、甲の指示に従って管理権限を返還し、乙が保管するログイン情報を削除する。`]],
+  ['第11条（ドメイン）',[`ドメインは甲を登録者として取得する。乙が取得・更新を代行する場合も同様とし、本契約が終了したときは、乙は甲の求めに応じ、14日以内に管理の移管に必要な情報（認証コード等）を甲に引き渡す。`]],
+  ['第12条（公開前の確認と対外対応）',[
+   `乙は、投稿、口コミへの返信、ページの公開等を行う前に、甲と合意した方法（LINE等）で内容を示し、甲の確認を得る。ただし、甲があらかじめ包括的に承認した定型の作業については、この限りでない。`,
+   `乙は、投稿や口コミ等に関して批判的な反応その他のトラブルを知ったときは、速やかに甲に報告し、その対応は甲の判断に従う。乙は、甲の承諾なく、甲を代表して謝罪、約束その他の対外的な表明をしない。`]],
+  ['第13条（法令の遵守と第三者サービス）',[
+   `甲及び乙は、不当景品類及び不当表示防止法（いわゆるステルスマーケティング規制を含む。）、各プラットフォームの利用規約その他の法令を遵守する。`,
+   `乙は、事実と異なる口コミの投稿、口コミの対価としての割引・特典の提供、評価の高い口コミのみを依頼する行為、フォロワーの購入その他これらに類する行為を行わず、甲から依頼があってもこれに応じない。`,
+   `甲は、乙に提供する素材について、著作権、肖像権その他の必要な権利を有し、又は権利者の許諾を得ていることを保証する。`,
+   `Google、Meta、TikTok、LINEヤフー、Stripe等の第三者サービスには各社の規約が適用され、その利用料、手数料及び広告費は、別紙に定めるものを除き、甲が各社に直接支払う。決済の売上金は決済事業者から甲に直接支払われ、乙は甲の売上金を受領又は保管しない。`]],
+  ['第14条（成果の非保証）',[
+   `乙は、本サービスを善良な管理者の注意をもって提供するが、検索順位、表示回数、フォロワー数、来店数、売上等の特定の成果を保証しない。御見積書、説明資料又は口頭の説明で示した効果の例は見込みであり、保証ではない。`,
+   `第三者サービスの仕様変更、障害、審査、アカウントの停止等、乙の責めに帰すことのできない事由により生じた影響について、乙は責任を負わない。この場合も、乙は復旧や代替手段の検討に協力する。`]],
+  ['第15条（成果物の権利）',[
+   `乙が本サービスにおいて作成したホームページ、ミニアプリの画面、文章、写真、動画等（以下「成果物」という。）の著作権（著作権法第27条及び第28条の権利を含む。）は、当該成果物に係る初期費用の全額の支払いをもって、乙から甲に移転する。月額料金で作成した投稿用の成果物は、当該月の料金の支払いをもって移転する。`,
+   `前項にかかわらず、乙が従前から保有し、又は汎用的に利用するプログラム、テンプレート及びノウハウの権利は乙に留保する。乙は甲に対し、甲の事業のためにこれらを利用することを、本契約の終了後も含め無償で許諾する。`,
+   `乙は、甲及び甲が指定する者に対し、成果物に関する著作者人格権を行使しない。`,
+   `乙は、甲の事前の承諾を得た場合に限り、成果物を乙の制作実績として紹介できる。`]],
+  ['第16条（秘密保持）',[
+   `甲及び乙は、本契約に関して知り得た相手方の営業上又は技術上の情報を、相手方の承諾なく第三者に開示せず、本契約の目的以外に使用しない。ただし、公知の情報、正当に第三者から取得した情報及び法令により開示を求められた情報は除く。`,
+   `本条の義務は、本契約の終了後3年間存続する。`]],
+  ['第17条（個人情報）',[
+   `本サービスで取り扱う甲の顧客の個人情報（予約、注文、会員情報等）について、甲は個人情報取扱事業者として責任を負い、乙は甲から委託を受けてこれを取り扱う。`,
+   `乙は、個人情報の保護に関する法律その他の法令に従い、必要な安全管理措置を講じ、本サービスの提供以外の目的に利用しない。漏えい等のおそれを知ったときは、直ちに甲に報告し、対応に協力する。`,
+   `乙の担当者又は再委託先が${ab}から作業を行う場合があり、甲はこれに同意する。この場合も、乙は日本国内と同等の安全管理措置を講じる。`,
+   `本契約が終了したときは、乙は甲の指示に従い、当該個人情報を返還し、又は削除する。`]],
+  ['第18条（再委託）',[`乙は、本サービスの一部を第三者に再委託できる。この場合、乙は再委託先に本契約と同等の義務を負わせ、再委託先の行為について甲に対して責任を負う。`]],
+  ['第19条（損害賠償）',[
+   `甲及び乙は、本契約に違反して相手方に損害を与えたときは、直接かつ通常の損害を賠償する。`,
+   `乙が賠償する額は、乙に故意又は重大な過失がある場合を除き、損害の原因となった事由が生じた月の前3ヶ月間に甲が乙に支払った料金の総額を上限とし、逸失利益は含まない。`]],
+  ['第20条（不可抗力）',[`天災地変、感染症、戦争、停電、通信回線の障害、第三者サービスの障害その他当事者の責めに帰すことのできない事由により本契約の履行が遅れ、又はできなくなったときは、当事者はその責任を負わない。`]],
+  ['第21条（解除）',[
+   `甲又は乙は、相手方が次のいずれかに該当するときは、書面で通知することにより、本契約の全部又は一部を解除できる。（1）本契約に違反し、相当の期間を定めて催告したにもかかわらず是正しないとき（2）支払停止若しくは支払不能となり、又は破産手続開始等の申立てがあったとき（3）営業停止処分を受け、又は廃業したとき（4）第22条に違反したとき`,
+   `前項による解除は、損害賠償の請求を妨げない。`]],
+  ['第22条（反社会的勢力の排除）',[
+   `甲及び乙は、自己及び自己の役員が、暴力団、暴力団員その他の反社会的勢力に該当しないこと、及び今後も該当しないことを表明し、保証する。`,
+   `甲又は乙は、相手方が前項に違反したときは、何らの催告を要せず直ちに本契約を解除でき、これにより相手方に生じた損害を賠償しない。`]],
+  ['第23条（契約終了時の取扱い）',[
+   `甲が本契約の終了日から30日以内に求めたときは、乙は、ホームページのデータ一式（HTML等のファイル及び画像）、投稿用に作成した画像・動画及びドメインの移管に必要な情報を、一般的な形式で1回無償で引き渡す。`,
+   `乙のサーバーで運用しているホームページ及びミニアプリは、終了日の属する月の翌月末日まで公開を継続し、その後停止する。乙は、停止から90日を経過したデータを削除できる。甲が引き続き乙のサーバーでの運用を希望するときは、方法及び費用を甲乙協議して定める。`,
+   `乙が本サービスの提供をやめるとき（廃業等を含む。）は、2ヶ月前までに甲に通知し、第1項の引渡しを行う。`]],
+  ['第24条（権利義務の譲渡禁止）',[`甲及び乙は、相手方の書面による承諾なく、本契約上の地位又は権利義務を第三者に譲渡し、又は担保に供してはならない。`]],
+  ['第25条（通知）',[`本契約に関する通知は、本書に記載する住所又は甲乙が合意した電子メール・LINEの連絡先に宛てて行う。連絡先を変更したときは速やかに相手方に知らせるものとし、これを怠ったため通知が届かなかったときは、通常届くべき時に届いたものとみなす。`]],
+  ['第26条（存続条項）',[`本契約の終了後も、第4条（未払いの料金に関する部分）、第6条、第15条から第17条まで、第19条、第23条及び第27条の規定は効力を有する。`]],
+  ['第27条（準拠法及び管轄）',[`本契約は日本法に準拠する。本契約に関する紛争は、${v.court}を第一審の専属的合意管轄裁判所とする。`]],
+  ['第28条（協議）',[`本契約に定めのない事項及び本契約の解釈に疑義が生じた事項は、甲乙誠実に協議して解決する。`]]
+ ];
+ if(lang==='ja') return J;
+ return [
+  ['ماده ۱ (هدف)',[`ما برای کمک به جذب مشتریِ مغازه، خدماتی را که در پیوست «خدمات انتخاب‌شده» آمده (از این پس «خدمات») ارائه می‌دهیم و مشتری هزینه‌اش را می‌پردازد.`]],
+  ['ماده ۲ (محتوای خدمات)',[
+   `محتوا، تعداد و قیمت خدمات طبق پیوست و پیش‌فاکتورِ همان تاریخ است.`,
+   `کاری که در پیوست نیامده جزو خدمات نیست. اگر مشتری کار اضافه بخواهد، اول قیمت می‌دهیم و بعد از تأیید مشتری شروع می‌کنیم.`,
+   `تعداد کارهای هر ماه (پست، عکاسی، به‌روزرسانی و …) طبق پیوست است. کاری که به‌خاطر دیر رسیدن مواد یا تأیید از طرف مشتری انجام نشد، به ماه بعد منتقل نمی‌شود. کاری که به‌خاطر ما انجام نشد، ماه بعد انجام می‌شود یا از قیمت کم می‌شود.`]],
+  ['ماده ۳ (مدت قرارداد)',[
+   `مدت قرارداد از ${v.fs} تا ${v.fe}، یعنی ${v.m} ماه است.`,
+   `اگر تا ۱۴ روز قبل از پایان مدت هیچ‌کدام کتبی (ایمیل و پیام LINE هم کتبی حساب می‌شود) اعلام نکنیم، قرارداد با همان شرایط یک ماه دیگر تمدید می‌شود و همین‌طور ادامه دارد.`,
+   `مشتری حتی وسط مدت هم می‌تواند فسخ کند: کافی است تا آخر ماهِ قبل کتبی بگوید، و قرارداد آخر همان ماه تمام می‌شود.${v.hasLine?' ولی برای مینی‌اپ LINE، اگر قبل از گذشت ۳ ماه از شروع فسخ کند، ماهانه‌ی ماه‌های باقی‌مانده تا ۳ ماه را می‌پردازد.':''}`]],
+  ['ماده ۴ (قیمت و پرداخت)',[
+   v.split?`مشتری هزینه‌ی راه‌اندازی ${v.init} را در ${v.m} قسط، هر قسط ${v.splitAmt} (کسری ین در قسط آخر تنظیم می‌شود)، همراه ماهانه می‌پردازد.`:`مشتری هزینه‌ی راه‌اندازی ${v.init} را ظرف ۷ روز از تاریخ فاکتور ما می‌پردازد.`,
+   `مشتری ماهانه‌ی ${v.mo}${v.split?' (با قسط)':''} را هر ماه تا آخر همان ماه می‌پردازد. ماه اول روزشمار حساب نمی‌شود.`,
+   `پرداخت با واریز به حساب بانکی ما است و کارمزد واریز با مشتری است. ما هیچ‌وقت نمی‌خواهیم پول به حسابی به اسم کسی جز کسی که در قرارداد آمده واریز شود.`,
+   v.tax?`قیمت‌ها بدون مالیات مصرف است و مشتری مالیات ۱۰٪ را جدا می‌پردازد.`:`ما در سیستم فاکتور رسمی (インボイス) ثبت نیستیم و مالیات مصرف به قیمت اضافه نمی‌کنیم. وقتی ثبت شدیم، تغییر قیمت طبق ماده ۵ است.`,
+   `اگر مشتری دیر بپردازد، از روز بعد از سررسید تا روز پرداخت، سالی ۱۴.۶٪ (روزشمار) جریمه‌ی تأخیر می‌توانیم بگیریم.`,
+   `اگر مشتری ۳۰ روز یا بیشتر عقب بیفتد یا یکی از بندهای ماده ۲۱ برایش پیش بیاید، باقی اقساط و همه‌ی بدهی‌اش فوراً یک‌جا سررسید می‌شود.`,
+   `اگر پرداخت ۳۰ روز یا بیشتر عقب بیفتد، بعد از اخطار کتبی می‌توانیم تا وقتی پرداخت نشده خدمات را متوقف کنیم.`]],
+  ['ماده ۵ (تغییر قیمت)',[`در طول مدت قرارداد قیمت عوض نمی‌شود. برای تغییر قیمت بعد از تمدید، حداقل ۲ ماه قبل کتبی خبر می‌دهیم. اگر مشتری قبول نکند، می‌تواند قرارداد را از روز قبل از تغییر فسخ کند.`]],
+  ['ماده ۶ (تسویه در پایان زودتر از موعد)',[
+   `اگر قرارداد وسط مدت تمام شود، پولی را که گرفته‌ایم پس نمی‌دهیم؛ مگر به‌خاطر تقصیر ما تمام شده باشد که آن‌وقت پول ماه‌هایی که خدمت نداده‌ایم را پس می‌دهیم.`,
+   v.split?`اگر هزینه‌ی راه‌اندازی قسطی باشد و قرارداد تمام شود، مشتری باقی اقساط را تا آخر ماه بعد یک‌جا می‌پردازد.`:`هزینه‌ی راه‌اندازی بعد از پرداخت پس داده نمی‌شود، مگر قرارداد قبل از شروع کار ما تمام شود.`]],
+  ['ماده ۷ (قرارداد مستقیم)',[`این قرارداد مستقیم بین مشتری و ما است و قرارداد لیزینگ، اقساطی یا از طریق شرکت اعتباری نیست. ما مشتری را مجبور به خرید یا لیزینگ دستگاه نمی‌کنیم. (در ژاپن شکایت زیادی از «سایت با لیزینگ» هست؛ این ماده اعتماد می‌سازد.)`]],
+  ['ماده ۸ (همکاری مشتری)',[
+   `مشتری اطلاعات و مواد لازم (عکس، لوگو، منو، قیمت، ساعت کاری و …) و دسترسی مدیریت اکانت‌ها را سریع به ما می‌دهد.`,
+   `مشتری به درخواست تأیید ما معمولاً ظرف ۵ روز کاری جواب می‌دهد. تأخیری که از همکاری‌نکردن مشتری بیاید، مسئولیتش با ما نیست. اگر ۳۰ روز جواب ندهد، می‌توانیم کار را نگه داریم و ماهانه همچنان حساب می‌شود.`,
+   `اگر در عکاسی کارکنان یا مشتری‌های مغازه دیده شوند، رضایتشان را خود مغازه می‌گیرد. ما عکس یا ویدیویی که صورت کسی بدون رضایت در آن معلوم باشد منتشر نمی‌کنیم.`]],
+  ['ماده ۹ (تأیید و تحویل کارهای ساختنی)',[
+   `برای سایت و مینی‌اپ، طرح اولیه و نسخه‌ی نهایی را نشان می‌دهیم و مشتری بررسی می‌کند. تا ۲ بار اصلاح طرح داخل هزینه‌ی راه‌اندازی است؛ بیشتر از آن یا تغییر بزرگ بعد از تأیید، قیمت جدا دارد.`,
+   `مشتری ظرف ۱۰ روز از نشان دادن نسخه‌ی نهایی آن را بررسی می‌کند و اگر ایرادی دارد دقیق می‌گوید. اگر در این مدت چیزی نگوید یا شروع به استفاده کند، تحویل‌گرفته حساب می‌شود.`,
+   `اگر تا ۳ ماه بعد از تحویل ایرادی پیدا شود که با توافق ما فرق دارد، رایگان درست می‌کنیم؛ مگر ایراد از تغییر خود مشتری یا دیگران، تغییر سرویس‌های بیرونی یا استفاده بیرون از محیط پیشنهادی ما باشد.`]],
+  ['ماده ۱۰ (مالکیت و مدیریت اکانت‌ها)',[
+   `اکانت‌های گوگل، اینستاگرام، تیک‌تاک، LINE رسمی و پرداخت به اسم مشتری است. اگر مشتری اکانت ندارد، کمک می‌کنیم به اسم خودش بسازد.`,
+   `ما فقط در حد دسترسی‌ای که مشتری داده کار می‌کنیم و رمزها را امن نگه می‌داریم و به کسی نمی‌دهیم.`,
+   `هر کدام از ما که از ورود غیرمجاز یا هک شدن اکانت باخبر شد، فوراً به دیگری خبر می‌دهد و برای برگرداندنش همکاری می‌کنیم.`,
+   `وقتی قرارداد تمام شد، ظرف ۱۴ روز دسترسی‌ها را طبق گفته‌ی مشتری پس می‌دهیم و رمزهایی را که نگه داشته‌ایم پاک می‌کنیم.`]],
+  ['ماده ۱۱ (دامنه)',[`دامنه به اسم مشتری ثبت می‌شود، حتی اگر خرید و تمدیدش را ما انجام دهیم. بعد از پایان قرارداد، اگر مشتری بخواهد، ظرف ۱۴ روز اطلاعات لازم برای انتقال (مثل کد انتقال) را می‌دهیم.`]],
+  ['ماده ۱۲ (تأیید قبل از انتشار و برخورد با مشکلات)',[
+   `قبل از هر پست، جواب نظر یا انتشار صفحه، محتوا را از راهی که توافق کرده‌ایم (مثل LINE) نشان می‌دهیم و تأیید می‌گیریم؛ مگر کارهای تکراری که مشتری از قبل کلی تأیید کرده.`,
+   `اگر واکنش منفی یا دردسری درباره‌ی پست‌ها یا نظرها دیدیم، سریع به مشتری خبر می‌دهیم و تصمیم با خود مشتری است. ما بدون اجازه از طرف مغازه عذرخواهی یا قول نمی‌دهیم.`]],
+  ['ماده ۱۳ (رعایت قانون و سرویس‌های بیرونی)',[
+   `هر دو طرف قانون تبلیغات ژاپن (景品表示法، از جمله قانون تبلیغات پنهان «ステマ») و قوانین هر پلتفرم را رعایت می‌کنیم.`,
+   `ما نظر جعلی نمی‌نویسیم، در ازای نظر تخفیف یا هدیه نمی‌دهیم، فقط از مشتری‌های راضی نظر نمی‌خواهیم، فالوور نمی‌خریم، و اگر مشتری بخواهد هم انجام نمی‌دهیم.`,
+   `مشتری تضمین می‌کند حق استفاده از عکس‌ها و موادی را که به ما می‌دهد دارد.`,
+   `برای گوگل، متا، تیک‌تاک، LINE، Stripe و … قوانین خود آن شرکت‌ها اجرا می‌شود و هزینه، کارمزد و پول تبلیغ را مشتری مستقیم به آن‌ها می‌دهد (مگر در پیوست آمده باشد). پول فروش از شرکت پرداخت مستقیم به مشتری می‌رسد و ما پول فروش مغازه را نمی‌گیریم و نگه نمی‌داریم.`]],
+  ['ماده ۱۴ (عدم تضمین نتیجه)',[
+   `ما با دقت و حسن نیت کار می‌کنیم، ولی رتبه‌ی جستجو، تعداد بازدید، فالوور، مشتری یا فروش مشخصی را تضمین نمی‌کنیم. مثال‌هایی که در پیش‌فاکتور، بروشور یا صحبت حضوری گفته‌ایم، پیش‌بینی است، نه تضمین.`,
+   `اثر تغییرات، خرابی، بررسی یا بستن اکانت از طرف پلتفرم‌ها که تقصیر ما نیست، مسئولیتش با ما نیست؛ ولی برای برگرداندن یا پیدا کردن راه جایگزین کمک می‌کنیم.`]],
+  ['ماده ۱۵ (حقوق کارهای تحویلی)',[
+   `حق نشر سایت، صفحه‌های مینی‌اپ، متن، عکس و ویدیوهایی که می‌سازیم (از جمله حق تغییر و اقتباس) با پرداخت کامل هزینه‌ی راه‌اندازی همان کار به مشتری منتقل می‌شود. پست‌هایی که با ماهانه ساخته می‌شوند با پرداخت ماهانه‌ی همان ماه منتقل می‌شوند.`,
+   `برنامه‌ها، قالب‌ها و دانشی که ما از قبل داریم یا عمومی استفاده می‌کنیم مال ما می‌ماند، ولی مشتری حتی بعد از پایان قرارداد رایگان اجازه‌ی استفاده از آن‌ها برای کسب‌وکار خودش را دارد.`,
+   `ما «حق معنوی مؤلف» را علیه مشتری و کسانی که مشتری معرفی می‌کند اعمال نمی‌کنیم.`,
+   `فقط با اجازه‌ی قبلی مشتری، کار را در نمونه‌کارهایمان نشان می‌دهیم.`]],
+  ['ماده ۱۶ (محرمانگی)',[
+   `هر دو طرف اطلاعات تجاری و فنی طرف دیگر را بدون اجازه به کسی نمی‌دهیم و جز برای این قرارداد استفاده نمی‌کنیم؛ به‌جز اطلاعات عمومی، اطلاعاتی که قانونی از دیگری گرفته‌ایم و آنچه قانون بخواهد.`,
+   `این تعهد تا ۳ سال بعد از پایان قرارداد ادامه دارد.`]],
+  ['ماده ۱۷ (اطلاعات شخصی)',[
+   `مسئول اطلاعات شخصی مشتری‌های مغازه (رزرو، سفارش، عضویت و …) خود مغازه است و ما به نمایندگی از مغازه با آن کار می‌کنیم.`,
+   `طبق قانون حفاظت از اطلاعات شخصی ژاپن آن‌ها را امن نگه می‌داریم و برای کار دیگری استفاده نمی‌کنیم. اگر احتمال نشت اطلاعات بود، فوراً خبر می‌دهیم و کمک می‌کنیم.`,
+   `ممکن است اعضای تیم یا همکاران ما از ${abF} کار کنند و مشتری با این موافقت می‌کند. در این حالت هم همان سطح امنیت داخل ژاپن را رعایت می‌کنیم.`,
+   `بعد از پایان قرارداد، طبق گفته‌ی مشتری آن‌ها را پس می‌دهیم یا پاک می‌کنیم.`]],
+  ['ماده ۱۸ (سپردن کار به دیگری)',[`می‌توانیم بخشی از کار را به شخص سوم بسپاریم، به شرطی که همین تعهدها را به او هم بدهیم؛ مسئولیت کار او با ما است.`]],
+  ['ماده ۱۹ (جبران خسارت)',[
+   `اگر یکی از ما قرارداد را نقض کند و به دیگری خسارت بزند، خسارت مستقیم و معمول را جبران می‌کند.`,
+   `سقف خسارتی که ما می‌پردازیم، جمع پولی است که مشتری در ۳ ماهِ قبل از ماهِ حادثه به ما داده، و سودِ ازدست‌رفته را شامل نمی‌شود؛ مگر عمد یا سهل‌انگاری شدید ما در کار باشد.`]],
+  ['ماده ۲۰ (قوه‌ی قهریه)',[`اگر به‌خاطر بلای طبیعی، بیماری همه‌گیر، جنگ، قطع برق، خرابی اینترنت، خرابی سرویس‌های بیرونی یا چیزی که تقصیر هیچ‌کدام نیست، کار عقب بیفتد یا نشود، کسی مسئول نیست.`]],
+  ['ماده ۲۱ (فسخ)',[
+   `هر طرف می‌تواند با اطلاع کتبی تمام یا بخشی از قرارداد را فسخ کند اگر طرف دیگر: (۱) قرارداد را نقض کند و بعد از مهلت مناسب درستش نکند؛ (۲) از پرداخت بازبماند، ناتوان از پرداخت شود یا برای ورشکستگی درخواست داده شود؛ (۳) دستور تعطیلی بگیرد یا کار را تعطیل کند؛ (۴) ماده ۲۲ را نقض کند.`,
+   `فسخ، حق مطالبه‌ی خسارت را از بین نمی‌برد.`]],
+  ['ماده ۲۲ (حذف گروه‌های مافیایی)',[
+   `هر دو طرف اعلام و تضمین می‌کنیم که خودمان و مدیرانمان عضو یاکوزا یا گروه‌های ضداجتماعی نیستیم و نخواهیم بود.`,
+   `اگر طرف دیگر این را نقض کند، بلافاصله و بدون اخطار می‌شود فسخ کرد و خسارتی که به او برسد جبران نمی‌شود. (این ماده در همه‌ی قراردادهای ژاپنی استاندارد است.)`]],
+  ['ماده ۲۳ (بعد از پایان قرارداد)',[
+   `اگر مشتری تا ۳۰ روز بعد از پایان بخواهد، یک بار رایگان همه‌ی فایل‌های سایت (HTML و عکس‌ها)، عکس‌ها و ویدیوهای پست‌ها و اطلاعات انتقال دامنه را در قالب معمول تحویل می‌دهیم.`,
+   `سایت و مینی‌اپی که روی سرور ما است تا آخر ماهِ بعد از پایان روشن می‌ماند و بعد خاموش می‌شود. ۹۰ روز بعد از خاموشی می‌توانیم داده‌ها را پاک کنیم. اگر مشتری بخواهد روی سرور ما ادامه بدهد، روش و هزینه را توافق می‌کنیم.`,
+   `اگر ما کار را تعطیل کنیم، حداقل ۲ ماه قبل خبر می‌دهیم و تحویل بند ۱ را انجام می‌دهیم.`]],
+  ['ماده ۲۴ (ممنوعیت انتقال قرارداد)',[`هیچ‌کدام بدون اجازه‌ی کتبی دیگری، جایگاه یا حق و تعهد این قرارداد را به کسی منتقل نمی‌کند یا گرو نمی‌گذارد.`]],
+  ['ماده ۲۵ (اطلاع‌رسانی)',[`پیام‌های مربوط به قرارداد به آدرس این قرارداد یا ایمیل/LINE توافق‌شده فرستاده می‌شود. اگر کسی آدرس یا راه تماسش را عوض کند و خبر ندهد، پیام در زمان معمول رسیده حساب می‌شود.`]],
+  ['ماده ۲۶ (بندهایی که بعد از پایان می‌مانند)',[`بعد از پایان قرارداد هم ماده ۴ (برای پول پرداخت‌نشده)، ۶، ۱۵ تا ۱۷، ۱۹، ۲۳ و ۲۷ اعتبار دارند.`]],
+  ['ماده ۲۷ (قانون حاکم و دادگاه)',[`قانون ژاپن حاکم است و دعوای مربوط به این قرارداد در مرحله‌ی اول فقط در ${v.court} رسیدگی می‌شود.`]],
+  ['ماده ۲۸ (مذاکره)',[`هر چیزی که در قرارداد نیامده یا تفسیرش روشن نیست را با حسن نیت با هم حل می‌کنیم.`]]
+ ];
+}
+function renderContract(){
+ $('#conChips').innerHTML=[['ja','cJa'],['fa','cFa']].map(([k,t])=>`<button type="button" class="chip" data-con="${k}" aria-pressed="${state.con===k}">${tr(t)}</button>`).join('');
+ $('#conOut').innerHTML=buildContract(state.con);
+}
+
+/* ================= team view ================= */
+function renderTeam(){
+ const r=compute(), rate=+set.rate||0, fa=L()==='fa';
+ const lab = h=>h; // hours
+ const moCost = r.h*rate + r.c, inCost = r.hi*rate + r.ci;
+ const moProfit = r.moNet - moCost, inProfit = r.initNet - inCost;
+ const termProfit = moProfit*r.m + inProfit, termRev=r.total;
+ const pct = termRev? Math.round(termProfit/termRev*100):0;
+ const pill = pct>=40?'good':pct>=20?'mid':'bad';
+ const rows = r.per.map(p=>{ const c=p.h*rate+p.c; const pr=p.mo*(1-r.d)-c; return `<tr><td>${esc(fa?p.s.fa:p.s.ja)}</td><td class="n num">${p.h}h</td><td class="n num">${yen(c)}</td><td class="n num">${yen(pr)}</td><td class="n num">${p.hi}h</td></tr>`; }).join('');
+ $('#teamMargin').innerHTML = fa ? `<h2>سود همین انتخاب (فقط برای تیم، به مشتری نشان ندهید)</h2>
+  <div class="kpis"><div><span>کار تیم در ماه</span><b>${r.h} ساعت</b></div><div><span>کار راه‌اندازی</span><b>${r.hi} ساعت</b></div>
+  <div><span>سود ماهانه</span><b>${yen(moProfit)}</b></div><div><span>سود کل ${r.m} ماه</span><b>${yen(termProfit)}</b></div></div>
+  <p>حاشیه‌ی سود کل دوره: <span class="pill ${pill}">${pct}٪</span> <span class="small muted">(هزینه = ساعت × ${yen(rate)} + کرایه و چاپ و سرور. زیر ۲۰٪ قرمز.)</span></p>
+  <div class="tw"><table class="t"><thead><tr><th>خدمت</th><th class="n">ساعت/ماه</th><th class="n">هزینه/ماه</th><th class="n">سود/ماه</th><th class="n">ساعت راه‌اندازی</th></tr></thead><tbody>${rows}</tbody></table></div>
+  ${inProfit<0?`<div class="note warn">با این تخفیف، راه‌اندازی زیر هزینه است (${yen(inProfit)}).</div>`:''}`
+  : `<h2>この見積もりの利益（社内用）</h2><div class="kpis"><div><span>月の作業</span><b>${r.h}h</b></div><div><span>初期作業</span><b>${r.hi}h</b></div><div><span>月の利益</span><b>${yen(moProfit)}</b></div><div><span>${r.m}ヶ月の利益</span><b>${yen(termProfit)}</b></div></div><p>利益率 <span class="pill ${pill}">${pct}%</span></p><div class="tw"><table class="t"><thead><tr><th>サービス</th><th class="n">h/月</th><th class="n">原価/月</th><th class="n">利益/月</th><th class="n">初期h</th></tr></thead><tbody>${rows}</tbody></table></div>`;
+ const ids={sName:'name',sPerson:'person',sAddr:'addr',sTel:'tel',sMail:'mail',sT:'tnum',sCourt:'court',sAbroad:'abroad',sRate:'rate',sBank:'bank'};
+ for(const [id,k] of Object.entries(ids)){ const el=$('#'+id); if(document.activeElement!==el) el.value=set[k]??''; $('#l'+id.charAt(0).toUpperCase()+id.slice(1)) && 0; }
+ $('#teamGuide').innerHTML = GUIDE();
+}
+function GUIDE(){
+ return `<h2>راهنما و نکته‌ها (فارسی)</h2>
+ <h3 style="font-size:15px">در مغازه، قدم به قدم</h3>
+ <ol class="list">
+  <li>اسم مغازه و تعداد ماه را بزنید. بعد هر خدمتی که می‌خواهد را روشن کنید و سؤال‌های چک‌لیست را با خودش جواب بدهید. نوار پایین همیشه ماهانه، راه‌اندازی و جمع کل را نشان می‌دهد.</li>
+  <li>زبان را روی «日本語» بگذارید و صفحه را به خودش نشان دهید: برچسب‌ها ژاپنی می‌شوند و زیر هر خدمت «料金幅» (کف تا سقف) هست.</li>
+  <li>تب «見積書・請求書»: پیش‌فاکتور را بسازید. «کپی متن برای LINE» یک متن ژاپنی مرتب می‌دهد که می‌شود همان‌جا برایش فرستاد. «ذخیره‌ی فایل» یک فایل HTML می‌دهد که در مرورگر گوشی باز می‌شود و از منوی چاپ/اشتراک به PDF تبدیل می‌شود.</li>
+  <li>اگر قبول کرد: تب «契約書»، آدرسش را بزنید، قرارداد ژاپنی را ذخیره کنید و برایش بفرستید. امضای الکترونیکی یا PDF امضاشده با ایمیل/LINE کافی است و تمبر (収入印紙) لازم ندارد.</li>
+  <li>فاکتور اول (請求書・初回) = راه‌اندازی + ماه اول. هر ماه بعد «請求書・月次» با ماهِ همان فاکتور.</li>
+ </ol>
+ <h3 style="font-size:15px">قیمت‌ها چطور چیده شده</h3>
+ <ul class="list">
+  <li>پلن ثابت نداریم؛ هر خدمت یک «پایه» دارد و بقیه با چک‌لیست اضافه می‌شود. کف هر خدمت با کمترین انتخاب‌ها و سقف با همه‌ی انتخاب‌ها است.</li>
+  <li>کف کل قرارداد ماهی <b class="num">¥20,000</b> است. همه‌ی چهار خدمت با همه‌ی گزینه‌ها حدود <b class="num">¥280,000</b> در ماه می‌شود و با قسط راه‌اندازی در ۱۲ ماه حدود <b class="num">¥300,000</b>، همان سقفی که در گروه گفتید.</li>
+  <li>مدت: ۱ و ۳ ماه بدون تخفیف، ۶ ماه ۵٪ و ۱۲ ماه ۱۰٪ تخفیف روی ماهانه. قسطی کردن راه‌اندازی فقط ۶ ماه به بالا.</li>
+  <li>تخفیف دستی فقط روی راه‌اندازی است، نه ماهانه؛ ماهانه‌ی ارزان سال‌ها سود را پایین نگه می‌دارد.</li>
+  <li>این قیمت‌های «شروع کار» هستند و حدود نصف پیشنهاد قبلی‌اند. قیمت‌های روی سایت عوض نشده‌اند.</li>
+ </ul>
+ <h3 style="font-size:15px">هزینه‌های ما در ۱ تا ۳ ماه اول (بدون شرکت)</h3>
+ <div class="tw"><table class="t"><thead><tr><th>مورد</th><th class="n">ماهانه</th><th>توضیح</th></tr></thead><tbody>
+  <tr><td>Canva Pro</td><td class="n num">≈¥1,000</td><td>سالی ¥11,800؛ برای پست و کارت QR</td></tr>
+  <tr><td>CapCut / ویرایش ویدیو</td><td class="n num">¥0</td><td>نسخه‌ی رایگان کافی است</td></tr>
+  <tr><td>هاست سایت و مینی‌اپ</td><td class="n num">¥0</td><td>GitHub Pages / Cloudflare رایگان برای چند مشتری</td></tr>
+  <tr><td>ابزار MEO</td><td class="n num">¥0</td><td>با چند مشتری دستی از داخل Google انجام می‌شود</td></tr>
+  <tr><td>حسابدار، 均等割، نرم‌افزار حسابداری</td><td class="n num">¥0</td><td>تا شرکت ثبت نشده لازم نیست</td></tr>
+  <tr><td>کرایه‌ی رفت‌وآمد میثم</td><td class="n num">—</td><td>داخل هزینه‌ی هر گزینه‌ی عکاسی (¥1,000 هر بار) حساب شده</td></tr>
+  <tr><td>LINE رسمی، Stripe، دامنه</td><td class="n num">—</td><td>به اسم مغازه و هزینه‌اش با خود مغازه</td></tr>
+ </tbody></table></div>
+ <p class="small muted">پس هزینه‌ی ثابت ما الان حدود ¥1,000 تا ¥3,000 در ماه است و تقریباً همه‌ی هزینه، وقت خود تیم است. نرخ ساعتی را در «اطلاعات ما» عوض کنید تا جدول سود بالا درست شود.</p>
+ <h3 style="font-size:15px">قرارداد: از رقبا چه گرفتیم و کجا منصف‌تریم</h3>
+ <p class="small">خوانده‌شده: <a href="https://business.ntt-east.co.jp/service/hpsupport/download/agreement_meo_20261001.pdf">شرایط MEO</a> و <a href="https://business.ntt-east.co.jp/service/hpsupport/download/agreement_sns-marketing_20261001.pdf">شرایط SNS</a> «タウンページ / NTT東日本» (اکتبر ۲۰۲۶)، <a href="https://linestep.jp/lp/01/contract.html">شرایط Lステップ</a>، <a href="https://lawinsider.com/ja/contracts/lilckQBuLgB">یک قرارداد نمونه‌ی ساخت و نگهداری سایت ماهانه</a>، و <a href="https://www.oflight.co.jp/ja/columns/subscription-homepage-contract-trap-2026">فهرست دام‌های قرارداد سایت ماهانه</a>.</p>
+ <ul class="list">
+  <li><b>گرفتیم (محکم‌کاری):</b> سررسید یک‌جای همه‌ی بدهی اگر ۳۰ روز عقب بیفتد (期限の利益喪失)، جریمه‌ی تأخیر ۱۴.۶٪ مثل همه‌شان، «کارِ انجام‌نشده‌ی ماه منتقل نمی‌شود»، تحویل‌گرفته‌شدن خودکار اگر ۱۰ روز جواب ندهد (みなし検収)، سقف ۲ بار اصلاح طرح، مثال‌های فروش «پیش‌بینی است نه تضمین»، اطلاع فوری هک اکانت، قوه‌ی قهریه، ممنوعیت انتقال قرارداد، «پیام به آدرس قدیمی رسیده حساب می‌شود»، بندهای ماندگار بعد از پایان.</li>
+  <li><b>عمداً منصف‌تر از آن‌ها:</b> آن‌ها فسخ وسط مدت را ممنوع کرده‌اند و ۱ ساله خودکار تمدید می‌کنند؛ ما ماه به ماه و با یک ماه خبر. آن‌ها اکانت گوگل را دست خودشان نگه می‌دارند و فایل سایت را بعد از پایان پاک می‌کنند؛ ما همه‌چیز را به اسم مغازه می‌گذاریم و فایل‌ها را رایگان تحویل می‌دهیم. آن‌ها سقف خسارت را ۱ ماه گذاشته‌اند؛ ما ۳ ماه. ما بند «لیزینگ نیست» داریم چون در ژاپن «سایت با لیزینگ» شکایت زیادی دارد. برای مغازه‌ای که ما را نمی‌شناسد، همین‌ها دلیل امضا کردن است.</li>
+  <li><b>نکته‌ی تازه (مهم):</b> ماده‌ی ۱۷ می‌گوید ممکن است اعضای تیم از بیرون ژاپن روی اطلاعات مشتری‌های مغازه کار کنند. قانون ژاپن برای این کار رضایت و اسم کشور را می‌خواهد. اسم کشور را در «اطلاعات ما» به ژاپنی بنویسید (مثلاً イラン).</li>
+  <li><b>حساب بانکی:</b> هشدارهای مصرف‌کننده در ژاپن می‌گویند «واریز به حساب شخصی» نشانه‌ی کلاه‌برداری است. بهتر است حساب «屋号付き» (به اسم Open Hours Studio + اسم صاحب حساب) باز کنید؛ قرارداد هم می‌گوید فقط به حساب همان کسی که امضا کرده واریز شود.</li>
+ </ul>
+ <h3 style="font-size:15px">چیزهایی که قبل از اولین قرارداد واقعی باید روشن شود</h3>
+ <ul class="list">
+  <li><b>چه کسی «乙» است؟</b> بدون شرکت، طرف قرارداد یک شخص است (با اسم کامل و آدرس ژاپن). این شخص باید اجازه‌ی کار آزاد در ژاپن را داشته باشد (نوع ویزا)، و درآمد در 確定申告 همان شخص می‌آید. بهتر است «開業届» هم بدهد.</li>
+  <li><b>مالیات مصرف:</b> چون در インボイス ثبت نیستیم، فاکتور «消費税» ندارد و جمله‌ی «当方は適格請求書発行事業者ではありません» رویش هست. مشتری کسب‌وکار، از اکتبر ۲۰۲۶ فقط ۷۰٪ مالیات خریدش را می‌تواند کم کند؛ با قیمت پایین ما معمولاً مشکلی نمی‌شود. وقتی شماره‌ی T گرفتید، آن را در «اطلاعات ما» بزنید: فاکتور خودش ۱۰٪ مالیات و شماره را اضافه می‌کند.</li>
+  <li><b>قرارداد:</b> این متن را من نوشته‌ام و هیچ متخصص حقوقی ژاپنی آن را نخوانده. یک بار به یک 行政書士 یا وکیل بدهید (معمولاً ¥30,000 تا ¥50,000).</li>
+  <li><b>تمبر:</b> قرارداد کاغذی که ساخت سایت دارد ممکن است تمبر (収入印紙) ¥200 تا ¥4,000 بخواهد؛ قرارداد الکترونیکی (PDF با ایمیل/LINE یا クラウドサイン) لازم ندارد.</li>
+  <li><b>قانون فریلنس:</b> اگر «乙» یک شخص بی‌کارمند باشد، مغازه طبق フリーランス法 باید شرایط را کتبی بدهد و حداکثر ۶۰ روزه بپردازد؛ این قرارداد هر دو را پوشش می‌دهد.</li>
+  <li><b>اطلاعات ما</b> فقط روی همان گوشی ذخیره می‌شود؛ هر کس از گوشی خودش استفاده می‌کند یک بار پر کند. شماره‌ی فاکتورها هم خودکار از تاریخ ساخته می‌شود؛ اگر یک روز دو فاکتور دادید، دستی شماره بزنید.</li>
+ </ul>`;
+}
+
+/* ================= wiring ================= */
+function applyLang(){
+ document.body.classList.toggle('fa',L()==='fa'); document.documentElement.lang=L()==='fa'?'fa':'ja';
+ document.querySelectorAll('.ui').forEach(e=>e.dir=L()==='fa'?'rtl':'ltr');
+ $('#lgFa').setAttribute('aria-pressed',L()==='fa'); $('#lgJa').setAttribute('aria-pressed',L()==='ja');
+ const map={hSub:'sub',tbCalc:'tCalc',tbDoc:'tDoc',tbCon:'tCon',tbTeam:'tTeam',lCust:'cust',lName:'name',lPerson:'person',lStart:'start',lMonths:'months',lPay:'pay',lDisc:'disc',
+  kMo:'mo',kIn:'init',goDoc:'goDoc',lDDate:'dDate',lDMonth:'dMonth',lDNo:'dNo',dlDoc:'dl',cpDoc:'cp',lKAddr:'kAddr',lKDate:'kDate',dlCon:'dlCon',conWarn:'conWarn',lSet:'set',
+  lSName:'sName',lSPerson:'sPerson',lSAddr:'sAddr',lSTel:'sTel',lSMail:'sMail',lST:'sT',lSCourt:'sCourt',lSAbroad:'sAbroad',lKTel:'kTel',prDoc:'pr',prCon:'pr',lSRate:'sRate',lSBank:'sBank',setNote:'setNote'};
+ for(const [id,k] of Object.entries(map)){ const e=$('#'+id); if(e) e.textContent=tr(k); }
+ $('#lSplit').textContent=tr('split',state.months);
+}
+function fillInputs(){
+ $('#cName').value=state.cust.name; $('#cPerson').value=state.cust.person; $('#cStart').value=state.start;
+ $('#cSplit').checked=state.split; $('#cDisc').value=state.discount||'';
+ $('#dDate').value=state.docDate; $('#dMonth').value=state.docMonth; $('#dNo').value=state.docNo;
+ $('#kAddr').value=state.cust.addr; $('#kTel').value=state.cust.tel||''; $('#kSignDate').value=state.signDate;
+}
+function showView(){
+ const v=(location.hash||'#calc').slice(1); state.view=['calc','doc','contract','team'].includes(v)?v:'calc';
+ for(const k of ['calc','doc','contract','team']) $('#v-'+k).hidden = k!==state.view;
+ document.querySelectorAll('nav.tabs a').forEach(a=>a.setAttribute('aria-current',a.dataset.v===state.view?'page':'false'));
+ $('#goDoc').hidden = state.view!=='calc';
+ refresh();
+}
+function refresh(){
+ renderTally();
+ if(state.view==='doc') renderDoc();
+ if(state.view==='contract') renderContract();
+ if(state.view==='team') renderTeam();
+ save();
+}
+function full(){ applyLang(); renderMonths(); renderSvcs(); refresh(); }
+
+document.addEventListener('click',e=>{
+ const m=e.target.closest('[data-m]'); if(m){ state.months=+m.dataset.m; renderMonths(); applyLang(); refresh(); return; }
+ const d=e.target.closest('[data-doc]'); if(d){ state.doc=d.dataset.doc; state.docNo=''; $('#dNo').value=''; refresh(); return; }
+ const c=e.target.closest('[data-con]'); if(c){ state.con=c.dataset.con; refresh(); return; }
+});
+$('#lgFa').onclick=()=>{ state.lang='fa'; full(); };
+$('#lgJa').onclick=()=>{ state.lang='ja'; full(); };
+$('#goDoc').onclick=()=>{ location.hash='doc'; };
+$('#svcList').addEventListener('change',e=>{
+ const t=e.target;
+ if(t.dataset.svc){ state.svc[t.dataset.svc].on=t.checked; renderSvcs(); refresh(); return; }
+ if(t.dataset.s){ const sel=state.svc[t.dataset.s].sel;
+  if(t.type==='radio') sel[t.dataset.g]=t.dataset.o;
+  else { const a=new Set(sel[t.dataset.g]||[]); t.checked?a.add(t.dataset.o):a.delete(t.dataset.o); sel[t.dataset.g]=[...a]; }
+  t.closest('.grp').querySelectorAll('.opt').forEach(o=>o.classList.toggle('sel',o.querySelector('input').checked));
+  refresh(); }
+});
+const bind=(id,fn)=>$('#'+id).addEventListener('input',e=>{ fn(e.target.value); refresh(); });
+bind('cName',v=>state.cust.name=v); bind('cPerson',v=>state.cust.person=v); bind('cStart',v=>state.start=v||firstOfNext());
+bind('cDisc',v=>state.discount=+v||0); bind('dDate',v=>state.docDate=v||today()); bind('dMonth',v=>state.docMonth=v); bind('dNo',v=>state.docNo=v);
+bind('kAddr',v=>state.cust.addr=v); bind('kTel',v=>state.cust.tel=v); bind('kSignDate',v=>state.signDate=v);
+$('#cSplit').addEventListener('change',e=>{ state.split=e.target.checked; refresh(); });
+const sbind={sName:'name',sPerson:'person',sAddr:'addr',sTel:'tel',sMail:'mail',sT:'tnum',sCourt:'court',sAbroad:'abroad',sRate:'rate',sBank:'bank'};
+for(const [id,k] of Object.entries(sbind)) $('#'+id).addEventListener('input',e=>{ set[k]= k==='rate'? +e.target.value||0 : e.target.value; refresh(); });
+window.addEventListener('hashchange',showView);
+
+/* downloads */
+let dl=null;
+(async()=>{ try{ dl = window.claude?.use ? await window.claude.use('downloads') : null; }catch(e){ dl=null; } })();
+function standalone(title,inner){
+ const css=document.getElementById('papercss').textContent;
+ return `<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc(title)}</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;700&family=Vazirmatn:wght@400;700&family=IBM+Plex+Mono&display=swap">
+<style>body{margin:0;background:#e9e9e9;padding:16px}@page{size:A4;margin:14mm}@media print{body{background:#fff;padding:0}.bar{display:none}}.bar{max-width:794px;margin:0 auto 10px;text-align:right}.bar button{font:inherit;padding:8px 16px;border-radius:999px;border:1px solid #23417A;background:#23417A;color:#fff;cursor:pointer}${css}</style></head>
+<body><div class="bar"><button onclick="window.print()">印刷 / PDF保存</button></div>${inner}</body></html>`;
+}
+const onSite = (()=>{ try{ return window.top===window.self; }catch(e){ return false; } })();
+if(onSite){ document.querySelectorAll('.onsite').forEach(b=>b.hidden=false); }
+function blobSave(name,html){ const u=URL.createObjectURL(new Blob([html],{type:'text/html'})); const a=document.createElement('a'); a.href=u; a.download=name; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(u),4000); }
+async function offer(name,html,msgEl){
+ const out=$(msgEl);
+ if(!dl && onSite){ try{ blobSave(name,html); out.textContent=tr('saved'); }catch(e){ out.textContent=tr('noDl'); } return; }
+ if(!dl){ out.textContent=tr('noDl'); return; }
+ try{ await dl.save({filename:name,data:html}); out.textContent=tr('saved'); }
+ catch(err){ out.textContent = err && err.code==='declined' ? tr('declined') : tr('noDl'); }
+}
+const safe = s => (s||'').normalize('NFKC').replace(/[^A-Za-z0-9_-]+/g,'').slice(0,24);
+const fname = (kind,d) => ['ohs',kind,safe(state.cust.name),(d||'').replace(/-/g,'')].filter(Boolean).join('_')+'.html';
+$('#dlDoc').onclick=()=>{ const b=buildDoc(); offer(fname(state.doc==='quote'?'mitsumorisho':'seikyusho',state.docDate), standalone(b.title,b.html), '#docMsg'); };
+$('#dlCon').onclick=()=>{ offer(fname(state.con==='ja'?'keiyakusho':'contract-fa',state.signDate), standalone('契約書',buildContract(state.con)), '#conMsg'); };
+$('#prDoc').onclick=()=>window.print(); $('#prCon').onclick=()=>window.print();
+$('#cpDoc').onclick=()=>{ const t=docText(); try{ navigator.clipboard.writeText(t).then(()=>$('#docMsg').textContent=tr('copied'),()=>fallbackCopy(t)); }catch(e){ fallbackCopy(t); } };
+function fallbackCopy(t){ $('#docMsg').innerHTML=esc(tr('copyFail'))+`<textarea style="width:100%;min-height:180px;margin-top:6px;font-size:13px" readonly>${esc(t)}</textarea>`; const ta=$('#docMsg textarea'); ta.focus(); ta.select(); }
+
+fillInputs(); full(); showView();
+})();
+</script>
+
+</body>
+</html>

@@ -34,6 +34,7 @@ Open Hours Studio is a small web studio that builds websites for small local bus
 | `assets/shots/<slug>-desk.webp` (1200×750), `<slug>-phone.webp` (520×1125) | Screenshots of each concept site |
 | `assets/photos/` + `CREDITS.json` | Photos (CC0 etc.); every new photo needs a credits entry |
 | `flyers/` | Printable flyers for local partners; hidden from search in `robots.txt` |
+| `mitsumori/` | Internal Japan sales tool (price calculator, 見積書/請求書, service contract JA+FA). Not linked, `noindex`, disallowed in `robots.txt`. Prices live in the `SVC` array at the top of its script |
 | `sitemap.xml`, `robots.txt` | SEO |
 | `docs/PLAN.md` | Roadmap, status, decisions (Persian) |
 
