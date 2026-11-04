@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /flyers/
+Disallow: /mitsumori/
 
 Sitemap: https://openhoursstudio.github.io/sitemap.xml
