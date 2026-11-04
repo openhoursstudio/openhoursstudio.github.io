@@ -240,7 +240,6 @@ ul.list{margin:0;padding-inline-start:20px;display:flex;flex-direction:column;ga
    </div>
    <div class="btns"><button class="btn" id="dlCon" type="button"></button><button class="btn ghost onsite" id="prCon" type="button" hidden></button></div>
    <p class="msg" id="conMsg" aria-live="polite"></p>
-   <div class="note warn" id="conWarn"></div>
   </div>
   <div class="paperbox"><div id="conOut"></div></div>
  </section>
@@ -262,6 +261,8 @@ ul.list{margin:0;padding-inline-start:20px;display:flex;flex-direction:column;ga
     <div class="f"><label for="sRate" id="lSRate"></label><input id="sRate" type="number" inputmode="numeric" step="100"></div>
    </div>
    <div class="f"><label for="sBank" id="lSBank"></label><textarea id="sBank"></textarea></div>
+   <div class="btns"><button class="btn" id="sSave" type="button"></button></div>
+   <p class="msg" id="setMsg" aria-live="polite"></p>
    <p class="small muted" id="setNote"></p>
   </details>
   <div class="sheet ui" id="teamGuide"></div>
@@ -419,12 +420,13 @@ const T = {
  cJa:{fa:'نسخه‌ی ژاپنی (برای امضا)',ja:'日本語（署名用）'}, cFa:{fa:'ترجمه‌ی فارسی (برای تیم)',ja:'ペルシャ語訳（社内用）'},
  kAddr:{fa:'آدرس مغازه',ja:'お客様の住所'}, kDate:{fa:'تاریخ امضا',ja:'契約日'},
  dlCon:{fa:'ذخیره‌ی قرارداد (HTML قابل چاپ)',ja:'契約書を保存'},
- conWarn:{fa:'این متن را هنوز هیچ وکیل یا 行政書士 ژاپنی نخوانده. قبل از اولین امضای واقعی، یک بار بدهید بررسی کند (هزینه‌ی معمول بررسی قرارداد حدود ¥30,000 تا ¥50,000). اسم و آدرس «乙» را در بخش تیم ← اطلاعات ما پر کنید.',ja:'この契約書は専門家の確認を受けていません。'},
+ sSave:{fa:'ثبت',ja:'登録'}, sOk:{fa:'ثبت شد. از این به بعد روی فاکتور و قرارداد همین‌ها می‌آید. هر وقت خواستید عوض کنید و دوباره «ثبت» بزنید.',ja:'登録しました。'}, sDirty:{fa:'تغییرات هنوز ثبت نشده؛ «ثبت» را بزنید.',ja:'未登録の変更があります。'},
+ conWarnX:{fa:'این متن را هنوز هیچ وکیل یا 行政書士 ژاپنی نخوانده. قبل از اولین امضای واقعی، یک بار بدهید بررسی کند (هزینه‌ی معمول بررسی قرارداد حدود ¥30,000 تا ¥50,000). اسم و آدرس «乙» را در بخش تیم ← اطلاعات ما پر کنید.',ja:'この契約書は専門家の確認を受けていません。'},
  set:{fa:'اطلاعات ما (روی فاکتور و قرارداد می‌آید)',ja:'発行者情報'},
  sName:{fa:'اسم کسب‌وکار (屋号)',ja:'屋号'}, sPerson:{fa:'اسم کامل امضاکننده (به ژاپنی یا لاتین)',ja:'代表者氏名'}, sAddr:{fa:'آدرس در ژاپن',ja:'住所'},
  sTel:{fa:'تلفن',ja:'電話'}, sMail:{fa:'ایمیل',ja:'メール'}, sT:{fa:'شماره‌ی ثبت インボイス (اگر ندارید خالی)',ja:'登録番号'},
  sCourt:{fa:'دادگاه صالح',ja:'管轄裁判所'}, sAbroad:{fa:'کشور(های) اعضای تیم بیرون از ژاپن، به ژاپنی (برای ماده‌ی اطلاعات شخصی)',ja:'海外の作業拠点'}, kTel:{fa:'ایمیل یا LINE مشتری',ja:'お客様の連絡先（メール・LINE）'}, pr:{fa:'چاپ / PDF',ja:'印刷 / PDF'}, sRate:{fa:'هزینه‌ی هر ساعت کار تیم (برای حساب سود)',ja:'時間単価'}, sBank:{fa:'حساب بانکی برای واریز (振込先)',ja:'振込先'},
- setNote:{fa:'این‌ها فقط روی همین گوشی ذخیره می‌شوند. روی هر گوشی یک بار پر کنید.',ja:''}
+ setNote:{fa:'بعد از «ثبت»، این‌ها روی همین گوشی می‌مانند و روی همه‌ی فاکتورها و قراردادها می‌آیند. روی هر گوشی یک بار پر کنید.',ja:''}
 };
 const L = () => state.lang;
 const tr = (k,...a) => { const v=T[k][L()]; return typeof v==='function'?v(...a):v; };
@@ -875,7 +877,6 @@ function renderTeam(){
   ${inProfit<0?`<div class="note warn">با این تخفیف، راه‌اندازی زیر هزینه است (${yen(inProfit)}).</div>`:''}`
   : `<h2>この見積もりの利益（社内用）</h2><div class="kpis"><div><span>月の作業</span><b>${r.h}h</b></div><div><span>初期作業</span><b>${r.hi}h</b></div><div><span>月の利益</span><b>${yen(moProfit)}</b></div><div><span>${r.m}ヶ月の利益</span><b>${yen(termProfit)}</b></div></div><p>利益率 <span class="pill ${pill}">${pct}%</span></p><div class="tw"><table class="t"><thead><tr><th>サービス</th><th class="n">h/月</th><th class="n">原価/月</th><th class="n">利益/月</th><th class="n">初期h</th></tr></thead><tbody>${rows}</tbody></table></div>`;
  const ids={sName:'name',sPerson:'person',sAddr:'addr',sTel:'tel',sMail:'mail',sT:'tnum',sCourt:'court',sAbroad:'abroad',sRate:'rate',sBank:'bank'};
- for(const [id,k] of Object.entries(ids)){ const el=$('#'+id); if(document.activeElement!==el) el.value=set[k]??''; $('#l'+id.charAt(0).toUpperCase()+id.slice(1)) && 0; }
  $('#teamGuide').innerHTML = GUIDE();
 }
 function GUIDE(){
@@ -932,7 +933,7 @@ function applyLang(){
  document.querySelectorAll('.ui').forEach(e=>e.dir=L()==='fa'?'rtl':'ltr');
  $('#lgFa').setAttribute('aria-pressed',L()==='fa'); $('#lgJa').setAttribute('aria-pressed',L()==='ja');
  const map={hSub:'sub',tbCalc:'tCalc',tbDoc:'tDoc',tbCon:'tCon',tbTeam:'tTeam',lCust:'cust',lName:'name',lPerson:'person',lStart:'start',lMonths:'months',lPay:'pay',lDisc:'disc',
-  kMo:'mo',kIn:'init',goDoc:'goDoc',lDDate:'dDate',lDMonth:'dMonth',lDNo:'dNo',dlDoc:'dl',cpDoc:'cp',lKAddr:'kAddr',lKDate:'kDate',dlCon:'dlCon',conWarn:'conWarn',lSet:'set',
+  kMo:'mo',kIn:'init',goDoc:'goDoc',lDDate:'dDate',lDMonth:'dMonth',lDNo:'dNo',dlDoc:'dl',cpDoc:'cp',lKAddr:'kAddr',lKDate:'kDate',dlCon:'dlCon',sSave:'sSave',lSet:'set',
   lSName:'sName',lSPerson:'sPerson',lSAddr:'sAddr',lSTel:'sTel',lSMail:'sMail',lST:'sT',lSCourt:'sCourt',lSAbroad:'sAbroad',lKTel:'kTel',prDoc:'pr',prCon:'pr',lSRate:'sRate',lSBank:'sBank',setNote:'setNote'};
  for(const [id,k] of Object.entries(map)){ const e=$('#'+id); if(e) e.textContent=tr(k); }
  $('#lSplit').textContent=tr('split',state.months);
@@ -982,7 +983,10 @@ bind('cDisc',v=>state.discount=+v||0); bind('dDate',v=>state.docDate=v||today())
 bind('kAddr',v=>state.cust.addr=v); bind('kTel',v=>state.cust.tel=v); bind('kSignDate',v=>state.signDate=v);
 $('#cSplit').addEventListener('change',e=>{ state.split=e.target.checked; refresh(); });
 const sbind={sName:'name',sPerson:'person',sAddr:'addr',sTel:'tel',sMail:'mail',sT:'tnum',sCourt:'court',sAbroad:'abroad',sRate:'rate',sBank:'bank'};
-for(const [id,k] of Object.entries(sbind)) $('#'+id).addEventListener('input',e=>{ set[k]= k==='rate'? +e.target.value||0 : e.target.value; refresh(); });
+function fillSet(){ for(const [id,k] of Object.entries(sbind)) $('#'+id).value=set[k]??''; }
+for(const [id] of Object.entries(sbind)) $('#'+id).addEventListener('input',()=>{ $('#setMsg').textContent=tr('sDirty'); });
+$('#sSave').onclick=()=>{ for(const [id,k] of Object.entries(sbind)){ const v=$('#'+id).value.trim(); set[k]= k==='rate'? (+v||0) : v; } save(); fillSet(); refresh(); $('#setMsg').textContent=tr('sOk'); };
+fillSet(); if(!set.person||!set.addr) $('#setBox').open=true;
 window.addEventListener('hashchange',showView);
 
 /* downloads */
