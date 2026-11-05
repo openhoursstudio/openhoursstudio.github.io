@@ -78,8 +78,11 @@ nav.tabs a[aria-current="page"]{background:var(--paper);color:var(--ink);box-sha
 .svc-head .sum{text-align:end;font-size:13px}
 .svc-head .sum b{display:block;font-family:var(--f-num);font-size:16px;font-weight:500}
 .svc-body{border-top:1px solid var(--line);padding:6px 16px 14px;display:flex;flex-direction:column;gap:2px}
-.svc.off .svc-body{display:none}
-.svc.off .svc-head{opacity:.75}
+.svc-head .fold{flex:none;width:32px;height:32px;margin-inline-end:-6px;border:0;background:none;color:var(--muted);cursor:pointer;border-radius:8px;display:grid;place-items:center}
+.svc-head .fold:hover{background:var(--line)}
+.svc-head .fold svg{width:16px;height:16px;transition:transform .15s}
+.svc.shut .svc-head .fold svg{transform:rotate(-90deg)}.svc.off .svc-body,.svc.shut .svc-body{display:none}
+.svc.off .svc-head{opacity:.75;cursor:default}
 .grp{padding-block:10px 4px;display:flex;flex-direction:column;gap:6px;border-bottom:1px dashed var(--line)}
 .grp:last-child{border-bottom:0}
 .grp > .q{font-size:13.5px;font-weight:700}
@@ -399,6 +402,7 @@ const T = {
  cust:{fa:'مشتری و مدت',ja:'お客様と期間'}, name:{fa:'اسم مغازه',ja:'店名・会社名'}, person:{fa:'اسم صاحب/مسئول',ja:'ご担当者名'},
  start:{fa:'شروع',ja:'開始日'}, months:{fa:'چند ماه',ja:'契約期間'},
  term:{fa:(m,e,d)=>`تا ${e} · ${d?('تخفیف '+Math.round(d*100)+'٪ روی ماهانه'):'۶ ماه: ۵٪ و ۱۲ ماه: ۱۰٪ تخفیف ماهانه'}`, ja:(m,e,d)=>`${e}まで · ${d?('月額 '+Math.round(d*100)+'% 割引'):'6ヶ月で5%、12ヶ月で10% 月額割引'}`},
+ fold:{fa:'باز / بسته کردن گزینه‌ها',ja:'オプションを開く・閉じる'},
  range:{fa:'بازه‌ی این خدمت',ja:'このサービスの料金幅'}, permo:{fa:'/ماه',ja:'/月'}, once:{fa:'یک‌بار',ja:'初期'},
  incl:{fa:'همیشه داخلش است',ja:'基本に含む'}, minTerm:{fa:m=>`حداقل ${m} ماه`,ja:m=>`最低${m}ヶ月`},
  pay:{fa:'پرداخت',ja:'お支払い'},
@@ -523,8 +527,9 @@ function renderSvcs(){
  const box=$('#svcList'); box.innerHTML='';
  for(const s of SVC){
   const st=state.svc[s.id], rg=svcRange(s);
-  const el=document.createElement('div'); el.className='sheet svc'+(st.on?'':' off');
-  let h=`<label class="svc-head"><input type="checkbox" data-svc="${s.id}" ${st.on?'checked':''}><span class="t"><b>${esc(s[L()])}</b><span class="ui">${esc(L()==='fa'?s.faD:s.jaD)}</span></span><span class="sum" id="sum-${s.id}"></span></label><div class="svc-body">`;
+  const el=document.createElement('div'); el.className='sheet svc'+(st.on?'':' off')+(st.on&&st.shut?' shut':'');
+  const fold=st.on?`<button type="button" class="fold" data-fold="${s.id}" aria-expanded="${!st.shut}" aria-controls="body-${s.id}" title="${tr('fold')}" aria-label="${tr('fold')}"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6l4 4 4-4"/></svg></button>`:'';
+  let h=`<div class="svc-head"${st.on?` data-fold="${s.id}"`:''}><input type="checkbox" data-svc="${s.id}" aria-label="${esc(s[L()])}" ${st.on?'checked':''}><span class="t"><b>${esc(s[L()])}</b><span class="ui">${esc(L()==='fa'?s.faD:s.jaD)}</span></span><span class="sum" id="sum-${s.id}"></span>${fold}</div><div class="svc-body" id="body-${s.id}">`;
   for(const b of s.base) h+=`<div class="base"><span class="dot"></span><span class="l">${esc(b[L()])}<small class="muted" style="display:block;font-size:12px">${esc(L()==='fa'?b.faS:b.jaS)}</small></span><span class="p small muted">${priceTag(b)}</span></div>`;
   for(const g of s.groups){
    h+=`<div class="grp"><div class="q ui">${esc(g[L()])}</div>`;
@@ -968,9 +973,18 @@ document.addEventListener('click',e=>{
 $('#lgFa').onclick=()=>{ state.lang='fa'; full(); };
 $('#lgJa').onclick=()=>{ state.lang='ja'; full(); };
 $('#goDoc').onclick=()=>{ location.hash='doc'; };
+$('#svcList').addEventListener('click',e=>{
+ // header click (or the arrow) folds a selected service; the checkbox itself only selects
+ if(e.target.closest('input')) return;
+ const f=e.target.closest('[data-fold]'); if(!f) return;
+ const st=state.svc[f.dataset.fold]; st.shut=!st.shut;
+ const card=f.closest('.svc'); card.classList.toggle('shut',st.shut);
+ card.querySelector('.fold').setAttribute('aria-expanded',!st.shut);
+ save();
+});
 $('#svcList').addEventListener('change',e=>{
  const t=e.target;
- if(t.dataset.svc){ state.svc[t.dataset.svc].on=t.checked; renderSvcs(); refresh(); return; }
+ if(t.dataset.svc){ const st=state.svc[t.dataset.svc]; st.on=t.checked; st.shut=false; renderSvcs(); refresh(); return; }
  if(t.dataset.s){ const sel=state.svc[t.dataset.s].sel;
   if(t.type==='radio') sel[t.dataset.g]=t.dataset.o;
   else { const a=new Set(sel[t.dataset.g]||[]); t.checked?a.add(t.dataset.o):a.delete(t.dataset.o); sel[t.dataset.g]=[...a]; }
